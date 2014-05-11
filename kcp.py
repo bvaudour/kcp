@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.2
+# Release: 0.3
 
 import argparse, os, sys, subprocess
 
@@ -12,7 +12,7 @@ def print_error(msg):
 	print('\033[1;31m{}\033[m'.format(msg))
 
 def check_user():
-	if os.environ['USER'] == 'root':
+	if not os.geteuid():
 		print_error("Don't launch this program as root!")
 		sys.exit(1)
 
@@ -61,7 +61,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.2')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.3')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
