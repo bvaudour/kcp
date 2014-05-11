@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.1
+# Release: 0.2
 
 import argparse, os, sys, subprocess
-from io import BytesIO
-from contextlib import contextmanager
 
 search_head = 'Accept: application/vnd.github.v3.text-match+json'
 search_base = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages'
@@ -13,25 +11,10 @@ url_base    = 'https://github.com/KaOS-Community-Packages/{}.git'
 def print_error(msg):
 	print('\033[1;31m{}\033[m'.format(msg))
 
-def capture_output(stdout_to = None, stderr_to = None):
-	try:
-		stdout, stderr = sys.stdout, sys.stderr
-		sys.stdout = c1 = stdout_to or BytesIO()
-		sys.stderr = c2 = stderr_to or BytesIO()
-		yield c1, c2
-	finally:
-		sys.stdout = stdout
-		sys.stderr = stderr
-		try:
-			c1.flush(1)
-			c1.seek(0)
-		except (ValueError, IOError):
-			pass
-		try:
-			c2.flush()
-			c2.seek(0)
-		except (ValueError, IOError):
-			pass
+def check_user():
+	if os.environ['USER'] == 'root':
+		print_error("Don't launch this program as root!")
+		sys.exit(1)
 
 def get_package(app):
 	url = url_base.format(app)
@@ -78,13 +61,15 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.1')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.2')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
 	group.add_argument('-i', '--install', help='install an app in KCP', metavar='APP')
 	parser.add_argument('--asdeps', help='install as a dependence', action='store_true', default=False)
 	return parser
+
+check_user()
 
 parser = build_args()
 if len(sys.argv) == 1:
