@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.3
+# Release: 0.4
 
 import argparse, os, sys, subprocess
 
@@ -11,10 +11,31 @@ url_base    = 'https://github.com/KaOS-Community-Packages/{}.git'
 def print_error(msg):
 	print('\033[1;31m{}\033[m'.format(msg))
 
+def question(msg, default_value=True):
+	if default_value:
+		choice_rep = '[Y/n]'
+	else:
+		choice_rep = '[y/N]'
+	response = input('\033[1;33m{} {} \033[m'.format(msg, choice_rep)).lower()
+	if not response:
+		return default_value
+	if response[0] == 'y':
+		return True
+	if response[0] == 'n':
+		return False
+	return default_value
+
+def edit(file_name):
+	os.system('$EDITOR {}'.format(file_name))
+
 def check_user():
 	if not os.geteuid():
 		print_error("Don't launch this program as root!")
 		sys.exit(1)
+
+def edit_pkgbuild():
+	if question('Do you want to edit PKGBUILD?'):
+		edit('PKGBUILD')
 
 def get_package(app):
 	url = url_base.format(app)
@@ -53,6 +74,7 @@ def install_package(app, asdeps):
 	os.chdir('/tmp')
 	get_package(app)
 	os.chdir('/tmp/{}'.format(app))
+	edit_pkgbuild()
 	cmd = 'makepkg -si'
 	if asdeps:
 		cmd += ' --asdeps'
@@ -61,7 +83,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.3')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.4')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
