@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.4
+# Release: 0.5
 
-import argparse, os, sys, subprocess
+import argparse, os, sys, subprocess, json
+from urllib import request
 
-search_head = 'Accept: application/vnd.github.v3.text-match+json'
+search_head = 'application/vnd.github.v3.text-match+json'
+search_h_tp = 'Accept'
 search_base = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages'
 url_base    = 'https://github.com/KaOS-Community-Packages/{}.git'
 
@@ -44,29 +46,16 @@ def get_package(app):
 	if err:
 		sys.exit(err)
 
+def launch_request(search):
+	req = request.Request(search)
+	req.add_header(search_h_tp, search_head)
+	return request.urlopen(req).read().decode()
+
 def search_package(app):
 	search = search_base.format(app)
-	exe = subprocess.Popen(['curl', '-H', search_head, search], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	err = exe.wait()
-	if err:
-		print(exe.stderr.read())
-		sys.exit(err)
-	json = str(exe.stdout.read()).split('\\n')
-	(name, description, star) = ([], [], [])
-	for l in json:
-		e = l.strip()
-		n = e.find(':')
-		if n < 0:
-			continue
-		key, value = e[:n], e[n+1:-1].strip()
-		if key == '"name"':
-			name.append(value[1:-1])
-		elif key == '"description"':
-			description.append(value[1:-1])
-		elif key == '"stargazers_count"':
-			star.append(value)
-	for i in range(len(name)):
-		n, d, s = name[i], description[i], star[i]
+	result = json.loads(launch_request(search))
+	for a in result['items']:
+		n, d, s = a['name'], a['description'], a['stargazers_count']
 		print('\033[1m{}\033[m \033[1;36m({})\033[m'.format(n, s))
 		print('\t{}'.format(d))
 
@@ -83,7 +72,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.4')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.5')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
