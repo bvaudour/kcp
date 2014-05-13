@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.5
+# Release: 0.6
 
 import argparse, os, sys, subprocess, json
 from urllib import request
 
-search_head = 'application/vnd.github.v3.text-match+json'
-search_h_tp = 'Accept'
-search_base = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages'
-url_base    = 'https://github.com/KaOS-Community-Packages/{}.git'
+search_head  = 'application/vnd.github.v3.text-match+json'
+search_h_tp  = 'Accept'
+search_base  = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages'
+url_base     = 'https://github.com/KaOS-Community-Packages/{}.git'
+url_pkgbuild = 'https://raw.githubusercontent.com/KaOS-Community-Packages/{}/master/PKGBUILD'
 
 def print_error(msg):
 	print('\033[1;31m{}\033[m'.format(msg))
@@ -46,17 +47,35 @@ def get_package(app):
 	if err:
 		sys.exit(err)
 
-def launch_request(search):
+def launch_request(search, header = None):
 	req = request.Request(search)
-	req.add_header(search_h_tp, search_head)
-	return request.urlopen(req).read().decode()
+	if header:
+		req.add_header(search_h_tp, header)
+	try:
+		result = request.urlopen(req)
+		return result.read().decode()
+	except:
+		return ''
+
+def get_version(result):
+	pkgver, pkgrel = '', ''
+	for l in result.split('\n'):
+		e = l.strip()
+		if e[:7] == 'pkgver=':
+			pkgver = e[7:]
+		elif e[:7] == 'pkgrel=':
+			pkgrel = e[7:]
+	if pkgver and pkgrel:
+		return '{}-{}'.format(pkgver, pkgrel)
+	return '<unknown>'
 
 def search_package(app):
 	search = search_base.format(app)
-	result = json.loads(launch_request(search))
+	result = json.loads(launch_request(search, search_head))
 	for a in result['items']:
 		n, d, s = a['name'], a['description'], a['stargazers_count']
-		print('\033[1m{}\033[m \033[1;36m({})\033[m'.format(n, s))
+		v = get_version(launch_request(url_pkgbuild.format(n)))
+		print('\033[1m{}\033[m \033[1;36m[{}]\033[m \033[1;31m({})\033[m'.format(n, v, s))
 		print('\t{}'.format(d))
 
 def install_package(app, asdeps):
@@ -72,7 +91,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.5')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.6')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
