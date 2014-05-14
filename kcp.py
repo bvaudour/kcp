@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.6
+# Release: 0.7
 
 import argparse, os, sys, subprocess, json
 from urllib import request
@@ -69,13 +69,16 @@ def get_version(result):
 		return '{}-{}'.format(pkgver, pkgrel)
 	return '<unknown>'
 
-def search_package(app):
+def search_package(app, fast):
 	search = search_base.format(app)
 	result = json.loads(launch_request(search, search_head))
 	for a in result['items']:
 		n, d, s = a['name'], a['description'], a['stargazers_count']
-		v = get_version(launch_request(url_pkgbuild.format(n)))
-		print('\033[1m{}\033[m \033[1;36m[{}]\033[m \033[1;31m({})\033[m'.format(n, v, s))
+		if fast:
+			print('\033[1m{}\033[m \033[1;31m({})\033[m'.format(n, s))
+		else:
+			v = get_version(launch_request(url_pkgbuild.format(n)))
+			print('\033[1m{}\033[m \033[1;36m[{}]\033[m \033[1;31m({})\033[m'.format(n, v, s))
 		print('\t{}'.format(d))
 
 def install_package(app, asdeps):
@@ -91,12 +94,13 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.6')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.7')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
 	group.add_argument('-i', '--install', help='install an app in KCP', metavar='APP')
 	parser.add_argument('--asdeps', help='install as a dependence', action='store_true', default=False)
+	parser.add_argument('--fast', help='search without version', action='store_true', default=False)
 	return parser
 
 check_user()
@@ -110,7 +114,7 @@ args = parser.parse_args()
 if args.get:
 	get_package(args.get)
 elif args.search:
-	search_package(args.search)
+	search_package(args.search, args.fast)
 elif args.install:
 	install_package(args.install, args.asdeps)
 else:
