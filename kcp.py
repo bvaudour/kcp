@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.7
+# Release: 0.8
 
 import argparse, os, sys, subprocess, json
 from urllib import request
@@ -69,16 +69,31 @@ def get_version(result):
 		return '{}-{}'.format(pkgver, pkgrel)
 	return '<unknown>'
 
+def check_installed(app):
+	exe = subprocess.Popen(['pacman', '-Q', app], stdout=subprocess.PIPE, stderr=subprocess.PIPE)	
+	if exe.wait():
+		return ''
+	return exe.stdout.read().decode().split()[1]
+
 def search_package(app, fast):
 	search = search_base.format(app)
 	result = json.loads(launch_request(search, search_head))
 	for a in result['items']:
 		n, d, s = a['name'], a['description'], a['stargazers_count']
+		i = check_installed(a['name'])
 		if fast:
-			print('\033[1m{}\033[m \033[1;31m({})\033[m'.format(n, s))
+			if i:
+				print('\033[1m{}\033[m \033[1;36m[installed: {}]\033[m \033[1;34m({})\033[m'.format(n, i, s))
+			else:
+				print('\033[1m{}\033[m\033 \033[1;34m({})\033[m'.format(n, s))
 		else:
 			v = get_version(launch_request(url_pkgbuild.format(n)))
-			print('\033[1m{}\033[m \033[1;36m[{}]\033[m \033[1;31m({})\033[m'.format(n, v, s))
+			if i:
+				if v == i:
+					i = ' [installed]'
+				else:
+					i = ' [installed: {}]'.format(i)
+			print('\033[1m{}\033[m \033[1;32m{}\033[m\033[1;36m{}\033[m \033[1;34m({})\033[m'.format(n, v, i, s))
 		print('\t{}'.format(d))
 
 def install_package(app, asdeps):
@@ -94,7 +109,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.7')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.8')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
