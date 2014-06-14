@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # License: Public Domain
-# Release: 0.8
+# Release: 0.9
 
 import argparse, os, sys, subprocess, json
 from urllib import request
 
 search_head  = 'application/vnd.github.v3.text-match+json'
 search_h_tp  = 'Accept'
-search_base  = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages'
+search_base  = 'https://api.github.com/search/repositories?q={}+user:KaOS-Community-Packages+fork:true'
 url_base     = 'https://github.com/KaOS-Community-Packages/{}.git'
 url_pkgbuild = 'https://raw.githubusercontent.com/KaOS-Community-Packages/{}/master/PKGBUILD'
 
@@ -109,7 +109,7 @@ def install_package(app, asdeps):
 
 def build_args():
 	parser = argparse.ArgumentParser(description='Tool in command-line for KaOS Community Packages')
-	parser.add_argument('-v', '--version', help='print version', action='version', version='0.8')
+	parser.add_argument('-v', '--version', help='print version', action='version', version='0.9')
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument('-g', '--get', help='get needed files to build app', metavar='APP')
 	group.add_argument('-s', '--search', help='search an app in KCP', metavar='APP')
