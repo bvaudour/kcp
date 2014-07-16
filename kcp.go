@@ -12,11 +12,12 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"os/signal"
 	"strings"
 )
 
 const (
-	versionNumber  = "0.10"
+	versionNumber  = "0.11"
 	defaultEditor  = "vim"
 	searchHead     = "application/vnd.github.v3.text-match+json"
 	searchHeadType = "Accept"
@@ -45,7 +46,7 @@ func init() {
 	fInstall = goopt.String([]string{"-i", "--install"}, "", "install an app in KCP")
 	fDeps = goopt.Flag([]string{"--asdeps"}, []string{}, "install as a dependence", "")
 
-	goopt.Version = "0.10"
+	goopt.Version = versionNumber
 	goopt.Summary = "Tool in command-line for KaOS Community Packages"
 
 }
@@ -195,7 +196,15 @@ func searchPackage(app string, fast bool) {
 func installPackage(app string, asdeps bool) {
 	os.Chdir(tmpDir)
 	wDir := tmpDir + string(os.PathSeparator) + app
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	go func() {
+		<-c
+		os.RemoveAll(wDir)
+		os.Exit(1)
+	}()
 	getPackage(app)
+	defer os.RemoveAll(wDir)
 	if err := os.Chdir(wDir); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -211,7 +220,6 @@ func installPackage(app string, asdeps bool) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	os.RemoveAll(wDir)
 }
 
 func main() {
