@@ -1,0 +1,22 @@
+Installing kcp is a pretty straighforward task.
+
+1. DEPENDS
+  Ensure the needed depends are installed on your system:
+	- A go compiler (by default, go)
+	- git (to make the compiled app work)
+
+2. COMPILATION
+	Just launch the following command:
+	  make
+	This command will build the binary file, then launch this binary to create the man file.
+  Nota: if you don't use the default go compiler (for example gcc-go)dd, precise it (not tested):
+		make GOCMD=<your compiler>
+
+3. INSTALL
+	Launch the following command:
+	  make DESTDIR=<yourdestdir> install
+	As result:
+		- the binary file will be installed on <yourdestdir>/usr/bin
+		- the man file will be installed on <yourdestdir>/usr/share/man/man1
+
+4. ENJOY!

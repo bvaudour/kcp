@@ -1,4 +1,5 @@
 TODO :
 	- Improve the json parser work at search (done)
 	- Add the possibility of editing PKGBUILD (done)
-	- Add version in the -s listing
+	- Add version in the -s listing (done)
+	- Create a Makefile (done)

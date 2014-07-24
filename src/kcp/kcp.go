@@ -1,23 +1,24 @@
 package main
 
-/*
- * Depends on goopt: https://github.com/droundy/goopt
- */
-
 import (
 	"encoding/json"
 	"fmt"
-	"goopt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
 	"os/signal"
+	"parseargs"
 	"strings"
 )
 
 const (
-	versionNumber  = "0.11"
+	versionNumber   = "0.12"
+	author          = "B. VAUDOUR"
+	description     = "Tool in command-line for KaOS Community Packages"
+	longDescription = `Provides a tool to make the use of KaOS Community Packages.
+
+With this tool, you can search, get and install a package from KaOS Community Packages.`
 	defaultEditor  = "vim"
 	searchHead     = "application/vnd.github.v3.text-match+json"
 	searchHeadType = "Accept"
@@ -30,6 +31,7 @@ var editor string
 var tmpDir string
 var fGet, fInstall, fSearch *string
 var fHelp, fVersion, fFast, fDeps *bool
+var p *parseargs.Parser
 
 func init() {
 	editor = os.Getenv("EDITOR")
@@ -38,17 +40,20 @@ func init() {
 	}
 	tmpDir = os.TempDir()
 
-	fHelp = goopt.Flag([]string{"-h", "--help"}, []string{}, "show this help message and exit", "")
-	fVersion = goopt.Flag([]string{"-v", "--version"}, []string{}, "print version", "")
-	fGet = goopt.String([]string{"-g", "--get"}, "", "get needed files to build app")
-	fSearch = goopt.String([]string{"-s", "--search"}, "", "search an app in KCP")
-	fFast = goopt.Flag([]string{"--fast"}, []string{}, "search without version", "")
-	fInstall = goopt.String([]string{"-i", "--install"}, "", "install an app in KCP")
-	fDeps = goopt.Flag([]string{"--asdeps"}, []string{}, "install as a dependence", "")
-
-	goopt.Version = versionNumber
-	goopt.Summary = "Tool in command-line for KaOS Community Packages"
-
+	p = parseargs.New(description, versionNumber)
+	p.Set(parseargs.SYNOPSIS, "[OPTIONS] [APP]")
+	p.Set(parseargs.AUTHOR, author)
+	p.Set(parseargs.LONGDESCRIPTION, longDescription)
+	g := p.InsertGroup()
+	fHelp = p.Bool("-h", "--help", "print this help")
+	fVersion = g.Bool("-v", "--version", "print version")
+	fSearch = g.String("-s", "--search", "search an app in KCP", "APP", "")
+	fFast = g.Bool("", "--fast", "in conjonction with --search, don't print version")
+	fGet = g.String("-g", "--get", "get needed files to build app", "APP", "")
+	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
+	fDeps = g.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
+	p.Link("--asdeps", "-i")
+	p.Link("--fast", "-s")
 }
 
 func printError(msg string) {
@@ -224,12 +229,15 @@ func installPackage(app string, asdeps bool) {
 
 func main() {
 	checkUser()
-	goopt.Parse(nil)
+	err := p.Parse(os.Args)
 	switch {
-	case *fVersion:
-		fmt.Println(goopt.Version)
+	case err != nil:
+		fmt.Println(err)
+		p.PrintHelp()
 	case *fHelp:
-		fmt.Println(goopt.Usage())
+		p.PrintHelp()
+	case *fVersion:
+		p.PrintVersion()
 	case *fGet != "":
 		getPackage(*fGet)
 	case *fSearch != "":
@@ -237,6 +245,6 @@ func main() {
 	case *fInstall != "":
 		installPackage(*fInstall, *fDeps)
 	default:
-		fmt.Println(goopt.Usage())
+		p.PrintHelp()
 	}
 }
