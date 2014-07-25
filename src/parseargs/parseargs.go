@@ -466,18 +466,18 @@ func (p *Parser) synopsis() string {
 		n := f.Get(NAME)
 		switch {
 		case sn == "":
-			fmt.Fprint(h, "\\-\\-%s", n[2:])
+			fmt.Fprintf(h, "\\-\\-%s", n[2:])
 		case n == "":
-			fmt.Fprint(h, "\\-%c", sn[1])
+			fmt.Fprintf(h, "\\-%c", sn[1])
 		default:
-			fmt.Fprint(h, "\\-%c", sn[1])
-			fmt.Fprint(h, "|\\-\\-%s", n[2:])
+			fmt.Fprintf(h, "\\-%c", sn[1])
+			fmt.Fprintf(h, "|\\-\\-%s", n[2:])
 		}
 		if vn := f.Get(VALUENAME); vn != "" {
 			if dv := f.Get(DEFAULTVALUE); dv == "" {
-				fmt.Fprint(h, " [%s]", vn)
+				fmt.Fprintf(h, " [%s]", vn)
 			} else {
-				fmt.Fprint(h, " %s", vn)
+				fmt.Fprintf(h, " %s", vn)
 			}
 		}
 		fmt.Fprint(h, "]")
@@ -494,29 +494,29 @@ func (f *flag) Man() string {
 	n := f.Get(NAME)
 	switch {
 	case sn == "":
-		fmt.Fprint(h, "\\-\\-%s", n[2:])
+		fmt.Fprintf(h, "\\-\\-%s", n[2:])
 	case n == "":
-		fmt.Fprint(h, "\\-%c", sn[1])
+		fmt.Fprintf(h, "\\-%c", sn[1])
 	default:
-		fmt.Fprint(h, "\\-%c", sn[1])
-		fmt.Fprint(h, ", \\-\\-%s", n[2:])
+		fmt.Fprintf(h, "\\-%c", sn[1])
+		fmt.Fprintf(h, ", \\-\\-%s", n[2:])
 	}
 	if vn := f.Get(VALUENAME); vn != "" {
 		if dv := f.Get(DEFAULTVALUE); dv == "" {
 			if n == "" {
-				fmt.Fprint(h, " [%s]", vn)
+				fmt.Fprintf(h, " [%s]", vn)
 			} else {
-				fmt.Fprint(h, "[=%s]", vn)
+				fmt.Fprintf(h, "[=%s]", vn)
 			}
 		} else {
 			if n == "" {
-				fmt.Fprint(h, " %s", vn)
+				fmt.Fprintf(h, " %s", vn)
 			} else {
-				fmt.Fprint(h, "=%s", vn)
+				fmt.Fprintf(h, "=%s", vn)
 			}
 		}
 	}
-	fmt.Fprint(h, "\n\t%s", f.Get(DESCRIPTION))
+	fmt.Fprintf(h, "\n\t%s", f.Get(DESCRIPTION))
 	return h.String()
 }
 
