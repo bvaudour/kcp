@@ -5,9 +5,9 @@ GOCLEAN = $(GOCLEAN)
 GOPATH  = ${PWD}:${GOPATHi}
 export $(GOPATH)
 
-SRCDIR   = src
-BINDIR   = bin
-MANDIR   = man
+SRCDIR   = ${PWD}/src
+BINDIR   = ${PWD}/bin
+MANDIR   = ${PWD}/man
 PACKAGE  = kcp
 SRCFILE  = $(SRCDIR)/$(PACKAGE)/$(PACKAGE).go
 BINFILE  = $(BINDIR)/$(PACKAGE)
@@ -19,22 +19,18 @@ INSTALLDIR = $(DESTDIR)/usr
 DESTMAN = $(INSTALLDIR)/share/man/man1
 DESTBIN = $(INSTALLDIR)/bin
 
-.PHONY: default format build man install clean
+.PHONY: default build install clean
 
-default: build man
+default: build
 
-build: format
-	$(GOBUILD) -v -o $(BINFILE) $(SRCFILE)
-
-format:
+build:
 	$(GOFMT) $(SRCDIR)/...
+	$(GOBUILD) -v -o $(BINFILE) $(SRCFILE)
+	mkdir -p $(MANDIR)
+	$(BINFILE) --create-manpage > $(MANFILE)
 
 clean:
 	rm -rf $(BINDIR) $(MANDIR)
-
-man:
-	mkdir -p $(MANDIR)
-	$(BINFILE) --create-manpage > $(MANFILE)
 
 install:
 	mkdir -p $(DESTBIN) $(DESTMAN)
