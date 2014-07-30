@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.13"
+	versionNumber   = "0.14"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -48,10 +48,10 @@ func init() {
 	fHelp = p.Bool("-h", "--help", "print this help")
 	fVersion = g.Bool("-v", "--version", "print version")
 	fSearch = g.String("-s", "--search", "search an app in KCP", "APP", "")
-	fFast = g.Bool("", "--fast", "in conjonction with --search, don't print version")
+	fFast = p.Bool("", "--fast", "in conjonction with --search, don't print version")
 	fGet = g.String("-g", "--get", "get needed files to build app", "APP", "")
 	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
-	fDeps = g.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
+	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
 	p.Link("--asdeps", "-i")
 	p.Link("--fast", "-s")
 }
