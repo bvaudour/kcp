@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.14"
+	versionNumber   = "0.15"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -25,6 +25,7 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 	searchBase     = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
 	urlBase        = "https://github.com/KaOS-Community-Packages/%v.git"
 	urlPkgbuild    = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
+	kcp_lock       = "kcp.lock"
 )
 
 var editor string
@@ -200,12 +201,20 @@ func searchPackage(app string, fast bool) {
 
 func installPackage(app string, asdeps bool) {
 	os.Chdir(tmpDir)
+	lck := tmpDir + string(os.PathSeparator) + kcp_lock
+	_, e := os.Open(lck)
+	if e == nil {
+		fmt.Println("\033[1;31mAnother instance is running!\033[m")
+		os.Exit(1)
+	}
+	os.Create(lck)
 	wDir := tmpDir + string(os.PathSeparator) + app
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go func() {
 		<-c
 		os.RemoveAll(wDir)
+		os.Remove(lck)
 		os.Exit(1)
 	}()
 	getPackage(app)
