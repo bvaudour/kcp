@@ -209,18 +209,22 @@ func installPackage(app string, asdeps bool) {
 	}
 	os.Create(lck)
 	wDir := tmpDir + string(os.PathSeparator) + app
+	end := func() {
+		os.RemoveAll(wDir)
+		os.Remove(lck)
+	}
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go func() {
 		<-c
-		os.RemoveAll(wDir)
-		os.Remove(lck)
+		end()
 		os.Exit(1)
 	}()
 	getPackage(app)
-	defer os.RemoveAll(wDir)
+	defer end()
 	if err := os.Chdir(wDir); err != nil {
 		fmt.Println(err)
+		end()
 		os.Exit(1)
 	}
 	editPkgbuild()
