@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.15"
+	versionNumber   = "0.16"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -32,6 +32,7 @@ var editor string
 var tmpDir string
 var fGet, fInstall, fSearch *string
 var fHelp, fVersion, fFast, fDeps *bool
+var fList *bool
 var p *parseargs.Parser
 
 func init() {
@@ -53,6 +54,8 @@ func init() {
 	fGet = g.String("-g", "--get", "get needed files to build app", "APP", "")
 	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
 	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
+	fList = p.Bool("", "--list-all", "list all packages present in repo")
+	p.SetHidden("--list-all")
 	p.Link("--asdeps", "-i")
 	p.Link("--fast", "-s")
 }
@@ -240,6 +243,29 @@ func installPackage(app string, asdeps bool) {
 	cmd.Run()
 }
 
+func listpage(p int) bool {
+	urll := "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
+	search := fmt.Sprintf(urll, p)
+	var f interface{}
+	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
+		return false
+	}
+	result := f.([]interface{})
+	ok := false
+	for _, r := range result {
+		ok = true
+		e := r.(map[string]interface{})
+		app := e["name"]
+		fmt.Println(app)
+	}
+	return ok
+}
+
+func listAll() {
+	for p := 1; listpage(p); p++ {
+	}
+}
+
 func main() {
 	checkUser()
 	err := p.Parse(os.Args)
@@ -247,6 +273,8 @@ func main() {
 	case err != nil:
 		fmt.Println(err)
 		p.PrintHelp()
+	case *fList:
+		listAll()
 	case *fHelp:
 		p.PrintHelp()
 	case *fVersion:

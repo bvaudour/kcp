@@ -114,6 +114,7 @@ type flag struct {
 	process    func(string) error
 	in         *Group
 	linked     *flag
+	hidden     bool
 }
 
 func (f *flag) Get(property uint) string {
@@ -139,7 +140,7 @@ func (f *flag) Set(property uint, value string) error {
 }
 
 func newFlag() *flag {
-	f := flag{initProperties(FlagProperties), nil, nil, nil}
+	f := flag{initProperties(FlagProperties), nil, nil, nil, false}
 	return &f
 }
 
@@ -271,6 +272,12 @@ func (p *Parser) Set(property uint, value string) error {
 	}
 	p.properties[property] = value
 	return nil
+}
+
+func (p *Parser) SetHidden(n string) {
+	if f, ok := p.flags[n]; ok {
+		f.hidden = true
+	}
 }
 
 func New(description, version string) *Parser {
@@ -451,6 +458,9 @@ func (p *Parser) PrintHelp() {
 	p.PrintDescription()
 	fmt.Println("\n\033[1;31mOptions:\033[m")
 	for _, f := range p.oflags {
+		if f.hidden {
+			continue
+		}
 		f.Print()
 	}
 }
@@ -548,6 +558,9 @@ func (p *Parser) PrintMan() {
 	fmt.Println(p.description())
 	fmt.Println(".SH OPTIONS")
 	for _, f := range p.oflags {
+		if f.hidden {
+			continue
+		}
 		fmt.Println(".TP")
 		fmt.Println(f.Man())
 	}
