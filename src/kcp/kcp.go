@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.16"
+	versionNumber   = "0.17"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.

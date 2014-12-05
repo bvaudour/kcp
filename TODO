@@ -3,3 +3,5 @@ TODO :
 	- Add the possibility of editing PKGBUILD (done)
 	- Add version in the -s listing (done)
 	- Create a Makefile (done)
+	- Create bash completion (done)
+	- Create fish/zsh completion
