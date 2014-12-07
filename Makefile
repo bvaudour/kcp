@@ -14,6 +14,7 @@ SRCFILE  = $(SRCDIR)/$(PACKAGE)/$(PACKAGE).go
 BINFILE  = $(BINDIR)/$(PACKAGE)
 MANFILE  = $(MANDIR)/$(PACKAGE).1
 BASHFILE = $(COMPDIR)/$(PACKAGE).bash
+FISHFILE = $(COMPDIR)/$(PACKAGE).fish
 
 DESTDIR    = .
 INSTALLDIR = $(DESTDIR)/usr
@@ -21,6 +22,7 @@ INSTALLDIR = $(DESTDIR)/usr
 DESTMAN  = $(INSTALLDIR)/share/man/man1
 DESTBIN  = $(INSTALLDIR)/bin
 DESTBASH = $(DESTDIR)/etc/bash_completion.d
+DESTFISH = $(INSTALLDIR)/share/fish/completions
 
 .PHONY: default build install clean
 
@@ -35,8 +37,9 @@ clean:
 	rm -rf $(BINDIR) $(MANDIR)
 
 install:
-	mkdir -p $(DESTBIN) $(DESTMAN) $(DESTBASH)
+	mkdir -p $(DESTBIN) $(DESTMAN) $(DESTBASH) $(DESTFISH)
 	cp $(BINFILE) $(DESTBIN)
 	cp $(MANFILE) $(DESTMAN)
 	cp $(BASHFILE) $(DESTBASH)/$(PACKAGE)
+	cp $(FISHFILE) $(DESTFISH)
 

@@ -4,4 +4,5 @@ TODO :
 	- Add version in the -s listing (done)
 	- Create a Makefile (done)
 	- Create bash completion (done)
-	- Create fish/zsh completion
+	- Create fish completion (done)
+	- Create zsh completion
