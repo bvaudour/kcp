@@ -1,0 +1,64 @@
+# Go variables...
+GOCMD = go build
+GOPATH = ${PWD}
+GOFLAG = --compiler gccgo
+export $(GOPATH)
+
+PACKAGE = kcp
+PACKAGEFLAG = --create-manpage
+
+# Source directories
+SRCDIR = ${PWD}/src/kcp
+COMPDIR = ${PWD}/completion
+BUILDDIR = ${PWD}/build
+
+# Base files
+BINFILE = $(PACKAGE)
+MANFILE = $(PACKAGE).1
+GOFILE = $(PACKAGE).go
+BASHFILE = $(PACKAGE).bash
+FISHFILE = $(PACKAGE).fish
+
+# Source files
+SRCBINFILE = $(BUILDDIR)/$(BINFILE)
+SRCMANFILE = $(BUILDDIR)/$(MANFILE)
+SRCGOFILE = $(SRCDIR)/$(GOFILE)
+SRCBASHFILE = $(COMPDIR)/$(BASHFILE)
+SRCFISHFILE = $(COMPDIR)/$(FISHFILE)
+
+# Destination directories
+DESTDIR ?=
+DESTBIN = $(DESTDIR)/usr/bin
+DESTMAN = $(DESTDIR)/usr/share/man/man1
+DESTBASH = $(DESTDIR)/etc/bash_completion.d
+DESTFISH = $(DESTDIR)/usr/share/fish/completions
+
+# Destination files
+DESTBINFILE = $(DESTBIN)/$(BINFILE)
+DESTMANFILE = $(DESTMAN)$(MANFILE)
+DESTBASHFILE = $(DESTBASH)/$(PACKAGE)
+DESTFISHFILE = $(DESTFISH)/$(FISHFILE)
+
+.PHONY: default build install clean
+
+default: build
+
+build:
+	mkdir -p $(BUILDDIR)
+	$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)
+	$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)
+
+install:
+	mkdir -p $(DESTBIN)
+	mkdir -p $(DESTMAN)
+	mkdir -p $(DESTBASH)
+	mkdir -p $(DESTFISH)
+	cp $(SRCBINFILE) $(DESTBINFILE)
+	cp $(SRCMANFILE) $(DESTMANFILE)
+	cp $(SRCBASHFILE) $(DESTBASHFILE)
+	cp $(SRCFISHFILE) $(DESTFISHFILE)
+
+clean:
+	rm $(SRCBINFILE)
+	rm $(SRCMANFILE)
+	rmdir $(BUILDDIR)

@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+
+# Flag variables
+withgcco='no'
+withman='yes'
+withbash='yes'
+withfish='yes'
+
+_addline() {
+	echo -e $1 >> Makefile
+}
+
+_emptyline() {
+	_addline ''
+}
+
+_addline_t() {
+	_addline "\t$1"
+}
+
+_addline_cond() {
+	case "$1" in
+		'yes') _addline_t "$2";;
+		*) ;;
+	esac
+}
+
+_generate() {
+
+	if [[ -e Makefile ]]; then
+		rm Makefile
+	fi
+
+	_addline '# Go variables...'
+	_addline 'GOCMD  = go build'
+#	_addline 'GOPATH = ${PWD}:${GOPATH}'
+	_addline 'GOPATH = ${PWD}'
+	_addline 'GOFLAG = --compiler gccgo'
+	_addline 'export $(GOPATH)'
+	_emptyline
+
+	_addline 'PACKAGE = kcp'
+	_addline 'PACKAGEFLAG = --create-manpage'
+	_emptyline
+
+	_addline '# Source directories'
+	_addline 'SRCDIR   = ${PWD}/src/kcp'
+	_addline 'COMPDIR  = ${PWD}/completion'
+	_addline 'BUILDDIR = ${PWD}/build'
+	_emptyline
+
+	_addline '# Base files'
+	_addline 'BINFILE  = $(PACKAGE)'
+	_addline 'MANFILE  = $(PACKAGE).1'
+	_addline 'GOFILE   = $(PACKAGE).go'
+	_addline 'BASHFILE = $(PACKAGE).bash'
+	_addline 'FISHFILE = $(PACKAGE).fish'
+	_emptyline
+
+	_addline '# Source files'
+	_addline 'SRCBINFILE  = $(BUILDDIR)/$(BINFILE)'
+	_addline 'SRCMANFILE  = $(BUILDDIR)/$(MANFILE)'
+	_addline 'SRCGOFILE   = $(SRCDIR)/$(GOFILE)'
+	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
+	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
+	_emptyline
+
+	_addline '# Destination directories'
+	_addline 'DESTDIR ?='
+	_addline 'DESTBIN  = $(DESTDIR)/usr/bin'
+	_addline 'DESTMAN  = $(DESTDIR)/usr/share/man/man1'
+	_addline 'DESTBASH = $(DESTDIR)/etc/bash_completion.d'
+	_addline 'DESTFISH = $(DESTDIR)/usr/share/fish/completions'
+	_emptyline
+
+	_addline '# Destination files'
+	_addline 'DESTBINFILE  = $(DESTBIN)/$(BINFILE)'
+	_addline 'DESTMANFILE  = $(DESTMAN)$(MANFILE)'
+	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
+	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
+	_emptyline
+
+	_addline '.PHONY: default build install clean'
+	_emptyline
+	_addline 'default: build'
+	_emptyline
+
+	_addline 'build:'
+	_addline_t 'mkdir -p $(BUILDDIR)'
+	case "$withgcco" in
+		'yes') _addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
+		*)     _addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
+	esac
+	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
+	_emptyline
+
+	_addline 'install:'
+	_addline_t 'mkdir -p $(DESTBIN)'
+	_addline_cond "$withman"  'mkdir -p $(DESTMAN)'
+	_addline_cond "$withbash" 'mkdir -p $(DESTBASH)'
+	_addline_cond "$withfish" 'mkdir -p $(DESTFISH)'
+	_addline_t 'cp $(SRCBINFILE) $(DESTBINFILE)'
+	_addline_cond "$withman"  'cp $(SRCMANFILE) $(DESTMANFILE)'
+	_addline_cond "$withbash" 'cp $(SRCBASHFILE) $(DESTBASHFILE)'
+	_addline_cond "$withfish" 'cp $(SRCFISHFILE) $(DESTFISHFILE)'
+	_emptyline
+
+	_addline 'clean:'
+	_addline_t 'rm $(SRCBINFILE)'
+	_addline_cond "$withman" 'rm $(SRCMANFILE)'
+	_addline_t 'rmdir $(BUILDDIR)'
+}
+
+_help() {
+	echo "Usage: $0 [options]"
+	echo "Options:"
+	echo -e "\t-h, --help\tPrint this help"
+	echo -e "\t--enable-gcco\tCompile with gccgo [disable]"
+	echo -e "\t--disable-man\tInstall man file [enable]"
+	echo -e "\t--disable-bash\tInstall bash completion [enable]"
+	echo -e "\t--disable-fish\tInstall fish completion [enable]"
+}
+
+for i in ${@}; do
+	case $i in
+		"-h"|"--help") _help; exit 0;;
+		"--enable-gcco")
+			if [ which gcco > /dev/null ]; then
+				withgcco='yes'
+			else
+				echo -e '\033[1;31mgcco is not installed!\033[m'; exit 1
+			fi
+			;;
+		"--disable-man") withman='no';;
+		"--disable-bash") withbash='no';;
+		"--disable-fish") withfish='no';;
+		*)
+			echo -e '\033[1;31mgcco is not installed!\033[m'; exit 1;;
+	esac
+done
+
+_generate
+exit 0
