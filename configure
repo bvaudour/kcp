@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Flag variables
-withgcco='no'
+withgccgo='no'
 withman='yes'
 withbash='yes'
 withfish='yes'
@@ -87,7 +87,7 @@ _generate() {
 
 	_addline 'build:'
 	_addline_t 'mkdir -p $(BUILDDIR)'
-	case "$withgcco" in
+	case "$withgccgo" in
 		'yes') _addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
 		*)     _addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
 	esac
@@ -115,7 +115,7 @@ _help() {
 	echo "Usage: $0 [options]"
 	echo "Options:"
 	echo -e "\t-h, --help\tPrint this help"
-	echo -e "\t--enable-gcco\tCompile with gccgo [disable]"
+	echo -e "\t--enable-gccgo\tCompile with gccgo [disable]"
 	echo -e "\t--disable-man\tInstall man file [enable]"
 	echo -e "\t--disable-bash\tInstall bash completion [enable]"
 	echo -e "\t--disable-fish\tInstall fish completion [enable]"
@@ -124,18 +124,18 @@ _help() {
 for i in ${@}; do
 	case $i in
 		"-h"|"--help") _help; exit 0;;
-		"--enable-gcco")
-			if [ which gcco > /dev/null ]; then
-				withgcco='yes'
+		"--enable-gccgo")
+			if e=$(which gccgo > /dev/null); then
+				withgccgo='yes'
 			else
-				echo -e '\033[1;31mgcco is not installed!\033[m'; exit 1
+				echo -e '\033[1;31mgccgo is not installed!\033[m'; exit 1
 			fi
 			;;
 		"--disable-man") withman='no';;
 		"--disable-bash") withbash='no';;
 		"--disable-fish") withfish='no';;
 		*)
-			echo -e '\033[1;31Unsupported arg!\033[m'; exit 1;;
+			echo -e '\033[1;31mUnsupported arg!\033[m'; exit 1;;
 	esac
 done
 
