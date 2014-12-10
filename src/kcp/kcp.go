@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.20"
+	versionNumber   = "0.21"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -82,7 +82,7 @@ var editor string
 var tmpDir string
 var fGet, fInstall, fSearch *string
 var fHelp, fVersion, fFast, fDeps, fOutdated, fStars *bool
-var fList *bool
+var fList, fListStarred *bool
 var p *parseargs.Parser
 
 func init() {
@@ -106,8 +106,10 @@ func init() {
 	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
 	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
 	fList = p.Bool("", "--list-all", "list all packages present in repo")
+	fListStarred = p.Bool("", "--list-starred", "list all starred packages sorted")
 	fOutdated = p.Bool("-o", "--outdated", "display outdated packages")
 	p.SetHidden("--list-all")
+	p.SetHidden("--list-starred")
 	p.Link("--asdeps", "-i")
 	p.Link("--fast", "-s")
 	p.Link("--stars", "-s")
@@ -325,6 +327,31 @@ func listAll() {
 	}
 }
 
+func listStarred() {
+	urll := "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
+	pkgs := make(searchers, 0)
+	for p := 1; ; p++ {
+		search := fmt.Sprintf(urll, p)
+		var f interface{}
+		if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
+			break
+		}
+		result := f.([]interface{})
+		ok := false
+		for _, r := range result {
+			ok = true
+			pkgs = append(pkgs, news(r.(map[string]interface{})))
+		}
+		if !ok {
+			break
+		}
+	}
+	sort.Sort(pkgs)
+	for _, p := range pkgs {
+		fmt.Println(p)
+	}
+}
+
 func externInstalled() searchers {
 	out := make(searchers, 0)
 	cmd := exec.Command("pacman", "-Qm")
@@ -373,6 +400,8 @@ func main() {
 		p.PrintHelp()
 	case *fList:
 		listAll()
+	case *fListStarred:
+		listStarred()
 	case *fHelp:
 		p.PrintHelp()
 	case *fVersion:
