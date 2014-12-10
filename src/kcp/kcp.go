@@ -9,11 +9,12 @@ import (
 	"os/exec"
 	"os/signal"
 	"parseargs"
+	"sort"
 	"strings"
 )
 
 const (
-	versionNumber   = "0.19"
+	versionNumber   = "0.20"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -28,10 +29,59 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 	kcp_lock       = "kcp.lock"
 )
 
+type searcher struct {
+	name         string
+	localversion string
+	kcpversion   string
+	description  string
+	stars        int64
+}
+
+func news(e map[string]interface{}) *searcher {
+	s := new(searcher)
+	s.update(e)
+	return s
+}
+func (s *searcher) update(e map[string]interface{}) {
+	s.name = fmt.Sprintf("%s", e["name"])
+	s.description = fmt.Sprintf("%s", e["description"])
+	s.stars = int64(e["stargazers_count"].(float64))
+}
+func (s *searcher) String() string {
+	var out string
+	switch {
+	case s.kcpversion == "":
+		if s.localversion == "" {
+			out = fmt.Sprintf("\033[1m%v\033[m\033 \033[1;34m(%v)\033[m\n", s.name, s.stars)
+		} else {
+			out = fmt.Sprintf("\033[1m%v\033[m \033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", s.name, s.localversion, s.stars)
+		}
+	case s.localversion == "":
+		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.stars)
+	case s.localversion == s.kcpversion:
+		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m [installed]\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.stars)
+	default:
+		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m [installed: %v]\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.localversion, s.stars)
+	}
+	out = fmt.Sprintf("%s\t%s", out, s.description)
+	return out
+}
+
+type searchers []*searcher
+
+func (s searchers) Len() int      { return len(s) }
+func (s searchers) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s searchers) Less(i, j int) bool {
+	if s[i].stars != s[j].stars {
+		return s[i].stars > s[j].stars
+	}
+	return s[i].name <= s[j].name
+}
+
 var editor string
 var tmpDir string
 var fGet, fInstall, fSearch *string
-var fHelp, fVersion, fFast, fDeps, fOutdated *bool
+var fHelp, fVersion, fFast, fDeps, fOutdated, fStars *bool
 var fList *bool
 var p *parseargs.Parser
 
@@ -51,6 +101,7 @@ func init() {
 	fVersion = g.Bool("-v", "--version", "print version")
 	fSearch = g.String("-s", "--search", "search an app in KCP", "APP", "")
 	fFast = p.Bool("", "--fast", "in conjonction with --search, don't print version")
+	fStars = p.Bool("", "--stars", "in conjonction with --search, sort by stars")
 	fGet = g.String("-g", "--get", "get needed files to build app", "APP", "")
 	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
 	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
@@ -59,6 +110,7 @@ func init() {
 	p.SetHidden("--list-all")
 	p.Link("--asdeps", "-i")
 	p.Link("--fast", "-s")
+	p.Link("--stars", "-s")
 }
 
 func printError(msg string) {
@@ -170,36 +222,42 @@ func checkInstalled(app string) string {
 	return localVersion
 }
 
-func searchPackage(app string, fast bool) {
+func search(app string) searchers {
+	out := make(searchers, 0)
 	search := fmt.Sprintf(searchBase, app)
 	var f interface{}
 	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
-		return
+		return out
 	}
 	j := f.(map[string]interface{})["items"]
+	if j == nil {
+		return out
+	}
 	result := j.([]interface{})
 	for _, a := range result {
 		e := a.(map[string]interface{})
-		n, d, s := e["name"], e["description"], e["stargazers_count"]
-		i := checkInstalled(fmt.Sprintf("%v", n))
-		if fast {
-			if i != "" {
-				fmt.Printf("\033[1m%v\033[m \033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", n, i, s)
-			} else {
-				fmt.Printf("\033[1m%v\033[m\033 \033[1;34m(%v)\033[m\n", n, s)
-			}
-		} else {
-			v := string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, n), false)))
-			if i != "" {
-				if v == i {
-					i = " [installed]"
-				} else {
-					i = fmt.Sprintf(" [installed: %v]", i)
-				}
-			}
-			fmt.Printf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m%v\033[m \033[1;34m(%v)\033[m\n", n, v, i, s)
+		out = append(out, news(e))
+	}
+	return out
+}
+
+func searchPackage(app string, fast bool, sortByStars bool) {
+	pkgs := search(app)
+	if fast {
+		for _, p := range pkgs {
+			p.localversion = checkInstalled(fmt.Sprintf("%v", p.name))
 		}
-		fmt.Println("\t", d)
+	} else {
+		for _, p := range pkgs {
+			p.localversion = checkInstalled(fmt.Sprintf("%v", p.name))
+			p.kcpversion = string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, p.name), false)))
+		}
+	}
+	if sortByStars {
+		sort.Sort(pkgs)
+	}
+	for _, p := range pkgs {
+		fmt.Println(p)
 	}
 }
 
@@ -267,57 +325,42 @@ func listAll() {
 	}
 }
 
-func externInstalled() map[string]string {
-	out := make(map[string]string)
+func externInstalled() searchers {
+	out := make(searchers, 0)
 	cmd := exec.Command("pacman", "-Qm")
 	if output, err := cmd.Output(); err == nil {
 		lines := strings.Split(string(output), "\n")
 		for _, l := range lines {
 			o := strings.Fields(l)
 			if len(o) == 2 {
-				out[o[0]] = o[1]
+				s := new(searcher)
+				s.name = o[0]
+				s.localversion = o[1]
 			}
 		}
 	}
 	return out
 }
 
-func getKCPVersion(app string, localVersion string) (version, description, stars string, outdated bool) {
-	search := fmt.Sprintf(searchBase, app)
-	var f interface{}
-	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
-		return
-	}
-	j := f.(map[string]interface{})["items"]
-	if j == nil {
-		return
-	}
-	result := j.([]interface{})
-	for _, a := range result {
-		e := a.(map[string]interface{})
-		n, d, s := fmt.Sprintf("%v", e["name"]), fmt.Sprintf("%v", e["description"]), fmt.Sprintf("%v", e["stargazers_count"])
-		if n != app {
-			continue
-		}
-		v := string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, n), false)))
-		if v != localVersion {
-			version, description, stars = v, d, s
-			outdated = true
-		}
-		break
-	}
-	return
-}
-
 func displayOutdated() {
+	outdated := make(searchers, 0)
 	localapps := externInstalled()
-	for app, localVersion := range localapps {
-		v, d, s, o := getKCPVersion(app, localVersion)
-		if !o {
-			continue
+	for _, s := range localapps {
+		for _, kcppapps := range search(s.name) {
+			if kcppapps.name != s.name {
+				continue
+			}
+			s.kcpversion = string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, s.name), false)))
+			if s.kcpversion == s.localversion {
+				s.description = kcppapps.description
+				s.stars = kcppapps.stars
+				outdated = append(outdated, s)
+			}
+			break
 		}
-		fmt.Printf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", app, v, localVersion, s)
-		fmt.Println("\t", d)
+	}
+	for _, p := range outdated {
+		fmt.Println(p)
 	}
 }
 
@@ -337,7 +380,7 @@ func main() {
 	case *fGet != "":
 		getPackage(*fGet)
 	case *fSearch != "":
-		searchPackage(*fSearch, *fFast)
+		searchPackage(*fSearch, *fFast, *fStars)
 	case *fInstall != "":
 		installPackage(*fInstall, *fDeps)
 	case *fOutdated:

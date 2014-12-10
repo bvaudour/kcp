@@ -4,7 +4,7 @@ _kcp() {
 	local cur prev words cword pprev opts lst appfile appcache
 	_init_completion || return
 	pprev="${COMP_WORDS[COMP_CWORD-2]}"
-	opts="--asdeps --fast --help --install --search --get --version -h -i -s -g -v"
+	opts="--asdeps --fast --stars --help --install --search --get --version --outdated -h -i -s -g -v -o"
 	appfile="/tmp/kcp.lst"
 
 	case "$prev" in
@@ -14,7 +14,7 @@ _kcp() {
 		"--asdeps")
 			lst="--install"
 			;;
-		"--fast")
+		"--fast"|"--stars")
 			lst="--search"
 			;;
 		"--install"|"--search"|"--get"|"-i"|"-s"|"-g")
@@ -23,7 +23,7 @@ _kcp() {
 			fi
 			lst=$( cat "$appfile" | sort )
 			;;
-		"--help"|"--version"|"-h"|"-v")
+		"--help"|"--version"|"--outdated"|"-h"|"-v"|'-o')
 			return 0
 			;;
 		*)
@@ -32,7 +32,7 @@ _kcp() {
 					lst="--asdeps"
 					;;
 				"--search"|"-s")
-					lst="--fast"
+					lst="--fast --stars"
 					;;
 				*)
 					return 0

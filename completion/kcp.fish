@@ -30,8 +30,9 @@ function __fish_kcp_listall
 end
 
 # General options
-complete -fA -c kcp -n '__fish_kcp_needs_command' -a '-h --help'    -d 'Display help'
-complete -fA -c kcp -n '__fish_kcp_needs_command' -a '-v --version' -d 'Display version'
+complete -fA -c kcp -n '__fish_kcp_needs_command' -a '-h --help'     -d 'Display help'
+complete -fA -c kcp -n '__fish_kcp_needs_command' -a '-v --version'  -d 'Display version'
+complete -fA -c kcp -n '__fish_kcp_needs_command' -a '-o --outdated' -d 'Display outdated packages'
 
 # Option get
 complete -f -c kcp -n '__fish_kcp_needs_command'              -a '-g --get'             -d 'Download package'
@@ -46,6 +47,7 @@ complete -f -c kcp -n '__fish_kcp_using_command 3 3 -i --install' -a '(__fish_kc
 # Option search
 complete -f -c kcp -n '__fish_kcp_needs_command'                 -a '-s --search'          -d 'Search package'
 complete -f -c kcp -n '__fish_kcp_using_command 3 2 -s --search' -a '--fast'               -d 'Accelerate search package'
+complete -f -c kcp -n '__fish_kcp_using_command 3 2 -s --search' -a '--stars'              -d 'Sort result by stars descending'
 complete -f -c kcp -n '__fish_kcp_using_command 2 2 -s --search' -a '(__fish_kcp_listall)' -d 'Available packages'
 complete -f -c kcp -n '__fish_kcp_using_command 3 3 -s --search' -a '(__fish_kcp_listall)' -d 'Available packages'
 
@@ -56,3 +58,7 @@ complete -f -c kcp -n '__fish_kcp_using_command 2 2 --asdeps' -a '--install' -d 
 # Option fast
 complete -f -c kcp -n '__fish_kcp_needs_command'            -a '--fast'   -d 'Accelerate search package'
 complete -f -c kcp -n '__fish_kcp_using_command 2 2 --fast' -a '--search' -d 'Search package'
+
+# Option stars
+complete -f -c kcp -n '__fish_kcp_needs_command'             -a '--stars'  -d 'Sort result by stars descending'
+complete -f -c kcp -n '__fish_kcp_using_command 2 2 --stars' -a '--search' -d 'Search package'
