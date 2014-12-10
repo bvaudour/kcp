@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.18"
+	versionNumber   = "0.19"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -31,7 +31,7 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 var editor string
 var tmpDir string
 var fGet, fInstall, fSearch *string
-var fHelp, fVersion, fFast, fDeps *bool
+var fHelp, fVersion, fFast, fDeps, fOutdated *bool
 var fList *bool
 var p *parseargs.Parser
 
@@ -55,6 +55,7 @@ func init() {
 	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
 	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
 	fList = p.Bool("", "--list-all", "list all packages present in repo")
+	fOutdated = p.Bool("-o", "--outdated", "display outdated packages")
 	p.SetHidden("--list-all")
 	p.Link("--asdeps", "-i")
 	p.Link("--fast", "-s")
@@ -266,6 +267,60 @@ func listAll() {
 	}
 }
 
+func externInstalled() map[string]string {
+	out := make(map[string]string)
+	cmd := exec.Command("pacman", "-Qm")
+	if output, err := cmd.Output(); err == nil {
+		lines := strings.Split(string(output), "\n")
+		for _, l := range lines {
+			o := strings.Fields(l)
+			if len(o) == 2 {
+				out[o[0]] = o[1]
+			}
+		}
+	}
+	return out
+}
+
+func getKCPVersion(app string, localVersion string) (version, description, stars string, outdated bool) {
+	search := fmt.Sprintf(searchBase, app)
+	var f interface{}
+	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
+		return
+	}
+	j := f.(map[string]interface{})["items"]
+	if j == nil {
+		return
+	}
+	result := j.([]interface{})
+	for _, a := range result {
+		e := a.(map[string]interface{})
+		n, d, s := fmt.Sprintf("%v", e["name"]), fmt.Sprintf("%v", e["description"]), fmt.Sprintf("%v", e["stargazers_count"])
+		if n != app {
+			continue
+		}
+		v := string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, n), false)))
+		if v != localVersion {
+			version, description, stars = v, d, s
+			outdated = true
+		}
+		break
+	}
+	return
+}
+
+func displayOutdated() {
+	localapps := externInstalled()
+	for app, localVersion := range localapps {
+		v, d, s, o := getKCPVersion(app, localVersion)
+		if !o {
+			continue
+		}
+		fmt.Printf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", app, v, localVersion, s)
+		fmt.Println("\t", d)
+	}
+}
+
 func main() {
 	checkUser()
 	err := p.Parse(os.Args)
@@ -285,6 +340,8 @@ func main() {
 		searchPackage(*fSearch, *fFast)
 	case *fInstall != "":
 		installPackage(*fInstall, *fDeps)
+	case *fOutdated:
+		displayOutdated()
 	default:
 		p.PrintHelp()
 	}
