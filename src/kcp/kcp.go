@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	versionNumber   = "0.21"
+	versionNumber   = "0.22"
 	author          = "B. VAUDOUR"
 	description     = "Tool in command-line for KaOS Community Packages"
 	longDescription = `Provides a tool to make the use of KaOS Community Packages.
@@ -52,7 +52,7 @@ func (s *searcher) String() string {
 	switch {
 	case s.kcpversion == "":
 		if s.localversion == "" {
-			out = fmt.Sprintf("\033[1m%v\033[m\033 \033[1;34m(%v)\033[m\n", s.name, s.stars)
+			out = fmt.Sprintf("\033[1m%v\033[m \033[1;34m(%v)\033[m\n", s.name, s.stars)
 		} else {
 			out = fmt.Sprintf("\033[1m%v\033[m \033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", s.name, s.localversion, s.stars)
 		}
@@ -340,7 +340,10 @@ func listStarred() {
 		ok := false
 		for _, r := range result {
 			ok = true
-			pkgs = append(pkgs, news(r.(map[string]interface{})))
+			p := news(r.(map[string]interface{}))
+			if p.stars > 0 {
+				pkgs = append(pkgs, p)
+			}
 		}
 		if !ok {
 			break
