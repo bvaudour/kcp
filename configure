@@ -75,7 +75,7 @@ _generate() {
 
 	_addline '# Destination files'
 	_addline 'DESTBINFILE  = $(DESTBIN)/$(BINFILE)'
-	_addline 'DESTMANFILE  = $(DESTMAN)$(MANFILE)'
+	_addline 'DESTMANFILE  = $(DESTMAN)/$(MANFILE)'
 	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
 	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
 	_emptyline
