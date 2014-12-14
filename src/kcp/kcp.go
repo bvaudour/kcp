@@ -29,6 +29,7 @@ const (
 	HEADER       = "application/vnd.github.v3+json"
 	HEADERMATCH  = "application/vnd.github.v3.text-match+json"
 	SEARCH_ALL   = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
+	SEARCH_ALLST = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100+stars:>=1"
 	SEARCH_APP   = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
 	URL_REPO     = "https://github.com/KaOS-Community-Packages/%v.git"
 	URL_PKGBUILD = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
@@ -52,7 +53,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.23-dev"
+	VERSION         = "0.24-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -250,11 +251,15 @@ func displayInformations(l informations, sorted bool) {
 func list(debug, checkVersions, onlyStarred bool) informations {
 	out := make(informations, 0)
 	ok := true
+	search := SEARCH_ALL
+	if onlyStarred {
+		search = SEARCH_ALLST
+	}
 	for i := 1; ok; i++ {
-		obj, e := pjson.ArrayObjectBytes(launchRequest(debug, HEADER, SEARCH_ALL, i))
+		obj, e := pjson.ArrayObjectBytes(launchRequest(debug, HEADER, search, i))
 		if e != nil {
 			if i == i {
-				o, _ := pjson.ObjectBytes(launchRequest(debug, HEADER, SEARCH_ALL, i))
+				o, _ := pjson.ObjectBytes(launchRequest(debug, HEADER, search, i))
 				printError(apiError(o))
 			}
 			ok = false
