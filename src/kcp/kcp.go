@@ -32,7 +32,7 @@ const (
 	SEARCH_APP   = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
 	URL_REPO     = "https://github.com/KaOS-Community-Packages/%v.git"
 	URL_PKGBUILD = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
-	TOKEN        = "bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
+	TOKEN        = "token bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
 )
 
 // Messages
@@ -52,7 +52,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.23"
+	VERSION         = "0.23-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -114,7 +114,7 @@ func (i *information) updateLocalVersion() {
 	}
 }
 func (i *information) updateKcpVersion() {
-	out := string(launchRequest("", URL_PKGBUILD, i.name))
+	out := string(launchRequest(false, "", URL_PKGBUILD, i.name))
 	pkgver, pkgrel := "", ""
 	for _, l := range strings.Split(out, "\n") {
 		l = strings.TrimSpace(l)
@@ -206,7 +206,7 @@ func launchCommandWithResult(name string, args ...string) string {
 	}
 	return ""
 }
-func launchRequest(header string, searchbase string, v ...interface{}) []byte {
+func launchRequest(debug bool, header string, searchbase string, v ...interface{}) []byte {
 	search := fmt.Sprintf(searchbase, v...)
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", search, nil)
@@ -216,13 +216,16 @@ func launchRequest(header string, searchbase string, v ...interface{}) []byte {
 	}
 	if header != "" {
 		request.Header.Add("Accept", header)
+		//request.Header.Add("Authorization", TOKEN)
 	}
 	//request.SetBasicAuth(TOKEN, "")
-	//request.Header.Add("Authorization", "token "+TOKEN)
 	response, err := client.Do(request)
 	if err != nil {
 		printError(err)
 		return make([]byte, 0)
+	}
+	if debug {
+		response.Write(os.Stdout)
 	}
 	out, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
@@ -244,14 +247,14 @@ func displayInformations(l informations, sorted bool) {
 		fmt.Println(i)
 	}
 }
-func list(checkVersions, onlyStarred bool) informations {
+func list(debug, checkVersions, onlyStarred bool) informations {
 	out := make(informations, 0)
 	ok := true
 	for i := 1; ok; i++ {
-		obj, e := pjson.ArrayObjectBytes(launchRequest(HEADER, SEARCH_ALL, i))
+		obj, e := pjson.ArrayObjectBytes(launchRequest(debug, HEADER, SEARCH_ALL, i))
 		if e != nil {
 			if i == i {
-				o, _ := pjson.ObjectBytes(launchRequest(HEADER, SEARCH_ALL, i))
+				o, _ := pjson.ObjectBytes(launchRequest(debug, HEADER, SEARCH_ALL, i))
 				printError(apiError(o))
 			}
 			ok = false
@@ -272,9 +275,9 @@ func list(checkVersions, onlyStarred bool) informations {
 	}
 	return out
 }
-func search(word string, checkKcpVersion, checkLocalVersion bool) informations {
+func search(word string, debug, checkKcpVersion, checkLocalVersion bool) informations {
 	out := make(informations, 0)
-	o, e := pjson.ObjectBytes(launchRequest(HEADERMATCH, SEARCH_APP, word))
+	o, e := pjson.ObjectBytes(launchRequest(debug, HEADERMATCH, SEARCH_APP, word))
 	if e != nil {
 		return out
 	}
@@ -298,9 +301,9 @@ func search(word string, checkKcpVersion, checkLocalVersion bool) informations {
 	}
 	return out
 }
-func get(app string) error {
+func get(app string, debug bool) error {
 	ok := false
-	for _, i := range search(app, false, false) {
+	for _, i := range search(app, debug, false, false) {
 		if i.name == app {
 			ok = true
 		}
@@ -326,15 +329,15 @@ func apiError(o pjson.Object) error {
 }
 
 // Actions
-func actionListAll(fast, onlyStarred, sorted bool) {
-	l := list(!fast, onlyStarred)
+func actionListAll(debug, fast, onlyStarred, sorted bool) {
+	l := list(debug, !fast, onlyStarred)
 	displayInformations(l, sorted)
 }
-func actionSearch(word string, fast, sorted bool) {
-	l := search(word, !fast, true)
+func actionSearch(word string, debug, fast, sorted bool) {
+	l := search(word, debug, !fast, true)
 	displayInformations(l, sorted)
 }
-func actionOutOfDate(sorted bool) {
+func actionOutOfDate(debug, sorted bool) {
 	l := make(informations, 0)
 	for _, app := range strings.Split(launchCommandWithResult("pacman", "-Qm"), "\n") {
 		c := strings.Fields(app)
@@ -345,7 +348,7 @@ func actionOutOfDate(sorted bool) {
 		il.name = c[0]
 		il.localversion = c[1]
 		ok := false
-		for _, ik := range search(il.name, true, false) {
+		for _, ik := range search(il.name, debug, true, false) {
 			if ik.name == il.name {
 				if ik.kcpversion != il.localversion {
 					il.kcpversion = ik.kcpversion
@@ -362,13 +365,13 @@ func actionOutOfDate(sorted bool) {
 	}
 	displayInformations(l, sorted)
 }
-func actionGet(app string) {
-	if e := get(app); e != nil {
+func actionGet(app string, debug bool) {
+	if e := get(app, debug); e != nil {
 		printError(e)
 		os.Exit(1)
 	}
 }
-func actionInstall(app string, asdeps bool) {
+func actionInstall(app string, debug, asdeps bool) {
 	tmpDir := os.TempDir()
 	os.Chdir(tmpDir)
 	lck := tmpDir + string(os.PathSeparator) + KCP_LOCK
@@ -391,7 +394,7 @@ func actionInstall(app string, asdeps bool) {
 		printError(MSG_INTERRUPT)
 		os.Exit(1)
 	}()
-	if e := get(app); e != nil {
+	if e := get(app, debug); e != nil {
 		printError(e)
 		os.Remove(lck)
 		os.Exit(1)
@@ -428,6 +431,7 @@ var argparser *pargs.Parser
 var flag_h, flag_v, flag_l, flag_o *bool
 var flag_s, flag_g, flag_i *string
 var flag_fast, flag_sorted, flag_asdeps *bool
+var flag_debug *bool
 
 // Launching
 func init() {
@@ -445,6 +449,8 @@ func init() {
 	flag_fast, _ = argparser.Bool("", "--fast", D_FAST)
 	flag_sorted, _ = argparser.Bool("", "--sort", D_SORT)
 	flag_asdeps, _ = argparser.Bool("", "--asdeps", D_ASDEPS)
+	flag_debug, _ = argparser.Bool("", "--debug", "debug mode")
+	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
 	argparser.Group("-h", "-v", "-l", "-o", "-s", "-g", "-i", "-l")
 	argparser.Require("--fast", "-s", "-l")
 	argparser.Require("--sort", "-s", "-l", "-o")
@@ -463,15 +469,15 @@ func main() {
 	case *flag_v:
 		argparser.PrintVersion()
 	case *flag_l:
-		actionListAll(*flag_fast, *flag_sorted, *flag_sorted)
+		actionListAll(*flag_debug, *flag_fast, *flag_sorted, *flag_sorted)
 	case *flag_o:
-		actionOutOfDate(*flag_sorted)
+		actionOutOfDate(*flag_debug, *flag_sorted)
 	case *flag_s != "":
-		actionSearch(*flag_s, *flag_fast, *flag_sorted)
+		actionSearch(*flag_s, *flag_debug, *flag_fast, *flag_sorted)
 	case *flag_g != "":
-		actionGet(*flag_g)
+		actionGet(*flag_g, *flag_debug)
 	case *flag_i != "":
-		actionInstall(*flag_i, *flag_asdeps)
+		actionInstall(*flag_i, *flag_debug, *flag_asdeps)
 	default:
 		argparser.PrintHelp() // Should not happen
 	}
