@@ -1,35 +1,86 @@
 package main
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
 	"os/signal"
-	"parseargs"
+	"parser/pargs"
+	"parser/pjson"
 	"sort"
 	"strings"
 )
 
+// Needed keys for requests
 const (
-	versionNumber   = "0.22"
-	author          = "B. VAUDOUR"
-	description     = "Tool in command-line for KaOS Community Packages"
-	longDescription = `Provides a tool to make the use of KaOS Community Packages.
-
-With this tool, you can search, get and install a package from KaOS Community Packages.`
-	defaultEditor  = "vim"
-	searchHead     = "application/vnd.github.v3.text-match+json"
-	searchHeadType = "Accept"
-	searchBase     = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
-	urlBase        = "https://github.com/KaOS-Community-Packages/%v.git"
-	urlPkgbuild    = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
-	kcp_lock       = "kcp.lock"
+	NAME          = "name"
+	DESCRIPTION   = "description"
+	STARS         = "stargazers_count"
+	MESSAGE       = "message"
+	DOCUMENTATION = "documentation_url"
 )
 
-type searcher struct {
+// Needed URLs for requests
+const (
+	//HEADERPREVIEW = "application/vnd.github.moondragon-preview+json"
+	HEADER       = "application/vnd.github.v3+json"
+	HEADERMATCH  = "application/vnd.github.v3.text-match+json"
+	SEARCH_ALL   = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
+	SEARCH_APP   = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
+	URL_REPO     = "https://github.com/KaOS-Community-Packages/%v.git"
+	URL_PKGBUILD = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
+	TOKEN        = "bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
+)
+
+// Messages
+//   -> Find a way to use i18n files
+const (
+	MSG_NOPACKAGE       = "No package found"
+	MSG_NOROOT          = "Don't launch this program as root!"
+	MSG_DIREXISTS       = "Dir %s already exists!"
+	MSG_ONLYONEINSTANCE = "Another instance of kcp is running!"
+	MSG_INTERRUPT       = "Interrupt by user..."
+	MSG_EDIT            = "Do you want to edit PKGBUILD?"
+	MSG_UNKNOWN         = "Unknown error!"
+)
+
+// Parser's descriptions
+const (
+	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
+
+With this tool, you can search, get and install a package from KaOS Community Packages.`
+	VERSION         = "0.23"
+	AUTHOR          = "B. VAUDOUR"
+	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
+	SYNOPSIS        = "[OPTIONS] [APP]"
+	D_HELP          = "Print this help"
+	D_VERSION       = "Print version"
+	D_LIST          = "Display all packages of KCP"
+	D_OUTDATED      = "Display all outdated packages from KCP"
+	D_SEARCH        = "Search packages' motif in KCP and display them"
+	D_GET           = "Download needed files to build a package"
+	D_INSTALL       = "Install a package from KCP"
+	D_FAST          = "On display action, don't print KCP version"
+	D_SORT          = "On display action, sort packages by stars descending"
+	D_ASDEPS        = "On install action, install as a dependence"
+	VALUENAME       = "<app>"
+)
+
+// Other constants
+const (
+	KCP_LOCK = "kcp.lock"
+)
+
+// Package informations extractor
+//  - name        : Name of the package
+//  - localversion: Version of installed package (if installed)
+//  - kcpversion  : Version of PKGBUILD present in KCP
+//  - description : Description of the package (extracted from KCP)
+//  - stars       : Stars number of the package in KCP
+type information struct {
 	name         string
 	localversion string
 	kcpversion   string
@@ -37,238 +88,293 @@ type searcher struct {
 	stars        int64
 }
 
-func news(e map[string]interface{}) *searcher {
-	s := new(searcher)
-	s.update(e)
-	return s
-}
-func (s *searcher) update(e map[string]interface{}) {
-	s.name = fmt.Sprintf("%s", e["name"])
-	s.description = fmt.Sprintf("%s", e["description"])
-	s.stars = int64(e["stargazers_count"].(float64))
-}
-func (s *searcher) String() string {
-	var out string
-	switch {
-	case s.kcpversion == "":
-		if s.localversion == "" {
-			out = fmt.Sprintf("\033[1m%v\033[m \033[1;34m(%v)\033[m\n", s.name, s.stars)
-		} else {
-			out = fmt.Sprintf("\033[1m%v\033[m \033[1;36m[installed: %v]\033[m \033[1;34m(%v)\033[m\n", s.name, s.localversion, s.stars)
+func (i *information) update(o pjson.Object, keys ...string) {
+	for _, k := range keys {
+		switch k {
+		case NAME:
+			if s, e := o.GetString(k); e == nil {
+				i.name = s
+			}
+		case DESCRIPTION:
+			if s, e := o.GetString(k); e == nil {
+				i.description = s
+			}
+		case STARS:
+			if s, e := o.GetNumber(k); e == nil {
+				i.stars = int64(s)
+			}
 		}
-	case s.localversion == "":
-		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.stars)
-	case s.localversion == s.kcpversion:
-		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m [installed]\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.stars)
-	default:
-		out = fmt.Sprintf("\033[1m%v\033[m \033[1;32m%v\033[m\033[1;36m [installed: %v]\033[m \033[1;34m(%v)\033[m\n", s.name, s.kcpversion, s.localversion, s.stars)
 	}
-	out = fmt.Sprintf("%s\t%s", out, s.description)
+}
+func (i *information) updateLocalVersion() {
+	out := launchCommandWithResult("pacman", "-Q", i.name)
+	spl := strings.Fields(out)
+	if len(spl) >= 2 {
+		i.localversion = spl[1]
+	}
+}
+func (i *information) updateKcpVersion() {
+	out := string(launchRequest("", URL_PKGBUILD, i.name))
+	pkgver, pkgrel := "", ""
+	for _, l := range strings.Split(out, "\n") {
+		l = strings.TrimSpace(l)
+		if strings.HasPrefix(l, "pkgver=") {
+			pkgver = l[7:]
+		} else if strings.HasPrefix(l, "pkgrel=") {
+			pkgrel = l[7:]
+		}
+		if pkgver != "" && pkgrel != "" {
+			i.kcpversion = pkgver + "-" + pkgrel
+			return
+		}
+	}
+	i.kcpversion = "<unknown>"
+}
+func (i *information) String() string {
+	if i.description == "" {
+		return i.name
+	}
+	out, local, kcp := "", "", ""
+	if i.localversion != "" {
+		if i.localversion == i.kcpversion {
+			local = " [installed]"
+		} else {
+			local = fmt.Sprintf(" [installed: %s]", i.localversion)
+		}
+	}
+	if i.kcpversion != "" {
+		kcp = " " + i.kcpversion
+	}
+	out = fmt.Sprintf("\033[1m%s\033[m\033[1;32m%s\033[m\033[1;36m%s\033[m \033[1;34m(%v)\033[m", i.name, kcp, local, i.stars)
+	if i.description != "" {
+		out = fmt.Sprintf("%s\n\t%s", out, i.description)
+	}
 	return out
 }
 
-type searchers []*searcher
+// List of informations to display - Can be sorted
+type informations []*information
 
-func (s searchers) Len() int      { return len(s) }
-func (s searchers) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s searchers) Less(i, j int) bool {
-	if s[i].stars != s[j].stars {
-		return s[i].stars > s[j].stars
+func (l informations) Len() int      { return len(l) }
+func (l informations) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l informations) Less(i, j int) bool {
+	if l[i].stars != l[j].stars {
+		return l[i].stars > l[j].stars
 	}
-	return s[i].name <= s[j].name
+	return l[i].name <= l[j].name
 }
 
-var editor string
-var tmpDir string
-var fGet, fInstall, fSearch *string
-var fHelp, fVersion, fFast, fDeps, fOutdated, fStars *bool
-var fList, fListStarred *bool
-var p *parseargs.Parser
-
-func init() {
-	editor = os.Getenv("EDITOR")
-	if editor == "" {
-		editor = defaultEditor
-	}
-	tmpDir = os.TempDir()
-
-	p = parseargs.New(description, versionNumber)
-	p.Set(parseargs.SYNOPSIS, "[OPTIONS] [APP]")
-	p.Set(parseargs.AUTHOR, author)
-	p.Set(parseargs.LONGDESCRIPTION, longDescription)
-	g := p.InsertGroup()
-	fHelp = p.Bool("-h", "--help", "print this help")
-	fVersion = g.Bool("-v", "--version", "print version")
-	fSearch = g.String("-s", "--search", "search an app in KCP", "APP", "")
-	fFast = p.Bool("", "--fast", "in conjonction with --search, don't print version")
-	fStars = p.Bool("", "--stars", "in conjonction with --search, sort by stars")
-	fGet = g.String("-g", "--get", "get needed files to build app", "APP", "")
-	fInstall = g.String("-i", "--install", "install an app from KCP", "APP", "")
-	fDeps = p.Bool("", "--asdeps", "in conjonction with --install, install as a dependence")
-	fList = p.Bool("", "--list-all", "list all packages present in repo")
-	fListStarred = p.Bool("", "--list-starred", "list all starred packages sorted")
-	fOutdated = p.Bool("-o", "--outdated", "display outdated packages")
-	p.SetHidden("--list-all")
-	p.SetHidden("--list-starred")
-	p.Link("--asdeps", "-i")
-	p.Link("--fast", "-s")
-	p.Link("--stars", "-s")
-}
-
-func printError(msg string) {
-	fmt.Printf("\033[1;31m%v\033[m\n", msg)
-}
-
-func question(msg string, value bool) bool {
-	var defaultVal string
-	if value {
-		defaultVal = "[Y/n]"
-	} else {
-		defaultVal = "[y/N]"
-	}
-	fmt.Printf("\033[1;33m%v %v \033[m", msg, defaultVal)
-	var response string
-	if _, err := fmt.Scanf("%v", &response); err != nil {
-		return value
-	}
-	if len(response) == 0 {
-		return value
-	}
-	response = strings.ToLower(response)
-	if strings.HasPrefix(response, "y") {
-		return true
-	} else if strings.HasPrefix(response, "n") {
-		return false
-	}
-	return value
-}
-
-func edit(filename string) {
-	cmd := exec.Command(editor, filename)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Run()
-}
-
+// Useful functions
 func checkUser() {
 	if e := os.Geteuid(); e == 0 {
-		printError("Don't launch this program as root!")
+		printError(MSG_NOROOT)
 		os.Exit(1)
 	}
 }
-
-func editPkgbuild() {
-	if question("Do you want to edit PKGBUILD?", true) {
-		edit("PKGBUILD")
+func printError(msg interface{}) {
+	fmt.Printf("\033[1;31m%v\033[m\n", msg)
+}
+func question(msg string, defaultValue bool) bool {
+	var defstr string = "[Y/n]"
+	if !defaultValue {
+		defstr = "[y/N]"
+	}
+	fmt.Printf("\033[1;33m%s %s \033[m", msg, defstr)
+	var response string
+	if _, err := fmt.Scanf("%v", &response); err != nil || len(response) == 0 {
+		return defaultValue
+	}
+	response = strings.ToLower(response)
+	switch {
+	case strings.HasPrefix(response, "y"):
+		return true
+	case strings.HasPrefix(response, "n"):
+		return false
+	default:
+		return defaultValue
 	}
 }
-
-func getPackage(app string) {
-	url := fmt.Sprintf(urlBase, app)
-	cmd := exec.Command("git", "clone", url)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		os.Exit(1)
-	}
+func launchCommand(name string, args ...string) error {
+	cmd := exec.Command(name, args...)
+	cmd.Stdin, cmd.Stdout, cmd.Stderr = os.Stdin, os.Stdout, os.Stderr
+	return cmd.Run()
 }
-
-func launchRequest(search string, withHeader bool) []byte {
+func launchCommandWithResult(name string, args ...string) string {
+	cmd := exec.Command(name, args...)
+	if out, err := cmd.Output(); err == nil {
+		return string(out)
+	}
+	return ""
+}
+func launchRequest(header string, searchbase string, v ...interface{}) []byte {
+	search := fmt.Sprintf(searchbase, v...)
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", search, nil)
+	request, err := http.NewRequest("GET", search, nil)
 	if err != nil {
-		return []byte{}
+		printError(err)
+		return make([]byte, 0)
 	}
-	if withHeader {
-		req.Header.Add(searchHeadType, searchHead)
+	if header != "" {
+		request.Header.Add("Accept", header)
 	}
-	resp, err := client.Do(req)
+	//request.SetBasicAuth(TOKEN, "")
+	//request.Header.Add("Authorization", "token "+TOKEN)
+	response, err := client.Do(request)
 	if err != nil {
-		fmt.Println(err)
+		printError(err)
+		return make([]byte, 0)
 	}
-	b, err := ioutil.ReadAll(resp.Body)
-	defer resp.Body.Close()
-	return b
+	out, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	return out
 }
-
-func getVersion(result []byte) string {
-	var pkgver, pkgrel string
-	l := strings.Split(string(result), "\n")
-	for _, e := range l {
-		e := strings.TrimSpace(e)
-		if len(e) <= 7 {
+func pathExists(path string) bool {
+	_, e := os.Stat(path)
+	return e == nil
+}
+func displayInformations(l informations, sorted bool) {
+	if len(l) == 0 {
+		fmt.Println(MSG_NOPACKAGE)
+		return
+	}
+	if sorted {
+		sort.Sort(l)
+	}
+	for _, i := range l {
+		fmt.Println(i)
+	}
+}
+func list(checkVersions, onlyStarred bool) informations {
+	out := make(informations, 0)
+	ok := true
+	for i := 1; ok; i++ {
+		obj, e := pjson.ArrayObjectBytes(launchRequest(HEADER, SEARCH_ALL, i))
+		if e != nil {
+			if i == i {
+				o, _ := pjson.ObjectBytes(launchRequest(HEADER, SEARCH_ALL, i))
+				printError(apiError(o))
+			}
+			ok = false
 			continue
 		}
-		if e[:7] == "pkgver=" {
-			pkgver = e[7:]
-		} else if e[:7] == "pkgrel=" {
-			pkgrel = e[7:]
+		for _, o := range obj {
+			i := new(information)
+			if checkVersions {
+				i.update(o, NAME, DESCRIPTION, STARS)
+				i.updateLocalVersion()
+			} else {
+				i.update(o, NAME, STARS)
+			}
+			if !onlyStarred || i.stars > 0 {
+				out = append(out, i)
+			}
 		}
-	}
-	if pkgver != "" && pkgrel != "" {
-		return pkgver + "-" + pkgrel
-	}
-	return "<unknown>"
-}
-
-func checkInstalled(app string) string {
-	var localVersion string
-	cmd := exec.Command("pacman", "-Q", app)
-	if out, err := cmd.Output(); err == nil {
-		o := strings.Fields(string(out))
-		if len(o) >= 2 {
-			localVersion = o[1]
-		}
-	}
-	return localVersion
-}
-
-func search(app string) searchers {
-	out := make(searchers, 0)
-	search := fmt.Sprintf(searchBase, app)
-	var f interface{}
-	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
-		return out
-	}
-	j := f.(map[string]interface{})["items"]
-	if j == nil {
-		return out
-	}
-	result := j.([]interface{})
-	for _, a := range result {
-		e := a.(map[string]interface{})
-		out = append(out, news(e))
 	}
 	return out
 }
-
-func searchPackage(app string, fast bool, sortByStars bool) {
-	pkgs := search(app)
-	if fast {
-		for _, p := range pkgs {
-			p.localversion = checkInstalled(fmt.Sprintf("%v", p.name))
+func search(word string, checkKcpVersion, checkLocalVersion bool) informations {
+	out := make(informations, 0)
+	o, e := pjson.ObjectBytes(launchRequest(HEADERMATCH, SEARCH_APP, word))
+	if e != nil {
+		return out
+	}
+	items, e := o.GetArray("items")
+	if e != nil {
+		printError(apiError(o))
+		return out
+	}
+	for _, v := range items {
+		if o, e := v.Object(); e == nil {
+			i := new(information)
+			i.update(o, NAME, DESCRIPTION, STARS)
+			if checkKcpVersion {
+				i.updateKcpVersion()
+			}
+			if checkLocalVersion {
+				i.updateLocalVersion()
+			}
+			out = append(out, i)
 		}
-	} else {
-		for _, p := range pkgs {
-			p.localversion = checkInstalled(fmt.Sprintf("%v", p.name))
-			p.kcpversion = string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, p.name), false)))
+	}
+	return out
+}
+func get(app string) error {
+	ok := false
+	for _, i := range search(app, false, false) {
+		if i.name == app {
+			ok = true
 		}
+		break
 	}
-	if sortByStars {
-		sort.Sort(pkgs)
+	if !ok {
+		return errors.New("Package not found!")
 	}
-	for _, p := range pkgs {
-		fmt.Println(p)
+	pwd, _ := os.Getwd()
+	path := pwd + string(os.PathSeparator) + app
+	if pathExists(path) {
+		return errors.New(fmt.Sprintf(MSG_DIREXISTS, path))
 	}
+	return launchCommand("git", "clone", app)
+}
+func apiError(o pjson.Object) error {
+	msg, e1 := o.GetString(MESSAGE)
+	doc, e2 := o.GetString(DOCUMENTATION)
+	if e1 != nil || e2 != nil {
+		return errors.New(MSG_UNKNOWN)
+	}
+	return errors.New(fmt.Sprintf("%s\n%s\n", msg, doc))
 }
 
-func installPackage(app string, asdeps bool) {
+// Actions
+func actionListAll(fast, onlyStarred, sorted bool) {
+	l := list(!fast, onlyStarred)
+	displayInformations(l, sorted)
+}
+func actionSearch(word string, fast, sorted bool) {
+	l := search(word, !fast, true)
+	displayInformations(l, sorted)
+}
+func actionOutOfDate(sorted bool) {
+	l := make(informations, 0)
+	for _, app := range strings.Split(launchCommandWithResult("pacman", "-Qm"), "\n") {
+		c := strings.Fields(app)
+		if len(c) < 2 {
+			continue
+		}
+		il := new(information)
+		il.name = c[0]
+		il.localversion = c[1]
+		ok := false
+		for _, ik := range search(il.name, true, false) {
+			if ik.name == il.name {
+				if ik.kcpversion != il.localversion {
+					il.kcpversion = ik.kcpversion
+					il.description = ik.description
+					il.stars = ik.stars
+					ok = true
+				}
+				break
+			}
+		}
+		if ok {
+			l = append(l, il)
+		}
+	}
+	displayInformations(l, sorted)
+}
+func actionGet(app string) {
+	if e := get(app); e != nil {
+		printError(e)
+		os.Exit(1)
+	}
+}
+func actionInstall(app string, asdeps bool) {
+	tmpDir := os.TempDir()
 	os.Chdir(tmpDir)
-	lck := tmpDir + string(os.PathSeparator) + kcp_lock
+	lck := tmpDir + string(os.PathSeparator) + KCP_LOCK
 	_, e := os.Open(lck)
-	if e == nil {
-		fmt.Println("\033[1;31mAnother instance is running!\033[m")
+	if _, e := os.Open(lck); e == nil {
+		printError(MSG_ONLYONEINSTANCE)
 		os.Exit(1)
 	}
 	os.Create(lck)
@@ -282,142 +388,91 @@ func installPackage(app string, asdeps bool) {
 	go func() {
 		<-c
 		end()
+		printError(MSG_INTERRUPT)
 		os.Exit(1)
 	}()
-	getPackage(app)
+	if e := get(app); e != nil {
+		printError(e)
+		os.Remove(lck)
+		os.Exit(1)
+	}
 	defer end()
-	if err := os.Chdir(wDir); err != nil {
-		fmt.Println(err)
+	if e := os.Chdir(wDir); e != nil {
+		printError(e)
 		end()
 		os.Exit(1)
 	}
-	editPkgbuild()
-	var cmd *exec.Cmd
+	if question(MSG_EDIT, true) {
+		editor := os.Getenv("EDITOR")
+		if editor == "" {
+			editor = "vim"
+		}
+		if e := launchCommand(editor, "PKGBUILD"); e != nil {
+			printError(e)
+			os.Exit(1)
+		}
+	}
 	if asdeps {
-		cmd = exec.Command("makepkg", "-si", "--asdeps")
+		e = launchCommand("makepkg", "-si", "--asdeps")
 	} else {
-		cmd = exec.Command("makepkg", "-si")
+		e = launchCommand("makepkg", "-si")
 	}
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Run()
-}
-
-func listpage(p int) bool {
-	urll := "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
-	search := fmt.Sprintf(urll, p)
-	var f interface{}
-	if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
-		return false
-	}
-	result := f.([]interface{})
-	ok := false
-	for _, r := range result {
-		ok = true
-		e := r.(map[string]interface{})
-		app := e["name"]
-		fmt.Println(app)
-	}
-	return ok
-}
-
-func listAll() {
-	for p := 1; listpage(p); p++ {
+	if e != nil {
+		printError(e)
+		os.Exit(1)
 	}
 }
 
-func listStarred() {
-	urll := "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
-	pkgs := make(searchers, 0)
-	for p := 1; ; p++ {
-		search := fmt.Sprintf(urll, p)
-		var f interface{}
-		if err := json.Unmarshal(launchRequest(search, true), &f); err != nil {
-			break
-		}
-		result := f.([]interface{})
-		ok := false
-		for _, r := range result {
-			ok = true
-			p := news(r.(map[string]interface{}))
-			if p.stars > 0 {
-				pkgs = append(pkgs, p)
-			}
-		}
-		if !ok {
-			break
-		}
-	}
-	sort.Sort(pkgs)
-	for _, p := range pkgs {
-		fmt.Println(p)
-	}
-}
+// Global variables
+var argparser *pargs.Parser
+var flag_h, flag_v, flag_l, flag_o *bool
+var flag_s, flag_g, flag_i *string
+var flag_fast, flag_sorted, flag_asdeps *bool
 
-func externInstalled() searchers {
-	out := make(searchers, 0)
-	cmd := exec.Command("pacman", "-Qm")
-	if output, err := cmd.Output(); err == nil {
-		lines := strings.Split(string(output), "\n")
-		for _, l := range lines {
-			o := strings.Fields(l)
-			if len(o) == 2 {
-				s := new(searcher)
-				s.name = o[0]
-				s.localversion = o[1]
-			}
-		}
-	}
-	return out
+// Launching
+func init() {
+	argparser = pargs.New(APP_DESCRIPTION, VERSION)
+	argparser.Set(pargs.AUTHOR, AUTHOR)
+	argparser.Set(pargs.SYNOPSIS, SYNOPSIS)
+	argparser.Set(pargs.LONGDESCRIPTION, LONGDESCRIPTION)
+	flag_h, _ = argparser.Bool("-h", "--help", D_HELP)
+	flag_v, _ = argparser.Bool("-v", "--version", D_VERSION)
+	flag_l, _ = argparser.Bool("-l", "--list", D_LIST)
+	flag_o, _ = argparser.Bool("-o", "--outdated", D_OUTDATED)
+	flag_s, _ = argparser.String("-s", "--search", D_SEARCH, VALUENAME, "")
+	flag_g, _ = argparser.String("-g", "--get", D_GET, VALUENAME, "")
+	flag_i, _ = argparser.String("-i", "--install", D_INSTALL, VALUENAME, "")
+	flag_fast, _ = argparser.Bool("", "--fast", D_FAST)
+	flag_sorted, _ = argparser.Bool("", "--sort", D_SORT)
+	flag_asdeps, _ = argparser.Bool("", "--asdeps", D_ASDEPS)
+	argparser.Group("-h", "-v", "-l", "-o", "-s", "-g", "-i", "-l")
+	argparser.Require("--fast", "-s", "-l")
+	argparser.Require("--sort", "-s", "-l", "-o")
+	argparser.Require("--asdeps", "-i")
 }
-
-func displayOutdated() {
-	outdated := make(searchers, 0)
-	localapps := externInstalled()
-	for _, s := range localapps {
-		for _, kcppapps := range search(s.name) {
-			if kcppapps.name != s.name {
-				continue
-			}
-			s.kcpversion = string(getVersion(launchRequest(fmt.Sprintf(urlPkgbuild, s.name), false)))
-			if s.kcpversion == s.localversion {
-				s.description = kcppapps.description
-				s.stars = kcppapps.stars
-				outdated = append(outdated, s)
-			}
-			break
-		}
-	}
-	for _, p := range outdated {
-		fmt.Println(p)
-	}
-}
-
 func main() {
 	checkUser()
-	err := p.Parse(os.Args)
+	e := argparser.Parse(os.Args)
 	switch {
-	case err != nil:
-		fmt.Println(err)
-		p.PrintHelp()
-	case *fList:
-		listAll()
-	case *fListStarred:
-		listStarred()
-	case *fHelp:
-		p.PrintHelp()
-	case *fVersion:
-		p.PrintVersion()
-	case *fGet != "":
-		getPackage(*fGet)
-	case *fSearch != "":
-		searchPackage(*fSearch, *fFast, *fStars)
-	case *fInstall != "":
-		installPackage(*fInstall, *fDeps)
-	case *fOutdated:
-		displayOutdated()
+	case e != nil:
+		printError(e)
+		fmt.Println()
+		argparser.PrintHelp()
+	case *flag_h:
+		argparser.PrintHelp()
+	case *flag_v:
+		argparser.PrintVersion()
+	case *flag_l:
+		actionListAll(*flag_fast, *flag_sorted, *flag_sorted)
+	case *flag_o:
+		actionOutOfDate(*flag_sorted)
+	case *flag_s != "":
+		actionSearch(*flag_s, *flag_fast, *flag_sorted)
+	case *flag_g != "":
+		actionGet(*flag_g)
+	case *flag_i != "":
+		actionInstall(*flag_i, *flag_asdeps)
 	default:
-		p.PrintHelp()
+		argparser.PrintHelp() // Should not happen
 	}
 }
