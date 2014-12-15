@@ -6,3 +6,5 @@ TODO :
 	- Create bash completion (done)
 	- Create fish completion (done)
 	- Create zsh completion
+	- Implement app access token for github api (done)
+	- Implement internationalization

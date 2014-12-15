@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"gettext"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -55,7 +56,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.25-dev"
+	VERSION         = "0.26-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -74,7 +75,8 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 
 // Other constants
 const (
-	KCP_LOCK = "kcp.lock"
+	KCP_LOCK   = "kcp.lock"
+	LOCALE_DIR = "/usr/share/locale"
 )
 
 // Package informations extractor
@@ -168,9 +170,10 @@ func (l informations) Less(i, j int) bool {
 }
 
 // Useful functions
+func t(arg string) string { return gettext.Gettext(arg) }
 func checkUser() {
 	if e := os.Geteuid(); e == 0 {
-		printError(MSG_NOROOT)
+		printError(t(MSG_NOROOT))
 		os.Exit(1)
 	}
 }
@@ -238,7 +241,7 @@ func pathExists(path string) bool {
 }
 func displayInformations(l informations, sorted bool) {
 	if len(l) == 0 {
-		fmt.Println(MSG_NOPACKAGE)
+		fmt.Println(t(MSG_NOPACKAGE))
 		return
 	}
 	if sorted {
@@ -324,7 +327,7 @@ func get(app string, debug bool) error {
 	pwd, _ := os.Getwd()
 	path := pwd + string(os.PathSeparator) + app
 	if pathExists(path) {
-		return errors.New(fmt.Sprintf(MSG_DIREXISTS, path))
+		return errors.New(fmt.Sprintf(t(MSG_DIREXISTS), path))
 	}
 	return launchCommand("git", "clone", app)
 }
@@ -332,7 +335,7 @@ func apiError(o pjson.Object) error {
 	msg, e1 := o.GetString(MESSAGE)
 	doc, e2 := o.GetString(DOCUMENTATION)
 	if e1 != nil || e2 != nil {
-		return errors.New(MSG_UNKNOWN)
+		return errors.New(t(MSG_UNKNOWN))
 	}
 	return errors.New(fmt.Sprintf("%s\n%s\n", msg, doc))
 }
@@ -386,7 +389,7 @@ func actionInstall(app string, debug, asdeps bool) {
 	lck := tmpDir + string(os.PathSeparator) + KCP_LOCK
 	_, e := os.Open(lck)
 	if _, e := os.Open(lck); e == nil {
-		printError(MSG_ONLYONEINSTANCE)
+		printError(t(MSG_ONLYONEINSTANCE))
 		os.Exit(1)
 	}
 	os.Create(lck)
@@ -400,7 +403,7 @@ func actionInstall(app string, debug, asdeps bool) {
 	go func() {
 		<-c
 		end()
-		printError(MSG_INTERRUPT)
+		printError(t(MSG_INTERRUPT))
 		os.Exit(1)
 	}()
 	if e := get(app, debug); e != nil {
@@ -414,7 +417,7 @@ func actionInstall(app string, debug, asdeps bool) {
 		end()
 		os.Exit(1)
 	}
-	if question(MSG_EDIT, true) {
+	if question(t(MSG_EDIT), true) {
 		editor := os.Getenv("EDITOR")
 		if editor == "" {
 			editor = "vim"
@@ -444,20 +447,27 @@ var flag_debug *bool
 
 // Launching
 func init() {
-	argparser = pargs.New(APP_DESCRIPTION, VERSION)
+	// Init the locales
+	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
+	gettext.SetLocale(gettext.LC_ALL, "")
+	gettext.BindTextdomain("kcp", LOCALE_DIR)
+	gettext.Textdomain("kcp")
+
+	// Init the args parser
+	argparser = pargs.New(t(APP_DESCRIPTION), VERSION)
 	argparser.Set(pargs.AUTHOR, AUTHOR)
-	argparser.Set(pargs.SYNOPSIS, SYNOPSIS)
-	argparser.Set(pargs.LONGDESCRIPTION, LONGDESCRIPTION)
-	flag_h, _ = argparser.Bool("-h", "--help", D_HELP)
-	flag_v, _ = argparser.Bool("-v", "--version", D_VERSION)
-	flag_l, _ = argparser.Bool("-l", "--list", D_LIST)
-	flag_o, _ = argparser.Bool("-o", "--outdated", D_OUTDATED)
-	flag_s, _ = argparser.String("-s", "--search", D_SEARCH, VALUENAME, "")
-	flag_g, _ = argparser.String("-g", "--get", D_GET, VALUENAME, "")
-	flag_i, _ = argparser.String("-i", "--install", D_INSTALL, VALUENAME, "")
-	flag_fast, _ = argparser.Bool("", "--fast", D_FAST)
-	flag_sorted, _ = argparser.Bool("", "--sort", D_SORT)
-	flag_asdeps, _ = argparser.Bool("", "--asdeps", D_ASDEPS)
+	argparser.Set(pargs.SYNOPSIS, t(SYNOPSIS))
+	argparser.Set(pargs.LONGDESCRIPTION, t(LONGDESCRIPTION))
+	flag_h, _ = argparser.Bool("-h", "--help", t(D_HELP))
+	flag_v, _ = argparser.Bool("-v", "--version", t(D_VERSION))
+	flag_l, _ = argparser.Bool("-l", "--list", t(D_LIST))
+	flag_o, _ = argparser.Bool("-o", "--outdated", t(D_OUTDATED))
+	flag_s, _ = argparser.String("-s", "--search", t(D_SEARCH), VALUENAME, "")
+	flag_g, _ = argparser.String("-g", "--get", t(D_GET), VALUENAME, "")
+	flag_i, _ = argparser.String("-i", "--install", t(D_INSTALL), VALUENAME, "")
+	flag_fast, _ = argparser.Bool("", "--fast", t(D_FAST))
+	flag_sorted, _ = argparser.Bool("", "--sort", t(D_SORT))
+	flag_asdeps, _ = argparser.Bool("", "--asdeps", t(D_ASDEPS))
 	flag_debug, _ = argparser.Bool("", "--debug", "debug mode")
 	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
 	argparser.Group("-h", "-v", "-l", "-o", "-s", "-g", "-i", "-l")

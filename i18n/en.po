@@ -1,0 +1,124 @@
+# TEMPLATE FOR KCP TRANSLATION.
+# Copyright (C) B.VAUDOUR 2014
+# This file is distributed under the same license as the kcp package.
+# benjamin.vaudour@yahoo.fr, 2014.
+#
+#: kcp.go:122 kcp.go:123 kcp.go:131 kcp.go:139 kcp.go:142 kcp.go:143
+#: kcp.go:150 kcp.go:154 kcp.go:213 kcp.go:223 kcp.go:422 kcp.go:452
+#: kcp.go:465 kcp.go:466 kcp.go:467 kcp.go:468 kcp.go:469 kcp.go:470
+#: kcp.go:471 kcp.go:494 kcp.go:496 kcp.go:498
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-15 20:05+0100\n"
+"PO-Revision-Date: 2014-12-15 20:19+0100\n"
+"Last-Translator: benjamin <benjamin.vaudour@yahoo.fr>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kcp.go:147
+#, c-format
+msgid " [installed: %s]"
+msgstr " [installed: %s]"
+
+#: kcp.go:145
+msgid " [installed]"
+msgstr " [installed]"
+
+#: kcp.go:73
+msgid "<app>"
+msgstr "<app>"
+
+#: kcp.go:136
+msgid "<unknown>"
+msgstr "<unknown>"
+
+#: kcp.go:48
+msgid "Another instance of kcp is running!"
+msgstr "Another instance of kcp is running!"
+
+#: kcp.go:47
+#, c-format
+msgid "Dir %s already exists!"
+msgstr "Dir %s already exists!"
+
+#: kcp.go:66
+msgid "Display all outdated packages from KCP"
+msgstr "Display all outdated packages from KCP"
+
+#: kcp.go:65
+msgid "Display all packages of KCP"
+msgstr "Display all packages of KCP"
+
+#: kcp.go:50
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Do you want to edit PKGBUILD?"
+
+#: kcp.go:46
+msgid "Don't launch this program as root!"
+msgstr "Don't launch this program as root!"
+
+#: kcp.go:68
+msgid "Download needed files to build a package"
+msgstr "Download needed files to build a package"
+
+#: kcp.go:69
+msgid "Install a package from KCP"
+msgstr "Install a package from KCP"
+
+#: kcp.go:49
+msgid "Interrupt by user..."
+msgstr "Interrupt by user..."
+
+#: kcp.go:45
+msgid "No package found"
+msgstr "No package found"
+
+#: kcp.go:70
+msgid "On display action, don't print KCP version"
+msgstr "On display action, don't print KCP version"
+
+#: kcp.go:71
+msgid "On display action, sort packages by stars descending"
+msgstr "On display action, sort packages by stars descending"
+
+#: kcp.go:72
+msgid "On install action, install as a dependence"
+msgstr "On install action, install as a dependence"
+
+#: kcp.go:325
+msgid "Package not found!"
+msgstr "Package not found!"
+
+#: kcp.go:63
+msgid "Print this help"
+msgstr "Print this help"
+
+#: kcp.go:64
+msgid "Print version"
+msgstr "Print version"
+
+#: kcp.go:67
+msgid "Search packages' motif in KCP and display them"
+msgstr "Search packages' motif in KCP and display them"
+
+#: kcp.go:61
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "Tool in command-line for KaOS Community Packages"
+
+#: kcp.go:51
+msgid "Unknown error!"
+msgstr "Unknown error!"
+
+#: kcp.go:62
+msgid "[OPTIONS] [APP]"
+msgstr "[OPTIONS] [APP]"
+
+#: kcp.go:471
+msgid "debug mode"
+msgstr "debug mode"
