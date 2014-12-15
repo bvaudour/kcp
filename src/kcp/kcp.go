@@ -265,16 +265,20 @@ func list(debug, checkVersions, onlyStarred bool) informations {
 			ok = false
 			continue
 		}
+		if len(obj) == 0 {
+			ok = false
+			continue
+		}
 		for _, o := range obj {
-			i := new(information)
+			inf := new(information)
 			if checkVersions {
-				i.update(o, NAME, DESCRIPTION, STARS)
-				i.updateLocalVersion()
+				inf.update(o, NAME, DESCRIPTION, STARS)
+				inf.updateLocalVersion()
 			} else {
-				i.update(o, NAME, STARS)
+				inf.update(o, NAME, STARS)
 			}
-			if !onlyStarred || i.stars > 0 {
-				out = append(out, i)
+			if !onlyStarred || inf.stars > 0 {
+				out = append(out, inf)
 			}
 		}
 	}
