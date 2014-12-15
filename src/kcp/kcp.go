@@ -28,12 +28,14 @@ const (
 	//HEADERPREVIEW = "application/vnd.github.moondragon-preview+json"
 	HEADER       = "application/vnd.github.v3+json"
 	HEADERMATCH  = "application/vnd.github.v3.text-match+json"
-	SEARCH_ALL   = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100"
-	SEARCH_ALLST = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100+stars:>=1"
-	SEARCH_APP   = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true"
+	SEARCH_ALL   = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100&%s"
+	SEARCH_ALLST = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100+stars:>=1&%s"
+	SEARCH_APP   = "https://api.github.com/search/repositories?q=%v+user:KaOS-Community-Packages+fork:true&%s"
 	URL_REPO     = "https://github.com/KaOS-Community-Packages/%v.git"
 	URL_PKGBUILD = "https://raw.githubusercontent.com/KaOS-Community-Packages/%v/master/PKGBUILD"
-	TOKEN        = "token bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
+	APP_ID       = "&client_id=11f5f3d9dab26c7fff24"
+	SECRET_ID    = "&client_secret=bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
+	IDENT        = APP_ID + SECRET_ID
 )
 
 // Messages
@@ -53,7 +55,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.24-dev"
+	VERSION         = "0.25-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -217,9 +219,7 @@ func launchRequest(debug bool, header string, searchbase string, v ...interface{
 	}
 	if header != "" {
 		request.Header.Add("Accept", header)
-		//request.Header.Add("Authorization", TOKEN)
 	}
-	//request.SetBasicAuth(TOKEN, "")
 	response, err := client.Do(request)
 	if err != nil {
 		printError(err)
@@ -256,10 +256,10 @@ func list(debug, checkVersions, onlyStarred bool) informations {
 		search = SEARCH_ALLST
 	}
 	for i := 1; ok; i++ {
-		obj, e := pjson.ArrayObjectBytes(launchRequest(debug, HEADER, search, i))
+		obj, e := pjson.ArrayObjectBytes(launchRequest(debug, HEADER, search, i, IDENT))
 		if e != nil {
 			if i == i {
-				o, _ := pjson.ObjectBytes(launchRequest(debug, HEADER, search, i))
+				o, _ := pjson.ObjectBytes(launchRequest(debug, HEADER, search, i, IDENT))
 				printError(apiError(o))
 			}
 			ok = false
@@ -282,7 +282,7 @@ func list(debug, checkVersions, onlyStarred bool) informations {
 }
 func search(word string, debug, checkKcpVersion, checkLocalVersion bool) informations {
 	out := make(informations, 0)
-	o, e := pjson.ObjectBytes(launchRequest(debug, HEADERMATCH, SEARCH_APP, word))
+	o, e := pjson.ObjectBytes(launchRequest(debug, HEADERMATCH, SEARCH_APP, word, IDENT))
 	if e != nil {
 		return out
 	}
