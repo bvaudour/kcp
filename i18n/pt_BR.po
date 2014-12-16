@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Arnt <qtgzmanager@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-15 19:40+0000\n"
-"Last-Translator: benjamin benjamin.vaudour@yahoo.fr\n"
+"PO-Revision-Date: 2014-12-16 12:50+0000\n"
+"Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,84 +21,84 @@ msgstr ""
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr ""
+msgstr "[instalado: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr ""
+msgstr "[instalado]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr ""
+msgstr "<app>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr ""
+msgstr "<unknown>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr ""
+msgstr "Há outra instância de kcp em execução!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "O diretório %s já existe!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr ""
+msgstr "Exibir todos os pacotes desatualizados do KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Exibir todos os pacotes do KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Você deseja editar o PKGBUILD?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr ""
+msgstr "Não execute este programa como root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr ""
+msgstr "Baixar os arquivos requeridos para construir um pacote"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Instalar um pacote do KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Interrompido pelo usuário..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr ""
+msgstr "Nenhum pacote encontrado"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "Na exibição, não imprimir a versão do KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "Na exibição, pesquisar os pacotes pela avaliação, em ordem decrescente"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "Na instalação, instalar como uma dependência"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr ""
+msgstr "Pacote não encontrado!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr ""
+msgstr "Imprimir esta ajuda"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr ""
+msgstr "Imprimir versão"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
@@ -105,16 +106,16 @@ msgstr ""
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Ferramenta em linha de comando para os pacotes comunitários do KaOS"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr ""
+msgstr "Erro desconhecido!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr ""
+msgstr "[OPTIONS] [APP]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr ""
+msgstr "Modo de depuração"

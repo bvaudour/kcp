@@ -56,7 +56,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.26-dev"
+	VERSION         = "0.27-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -118,8 +118,11 @@ func (i *information) updateLocalVersion() {
 		i.localversion = spl[1]
 	}
 }
-func (i *information) updateKcpVersion() {
+func (i *information) updateKcpVersion() bool {
 	out := string(launchRequest(false, "", URL_PKGBUILD, i.name))
+	if out == "" {
+		return false
+	}
 	pkgver, pkgrel := "", ""
 	for _, l := range strings.Split(out, "\n") {
 		l = strings.TrimSpace(l)
@@ -130,10 +133,11 @@ func (i *information) updateKcpVersion() {
 		}
 		if pkgver != "" && pkgrel != "" {
 			i.kcpversion = pkgver + "-" + pkgrel
-			return
+			return true
 		}
 	}
-	i.kcpversion = "<unknown>"
+	i.kcpversion = t("<unknown>")
+	return false
 }
 func (i *information) String() string {
 	if i.description == "" {
@@ -142,9 +146,9 @@ func (i *information) String() string {
 	out, local, kcp := "", "", ""
 	if i.localversion != "" {
 		if i.localversion == i.kcpversion {
-			local = " [installed]"
+			local = t(" [installed]")
 		} else {
-			local = fmt.Sprintf(" [installed: %s]", i.localversion)
+			local = fmt.Sprintf(t(" [installed: %s]"), i.localversion)
 		}
 	}
 	if i.kcpversion != "" {
@@ -359,21 +363,32 @@ func actionOutOfDate(debug, sorted bool) {
 		il := new(information)
 		il.name = c[0]
 		il.localversion = c[1]
-		ok := false
-		for _, ik := range search(il.name, debug, true, false) {
-			if ik.name == il.name {
-				if ik.kcpversion != il.localversion {
-					il.kcpversion = ik.kcpversion
-					il.description = ik.description
-					il.stars = ik.stars
-					ok = true
+		if !il.updateKcpVersion() || il.kcpversion == il.localversion {
+			continue
+		}
+		description := strings.Split(launchCommandWithResult("pacman", "-Qs", il.name), "\n")
+		if len(description) >= 2 {
+			il.description = strings.TrimSpace(description[1])
+		}
+		/*
+			// Unactivated code because of performance
+			ok := false
+			for _, ik := range search(il.name, debug, true, false) {
+				if ik.name == il.name {
+					if ik.kcpversion != il.localversion {
+						il.kcpversion = ik.kcpversion
+						il.description = ik.description
+						il.stars = ik.stars
+						ok = true
+					}
+					break
 				}
-				break
 			}
-		}
-		if ok {
-			l = append(l, il)
-		}
+			if ok {
+				l = append(l, il)
+			}
+		*/
+		l = append(l, il)
 	}
 	displayInformations(l, sorted)
 }
