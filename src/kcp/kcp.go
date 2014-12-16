@@ -64,7 +64,7 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 	D_VERSION       = "Print version"
 	D_LIST          = "Display all packages of KCP"
 	D_OUTDATED      = "Display all outdated packages from KCP"
-	D_SEARCH        = "Search packages' motif in KCP and display them"
+	D_SEARCH        = "Search packages in KCP and display them"
 	D_GET           = "Download needed files to build a package"
 	D_INSTALL       = "Install a package from KCP"
 	D_FAST          = "On display action, don't print KCP version"

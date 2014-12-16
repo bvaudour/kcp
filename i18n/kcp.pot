@@ -121,3 +121,7 @@ msgstr  ""
 #: kcp.go:471
 msgid   "debug mode"
 msgstr  ""
+
+#: kcp.go:67
+msgid   "Search packages in KCP and display them"
+msgstr  ""
