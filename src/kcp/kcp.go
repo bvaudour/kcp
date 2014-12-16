@@ -56,7 +56,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.27-dev"
+	VERSION         = "0.28-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -421,12 +421,12 @@ func actionInstall(app string, debug, asdeps bool) {
 		printError(t(MSG_INTERRUPT))
 		os.Exit(1)
 	}()
+	defer end()
 	if e := get(app, debug); e != nil {
 		printError(e)
-		os.Remove(lck)
+		end()
 		os.Exit(1)
 	}
-	defer end()
 	if e := os.Chdir(wDir); e != nil {
 		printError(e)
 		end()
@@ -439,6 +439,7 @@ func actionInstall(app string, debug, asdeps bool) {
 		}
 		if e := launchCommand(editor, "PKGBUILD"); e != nil {
 			printError(e)
+			end()
 			os.Exit(1)
 		}
 	}
@@ -449,8 +450,10 @@ func actionInstall(app string, debug, asdeps bool) {
 	}
 	if e != nil {
 		printError(e)
+		end()
 		os.Exit(1)
 	}
+	end()
 }
 
 // Global variables
@@ -458,7 +461,7 @@ var argparser *pargs.Parser
 var flag_h, flag_v, flag_l, flag_o *bool
 var flag_s, flag_g, flag_i *string
 var flag_fast, flag_sorted, flag_asdeps *bool
-var flag_debug *bool
+var flag_debug, flag_octopi *bool
 
 // Launching
 func init() {
@@ -484,7 +487,9 @@ func init() {
 	flag_sorted, _ = argparser.Bool("", "--sort", t(D_SORT))
 	flag_asdeps, _ = argparser.Bool("", "--asdeps", t(D_ASDEPS))
 	flag_debug, _ = argparser.Bool("", "--debug", "debug mode")
+	flag_octopi, _ = argparser.Bool("", "--octopi", "don't use (for octopi usage only)")
 	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
+	argparser.GetFlag("--octopi").Set(pargs.HIDDEN, true)
 	argparser.Group("-h", "-v", "-l", "-o", "-s", "-g", "-i", "-l")
 	argparser.Require("--fast", "-s", "-l")
 	argparser.Require("--sort", "-s", "-l", "-o")
