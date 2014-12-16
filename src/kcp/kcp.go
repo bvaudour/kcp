@@ -329,7 +329,7 @@ func get(app string, debug bool) error {
 	if pathExists(path) {
 		return errors.New(fmt.Sprintf(t(MSG_DIREXISTS), path))
 	}
-	return launchCommand("git", "clone", app)
+	return launchCommand("git", "clone", fmt.Sprintf(URL_REPO, app))
 }
 func apiError(o pjson.Object) error {
 	msg, e1 := o.GetString(MESSAGE)
