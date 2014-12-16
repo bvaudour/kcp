@@ -9,112 +9,112 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
 "PO-Revision-Date: 2014-12-15 19:40+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
-"Language-Team: English (http://www.transifex.com/projects/p/kaos/language/en/)\n"
+"Last-Translator: benjamin benjamin.vaudour@yahoo.fr\n"
+"Language-Team: Hebrew (http://www.transifex.com/projects/p/kaos/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: he\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr " [installed: %s]"
+msgstr ""
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr " [installed]"
+msgstr ""
 
 #: kcp.go:73
 msgid "<app>"
-msgstr "<app>"
+msgstr ""
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr "<unknown>"
+msgstr ""
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr "Another instance of kcp is running!"
+msgstr ""
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr "Dir %s already exists!"
+msgstr ""
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr "Display all outdated packages from KCP"
+msgstr ""
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr "Display all packages of KCP"
+msgstr ""
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr "Do you want to edit PKGBUILD?"
+msgstr ""
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr "Don't launch this program as root!"
+msgstr ""
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr "Download needed files to build a package"
+msgstr ""
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr "Install a package from KCP"
+msgstr ""
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr "Interrupt by user..."
+msgstr ""
 
 #: kcp.go:45
 msgid "No package found"
-msgstr "No package found"
+msgstr ""
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "On display action, don't print KCP version"
+msgstr ""
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "On display action, sort packages by stars descending"
+msgstr ""
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "On install action, install as a dependence"
+msgstr ""
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr "Package not found!"
+msgstr ""
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr "Print this help"
+msgstr ""
 
 #: kcp.go:64
 msgid "Print version"
-msgstr "Print version"
+msgstr ""
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr "Search packages' motif in KCP and display them"
+msgstr ""
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Tool in command-line for KaOS Community Packages"
+msgstr ""
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr "Unknown error!"
+msgstr ""
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr "[OPTIONS] [APP]"
+msgstr ""
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr "debug mode"
+msgstr ""

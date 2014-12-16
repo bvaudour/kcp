@@ -3,118 +3,119 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Diego L. Velazquez <dlvelazquez@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-15 19:40+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
-"Language-Team: English (http://www.transifex.com/projects/p/kaos/language/en/)\n"
+"PO-Revision-Date: 2014-12-15 21:47+0000\n"
+"Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (http://www.transifex.com/projects/p/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: es_AR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr " [installed: %s]"
+msgstr "[nstalado: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr " [installed]"
+msgstr "[instalado]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr "<app>"
+msgstr "<applicación>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr "<unknown>"
+msgstr "<desconocido>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr "Another instance of kcp is running!"
+msgstr "¡Se está ejecutando otra instancia de kcp!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr "Dir %s already exists!"
+msgstr "¡El directorio %s ya existe!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr "Display all outdated packages from KCP"
+msgstr "Muestra todos los paquetes desactualizados de KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr "Display all packages of KCP"
+msgstr "Muestra todos los paquetes de KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr "Do you want to edit PKGBUILD?"
+msgstr "¿Quiere editar el PKGBUILD?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr "Don't launch this program as root!"
+msgstr "¡No ejecute este programa como root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr "Download needed files to build a package"
+msgstr "Descargar los archivos necesarios para compilar un paquete"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr "Install a package from KCP"
+msgstr "Instala un paquete desde KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr "Interrupt by user..."
+msgstr "Interrumpido por el usuario"
 
 #: kcp.go:45
 msgid "No package found"
-msgstr "No package found"
+msgstr "No se encontró el paquete"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "On display action, don't print KCP version"
+msgstr "En una acción de visualización, no muestra versión de KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "On display action, sort packages by stars descending"
+msgstr "Acción de visualización, ordena lo paquetes por orden descendiente de votación"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "On install action, install as a dependence"
+msgstr "Acción de instalación, instala como una dependencia"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr "Package not found!"
+msgstr "¡Paquete no encontrado!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr "Print this help"
+msgstr "Muestra esta ayuda"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr "Print version"
+msgstr "Muestra la versión"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr "Search packages' motif in KCP and display them"
+msgstr "Busca paquetes en KCP y los muestra"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Tool in command-line for KaOS Community Packages"
+msgstr "Herramienta en linea de comandos para KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr "Unknown error!"
+msgstr "¡Error desconocido!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr "[OPTIONS] [APP]"
+msgstr "[OPCIONES][APPLICACION]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr "debug mode"
+msgstr "modo depuración"

@@ -1,124 +1,121 @@
 # TEMPLATE FOR KCP TRANSLATION.
 # Copyright (C) B.VAUDOUR 2014
 # This file is distributed under the same license as the kcp package.
-# benjamin.vaudour@yahoo.fr, 2014.
-#
-#: kcp.go:122 kcp.go:123 kcp.go:131 kcp.go:139 kcp.go:142 kcp.go:143
-#: kcp.go:150 kcp.go:154 kcp.go:213 kcp.go:223 kcp.go:422 kcp.go:452
-#: kcp.go:465 kcp.go:466 kcp.go:467 kcp.go:468 kcp.go:469 kcp.go:470
-#: kcp.go:471 kcp.go:494 kcp.go:496 kcp.go:498
+# 
+# Translators:
+# Cellix <cellix@yandex.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-15 20:18+0100\n"
-"Last-Translator: benjamin <benjamin.vaudour@yahoo.fr>\n"
-"Language-Team: French\n"
-"Language: fr\n"
+"PO-Revision-Date: 2014-12-15 20:37+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr ""
+msgstr "[installé: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr ""
+msgstr "[installé]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr ""
+msgstr "<app>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr ""
+msgstr "<inconnue>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr ""
+msgstr "Une autre instance de kcp est en cours !"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Le répertoire %s existe déjà !"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr ""
+msgstr "Affiche tous les paquets obsolètes de KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Affiche tous les paquets de KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Voulez-vous éditer le PKGBUILD ?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr ""
+msgstr "Impossible de lancer le programme en mode administrateur !"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr ""
+msgstr "Télécharge les fichiers nécessaires à la compilation du paquet"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Installe un paquet KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Interruption par l'utilisateur…"
 
 #: kcp.go:45
 msgid "No package found"
-msgstr ""
+msgstr "Aucun paquet trouvé"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "Lors d'une action d'affichage, n'affiche pas la version KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "Lors d'une action d'affichage, trie les paquets par nombre d'étoiles décroissantes"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "Lors d'une action d'installation, installe en tant que dépendance"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr ""
+msgstr "Paquet non trouvé !"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr ""
+msgstr "Affiche cette aide"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr ""
+msgstr "Affiche la version"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "Affiche les paquet KCP correspondant au motif recherché"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Outil en ligne de commande pour KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr ""
+msgstr "Erreur inconnue !"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr ""
+msgstr "[OPTIONS] [APP]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr ""
+msgstr "mode débug"
