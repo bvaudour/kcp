@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-16 12:50+0000\n"
+"PO-Revision-Date: 2014-12-16 16:43+0000\n"
 "Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr "Imprimir versão"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "Procurar pacotes no KCP"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
@@ -114,7 +114,7 @@ msgstr "Erro desconhecido!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr "[OPTIONS] [APP]"
+msgstr "[OPÇÕES] [APLICATIVOS]"
 
 #: kcp.go:471
 msgid "debug mode"
