@@ -56,7 +56,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.28-dev"
+	VERSION         = "0.29-dev"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -487,9 +487,9 @@ func init() {
 	flag_sorted, _ = argparser.Bool("", "--sort", t(D_SORT))
 	flag_asdeps, _ = argparser.Bool("", "--asdeps", t(D_ASDEPS))
 	flag_debug, _ = argparser.Bool("", "--debug", "debug mode")
-	flag_octopi, _ = argparser.Bool("", "--octopi", "don't use (for octopi usage only)")
+	//flag_octopi, _ = argparser.Bool("", "--octopi", "don't use (for octopi usage only)")
 	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
-	argparser.GetFlag("--octopi").Set(pargs.HIDDEN, true)
+	//argparser.GetFlag("--octopi").Set(pargs.HIDDEN, true)
 	argparser.Group("-h", "-v", "-l", "-o", "-s", "-g", "-i", "-l")
 	argparser.Require("--fast", "-s", "-l")
 	argparser.Require("--sort", "-s", "-l", "-o")

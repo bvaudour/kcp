@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-15 20:37+0000\n"
+"PO-Revision-Date: 2014-12-17 10:10+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -119,3 +119,7 @@ msgstr "[OPTIONS] [APP]"
 #: kcp.go:471
 msgid "debug mode"
 msgstr "mode débug"
+
+#: kcp.go:67
+msgid "Search packages in KCP and display them"
+msgstr "Cherche des paquets dans KCP et les affiche"

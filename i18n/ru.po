@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Анатолий Валерианович <ffox909@mail.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-15 19:40+0000\n"
-"Last-Translator: benjamin benjamin.vaudour@yahoo.fr\n"
+"PO-Revision-Date: 2014-12-19 09:54+0000\n"
+"Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/kaos/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,84 +21,84 @@ msgstr ""
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr ""
+msgstr " [установлен: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr ""
+msgstr " [установлен]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr ""
+msgstr "<app>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr ""
+msgstr "<unknown>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr ""
+msgstr "Запущен другой экземпляр KCP!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Папка %s уже существует!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr ""
+msgstr "Показать все устаревшие пакеты из KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Показать все пакеты из KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Вы хотите отредактировать PKGBUILD?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr ""
+msgstr "Не запускайте эту программу с правами root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr ""
+msgstr "Скачать файлы, необходимые для сборки пакета"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Установить пакет из KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Прерывание пользователем..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr ""
+msgstr "Пакет не найден"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "При отображении, не печатать версию KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "При отображении, сортировать по убыванию звёзд"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "При установке, установить как зависимость"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr ""
+msgstr "Пакет отсутствует!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr ""
+msgstr "Распечатать инструкцию"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr ""
+msgstr "Печатать версию"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
@@ -117,4 +118,8 @@ msgstr ""
 
 #: kcp.go:471
 msgid "debug mode"
+msgstr ""
+
+#: kcp.go:67
+msgid "Search packages in KCP and display them"
 msgstr ""
