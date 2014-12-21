@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-19 09:54+0000\n"
+"PO-Revision-Date: 2014-12-20 13:37+0000\n"
 "Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/kaos/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "Прерывание пользователем..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr "Пакет не найден"
+msgstr "Не найдено пакета"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
@@ -102,24 +102,24 @@ msgstr "Печатать версию"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "Поиск и отображение пакетов Motif в KCP"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Инструмент командой строки для KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr ""
+msgstr "Неизвестная ошибка!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr ""
+msgstr "[OPTIONS] [APP]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr ""
+msgstr "режим отладки"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr ""
+msgstr "Поиск и отображение пакетов в KCP"
