@@ -122,6 +122,11 @@ func ArrayObjectBytes(b []byte) ([]Object, error) {
 	return v2a(ParseBytes(b))
 }
 
+// Marshaller
+func Marshal(v interface{}) ([]byte, error) { return json.Marshal(v) }
+func (v *Value) Marshal() ([]byte, error)   { return Marshal(v.data) }
+func (o Object) Marshal() ([]byte, error)   { return Marshal(o) }
+
 // Search in childs
 func (o Object) get(k string) (c *Value, e error) {
 	if v, ok := o[k]; ok {
@@ -189,6 +194,9 @@ func (o Object) GetNull(keys ...string) error {
 	}
 	return e
 }
+
+// Map representation
+func (o Object) Map() map[string]interface{} { return o }
 
 // String representation
 func (o Object) String() string {
