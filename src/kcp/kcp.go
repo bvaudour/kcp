@@ -142,6 +142,7 @@ var flag_complete, flag_sorted, flag_forceupdate *bool
 var flag_onlyname, flag_onlystarred, flag_onlyinstalled, flag_onlyoutdated *bool
 var flag_asdeps *bool
 var flag_debug *bool
+var flag_fast *bool
 
 // Parser's descriptions
 const (
@@ -327,6 +328,10 @@ func init() {
 	argparser.Require("--only-installed", "-l", "-s")
 	argparser.Require("--only-outdated", "-l", "-s")
 	argparser.Require("--asdeps", "-i")
+	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
+	// To ensure compatibility with completion
+	flag_fast, _ = argparser.Bool("", "--fast", "")
+	argparser.GetFlag("--fast").Set(pargs.HIDDEN, true)
 }
 
 func main() {
@@ -343,6 +348,9 @@ func main() {
 	case *flag_version:
 		version()
 	case *flag_list:
+		if *flag_fast {
+			*flag_onlyname = true
+		}
 		list()
 	case *flag_update:
 		update()
