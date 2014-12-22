@@ -102,6 +102,10 @@ func Install(app string, asdeps bool) error {
 	}()
 	defer endInstall(wdir, lck)
 
+	if e := Get(app); e != nil {
+		endInstall(wdir, lck)
+		return e
+	}
 	cd(wdir)
 	if question(Translate(MSG_EDIT), true) {
 		if e := editPkgbuild(); e != nil {
