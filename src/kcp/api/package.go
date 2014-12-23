@@ -43,7 +43,7 @@ func (p *Package) String() string {
 	if p.Description != "" {
 		description = fmt.Sprintf("\n\t%s", p.Description)
 	}
-	return fmt.Sprintf("\033[1;35mkcp/\033[m%s %s%s %s %s", name, kcpversion, localversion, stars, description)
+	return fmt.Sprintf("\033[1;35mkcp/\033[m%s %s %s %s %s", name, kcpversion, localversion, stars, description)
 }
 
 // Collection of packages

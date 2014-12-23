@@ -50,7 +50,7 @@ const (
 const (
 	DEFAULT_EDITOR     = "vim"
 	UNKNOWN_VERSION    = "<unknown>"
-	INSTALLED_VERSION  = " [installed]"
+	INSTALLED_VERSION  = "[installed]"
 	INSTALLED_VERSIONF = "[installed: %s]"
 	KCP_LOCK           = "kcp.lock"
 	KCP_DB             = ".kcp.json"
