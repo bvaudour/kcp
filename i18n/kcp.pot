@@ -158,10 +158,6 @@ msgstr  ""
 msgid   "Refresh the local database"
 msgstr  ""
 
-#: kcp.go:154
-msgid   "Tool in command-line for KaOS Community Packages"
-msgstr  ""
-
 #: const.go:46
 #, c-format
 msgid   "%d entries updated!"

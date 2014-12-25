@@ -47,6 +47,7 @@ _generate() {
 	_addline 'SRCDIR   = ${PWD}/src/kcp'
 	_addline 'COMPDIR  = ${PWD}/completion'
 	_addline 'BUILDDIR = ${PWD}/build'
+	_addline 'MANDIR   = ${PWD}/man'
 	_emptyline
 
 	_addline '# Base files'
@@ -59,7 +60,7 @@ _generate() {
 
 	_addline '# Source files'
 	_addline 'SRCBINFILE  = $(BUILDDIR)/$(BINFILE)'
-	_addline 'SRCMANFILE  = $(BUILDDIR)/$(MANFILE)'
+	_addline 'SRCMANFILE  = $(MANDIR)/$(MANFILE)'
 	_addline 'SRCGOFILE   = $(SRCDIR)/$(GOFILE)'
 	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
 	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
@@ -91,7 +92,7 @@ _generate() {
 		'yes') _addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
 		*)     _addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
 	esac
-	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
+#	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
 	_emptyline
 
 	_addline 'install:'
