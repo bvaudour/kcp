@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-17 10:02+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2014-12-26 17:26+0000\n"
+"Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,15 +78,15 @@ msgstr "Nenhum pacote encontrado"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "Na exibição, não imprimir a versão do KCP"
+msgstr "Ao exibir, não imprimir a versão do KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "Na exibição, pesquisar os pacotes pela avaliação, em ordem decrescente"
+msgstr "Ao exibir, pesquisar os pacotes pela avaliação, em ordem decrescente"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "Na instalação, instalar como uma dependência"
+msgstr "Ao instalar, fazê-lo como uma dependência"
 
 #: kcp.go:325
 msgid "Package not found!"
@@ -122,4 +122,50 @@ msgstr "Modo de depuração"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr ""
+msgstr "Procurar pacotes no KCP"
+
+#: kcp.go:171
+msgid "On display action, display only installed packages"
+msgstr "Ao exibir, mostrar somente os pacotes instalados"
+
+#: kcp.go:172
+msgid "On display action, display only outdated packages"
+msgstr "Ao exibir, mostrar somente os pacotes desatualizados"
+
+#: kcp.go:170
+msgid "On display action, display only packages with at least one star"
+msgstr "Ao exibir, mostrar somente os pacotes com no mínimo 1 estrela"
+
+#: kcp.go:169
+msgid "On display action, display only the name of the package"
+msgstr "Ao exibir, mostrar somente o nome do pacote"
+
+#: kcp.go:168
+msgid "On display action, force refreshing local database"
+msgstr "Ao exibir, forçar a atualização da base de dados local"
+
+#: kcp.go:166
+msgid "On list action, display only installed packages"
+msgstr "Ao listar, exibir somente os pacotes instalados"
+
+#: kcp.go:167
+msgid "On refreshing database action, force complete update"
+msgstr "Ao refrescar a base de dados, forçar uma atualização completa"
+
+#: kcp.go:159
+msgid "Refresh the local database"
+msgstr "Refrescar a base de dados local"
+
+#: const.go:46
+#, c-format
+msgid "%d entries updated!"
+msgstr "%d entradas atualizadas!"
+
+#: const.go:54
+#, c-format
+msgid "[installed: %s]"
+msgstr "[instalado: %s]"
+
+#: const.go:53
+msgid "[installed]"
+msgstr "[instalado]"

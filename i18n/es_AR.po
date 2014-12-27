@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-17 10:19+0000\n"
+"PO-Revision-Date: 2014-12-26 21:14+0000\n"
 "Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/projects/p/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -123,3 +123,49 @@ msgstr "modo depuración"
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
 msgstr "Busca y muestra paquetes que están en KCP"
+
+#: kcp.go:171
+msgid "On display action, display only installed packages"
+msgstr "En una acción de visualización, muestra sólo los paquetes instalados"
+
+#: kcp.go:172
+msgid "On display action, display only outdated packages"
+msgstr "En una acción de visualización, muestra sólo los paquetes desactualizados"
+
+#: kcp.go:170
+msgid "On display action, display only packages with at least one star"
+msgstr "En una acción de visualización, muestra sólo los paquetes con al menos un voto."
+
+#: kcp.go:169
+msgid "On display action, display only the name of the package"
+msgstr "En una acción de visualización, muestra sólo el nombre del paquete"
+
+#: kcp.go:168
+msgid "On display action, force refreshing local database"
+msgstr "En una acción de visualización, fuerza la renovación de la base de datos local"
+
+#: kcp.go:166
+msgid "On list action, display only installed packages"
+msgstr "En una acción de listado, muestra sólo los paquetes instalados"
+
+#: kcp.go:167
+msgid "On refreshing database action, force complete update"
+msgstr "En una acción de renovación de la base de datos, fuerza la actualización completa"
+
+#: kcp.go:159
+msgid "Refresh the local database"
+msgstr "Renovar la base de datos local"
+
+#: const.go:46
+#, c-format
+msgid "%d entries updated!"
+msgstr "%d entradas actualizadas!"
+
+#: const.go:54
+#, c-format
+msgid "[installed: %s]"
+msgstr "[instalado: %s]"
+
+#: const.go:53
+msgid "[installed]"
+msgstr "[instalado]"
