@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-26 09:59+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2014-12-27 17:01+0000\n"
+"Last-Translator: Matthias Schuster Scharmer <shalokshalom@riseup.net>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,15 +78,15 @@ msgstr "Kein Paket gefunden"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "KCP listet keine Versionpackete auf, wenn '--fast' mit '--search' oder '--list' gesucht wird."
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "KCP sortiert Pakete nach absteigenden Sternsymbolen, wenn '--sort' mit '--search', '--list' oder '--outdated' verwendet wird."
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "KCP installiert das Paket <app>, welches darauf hinweist, das dieses Paket von einem anderen abhängt. Es ermöglicht eine saubere Deinstallation mit 'pacman -Rs"
 
 #: kcp.go:325
 msgid "Package not found!"
@@ -102,11 +102,11 @@ msgstr "Druckversion"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "KCP sucht nach allen Paketen, die das Schlüsselwort \"<app>\" enthalten, oder deren Beschreibung das Schlüsselwort enthält."
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Kommandozeilenprogramm für die KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
@@ -122,50 +122,50 @@ msgstr "Fehlerverbesserungswerkzeug"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr ""
+msgstr "Suche nach Paketen in KCP und zeige diese an"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
-msgstr ""
+msgstr "Zeige nur installierte Pakete an"
 
 #: kcp.go:172
 msgid "On display action, display only outdated packages"
-msgstr ""
+msgstr "Zeige nur abgelaufene Pakete an"
 
 #: kcp.go:170
 msgid "On display action, display only packages with at least one star"
-msgstr ""
+msgstr "Zeige nur Pakete mit mindestens einem Stern an"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr ""
+msgstr "Zeige nur die Namen der Pakete an."
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr ""
+msgstr "Aktualisiert die lokale Datenbank."
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr ""
+msgstr "Zeige nur die installierten Pakete an."
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr ""
+msgstr "Vollführe ein vollständiges Update, wenn die Datenbank aktualisiert wird."
 
 #: kcp.go:159
 msgid "Refresh the local database"
-msgstr ""
+msgstr "Aktualisiere die lokale Datenbank."
 
 #: const.go:46
 #, c-format
 msgid "%d entries updated!"
-msgstr ""
+msgstr "%d Einträge aktualisiert"
 
 #: const.go:54
 #, c-format
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[Installiert: %s]"
 
 #: const.go:53
 msgid "[installed]"
-msgstr ""
+msgstr "[Installiert]"
