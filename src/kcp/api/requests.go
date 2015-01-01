@@ -36,22 +36,32 @@ func LocalVersion(app string) string {
 
 // Remote requests
 func KcpListAll(debug bool) (PList, error) {
-	c, e := remoteAll(SEARCH_ALL, debug, true)
+	c, e := remoteAll(SEARCH_ALL, debug, true, false)
 	return c.List(), e
 }
 
 func KcpMapAll(debug bool) (PMap, error) {
-	c, e := remoteAll(SEARCH_ALL, debug, false)
+	c, e := remoteAll(SEARCH_ALL, debug, false, false)
+	return c.Map(), e
+}
+
+func KcpListAllWithVersions(debug bool) (PList, error) {
+	c, e := remoteAll(SEARCH_ALL, debug, true, true)
+	return c.List(), e
+}
+
+func KcpMapAllWithVersions(debug bool) (PMap, error) {
+	c, e := remoteAll(SEARCH_ALL, debug, false, true)
 	return c.Map(), e
 }
 
 func KcpListStarred(debug bool) (PList, error) {
-	c, e := remoteAll(SEARCH_ALLST, debug, true)
+	c, e := remoteAll(SEARCH_ALLST, debug, true, true)
 	return c.List(), e
 }
 
 func KcpMapStarred(debug bool) (PMap, error) {
-	c, e := remoteAll(SEARCH_ALLST, debug, false)
+	c, e := remoteAll(SEARCH_ALLST, debug, false, true)
 	return c.Map(), e
 }
 
@@ -67,6 +77,11 @@ func KcpMapSearch(app string, debug bool) (PMap, error) {
 
 func KcpVersion(app string) string {
 	v, _ := remoteVersion(app)
+	return v
+}
+
+func KcpVersion2(app string) string {
+	v, _ := remoteVersion2(app)
 	return v
 }
 

@@ -74,7 +74,7 @@ func merge(db api.PMap, c api.PCollection) int {
 	return i
 }
 
-func updatelocalv(db api.PMap) {
+func updatelocalv(db api.PMap, finish chan bool) {
 	updated := api.LocalMapAll()
 	for n, p := range db {
 		if pu, ok := updated[n]; ok {
@@ -83,14 +83,37 @@ func updatelocalv(db api.PMap) {
 			p.LocalVersion = ""
 		}
 	}
+	finish <- true
 }
 
-func updatekcpv(db api.PMap, onlyinstalled bool) {
+func updatekcpv(db api.PMap, onlyinstalled bool, finish chan bool) {
+	f := make(chan bool, len(db))
 	for _, p := range db {
-		if !onlyinstalled || p.LocalVersion != "" {
-			p.KcpVersion = api.KcpVersion(p.Name)
-		}
+		go func(p *api.Package, f chan bool) {
+			if !onlyinstalled || p.LocalVersion != "" {
+				p.KcpVersion = api.KcpVersion(p.Name)
+			}
+			f <- true
+		}(p, f)
 	}
+	for range f {
+	}
+	finish <- true
+}
+
+func updateversions(db api.PMap, onlyinstalled bool) <-chan bool {
+	finish := make(chan bool)
+	go func() {
+		f := make(chan bool, 2)
+		go updatelocalv(db, f)
+		go updatekcpv(db, onlyinstalled, f)
+		<-f
+		<-f
+		close(f)
+		finish <- true
+		close(finish)
+	}()
+	return finish
 }
 
 // Print method
@@ -149,7 +172,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.36"
+	VERSION         = "0.37"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -188,15 +211,19 @@ func list() {
 	var m api.PMap
 	var e error
 	if *flag_forceupdate {
-		m, e = api.KcpMapAll(*flag_debug)
-		updatelocalv(m)
-		updatekcpv(m, !*flag_complete)
+		if *flag_complete {
+			m, e = api.KcpMapAllWithVersions(*flag_debug)
+		} else {
+			m, e = api.KcpMapAll(*flag_debug)
+		}
+		//updatelocalv(m)
+		//updatekcpv(m, !*flag_complete)
 	} else if db, ok := load(); ok {
 		m = db
 	} else {
 		m, e = api.KcpMapAll(*flag_debug)
-		updatelocalv(m)
-		updatekcpv(m, true)
+		//updatelocalv(m)
+		//updatekcpv(m, true)
 	}
 	if e != nil {
 		printerror(e)
@@ -221,13 +248,21 @@ func list() {
 
 func update() {
 	mlocal, _ := api.LoadMapDB()
-	mkcp, e := api.KcpMapAll(*flag_debug)
+	var mkcp api.PMap
+	var e error
+	if *flag_complete {
+		mkcp, e = api.KcpMapAllWithVersions(*flag_debug)
+	} else {
+		mkcp, e = api.KcpMapAll(*flag_debug)
+	}
 	if e != nil {
 		printerror(e)
 		os.Exit(1)
 	}
-	updatelocalv(mkcp)
-	updatekcpv(mkcp, !*flag_complete)
+	//u := updateversions(mkcp, !*flag_complete)
+	//<-u
+	//updatelocalv(mkcp)
+	//updatekcpv(mkcp, !*flag_complete)
 	i := merge(mlocal, mkcp)
 	if e = api.SaveDB(mlocal); e != nil {
 		printerror(e)
@@ -277,7 +312,9 @@ func install(app string, asdeps bool) {
 		printerror(e)
 		os.Exit(1)
 	} else if db, ok := load(); ok {
-		updatelocalv(db)
+		f := make(chan bool)
+		go updatelocalv(db, f)
+		<-f
 		api.SaveDB(db)
 	}
 }

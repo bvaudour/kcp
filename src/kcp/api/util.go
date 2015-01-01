@@ -9,7 +9,9 @@ import (
 	"os/exec"
 	"parser/pjson"
 	"path/filepath"
+	"runtime"
 	"strings"
+	"sync"
 )
 
 // Parse
@@ -207,7 +209,75 @@ func searchError(o pjson.Object) error {
 	return errors.New(fmt.Sprintf("%s\n%s\n", msg, doc))
 }
 
+func testl(l, p string, v *string) bool {
+	if len(*v) > 0 {
+		return false
+	}
+	var out bool
+	if out = strings.HasPrefix(l, p); out {
+		*v = strings.TrimPrefix(l, p)
+	}
+	return out
+}
+
+func sendl(lines []string, quit <-chan bool) <-chan string {
+	out := make(chan string)
+	go func() {
+		for _, l := range lines {
+			select {
+			case <-quit:
+				break
+			default:
+				out <- l
+			}
+		}
+		close(out)
+	}()
+	return out
+}
+
+func rcvl(line <-chan string, quit chan<- bool, pkgver, pkgrel *string) <-chan bool {
+	out := make(chan bool)
+	go func() {
+		for l := range line {
+			if !testl(l, "pkgver=", pkgver) {
+				testl(l, "pkgrel=", pkgrel)
+			}
+			if len(*pkgver) > 0 && len(*pkgrel) > 0 {
+				out <- true
+				quit <- true
+				break
+			}
+		}
+		out <- true
+		close(quit)
+		close(out)
+	}()
+	return out
+}
+
 func remoteVersion(app string) (v string, ok bool) {
+	r, e := launchRequest(false, "", URL_PKGBUILD, app)
+	if e != nil {
+		v = Translate(UNKNOWN_VERSION)
+		return
+	}
+	var pkgver, pkgrel string
+	quit := make(chan bool)
+	line := sendl(strings.Split(string(r), "\n"), quit)
+	finish := rcvl(line, quit, &pkgver, &pkgrel)
+	<-finish
+	if len(pkgver) > 0 && len(pkgrel) > 0 {
+		v = pkgver + "-" + pkgrel
+		ok = true
+	} else {
+		v = Translate(UNKNOWN_VERSION)
+		ok = false
+	}
+	return
+}
+
+func remoteVersion2(app string) (v string, ok bool) {
 	r, e := launchRequest(false, "", URL_PKGBUILD, app)
 	if e == nil {
 		pkgbuild := string(r)
@@ -230,31 +300,56 @@ func remoteVersion(app string) (v string, ok bool) {
 	return
 }
 
-func remoteAll(search string, debug, t_lst bool) (c PCollection, e error) {
+func remoteAll(search string, debug, t_lst, updateversions bool) (c PCollection, e error) {
 	c = EmptyPCollection(t_lst)
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	var wg sync.WaitGroup
+	end := false
 	for i := 1; ; i++ {
+		//go func(i int) {
+		if end {
+			break
+		}
+		//wg.Add(1)
+		//defer wg.Done()
 		b, err := launchRequest(debug, HEADER, search, i, IDENT)
 		if err != nil {
+			end = true
 			e = err
 			return
 		}
 		obj, err := pjson.ArrayObjectBytes(b)
 		if err != nil {
+			end = true
 			o, _ := pjson.ObjectBytes(b)
 			e = searchError(o)
 			return
 		}
 		if len(obj) == 0 {
-			return
+			end = true
+			//return
+			break
 		}
 		for _, o := range obj {
-			p := parseFromKcp(o)
-			if p != nil {
-				p.LocalVersion, _ = localVersion(p.Name)
-				c.Add(p)
-			}
+			go func(o pjson.Object) {
+				wg.Add(1)
+				defer wg.Done()
+				p := parseFromKcp(o)
+				if p != nil {
+					p.LocalVersion, _ = localVersion(p.Name)
+					if updateversions {
+						p.KcpVersion, _ = remoteVersion(p.Name)
+					}
+					c.Add(p)
+				}
+			}(o)
+		}
+		//}(i)
+		if end {
+			break
 		}
 	}
+	wg.Wait()
 	return
 }
 
