@@ -71,6 +71,13 @@ func merge(db api.PMap, c api.PCollection) int {
 			i++
 		}
 	}
+	newdb := c.Map()
+	for n, _ := range db {
+		if _, ok := newdb[n]; !ok {
+			delete(db, n)
+			i++
+		}
+	}
 	return i
 }
 
@@ -172,7 +179,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.37"
+	VERSION         = "0.38"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
