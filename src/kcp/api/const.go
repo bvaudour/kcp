@@ -44,6 +44,8 @@ const (
 	MSG_UNKNOWN         = "Unknown error!"
 	MSG_NOT_FOUND       = "Package not found!"
 	MSG_ENTRIES_UPDATED = "%d entries updated!"
+	MSG_ENTRIES_ADDED   = "%d entries added!"
+	MSG_ENTRIES_DELETED = "%d entries deleted!"
 )
 
 // Other constants

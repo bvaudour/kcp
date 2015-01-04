@@ -43,12 +43,12 @@ func load() (api.PMap, bool) {
 	return m, e == nil
 }
 
-func merge(db api.PMap, c api.PCollection) int {
-	i := 0
+func merge(db api.PMap, c api.PCollection) (updated int, added int, deleted int) {
 	for _, p := range c.List() {
 		p_db, ok := db[p.Name]
 		if !ok {
 			db.Add(p)
+			added++
 		} else {
 			if p.Description != "" && p.Description != p_db.Description {
 				ok = false
@@ -66,19 +66,19 @@ func merge(db api.PMap, c api.PCollection) int {
 				ok = false
 				p_db.KcpVersion = p.KcpVersion
 			}
-		}
-		if !ok {
-			i++
+			if !ok {
+				updated++
+			}
 		}
 	}
 	newdb := c.Map()
 	for n, _ := range db {
 		if _, ok := newdb[n]; !ok {
 			delete(db, n)
-			i++
+			deleted++
 		}
 	}
-	return i
+	return
 }
 
 func updatelocalv(db api.PMap, finish chan bool) {
@@ -179,7 +179,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.38"
+	VERSION         = "0.39"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -270,13 +270,14 @@ func update() {
 	//<-u
 	//updatelocalv(mkcp)
 	//updatekcpv(mkcp, !*flag_complete)
-	i := merge(mlocal, mkcp)
+	u, a, d := merge(mlocal, mkcp)
 	if e = api.SaveDB(mlocal); e != nil {
 		printerror(e)
 		os.Exit(1)
 	} else {
-		fmt.Printf(api.MSG_ENTRIES_UPDATED, i)
-		fmt.Println()
+		fmt.Printf(api.MSG_ENTRIES_UPDATED + "\n", u)
+		fmt.Printf(api.MSG_ENTRIES_ADDED + "\n", a)
+		fmt.Printf(api.MSG_ENTRIES_DELETED + "\n", d)
 	}
 }
 

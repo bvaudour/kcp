@@ -172,3 +172,13 @@ msgstr  ""
 msgid   "[installed]"
 msgstr  ""
 
+#: const.go:47
+#, c-format
+msgid   "%d entries added!"
+msgstr  ""
+
+#: const.go:48
+#, c-format
+msgid   "%d entries deleted!"
+msgstr  ""
+
