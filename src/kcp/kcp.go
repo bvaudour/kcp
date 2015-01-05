@@ -152,7 +152,7 @@ func allprint(c api.PCollection, sorted bool) {
 	}
 	if len(l) == 0 {
 		fmt.Println()
-		printwarning(api.MSG_NOPACKAGE)
+		printwarning(t(api.MSG_NOPACKAGE))
 	}
 }
 
@@ -179,7 +179,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.39"
+	VERSION         = "0.40"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -275,9 +275,9 @@ func update() {
 		printerror(e)
 		os.Exit(1)
 	} else {
-		fmt.Printf(api.MSG_ENTRIES_UPDATED + "\n", u)
-		fmt.Printf(api.MSG_ENTRIES_ADDED + "\n", a)
-		fmt.Printf(api.MSG_ENTRIES_DELETED + "\n", d)
+		fmt.Printf(t(api.MSG_ENTRIES_UPDATED)+"\n", u)
+		fmt.Printf(t(api.MSG_ENTRIES_ADDED)+"\n", a)
+		fmt.Printf(t(api.MSG_ENTRIES_DELETED)+"\n", d)
 	}
 }
 
