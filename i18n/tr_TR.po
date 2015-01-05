@@ -4,13 +4,13 @@
 # 
 # Translators:
 # Demiray Muhterem <mdemiray@msn.com>, 2014
-# Mustafa Kılıç <mustafa@fomus.org>, 2014
+# Mustafa Kılıç <mustafa@fomus.org>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-26 20:01+0000\n"
+"PO-Revision-Date: 2015-01-05 19:16+0000\n"
 "Last-Translator: Mustafa Kılıç <mustafa@fomus.org>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/kaos/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -170,3 +170,13 @@ msgstr "[kuruldu: %s]"
 #: const.go:53
 msgid "[installed]"
 msgstr "[kuruldu]"
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr "%d girdiler eklendi!"
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
+msgstr "%d girdiler silindi!"

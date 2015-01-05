@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Anke Boersma <demm@kaosx.us>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-26 09:59+0000\n"
+"PO-Revision-Date: 2015-01-05 10:01+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/kaos/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -20,151 +21,161 @@ msgstr ""
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr ""
+msgstr " [geïnstalleerd: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr ""
+msgstr " [geïnstalleerd]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr ""
+msgstr "<app>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr ""
+msgstr "<onbekend>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr ""
+msgstr "Een ander exemplaar van kcp loopt!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Dir %s bestaat al!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr ""
+msgstr "Toon alle verouderde pakketten van KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Toon alle pakketten in KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Wil je PKGBUILD bewerken?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr ""
+msgstr "Start dit programma niet op als root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr ""
+msgstr "Download benodigde bestanden om een pakket te bouwen"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Installeer een pakket van KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Onderbroken door de gebruiker..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr ""
+msgstr "Geen pakket gevonden"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "Bij getoonde actie, KCP versie niet afdrukken"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "Getoonde actie, sorteer pakketten naar sterren aflopend"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "Op installeren actie, installeren als een afhankelijkheid"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr ""
+msgstr "Pakket niet gevonden!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr ""
+msgstr "Deze help tonen"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr ""
+msgstr "Versie tonen"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "Motief zoekopdracht pakketten in KCP en weergeven"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Hulpprogramma in commandoregel  voor KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr ""
+msgstr "Onbekende fout!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr ""
+msgstr "[OPTIES] [APP]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr ""
+msgstr "foutenopsporing modus"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr ""
+msgstr "Zoek pakketten in KCP en weergeven"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
-msgstr ""
+msgstr "Getoonde actie, alleen weergave geïnstalleerde pakketten"
 
 #: kcp.go:172
 msgid "On display action, display only outdated packages"
-msgstr ""
+msgstr "Getoonde actie, alleen verouderde pakketten weergeven"
 
 #: kcp.go:170
 msgid "On display action, display only packages with at least one star"
-msgstr ""
+msgstr "Getoonde actie, alleen pakketten weergeven met ten minste één ster"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr ""
+msgstr "Getoonde actie, alleen de naam van het pakket weergeven"
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr ""
+msgstr "Getoonde actie, opfrissen van lokale database afdwingen "
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr ""
+msgstr "Op lijst actie, alleen weergave geïnstalleerde pakketten"
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr ""
+msgstr "Bij opfrissen database actie, complete update dwingen"
 
 #: kcp.go:159
 msgid "Refresh the local database"
-msgstr ""
+msgstr "Opfrissen lokale database"
 
 #: const.go:46
 #, c-format
 msgid "%d entries updated!"
-msgstr ""
+msgstr "%d items bijgewerkt!"
 
 #: const.go:54
 #, c-format
 msgid "[installed: %s]"
-msgstr ""
+msgstr " [geïnstalleerd:%s]"
 
 #: const.go:53
 msgid "[installed]"
+msgstr " [geïnstalleerd]"
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr ""
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
 msgstr ""

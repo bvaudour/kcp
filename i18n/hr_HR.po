@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-26 09:59+0000\n"
+"PO-Revision-Date: 2015-01-05 10:01+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/projects/p/kaos/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -167,4 +167,14 @@ msgstr ""
 
 #: const.go:53
 msgid "[installed]"
+msgstr ""
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr ""
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
 msgstr ""

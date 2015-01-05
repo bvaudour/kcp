@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# Cellix <cellix@yandex.com>, 2014
+# Cellix <cellix@yandex.com>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2014-12-26 10:04+0000\n"
+"PO-Revision-Date: 2015-01-05 10:03+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -169,3 +169,13 @@ msgstr "[installé: %s]"
 #: const.go:53
 msgid "[installed]"
 msgstr "[installé]"
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr "%d entrées ajoutées !"
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
+msgstr "%d entrées supprimées !"
