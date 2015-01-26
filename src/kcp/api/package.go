@@ -32,9 +32,9 @@ func (p *Package) String() string {
 	localversion := ""
 	if p.LocalVersion != "" {
 		if p.LocalVersion == p.KcpVersion {
-			localversion = INSTALLED_VERSION
+			localversion = Translate(INSTALLED_VERSION)
 		} else {
-			localversion = fmt.Sprintf(INSTALLED_VERSIONF, p.LocalVersion)
+			localversion = fmt.Sprintf(Translate(INSTALLED_VERSIONF), p.LocalVersion)
 		}
 		localversion = fmt.Sprintf("\033[1;36m%s\033[m", localversion)
 	}
