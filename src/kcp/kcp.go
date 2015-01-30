@@ -179,7 +179,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.42"
+	VERSION         = "0.43"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -257,11 +257,11 @@ func update() {
 	mlocal, _ := api.LoadMapDB()
 	var mkcp api.PMap
 	var e error
-	if *flag_complete {
-		mkcp, e = api.KcpMapAllWithVersions(*flag_debug)
-	} else {
-		mkcp, e = api.KcpMapAll(*flag_debug)
-	}
+	//if *flag_complete {
+	mkcp, e = api.KcpMapAllWithVersions(*flag_debug)
+	//} else {
+	//  mkcp, e = api.KcpMapAll(*flag_debug)
+	//}
 	if e != nil {
 		printerror(e)
 		os.Exit(1)

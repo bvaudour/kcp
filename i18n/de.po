@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2014
+# Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-01-05 10:01+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-01-30 01:00+0000\n"
+"Last-Translator: Matthias Schuster Scharmer <shalokshalom@riseup.net>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -178,4 +178,4 @@ msgstr ""
 #: const.go:48
 #, c-format
 msgid "%d entries deleted!"
-msgstr ""
+msgstr "%d Einträge gelöscht"
