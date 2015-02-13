@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-01-30 01:00+0000\n"
+"PO-Revision-Date: 2015-02-11 21:15+0000\n"
 "Last-Translator: Matthias Schuster Scharmer <shalokshalom@riseup.net>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -173,7 +173,7 @@ msgstr "[Installiert]"
 #: const.go:47
 #, c-format
 msgid "%d entries added!"
-msgstr ""
+msgstr "%d Einträge hinzugefügt!"
 
 #: const.go:48
 #, c-format
