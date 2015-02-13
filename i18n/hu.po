@@ -1,0 +1,181 @@
+# TEMPLATE FOR KCP TRANSLATION.
+# Copyright (C) B.VAUDOUR 2014
+# This file is distributed under the same license as the kcp package.
+# 
+# Translators:
+# Laszlo Espadas <kw@kardiweb.org>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: KaOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-15 20:05+0100\n"
+"PO-Revision-Date: 2015-02-13 18:58+0000\n"
+"Last-Translator: Laszlo Espadas <kw@kardiweb.org>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/kaos/language/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kcp.go:147
+#, c-format
+msgid " [installed: %s]"
+msgstr "[telepítve: %s]"
+
+#: kcp.go:145
+msgid " [installed]"
+msgstr "[telepítve]"
+
+#: kcp.go:73
+msgid "<app>"
+msgstr "<app>"
+
+#: kcp.go:136
+msgid "<unknown>"
+msgstr "<ismeretlen>"
+
+#: kcp.go:48
+msgid "Another instance of kcp is running!"
+msgstr "A KCP egy másik példánya fut!"
+
+#: kcp.go:47
+#, c-format
+msgid "Dir %s already exists!"
+msgstr "%s könyvtár már létezik!"
+
+#: kcp.go:66
+msgid "Display all outdated packages from KCP"
+msgstr "KCP összes elavult csomagjának megjelenítése"
+
+#: kcp.go:65
+msgid "Display all packages of KCP"
+msgstr "KCP összes csomagjának megjelenítése"
+
+#: kcp.go:50
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Szerkesszük a PKGBUILD fájlt?"
+
+#: kcp.go:46
+msgid "Don't launch this program as root!"
+msgstr "Ne futtassuk a programot root felhasználóként!"
+
+#: kcp.go:68
+msgid "Download needed files to build a package"
+msgstr "Töltsük le az összes szükséges fájlt egy csomagban"
+
+#: kcp.go:69
+msgid "Install a package from KCP"
+msgstr "KCP csomagok telepítése"
+
+#: kcp.go:49
+msgid "Interrupt by user..."
+msgstr "Felhasználói művelet megszakítás..."
+
+#: kcp.go:45
+msgid "No package found"
+msgstr "Nem található csomag"
+
+#: kcp.go:70
+msgid "On display action, don't print KCP version"
+msgstr "Látható műveletben, ne írassuk ki a KCP verziót"
+
+#: kcp.go:71
+msgid "On display action, sort packages by stars descending"
+msgstr "Megjeleníthető művelet, csomagok csillagok szerinti csökkenése"
+
+#: kcp.go:72
+msgid "On install action, install as a dependence"
+msgstr "Telepítő művelet, függőségek telepítése"
+
+#: kcp.go:325
+msgid "Package not found!"
+msgstr "Csomag nem található!"
+
+#: kcp.go:63
+msgid "Print this help"
+msgstr "Súgó megtekintés"
+
+#: kcp.go:64
+msgid "Print version"
+msgstr "Verzió kiíratás"
+
+#: kcp.go:67
+msgid "Search packages' motif in KCP and display them"
+msgstr "KCP csomagok keresése és megjelenítése"
+
+#: kcp.go:61
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "KaOS közösségi csomagok parancssori eszköz"
+
+#: kcp.go:51
+msgid "Unknown error!"
+msgstr "Ismeretlen hiba!"
+
+#: kcp.go:62
+msgid "[OPTIONS] [APP]"
+msgstr "[OPTIONS] [APP]"
+
+#: kcp.go:471
+msgid "debug mode"
+msgstr "hibakereső mód"
+
+#: kcp.go:67
+msgid "Search packages in KCP and display them"
+msgstr "Keresés a KCP csomagok között és megjelenítés"
+
+#: kcp.go:171
+msgid "On display action, display only installed packages"
+msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
+
+#: kcp.go:172
+msgid "On display action, display only outdated packages"
+msgstr "Megjeleníthető művelet, csak az elavult csomagok megjelenítése"
+
+#: kcp.go:170
+msgid "On display action, display only packages with at least one star"
+msgstr "Megjeleníthető művelet, csak olyan csomagok megjelenítése amelyek rendelkeznek legalább egy csillaggal"
+
+#: kcp.go:169
+msgid "On display action, display only the name of the package"
+msgstr "Megjeleníthető művelet, csak a csomag nevének megjelenítése"
+
+#: kcp.go:168
+msgid "On display action, force refreshing local database"
+msgstr "Megjeleníthető művelet, kényszerített helyi adatbázis frissítés"
+
+#: kcp.go:166
+msgid "On list action, display only installed packages"
+msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
+
+#: kcp.go:167
+msgid "On refreshing database action, force complete update"
+msgstr "Adatbázis frissítés művelet, kényszerített frissítés befejezés"
+
+#: kcp.go:159
+msgid "Refresh the local database"
+msgstr "Helyi adatbázis frissítése"
+
+#: const.go:46
+#, c-format
+msgid "%d entries updated!"
+msgstr "%d frissítve!"
+
+#: const.go:54
+#, c-format
+msgid "[installed: %s]"
+msgstr "[telepítve: %s]"
+
+#: const.go:53
+msgid "[installed]"
+msgstr "[telepítve]"
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr "%d hozzáadva!"
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
+msgstr "%d törölve!"
