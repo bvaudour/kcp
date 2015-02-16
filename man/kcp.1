@@ -37,7 +37,7 @@ Refresh the local database. The database is a file (see CREATED FILES chapter) w
 
 - Its installed version (if installed),
 
-- Its latest version in KaOS Community Packages (only if complete update has be done),
+- Its latest version in KaOS Community Packages,
 
 - Its popularity.
 
@@ -64,11 +64,6 @@ Download, compile and install the package <app> from KaOS Community Packages.
 .B \-f, \-\-force-update
 By default, displaying list of packages uses the informations from the local database. With this option, the database is refreshed before displaying the list. It can be used only if -l option is used.
 
-.TP
-.B \-c, \-\-complete
-When updating the local database, only the name, the description, and the popularity are synchronized, by default. For installed packages from KaOS Community Packages, local and remote versions are refreshed, too. This option forces the refresh of the remote version for all current packages, not only the installed packages. This option can be used only with -f or -u options
-
-.TP
 .B \-x, \-\-sort
 On packages' display operation, sort the results by popularity, then, by name. This option can be used only with -l or -s options.
 
