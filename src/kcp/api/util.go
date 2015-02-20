@@ -117,12 +117,16 @@ func localSearch(app string, t_lst bool) PCollection {
 }
 
 // I/O actions
-func editPkgbuild() error {
+func editFile(f string) error {
 	editor := os.Getenv("EDITOR")
 	if editor == "" {
 		editor = DEFAULT_EDITOR
 	}
-	return launchCommand(editor, "PKGBUILD")
+	return launchCommand(editor, f)
+}
+
+func editPkgbuild() error {
+	return editFile("PKGBUILD")
 }
 
 func question(msg string, defaultValue bool) bool {
@@ -157,6 +161,11 @@ func pathOf(file string) string {
 func pathExists(path string) bool {
 	_, e := os.Stat(path)
 	return e == nil
+}
+
+func searchInstallFiles() []string {
+	m, _ := filepath.Glob("*.install")
+	return m
 }
 
 func cd(dir string) { os.Chdir(dir) }

@@ -128,6 +128,14 @@ func Install(app string, asdeps bool) error {
 			return e
 		}
 	}
+	for _, inst := range searchInstallFiles() {
+		if question(Translatef(MSG_EDIT_INSTALL, inst), true) {
+			if e := editFile(inst); e != nil {
+				endInstall(wdir, lck)
+				return e
+			}
+		}
+	}
 
 	var e error
 	if asdeps {

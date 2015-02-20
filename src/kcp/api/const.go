@@ -41,6 +41,7 @@ const (
 	MSG_ONLYONEINSTANCE = "Another instance of kcp is running!"
 	MSG_INTERRUPT       = "Interrupt by user..."
 	MSG_EDIT            = "Do you want to edit PKGBUILD?"
+	MSG_EDIT_INSTALL    = "Do you want to edit %s?"
 	MSG_UNKNOWN         = "Unknown error!"
 	MSG_NOT_FOUND       = "Package not found!"
 	MSG_ENTRIES_UPDATED = "%d entries updated!"

@@ -182,3 +182,8 @@ msgstr  ""
 msgid   "%d entries deleted!"
 msgstr  ""
 
+#: const.go:44
+#, c-format
+msgid   "Do you want to edit %s?"
+msgstr  ""
+
