@@ -129,7 +129,7 @@ func Install(app string, asdeps bool) error {
 		}
 	}
 	for _, inst := range searchInstallFiles() {
-		if question(Translatef(MSG_EDIT_INSTALL, inst), true) {
+		if question(Translatef(MSG_EDIT_INSTALL, inst), false) {
 			if e := editFile(inst); e != nil {
 				endInstall(wdir, lck)
 				return e
