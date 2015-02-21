@@ -276,6 +276,7 @@ func remoteVersion(app string) (v string, ok bool) {
 	line := sendl(strings.Split(string(r), "\n"), quit)
 	finish := rcvl(line, quit, &pkgver, &pkgrel)
 	<-finish
+	pkgver, pkgrel = strings.TrimSpace(pkgver), strings.TrimSpace(pkgrel)
 	if len(pkgver) > 0 && len(pkgrel) > 0 {
 		v = pkgver + "-" + pkgrel
 		ok = true

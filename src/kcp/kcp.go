@@ -58,7 +58,8 @@ func merge(db api.PMap, c api.PCollection) (updated int, added int, deleted int)
 				ok = false
 				p_db.Stars = p.Stars
 			}
-			if p.LocalVersion != "" && p.LocalVersion != p_db.LocalVersion {
+			//if p.LocalVersion != "" && p.LocalVersion != p_db.LocalVersion {
+			if p.LocalVersion != p_db.LocalVersion {
 				ok = false
 				p_db.LocalVersion = p.LocalVersion
 			}
@@ -179,7 +180,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.48"
+	VERSION         = "0.49"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-01-05 12:19+0000\n"
+"PO-Revision-Date: 2015-02-21 13:25+0000\n"
 "Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/kaos/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -179,3 +179,8 @@ msgstr "¡Se añadieron %d entradas!"
 #, c-format
 msgid "%d entries deleted!"
 msgstr "¡Se borraron %d entradas!"
+
+#: const.go:44
+#, c-format
+msgid "Do you want to edit %s?"
+msgstr "¿Quiere editar %s?"
