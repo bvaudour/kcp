@@ -180,7 +180,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.51"
+	VERSION         = "0.52"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -395,9 +395,9 @@ func main() {
 	case *flag_version:
 		version()
 	case *flag_list:
-		if *flag_fast {
-			*flag_onlyname = true
-		}
+		//if *flag_fast {
+		//	*flag_onlyname = true
+		//}
 		list()
 	case *flag_update:
 		update()
