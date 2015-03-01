@@ -1,0 +1,186 @@
+# TEMPLATE FOR KCP TRANSLATION.
+# Copyright (C) B.VAUDOUR 2014
+# This file is distributed under the same license as the kcp package.
+# 
+# Translators:
+# enolp <enolp@softastur.org>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: KaOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-15 20:05+0100\n"
+"PO-Revision-Date: 2015-02-28 17:24+0000\n"
+"Last-Translator: enolp <enolp@softastur.org>\n"
+"Language-Team: Asturian (http://www.transifex.com/projects/p/kaos/language/ast/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ast\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kcp.go:147
+#, c-format
+msgid " [installed: %s]"
+msgstr " [instaláu: %s]"
+
+#: kcp.go:145
+msgid " [installed]"
+msgstr "[instaláu]"
+
+#: kcp.go:73
+msgid "<app>"
+msgstr "<aplicación>"
+
+#: kcp.go:136
+msgid "<unknown>"
+msgstr "<desconocíu>"
+
+#: kcp.go:48
+msgid "Another instance of kcp is running!"
+msgstr "¡Ta executándose otra instancia de kcp!"
+
+#: kcp.go:47
+#, c-format
+msgid "Dir %s already exists!"
+msgstr "¡Yá esiste'l direutoriu %s!"
+
+#: kcp.go:66
+msgid "Display all outdated packages from KCP"
+msgstr "Amuesa tolos paquetes ensin anovar del KCP"
+
+#: kcp.go:65
+msgid "Display all packages of KCP"
+msgstr "Amuesa tolos paquetes del KCP"
+
+#: kcp.go:50
+msgid "Do you want to edit PKGBUILD?"
+msgstr "¿Quies editar el PKGBUILD?"
+
+#: kcp.go:46
+msgid "Don't launch this program as root!"
+msgstr "¡Nun llances esti programa como root!"
+
+#: kcp.go:68
+msgid "Download needed files to build a package"
+msgstr "Descarga los ficheros necesarios pa construyir el paquete"
+
+#: kcp.go:69
+msgid "Install a package from KCP"
+msgstr "Instala un paquete del KCP"
+
+#: kcp.go:49
+msgid "Interrupt by user..."
+msgstr "Interrumpíu pol usuariu..."
+
+#: kcp.go:45
+msgid "No package found"
+msgstr "Nun s'alcontró'l paquete"
+
+#: kcp.go:70
+msgid "On display action, don't print KCP version"
+msgstr "Na aición d'amosanza, nun amuesa la versión de kcp"
+
+#: kcp.go:71
+msgid "On display action, sort packages by stars descending"
+msgstr "Na aición d'amosanza, ordena los paquetes pel orde descendente d'estrelles"
+
+#: kcp.go:72
+msgid "On install action, install as a dependence"
+msgstr "Na aición d'instalación, instala como una dependencia"
+
+#: kcp.go:325
+msgid "Package not found!"
+msgstr "¡Nun s'alcontró'l paquete!"
+
+#: kcp.go:63
+msgid "Print this help"
+msgstr "Amuesa esta ayuda"
+
+#: kcp.go:64
+msgid "Print version"
+msgstr "Amuesa la versión"
+
+#: kcp.go:67
+msgid "Search packages' motif in KCP and display them"
+msgstr "Gueta'l motivu de paquetes en KCP y amuésalos"
+
+#: kcp.go:61
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "Ferramienta en llinia comandos pa los paquetes comunitarios KaOS"
+
+#: kcp.go:51
+msgid "Unknown error!"
+msgstr "¡Fallu desconocíu!"
+
+#: kcp.go:62
+msgid "[OPTIONS] [APP]"
+msgstr "[OPCIONES] [APLICACIÓN]"
+
+#: kcp.go:471
+msgid "debug mode"
+msgstr "mou depuración"
+
+#: kcp.go:67
+msgid "Search packages in KCP and display them"
+msgstr "Gueta los paquetes en KCP y amuésalos"
+
+#: kcp.go:171
+msgid "On display action, display only installed packages"
+msgstr "Na aición d'amosanza, amuesa namái los paquetes instalaos"
+
+#: kcp.go:172
+msgid "On display action, display only outdated packages"
+msgstr "Na aición d'amosanza, amuesa namái los paquetes ensin anovar"
+
+#: kcp.go:170
+msgid "On display action, display only packages with at least one star"
+msgstr "Na aición d'amosanza, amuesa namái los paquetes con polo menos una estrella"
+
+#: kcp.go:169
+msgid "On display action, display only the name of the package"
+msgstr "Na aición d'amosanza, amuesa namái'l nome del paquete"
+
+#: kcp.go:168
+msgid "On display action, force refreshing local database"
+msgstr "Na aición d'amosanza, fuercia'l refrescu de la base de datos llocal"
+
+#: kcp.go:166
+msgid "On list action, display only installed packages"
+msgstr "Na aición de llistáu, amuesa namái los paquetes instalaos"
+
+#: kcp.go:167
+msgid "On refreshing database action, force complete update"
+msgstr "Na aición del refrescu de la base de datos, fuercia l'anovamientu completu"
+
+#: kcp.go:159
+msgid "Refresh the local database"
+msgstr "Refresca la base de datos llocal"
+
+#: const.go:46
+#, c-format
+msgid "%d entries updated!"
+msgstr "¡%d entraes anovaes!"
+
+#: const.go:54
+#, c-format
+msgid "[installed: %s]"
+msgstr "[instaláu: %s]"
+
+#: const.go:53
+msgid "[installed]"
+msgstr "[instaláu]"
+
+#: const.go:47
+#, c-format
+msgid "%d entries added!"
+msgstr "¡%d entraes amestaes!"
+
+#: const.go:48
+#, c-format
+msgid "%d entries deleted!"
+msgstr "¡%d entraes desaniciaes!"
+
+#: const.go:44
+#, c-format
+msgid "Do you want to edit %s?"
+msgstr "¿Quies editar %s?"

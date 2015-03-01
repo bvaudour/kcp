@@ -180,7 +180,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.50"
+	VERSION         = "0.51"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -376,9 +376,9 @@ func init() {
 	argparser.Require("--asdeps", "-i")
 	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
 	// To ensure compatibility with completion
-	flag_fast, _ = argparser.Bool("", "--fast", "")
-	argparser.GetFlag("--fast").Set(pargs.HIDDEN, true)
-	argparser.GetFlag("--complete").Set(pargs.HIDDEN, true)
+	//flag_fast, _ = argparser.Bool("", "--fast", "")
+	//argparser.GetFlag("--fast").Set(pargs.HIDDEN, true)
+	//argparser.GetFlag("--complete").Set(pargs.HIDDEN, true)
 }
 
 func main() {
