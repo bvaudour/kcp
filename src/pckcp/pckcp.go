@@ -36,6 +36,7 @@ const (
 	W_SPLITTED     = "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains different packages!"
 	I_PACKAGE      = "package() function is present."
 	W_PACKAGE      = "package() function missing. You should have to add it."
+	W_EMPTYDEPENDS = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not an missing."
 	//I_URL          = "url is clean."
 	//W_URL          = "No url specified."
 	//Q_URL          = "Add url?"
@@ -150,22 +151,19 @@ func read_package(lines []string) string {
 	for _, l := range lines {
 		l := strings.TrimSpace(l)
 		if strings.HasPrefix(l, "pkgname=") {
-			return strings.TrimPrefix(l, "pkgname=")
+			return strings.Trim(strings.TrimPrefix(l, "pkgname="), "\"'")
 		}
 	}
 	return ""
 }
 
 func exists_package(p string) bool {
-	s, e := LaunchCommandWithResult("pacman", "-Q", p)
-	if e != nil {
-		return false
-	}
+	s, _ := LaunchCommandWithResult("pacman", "-Q", p)
 	if s != "" {
 		return true
 	}
-	s, e = LaunchCommandWithResult("kcp", "-Ns", p)
-	return e == nil && s != ""
+	s, _ = LaunchCommandWithResult("kcp", "-Ns", p)
+	return s != ""
 }
 
 func check_header(lines []string, edit bool) []string {
@@ -334,6 +332,21 @@ func check_package_func(lines []string, edit bool) []string {
 	return lines
 }
 
+func check_empty_depend(lines []string, edit bool) []string {
+	hasdepend := false
+	for _, l := range lines {
+		l = strings.TrimSpace(l)
+		if strings.HasPrefix(l, "depends=") || strings.HasPrefix(l, "makedepends=") {
+			hasdepend = true
+			break
+		}
+	}
+	if !hasdepend {
+		message(W, W_EMPTYDEPENDS)
+	}
+	return lines
+}
+
 func main() {
 	edit := false
 	if len(os.Args) > 1 {
@@ -349,6 +362,7 @@ func main() {
 	lines = check_emptyvar(lines, edit)
 	lines = check_conflicts(lines, edit)
 	lines = check_package_func(lines, edit)
+	lines = check_empty_depend(lines, edit)
 	if edit {
 		save_pkgbuild(lines)
 	}
