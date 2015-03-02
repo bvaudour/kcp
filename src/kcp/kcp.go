@@ -169,7 +169,9 @@ func packagesprint(c api.PCollection, sorted, onlyname bool) {
 var argparser *pargs.Parser
 var flag_help, flag_version, flag_list, flag_update *bool
 var flag_search, flag_get, flag_install *string
-var flag_complete, flag_sorted, flag_forceupdate *bool
+
+//var flag_complete, flag_sorted, flag_forceupdate *bool
+var flag_sorted, flag_forceupdate *bool
 var flag_onlyname, flag_onlystarred, flag_onlyinstalled, flag_onlyoutdated *bool
 var flag_asdeps *bool
 var flag_debug *bool
@@ -180,7 +182,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.52"
+	VERSION         = "0.53"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -354,7 +356,7 @@ func init() {
 	flag_search, _ = argparser.String("-s", "--search", t(D_SEARCH), VALUENAME, "")
 	flag_get, _ = argparser.String("-g", "--get", t(D_GET), VALUENAME, "")
 	flag_install, _ = argparser.String("-i", "--install", t(D_INSTALL), VALUENAME, "")
-	flag_complete, _ = argparser.Bool("-c", "--complete", t(D_COMPLETE))
+	//flag_complete, _ = argparser.Bool("-c", "--complete", t(D_COMPLETE))
 	flag_sorted, _ = argparser.Bool("-x", "--sort", t(D_SORT))
 	flag_forceupdate, _ = argparser.Bool("-f", "--force-update", t(D_FORCEUPDATE))
 	flag_onlyname, _ = argparser.Bool("-N", "--only-name", t(D_ONLYNAME))
@@ -366,7 +368,7 @@ func init() {
 
 	// Init flags groups/requirements
 	argparser.Group("-h", "-v", "-l", "-s", "-g", "-i", "-u")
-	argparser.Require("--complete", "-u", "-f")
+	//argparser.Require("--complete", "-u", "-f")
 	argparser.Require("--sort", "-l", "-s")
 	argparser.Require("--force-update", "-l")
 	argparser.Require("--only-name", "-l", "-s")

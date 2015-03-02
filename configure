@@ -33,18 +33,19 @@ _generate() {
 
 	_addline '# Go variables...'
 	_addline 'GOCMD  = go build'
-#	_addline 'GOPATH = ${PWD}:${GOPATH}'
 	_addline 'GOPATH = ${PWD}'
 	_addline 'GOFLAG = --compiler gccgo'
 	_addline 'export $(GOPATH)'
 	_emptyline
 
-	_addline 'PACKAGE = kcp'
+	_addline 'PACKAGE     = kcp'
+	_addline 'PACKAGEC    = pckcp'
 	_addline 'PACKAGEFLAG = --create-manpage'
 	_emptyline
 
 	_addline '# Source directories'
 	_addline 'SRCDIR   = ${PWD}/src/kcp'
+	_addline 'SRCDIRC  = ${PWD}/src/pckcp'
 	_addline 'COMPDIR  = ${PWD}/completion'
 	_addline 'BUILDDIR = ${PWD}/build'
 	_addline 'MANDIR   = ${PWD}/man'
@@ -52,16 +53,20 @@ _generate() {
 
 	_addline '# Base files'
 	_addline 'BINFILE  = $(PACKAGE)'
+	_addline 'BINFILEC = $(PACKAGEC)'
 	_addline 'MANFILE  = $(PACKAGE).1'
 	_addline 'GOFILE   = $(PACKAGE).go'
+	_addline 'GOFILEC  = $(PACKAGEC).go'
 	_addline 'BASHFILE = $(PACKAGE).bash'
 	_addline 'FISHFILE = $(PACKAGE).fish'
 	_emptyline
 
 	_addline '# Source files'
 	_addline 'SRCBINFILE  = $(BUILDDIR)/$(BINFILE)'
+	_addline 'SRCBINFILEC = $(BUILDDIR)/$(BINFILEC)'
 	_addline 'SRCMANFILE  = $(MANDIR)/$(MANFILE)'
 	_addline 'SRCGOFILE   = $(SRCDIR)/$(GOFILE)'
+	_addline 'SRCGOFILEC  = $(SRCDIRC)/$(GOFILEC)'
 	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
 	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
 	_emptyline
@@ -76,6 +81,7 @@ _generate() {
 
 	_addline '# Destination files'
 	_addline 'DESTBINFILE  = $(DESTBIN)/$(BINFILE)'
+	_addline 'DESTBINFILEC = $(DESTBIN)/$(BINFILEC)'
 	_addline 'DESTMANFILE  = $(DESTMAN)/$(MANFILE)'
 	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
 	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
@@ -89,8 +95,14 @@ _generate() {
 	_addline 'build:'
 	_addline_t 'mkdir -p $(BUILDDIR)'
 	case "$withgccgo" in
-		'yes') _addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
-		*)     _addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)';;
+		'yes')
+			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)'
+			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
+			;;
+		*)
+			_addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)'
+			_addline_t '$(GOCMD) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
+			;;
 	esac
 #	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
 	_emptyline
@@ -101,6 +113,7 @@ _generate() {
 	_addline_cond "$withbash" 'mkdir -p $(DESTBASH)'
 	_addline_cond "$withfish" 'mkdir -p $(DESTFISH)'
 	_addline_t 'cp $(SRCBINFILE) $(DESTBINFILE)'
+	_addline_t 'cp $(SRCBINFILEC) $(DESTBINFILEC)'
 	_addline_cond "$withman"  'cp $(SRCMANFILE) $(DESTMANFILE)'
 	_addline_cond "$withbash" 'cp $(SRCBASHFILE) $(DESTBASHFILE)'
 	_addline_cond "$withfish" 'cp $(SRCFISHFILE) $(DESTFISHFILE)'
@@ -108,6 +121,7 @@ _generate() {
 
 	_addline 'clean:'
 	_addline_t 'rm $(SRCBINFILE)'
+	_addline_t 'rm $(SRCBINFILEC)'
 	_addline_cond "$withman" 'rm $(SRCMANFILE)'
 	_addline_t 'rmdir $(BUILDDIR)'
 }
