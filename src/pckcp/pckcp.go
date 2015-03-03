@@ -36,7 +36,10 @@ const (
 	W_SPLITTED     = "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains different packages!"
 	I_PACKAGE      = "package() function is present."
 	W_PACKAGE      = "package() function missing. You should have to add it."
-	W_EMPTYDEPENDS = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not an missing."
+	W_EMPTYDEPENDS = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not a missing."
+	I_DEPENDS      = "'%s' is clean."
+	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
+	Q_DEPENDS      = "Remove %s as %s?"
 	//I_URL          = "url is clean."
 	//W_URL          = "No url specified."
 	//Q_URL          = "Add url?"
@@ -87,9 +90,7 @@ func message(tpe int, s string, a ...interface{}) {
 }
 
 func s2a(s string) []string {
-	if strings.HasPrefix(s, "(") || strings.HasSuffix(s, ")") {
-		s = strings.Trim(s, "()")
-	}
+	s = strings.Trim(s, "()")
 	out := strings.Fields(s)
 	for i, e := range out {
 		if strings.HasPrefix(e, "\"") || strings.HasPrefix(e, "'") {
@@ -106,6 +107,17 @@ func a2s(a []string) string {
 			out += " "
 		}
 		out += "'" + e + "'"
+	}
+	return out
+}
+
+func leftSpaces(s string) string {
+	out := ""
+	for _, c := range s {
+		if c != ' ' {
+			break
+		}
+		out += " "
 	}
 	return out
 }
@@ -158,12 +170,17 @@ func read_package(lines []string) string {
 }
 
 func exists_package(p string) bool {
-	s, _ := LaunchCommandWithResult("pacman", "-Q", p)
+	s, _ := LaunchCommandWithResult("pacman", "-Si", p)
 	if s != "" {
 		return true
 	}
 	s, _ = LaunchCommandWithResult("kcp", "-Ns", p)
-	return s != ""
+	for _, e := range strings.Split(s, "\n") {
+		if e == p {
+			return true
+		}
+	}
+	return false
 }
 
 func check_header(lines []string, edit bool) []string {
@@ -347,6 +364,68 @@ func check_empty_depend(lines []string, edit bool) []string {
 	return lines
 }
 
+func check_depends(lines []string, edit bool) []string {
+	out := make([]string, 0, len(lines))
+	v, ok, begin := "", false, false
+	for _, l := range lines {
+		sp := ""
+		lt := strings.TrimSpace(l)
+		switch {
+		case v != "":
+			sp = leftSpaces(l)
+		case strings.HasPrefix(lt, "depends="):
+			ok = true
+			v = "depends"
+			lt = strings.TrimPrefix(lt, "depends=")
+			begin = true
+		case strings.HasPrefix(lt, "makedepends="):
+			ok = true
+			v = "makedepends"
+			lt = strings.TrimPrefix(lt, "makedepends=")
+			begin = true
+		default:
+			out = append(out, l)
+			continue
+		}
+		end := strings.HasSuffix(lt, ")")
+		lst := s2a(lt)
+		keep := make([]string, 0, len(lst))
+		for _, e := range lst {
+			if !exists_package(e) {
+				message(E, W_DEPENDS, e, v)
+				ok = false
+				// TODO - check if there's well-known replacement
+				if edit && question(Q_DEPENDS, true) {
+					continue
+				}
+			}
+			keep = append(keep, e)
+		}
+		if end && ok {
+			message(I, I_DEPENDS, v)
+		}
+		if !edit {
+			out = append(out, l)
+		} else if len(keep) > 0 {
+			if begin {
+				begin = false
+				lt = v + "=("
+			} else {
+				lt = sp
+			}
+			lt += a2s(keep)
+			if end {
+				lt += ")"
+			}
+			out = append(out, lt)
+		}
+		if end {
+			v = ""
+		}
+	}
+	return out
+}
+
 func main() {
 	edit := false
 	if len(os.Args) > 1 {
@@ -363,6 +442,7 @@ func main() {
 	lines = check_conflicts(lines, edit)
 	lines = check_package_func(lines, edit)
 	lines = check_empty_depend(lines, edit)
+	lines = check_depends(lines, edit)
 	if edit {
 		save_pkgbuild(lines)
 	}
