@@ -40,6 +40,7 @@ const (
 	I_DEPENDS      = "'%s' is clean."
 	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
 	Q_DEPENDS      = "Remove %s as %s?"
+	SYNOPSIS       = "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
 	//I_URL          = "url is clean."
 	//W_URL          = "No url specified."
 	//Q_URL          = "Add url?"
@@ -394,7 +395,6 @@ func check_depends(lines []string, edit bool) []string {
 			if !exists_package(e) {
 				message(E, W_DEPENDS, e, v)
 				ok = false
-				// TODO - check if there's well-known replacement
 				if edit && question(Q_DEPENDS, true) {
 					continue
 				}
@@ -432,6 +432,9 @@ func main() {
 		a := os.Args[1]
 		if a == "-e" || a == "--edit" {
 			edit = true
+		} else {
+			message(N, SYNOPSIS, os.Args[0])
+			return
 		}
 	}
 	lines := open_pkgbuild()
