@@ -30,6 +30,12 @@ msgid   "%s isn't in repo neither in kcp. Variable '%s' doesn't need to "
         "contain it."
 msgstr  ""
 
+#: pckcp.go:34 pckcp.go:41
+#, c-format
+msgid   "%s isn't in repo neither in kcp. Variable '%s' shouldn't "
+        "contain it."
+msgstr  ""
+
 #: pckcp.go:40
 #, c-format
 msgid   "'%s' is clean."
@@ -119,6 +125,10 @@ msgstr  ""
 
 #: pckcp.go:38
 msgid   "package() function missing. You should have to add it."
+msgstr  ""
+
+#: pckcp.go:38
+msgid   "package() function missing. You need to add it."
 msgstr  ""
 
 #: pckcp.go:24

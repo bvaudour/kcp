@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Diego L. Velazquez <dlvelazquez@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: KaOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-04 13:22+0100\n"
+"PO-Revision-Date: 2015-03-04 16:19+0000\n"
+"Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (http://www.transifex.com/projects/p/kaos/language/es_AR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_AR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pckcp.go:43
+#, c-format
+msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
+msgstr "%s es una simple aplicación para comprobar los PKGBUILDs para KaOS Community Packages."
+
+#: pckcp.go:34 pckcp.go:41
+#, c-format
+msgid ""
+"%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
+msgstr "%s no está en repo ni en kcp. La variable '%s' no necesita contenerlo."
+
+#: pckcp.go:40
+#, c-format
+msgid "'%s' is clean."
+msgstr "'%s' está limpio."
+
+#: pckcp.go:19
+msgid "Current folder doesn't contain PKGBUILD!"
+msgstr "¡La carpeta actual no contiene ningún PKGBUILD!"
+
+#: pckcp.go:21
+msgid "Header is clean."
+msgstr "La cabecera está limpia."
+
+#: pckcp.go:22
+msgid ""
+"Header was found. Do not use names of maintainers or contributors in "
+"PKGBUILD, anyone can contribute, keep the header clean from this."
+msgstr "Se encontró una cabecera. No use nombres de mantenedores o contribuidores en el PKGBUILD, cualquiera puede contribuir, mantenga la cabecera limpia de esto."
+
+#: pckcp.go:20
+msgid "PKGBUILD cannot be saved!"
+msgstr "¡PKGBUILD no puede ser salvado!"
+
+#: pckcp.go:36
+msgid ""
+"PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
+"different packages!"
+msgstr "PKGBUILD es un PKGBUILD dividido. ¡Haga tantos PKGBUILDs como paquetes diferentes tenga!"
+
+#: pckcp.go:42
+#, c-format
+msgid "Remove %s as %s?"
+msgstr "¿Eliminar %s como %s?"
+
+#: pckcp.go:35
+#, c-format
+msgid "Remove %s in variable '%s'?"
+msgstr "¿Eliminar %s en variable '%s'?"
+
+#: pckcp.go:23
+msgid "Remove header?"
+msgstr "¿Eliminar cabecera?"
+
+#: pckcp.go:31
+#, c-format
+msgid "Remove variable '%s'?"
+msgstr "¿Eliminar variable '%s'?"
+
+#: pckcp.go:29
+msgid "Reset arch to x86_64?"
+msgstr "¿Reajustar arch a x86_64?"
+
+#: pckcp.go:26
+msgid "Reset pkgrel to 1?"
+msgstr "¿Reajustar pkgrel a 1?"
+
+#: pckcp.go:33
+#, c-format
+msgid "Variable '%s' contains name of the package. It is useless."
+msgstr "La variable '%s' contiene nombre del paquete. Eso es inútil."
+
+#: pckcp.go:32
+#, c-format
+msgid "Variable '%s' is clean."
+msgstr "La variable '%s' está limpia."
+
+#: pckcp.go:30
+#, c-format
+msgid "Variable '%s' is empty."
+msgstr "La variable '%s' está vacía."
+
+#: pckcp.go:39
+msgid ""
+"Variables 'depends' and 'makedepends' are empty. You should manually check "
+"if it is not a missing."
+msgstr "Las variables 'depends' y 'makedepends' están vacías. Debería comprobar manualmente si no se van a necesitar."
+
+#: pckcp.go:27
+msgid "arch is clean."
+msgstr "arch está limpia."
+
+#: pckcp.go:28
+msgid ""
+"arch is different from 'x86_64'. Since KaOS only supports this architecture,"
+" no other arch would be added here."
+msgstr "arch es distinto a 'x86-64'. Dado que KaOS sólo soporta esa arquitectura, no debería agregarse otra aquí."
+
+#: pckcp.go:37
+msgid "package() function is present."
+msgstr "Está presente la función package()."
+
+#: pckcp.go:38
+msgid "package() function missing. You should have to add it."
+msgstr "La función package() no está. Debería agregarla."
+
+#: pckcp.go:24
+msgid "pkgrel is clean."
+msgstr "pkgrel está limpio."
+
+#: pckcp.go:25
+msgid ""
+"pkgrel is different from 1. It should be the case only if build instructions"
+" are edited but not pkgver."
+msgstr "pkgrel es distinto a 1. Este debería ser el caso sólo si son editadas las instrucciones de compilación pero no el pkgver."

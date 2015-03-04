@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: KaOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-04 13:22+0100\n"
+"PO-Revision-Date: 2015-03-04 13:23+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/kaos/language/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: pckcp.go:43
+#, c-format
+msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
+msgstr ""
+
+#: pckcp.go:34 pckcp.go:41
+#, c-format
+msgid ""
+"%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
+msgstr ""
+
+#: pckcp.go:40
+#, c-format
+msgid "'%s' is clean."
+msgstr ""
+
+#: pckcp.go:19
+msgid "Current folder doesn't contain PKGBUILD!"
+msgstr ""
+
+#: pckcp.go:21
+msgid "Header is clean."
+msgstr ""
+
+#: pckcp.go:22
+msgid ""
+"Header was found. Do not use names of maintainers or contributors in "
+"PKGBUILD, anyone can contribute, keep the header clean from this."
+msgstr ""
+
+#: pckcp.go:20
+msgid "PKGBUILD cannot be saved!"
+msgstr ""
+
+#: pckcp.go:36
+msgid ""
+"PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
+"different packages!"
+msgstr ""
+
+#: pckcp.go:42
+#, c-format
+msgid "Remove %s as %s?"
+msgstr ""
+
+#: pckcp.go:35
+#, c-format
+msgid "Remove %s in variable '%s'?"
+msgstr ""
+
+#: pckcp.go:23
+msgid "Remove header?"
+msgstr ""
+
+#: pckcp.go:31
+#, c-format
+msgid "Remove variable '%s'?"
+msgstr ""
+
+#: pckcp.go:29
+msgid "Reset arch to x86_64?"
+msgstr ""
+
+#: pckcp.go:26
+msgid "Reset pkgrel to 1?"
+msgstr ""
+
+#: pckcp.go:33
+#, c-format
+msgid "Variable '%s' contains name of the package. It is useless."
+msgstr ""
+
+#: pckcp.go:32
+#, c-format
+msgid "Variable '%s' is clean."
+msgstr ""
+
+#: pckcp.go:30
+#, c-format
+msgid "Variable '%s' is empty."
+msgstr ""
+
+#: pckcp.go:39
+msgid ""
+"Variables 'depends' and 'makedepends' are empty. You should manually check "
+"if it is not a missing."
+msgstr ""
+
+#: pckcp.go:27
+msgid "arch is clean."
+msgstr ""
+
+#: pckcp.go:28
+msgid ""
+"arch is different from 'x86_64'. Since KaOS only supports this architecture,"
+" no other arch would be added here."
+msgstr ""
+
+#: pckcp.go:37
+msgid "package() function is present."
+msgstr ""
+
+#: pckcp.go:38
+msgid "package() function missing. You should have to add it."
+msgstr ""
+
+#: pckcp.go:24
+msgid "pkgrel is clean."
+msgstr ""
+
+#: pckcp.go:25
+msgid ""
+"pkgrel is different from 1. It should be the case only if build instructions"
+" are edited but not pkgver."
+msgstr ""

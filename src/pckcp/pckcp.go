@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gettext"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -31,11 +32,11 @@ const (
 	Q_EMPTYVAR     = "Remove variable '%s'?"
 	I_CONFLICTS    = "Variable '%s' is clean."
 	W_CONFLICTS    = "Variable '%s' contains name of the package. It is useless."
-	W_CONFLICTS2   = "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
+	W_CONFLICTS2   = "%s isn't in repo neither in kcp. Variable '%s' shouldn't to contain it."
 	Q_CONFLICTS    = "Remove %s in variable '%s'?"
 	W_SPLITTED     = "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains different packages!"
 	I_PACKAGE      = "package() function is present."
-	W_PACKAGE      = "package() function missing. You should have to add it."
+	W_PACKAGE      = "package() function missing. You need to add it."
 	W_EMPTYDEPENDS = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not a missing."
 	I_DEPENDS      = "'%s' is clean."
 	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
@@ -73,7 +74,7 @@ func LaunchCommandWithResult(name string, args ...string) (string, error) {
 
 //TODO
 func t(s string) string {
-	return s
+	return gettext.Gettext(s)
 }
 
 func message(tpe int, s string, a ...interface{}) {
@@ -424,6 +425,14 @@ func check_depends(lines []string, edit bool) []string {
 		}
 	}
 	return out
+}
+
+func init() {
+	// Init the locales
+	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
+	gettext.SetLocale(gettext.LC_ALL, "")
+	gettext.BindTextdomain("pckcp", api.LOCALE_DIR)
+	gettext.Textdomain("pckcp")
 }
 
 func main() {
