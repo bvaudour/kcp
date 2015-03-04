@@ -42,6 +42,7 @@ const (
 	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
 	Q_DEPENDS      = "Remove %s as %s?"
 	SYNOPSIS       = "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
+	LOCALE_DIR     = "/usr/share/locale"
 	//I_URL          = "url is clean."
 	//W_URL          = "No url specified."
 	//Q_URL          = "Add url?"
@@ -431,7 +432,7 @@ func init() {
 	// Init the locales
 	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
 	gettext.SetLocale(gettext.LC_ALL, "")
-	gettext.BindTextdomain("pckcp", api.LOCALE_DIR)
+	gettext.BindTextdomain("pckcp", LOCALE_DIR)
 	gettext.Textdomain("pckcp")
 }
 
