@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-04 16:19+0000\n"
+"PO-Revision-Date: 2015-03-05 10:45+0000\n"
 "Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/projects/p/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,11 @@ msgstr "%s es una simple aplicación para comprobar los PKGBUILDs para KaOS Comm
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
 msgstr "%s no está en repo ni en kcp. La variable '%s' no necesita contenerlo."
+
+#: pckcp.go:34 pckcp.go:41
+#, c-format
+msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
+msgstr "%s no está en los repos ni en kcpl. La variable '%s' no debería contenerlo."
 
 #: pckcp.go:40
 #, c-format
@@ -123,6 +128,10 @@ msgstr "Está presente la función package()."
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
 msgstr "La función package() no está. Debería agregarla."
+
+#: pckcp.go:38
+msgid "package() function missing. You need to add it."
+msgstr "No se encuentra la función package(). Necesita agregarla."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."

@@ -173,6 +173,14 @@ func read_package(lines []string) string {
 }
 
 func exists_package(p string) bool {
+	switch {
+	case strings.Contains(p, "<"):
+		p = p[:strings.Index(p, "<")]
+	case strings.Contains(p, ">"):
+		p = p[:strings.Index(p, ">")]
+	case strings.Contains(p, "="):
+		p = p[:strings.Index(p, "=")]
+	}
 	s, _ := LaunchCommandWithResult("pacman", "-Si", p)
 	if s != "" {
 		return true
