@@ -103,6 +103,34 @@ func s2a(s string) []string {
 	return out
 }
 
+func o2a(s string) []string {
+	s = strings.Trim(s, "()")
+	out := make([]string, 0)
+	p := 0
+	sc := make([]rune, 0)
+	for _, c := range s {
+		switch p {
+		case 0:
+			if c == '\'' || c == '"' {
+				p = 1
+			}
+		case 1:
+			if c == ':' || c == ' ' {
+				p = 2
+				out = append(out, string(sc))
+				sc = make([]rune, 0)
+			} else {
+				sc = append(sc, c)
+			}
+		case 2:
+			if c == '\'' || c == '"' {
+				p = 0
+			}
+		}
+	}
+	return out
+}
+
 func a2s(a []string) string {
 	out := ""
 	for _, e := range a {
@@ -310,14 +338,14 @@ func check_conflicts(lines []string, edit bool) []string {
 				okt := true
 				if e == pkgname {
 					okt = false
-					message(W, W_CONFLICTS, v)
+					message(W, t(W_CONFLICTS), v)
 				} else if !exists_package(e) {
 					okt = false
-					message(W, W_CONFLICTS2, e, v)
+					message(W, t(W_CONFLICTS2), e, v)
 				}
 				if !okt {
 					ok = false
-					if !edit || !question(fmt.Sprintf(Q_CONFLICTS, e, v), true) {
+					if !edit || !question(fmt.Sprintf(t(Q_CONFLICTS), e, v), true) {
 						keep = append(keep, e)
 					}
 				} else {
@@ -325,7 +353,7 @@ func check_conflicts(lines []string, edit bool) []string {
 				}
 			}
 			if ok {
-				message(I, I_CONFLICTS, v)
+				message(I, t(I_CONFLICTS), v)
 			}
 			if len(keep) == 0 {
 				continue
@@ -351,11 +379,11 @@ func check_package_func(lines []string, edit bool) []string {
 		}
 	}
 	if splitted {
-		message(W, W_SPLITTED)
+		message(W, t(W_SPLITTED))
 	} else if has_p {
-		message(I, I_PACKAGE)
+		message(I, t(I_PACKAGE))
 	} else {
-		message(W, W_PACKAGE)
+		message(W, t(W_PACKAGE))
 	}
 	return lines
 }
@@ -370,7 +398,7 @@ func check_empty_depend(lines []string, edit bool) []string {
 		}
 	}
 	if !hasdepend {
-		message(W, W_EMPTYDEPENDS)
+		message(W, t(W_EMPTYDEPENDS))
 	}
 	return lines
 }
@@ -394,25 +422,35 @@ func check_depends(lines []string, edit bool) []string {
 			v = "makedepends"
 			lt = strings.TrimPrefix(lt, "makedepends=")
 			begin = true
+		case strings.HasPrefix(lt, "optdepends="):
+			ok = true
+			v = "optdepends"
+			lt = strings.TrimPrefix(lt, "optdepends=")
+			begin = true
 		default:
 			out = append(out, l)
 			continue
 		}
 		end := strings.HasSuffix(lt, ")")
-		lst := s2a(lt)
+		var lst []string
+		if v == "optdepends" {
+			lst = o2a(lt)
+		} else {
+			lst = s2a(lt)
+		}
 		keep := make([]string, 0, len(lst))
 		for _, e := range lst {
 			if !exists_package(e) {
-				message(E, W_DEPENDS, e, v)
+				message(E, t(W_DEPENDS), e, v)
 				ok = false
-				if edit && question(Q_DEPENDS, true) {
+				if edit && question(t(Q_DEPENDS), true) {
 					continue
 				}
 			}
 			keep = append(keep, e)
 		}
 		if end && ok {
-			message(I, I_DEPENDS, v)
+			message(I, t(I_DEPENDS), v)
 		}
 		if !edit {
 			out = append(out, l)
@@ -451,7 +489,7 @@ func main() {
 		if a == "-e" || a == "--edit" {
 			edit = true
 		} else {
-			message(N, SYNOPSIS, os.Args[0])
+			message(N, t(SYNOPSIS), os.Args[0])
 			return
 		}
 	}
