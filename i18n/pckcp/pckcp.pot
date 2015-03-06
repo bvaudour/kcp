@@ -140,3 +140,19 @@ msgid   "pkgrel is different from 1. It should be the case only if build "
         "instructions are edited but not pkgver."
 msgstr  ""
 
+#: pckcp.go:44
+msgid   "url is clean."
+msgstr  ""
+
+#: pckcp.go:45
+msgid   "No url specified."
+msgstr  ""
+
+#: pckcp.go:46
+msgid   "Add url?"
+msgstr  ""
+
+#: pckcp.go:47
+msgid   "Please, type the URL to include:"
+msgstr  ""
+
