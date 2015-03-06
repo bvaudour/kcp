@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Arnt <qtgzmanager@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-05 10:37+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-03-06 18:53+0000\n"
+"Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,124 +21,124 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s é um avaliador simples para arquivos PKGBUILD provenientes dos Pacotes Comunitários do KaOS."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr ""
+msgstr "%s não está no repositório nem no kcp. Variável '%s' não precisa contê-lo."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr ""
+msgstr "%s não está no repositório nem no kcp. Variável '%s' não deveria contê-lo."
 
 #: pckcp.go:40
 #, c-format
 msgid "'%s' is clean."
-msgstr ""
+msgstr "'%s' está adequado."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "A pasta corrente não contém o arquivo PKGBUILD!"
 
 #: pckcp.go:21
 msgid "Header is clean."
-msgstr ""
+msgstr "O cabeçalho está adequado."
 
 #: pckcp.go:22
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
+msgstr "Um cabeçalho foi encontrado. Não utilize nomes de mantenedores nem contribuintes nos arquivos PKGBUILD, pois qualquer um pode contribuir. Mantenha o cabeçalho livre deste tipo de informação."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
-msgstr ""
+msgstr "O arquivo PKGBUILD não pode ser salvo!"
 
 #: pckcp.go:36
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "O arquivo PKGBUILD é um PKGBUILD dividido. Crie tantos arquivos PKGBUILD quantos forem o número de pacotes diferentes!"
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr ""
+msgstr "Remover %s como %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr ""
+msgstr "Remover %s da variável '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr ""
+msgstr "Remover o cabeçalho?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr ""
+msgstr "Remover a variável '%s'?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr ""
+msgstr "Alterar a arquitetura para x86_64?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr ""
+msgstr "Alterar pkgrel para 1?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr ""
+msgstr "Variável '%s' contém um nome do pacote. É inútil."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr ""
+msgstr "Variável '%s' está adequada."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr ""
+msgstr "Variável '%s' está vazia."
 
 #: pckcp.go:39
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr ""
+msgstr "Variável 'depends' e 'makedepends' estão vazias. Você deve indicar manualmente se isto não se trata de um equívoco."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr ""
+msgstr "Arquitetura está adequada."
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr ""
+msgstr "Arquitetura é diferente de 'x86_64'. Uma vez que o KaOS suporta apenas esta arquitetura, nenhuma outra poderá ser usada aqui."
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr ""
+msgstr "A função package() está presente."
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr ""
+msgstr "A função package() não foi encontrada. Você deverá adicioná-la."
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr ""
+msgstr "A função package() não foi encontrada. Você precisará adicioná-la."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr ""
+msgstr "pkgrel está adequado."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "pkgrel é diferente de 1. Este somente deve ser o caso se as instruções para montagem foram editadas, com exceção do pkgver."

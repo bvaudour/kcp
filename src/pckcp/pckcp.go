@@ -41,11 +41,12 @@ const (
 	I_DEPENDS      = "'%s' is clean."
 	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
 	Q_DEPENDS      = "Remove %s as %s?"
+	I_URL          = "url is clean."
+	W_URL          = "No url specified."
+	Q_URL          = "Add url?"
+	T_URL          = "Please, type the URL to include:"
 	SYNOPSIS       = "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
 	LOCALE_DIR     = "/usr/share/locale"
-	//I_URL          = "url is clean."
-	//W_URL          = "No url specified."
-	//Q_URL          = "Add url?"
 )
 
 func ReadFile(path string) (lines []string, err error) {
@@ -474,6 +475,29 @@ func check_depends(lines []string, edit bool) []string {
 	return out
 }
 
+func check_url(lines []string, edit bool) []string {
+	url := false
+	for _, l := range lines {
+		l = strings.TrimSpace(l)
+		if strings.HasPrefix(l, "url=") {
+			url = true
+			break
+		}
+	}
+	if url {
+		message(I, t(I_URL))
+	} else {
+		message(W, t(W_URL))
+		if edit && question(t(Q_URL), true) {
+			fmt.Print(t(T_URL), " ")
+			url_str := ""
+			fmt.Scan(&url_str)
+			lines = append(lines, fmt.Sprintf("url='%s'", url_str))
+		}
+	}
+	return lines
+}
+
 func init() {
 	// Init the locales
 	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
@@ -502,6 +526,7 @@ func main() {
 	lines = check_package_func(lines, edit)
 	lines = check_empty_depend(lines, edit)
 	lines = check_depends(lines, edit)
+	lines = check_url(lines, edit)
 	if edit {
 		save_pkgbuild(lines)
 	}
