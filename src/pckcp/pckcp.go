@@ -49,6 +49,25 @@ const (
 	LOCALE_DIR     = "/usr/share/locale"
 )
 
+// List of exceptions for depends
+var exceptions = []string{
+	"java-runtime",
+	"java-environment",
+	"libreoffice-common",
+	"libreoffice-base",
+	"libreoffice-calc",
+	"libreoffice-draw",
+	"libreoffice-impress",
+	"libreoffice-kde4",
+	"libreoffice-math",
+	"libreoffice-sdk",
+	"libreoffice-sdk-doc",
+	"libreoffice-writer",
+	"libreoffice-en-US",
+	"libreoffice-postgresql-connector",
+	"libreoffice-langpack",
+}
+
 func ReadFile(path string) (lines []string, err error) {
 	b, e := ioutil.ReadFile(path)
 	if e != nil {
@@ -209,6 +228,11 @@ func exists_package(p string) bool {
 		p = p[:strings.Index(p, ">")]
 	case strings.Contains(p, "="):
 		p = p[:strings.Index(p, "=")]
+	}
+	for _, e := range exceptions {
+		if e == p {
+			return true
+		}
 	}
 	s, _ := LaunchCommandWithResult("pacman", "-Si", p)
 	if s != "" {
