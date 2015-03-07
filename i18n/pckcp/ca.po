@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-05 10:37+0000\n"
+"PO-Revision-Date: 2015-03-07 10:37+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/kaos/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -140,4 +140,20 @@ msgstr ""
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
+msgstr ""
+
+#: pckcp.go:44
+msgid "url is clean."
+msgstr ""
+
+#: pckcp.go:45
+msgid "No url specified."
+msgstr ""
+
+#: pckcp.go:46
+msgid "Add url?"
+msgstr ""
+
+#: pckcp.go:47
+msgid "Please, type the URL to include:"
 msgstr ""

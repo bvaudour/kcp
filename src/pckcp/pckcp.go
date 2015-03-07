@@ -228,7 +228,8 @@ func check_header(lines []string, edit bool) []string {
 	var out []string
 	for i, l := range lines {
 		l = strings.TrimSpace(l)
-		if l == "" || strings.HasPrefix(l, "#") {
+		//if l == "" || strings.HasPrefix(l, "#") {
+		if strings.HasPrefix(l, "#") {
 			h = true
 			p = i + 1
 		} else {
@@ -512,6 +513,10 @@ func main() {
 		a := os.Args[1]
 		if a == "-e" || a == "--edit" {
 			edit = true
+		} else if a == "-v" || a == "--version" {
+			v, _ := LaunchCommandWithResult("kcp", "-v")
+			message(N, v)
+			return
 		} else {
 			message(N, t(SYNOPSIS), os.Args[0])
 			return

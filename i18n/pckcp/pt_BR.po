@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-06 18:53+0000\n"
+"PO-Revision-Date: 2015-03-07 15:20+0000\n"
 "Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -142,3 +142,19 @@ msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
 msgstr "pkgrel é diferente de 1. Este somente deve ser o caso se as instruções para montagem foram editadas, com exceção do pkgver."
+
+#: pckcp.go:44
+msgid "url is clean."
+msgstr "url está adequada."
+
+#: pckcp.go:45
+msgid "No url specified."
+msgstr "Nenhuma url especificada."
+
+#: pckcp.go:46
+msgid "Add url?"
+msgstr "Adicionar url?"
+
+#: pckcp.go:47
+msgid "Please, type the URL to include:"
+msgstr "Por favor, digite a URL a incluir:"
