@@ -53,19 +53,10 @@ const (
 var exceptions = []string{
 	"java-runtime",
 	"java-environment",
-	"libreoffice-common",
-	"libreoffice-base",
-	"libreoffice-calc",
-	"libreoffice-draw",
-	"libreoffice-impress",
-	"libreoffice-kde4",
-	"libreoffice-math",
-	"libreoffice-sdk",
-	"libreoffice-sdk-doc",
-	"libreoffice-writer",
 	"libreoffice-en-US",
-	"libreoffice-postgresql-connector",
 	"libreoffice-langpack",
+	"phonon-backend",
+	"phonon-backend-qt5",
 }
 
 func ReadFile(path string) (lines []string, err error) {
