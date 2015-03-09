@@ -7,30 +7,114 @@ import (
 	"unicode/utf8"
 )
 
-// Descriptor of a data
+// --DECLARATION OF STRUCTURES -- //
+
+// Data of a container
+//  - Type of the data
+//  - Line where the data is in the file (-1)
+//  - Value of the data:
+//      -> For variables' containers (var=...): one entry of the list, or all if no parenthesis
+//      -> For other types: the complete line
 type Data struct {
 	Type  int
 	Value string
+	Line  int
 }
 
-func newData(t int, v string) *Data {
-	return &Data{t, v}
-}
-
-func (d *Data) String() string {
-	return d.Value
-}
-
-func (d *Data) Quote() string {
-	return quotify(d.Value)
-}
-
-// Descriptor of a container of data
+// Container of data
+//  - Type of container (variable, function, unknown variable, header, etc.)
+//  - Begin, End: lines' range where the container is in the PKGBUILD
+//  - Values: List of data the containers contains
+//  - Name of container:
+//      -> For variables: name of the variable
+//      -> For function : name of the function
 type Container struct {
 	Type       int
 	Name       string
 	Begin, End int
 	Values     []*Data
+}
+
+// Parsed PKGBUILD
+type Pkgbuild map[string][]*Container
+
+// -- CONSTRUCTORS -- //
+func NewData(t int, v string, l int) *Data {
+	return &Data{t, v, l}
+}
+
+func NewContainer(l string, i int) (*Container, int) {
+	c := new(Container)
+	c.Begin = i
+	c.Values = make([]*Data, 0)
+	t, e, d := lineType(l)
+	switch t {
+	case TD_VARIABLE:
+		c.Name = d[1]
+		c.Type = TC_UVARIABLE
+		for _, v := range L_VARIABLES {
+			if v == c.Name {
+				c.Type = TC_VARIABLE
+				break
+			}
+		}
+		c.Append(t, i, splitString(d[2])...)
+	case TD_FUNC:
+		c.Name = d[0]
+		c.Type = TC_UFUNCTION
+		if strings.HasPrefix(d[1], "package_") {
+			c.Type = TC_SFUNCTION
+		} else {
+			for _, v := range L_FUNCTIONS {
+				if v == c.Name {
+					c.Type = TC_FUNCTION
+					break
+				}
+			}
+		}
+		c.Append(t, i, d[1])
+	case TD_UNKNOWN:
+		c.Name = UNKNOWN
+		c.Type = TC_UNKNOWN
+		c.Append(t, i, d[0])
+	default:
+		c.Name = BLANK
+		c.Type = TC_BLANKCOMMENT
+		c.Append(t, i, d[0])
+	}
+	return c, e
+}
+
+func NewPkgbuild() Pkgbuild {
+	return make(Pkgbuild)
+}
+
+// -- STRING REPRESENTATION (for debug) -- //
+func (d *Data) String() string {
+	return d.Value
+}
+
+func (c *Container) String() string {
+	return fmt.Sprintf("%s\n%s", c.Name, c.StringWithoutName())
+}
+
+func (p Pkgbuild) String() string {
+	s := ""
+	for k, cont := range p {
+		if s != "" {
+			s += "\n"
+		}
+		s = fmt.Sprintf("%s\033[1;31m%s\033[m", s, k)
+		for _, c := range cont {
+			s = fmt.Sprintf("%s\n-------------------------\n%s", s, c.StringWithoutName())
+		}
+		s += "\n-------------------------"
+	}
+	return s
+}
+
+func (d *Data) Quote() string {
+	return quotify(d.Value)
 }
 
 func (c *Container) StringWithoutName() string {
@@ -44,6 +128,7 @@ func (c *Container) StringWithoutName() string {
 	return s
 }
 
+// -- UNPARSING -- //
 func (c *Container) UnparseType() int {
 	switch c.Type {
 	case TC_VARIABLE:
@@ -112,155 +197,8 @@ func (c *Container) Lines() []string {
 	return out
 }
 
-func (c *Container) String() string {
-	return fmt.Sprintf("%s\n%s", c.Name, c.StringWithoutName())
-}
-
-func (c *Container) Empty() bool {
-	return len(c.Values) == 0
-}
-
-func (c *Container) Append(t int, v ...string) {
-	for _, e := range v {
-		c.Values = append(c.Values, newData(t, e))
-	}
-}
-
-func (c *Container) Set(idx int, v string) bool {
-	if idx < 0 || idx >= len(c.Values) {
-		return false
-	}
-	if v == "" {
-		c.Values = append(c.Values[:idx], c.Values[idx+1:]...)
-	} else {
-		c.Values[idx].Value = v
-	}
-	return true
-}
-
-func newContainer(l string) (*Container, int) {
-	c := new(Container)
-	c.Values = make([]*Data, 0)
-	t, e, d := lineType(l)
-	switch t {
-	case TD_VARIABLE:
-		c.Name = d[0]
-		c.Type = TC_UVARIABLE
-		for _, v := range L_VARIABLES {
-			if v == c.Name {
-				c.Type = TC_VARIABLE
-				break
-			}
-		}
-		c.Append(t, splitString(d[1])...)
-	case TD_FUNC:
-		c.Name = d[0]
-		c.Type = TC_UFUNCTION
-		if strings.HasPrefix(d[1], "package_") {
-			c.Type = TC_SFUNCTION
-		} else {
-			for _, v := range L_FUNCTIONS {
-				if v == c.Name {
-					c.Type = TC_FUNCTION
-					break
-				}
-			}
-		}
-		c.Append(t, d[1])
-	case TD_UNKNOWN:
-		c.Name = UNKNOWN
-		c.Type = TC_UNKNOWN
-		c.Append(t, d[0])
-	default:
-		c.Name = BLANK
-		c.Type = TC_BLANKCOMMENT
-		c.Append(t, d[0])
-	}
-	return c, e
-}
-
-// Descriptor of the complete PKGBUILD
-type Pkgbuild map[string][]*Container
-
-func newPkgbuild() Pkgbuild {
-	return make(Pkgbuild)
-}
-
-func (p Pkgbuild) Insert(cont ...*Container) {
-	for _, c := range cont {
-		if lc, ok := p[c.Name]; ok {
-			p[c.Name] = append(lc, c)
-		} else {
-			p[c.Name] = []*Container{c}
-		}
-	}
-}
-
-func (p Pkgbuild) Remove(k string, i int) bool {
-	if lc, ok := p[k]; ok {
-		if i >= 0 && i < len(lc) {
-			p[k] = append(lc[:i], lc[i+1:]...)
-			return true
-		}
-	}
-	return false
-}
-
-type LContainer []*Container
-
-func (l LContainer) Len() int {
-	return len(l)
-}
-
-func (l LContainer) Less(i, j int) bool {
-	return l[i].Begin <= l[j].Begin
-}
-
-func (l LContainer) Swap(i, j int) {
-	l[i], l[j] = l[j], l[i]
-}
-
-func (l LContainer) Sort() {
-	sort.Sort(l)
-}
-
-func (p Pkgbuild) Sort() []*Container {
-	out := make(LContainer, len(p))
-	for _, c := range p {
-		out = append(out, c...)
-	}
-	out.Sort()
-	return out
-}
-
-func (p Pkgbuild) Order() map[*Container]*Container {
-	cs := p.Sort()
-	out := make(map[*Container]*Container)
-	if (len(cs)) > 1 {
-		for i, c := range cs[1:] {
-			out[c] = cs[i]
-		}
-	}
-	return out
-}
-
-func (p Pkgbuild) String() string {
-	s := ""
-	for k, cont := range p {
-		if s != "" {
-			s += "\n"
-		}
-		s = fmt.Sprintf("%s\033[1;31m%s\033[m", s, k)
-		for _, c := range cont {
-			s = fmt.Sprintf("%s\n-------------------------", s, c.StringWithoutName())
-		}
-		s += "\n-------------------------"
-	}
-	return s
-}
-
 func (p Pkgbuild) Lines() []string {
-	pc := newPkgbuild()
+	pc := NewPkgbuild()
 	for _, c := range p {
 		pc.Insert(c...)
 	}
@@ -307,4 +245,94 @@ func (p Pkgbuild) Lines() []string {
 	getLinesByType(pc, o, TC_UNKNOWN, &lines)
 
 	return lines
+}
+
+// -- MODIFICATION -- //
+
+// Add data into a container
+func (c *Container) Append(t, i int, v ...string) {
+	for _, e := range v {
+		c.Values = append(c.Values, NewData(t, e, i))
+	}
+}
+
+// Modify a data of a container. If blank, remove it
+func (c *Container) Set(idx int, v string) bool {
+	if idx < 0 || idx >= len(c.Values) {
+		return false
+	}
+	if v == "" {
+		c.Values = append(c.Values[:idx], c.Values[idx+1:]...)
+	} else {
+		c.Values[idx].Value = v
+	}
+	return true
+}
+
+// Add a container in the parsed PKGBUILD
+func (p Pkgbuild) Insert(cont ...*Container) {
+	for _, c := range cont {
+		if lc, ok := p[c.Name]; ok {
+			p[c.Name] = append(lc, c)
+		} else {
+			p[c.Name] = []*Container{c}
+		}
+	}
+}
+
+// Remove a container of a PKGBUILD by its key and its position in array
+func (p Pkgbuild) Remove(k string, i int) bool {
+	if lc, ok := p[k]; ok {
+		if i >= 0 && i < len(lc) {
+			p[k] = append(lc[:i], lc[i+1:]...)
+			return true
+		}
+	}
+	return false
+}
+
+// -- SORTING CONTAINERS -- //
+type LContainer []*Container
+
+func (l LContainer) Len() int {
+	return len(l)
+}
+
+func (l LContainer) Less(i, j int) bool {
+	return l[i].Begin <= l[j].Begin
+}
+
+func (l LContainer) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
+}
+
+func (l LContainer) Sort() {
+	sort.Sort(l)
+}
+
+// Return all containers of the PKGBUILD, sorted by begin's line
+func (p Pkgbuild) Sort() []*Container {
+	out := make(LContainer, 0, len(p))
+	for _, c := range p {
+		out = append(out, c...)
+	}
+	out.Sort()
+	return out
+}
+
+// Return map of previous container of a container
+func (p Pkgbuild) Order() map[*Container]*Container {
+	cs := p.Sort()
+	out := make(map[*Container]*Container)
+	if (len(cs)) > 1 {
+		for i, c := range cs[1:] {
+			out[c] = cs[i]
+		}
+	}
+	return out
+}
+
+// -- OTHER -- //
+func (c *Container) Empty() bool {
+	return len(c.Values) == 0
 }

@@ -5,19 +5,19 @@ import (
 )
 
 func Parse(lines []string) Pkgbuild {
-	p := newPkgbuild()
+	p := NewPkgbuild()
 	var c *Container
 	var end int
 	for i, l := range lines {
 		switch {
 		case c == nil:
-			c, end = newContainer(l)
-			c.Begin = i
+			c, end = NewContainer(l, i)
 			if c.Type == TC_BLANKCOMMENT && len(p) == 0 {
 				c.Type = TC_HEADER
+				c.Name = HEADER
 			}
 		case c.Type == TC_UNKNOWN:
-			c2, e := newContainer(l)
+			c2, e := NewContainer(l, i)
 			if c2.Type == TC_UNKNOWN {
 				c.Values = append(c.Values, c2.Values...)
 			} else {
@@ -25,7 +25,7 @@ func Parse(lines []string) Pkgbuild {
 				c, end = c2, e
 			}
 		case c.Type == TC_HEADER || c.Type == TC_BLANKCOMMENT:
-			c2, e := newContainer(l)
+			c2, e := NewContainer(l, i)
 			if c2.Type == TC_BLANKCOMMENT {
 				c.Values = append(c.Values, c2.Values...)
 			} else {
@@ -33,15 +33,16 @@ func Parse(lines []string) Pkgbuild {
 				c, end = c2, e
 			}
 		case c.Type == TC_VARIABLE || c.Type == TC_UVARIABLE:
-			c.Append(TD_VARIABLE, splitString(l)...)
+			c.Append(TD_VARIABLE, i, splitString(l)...)
 			if strings.HasSuffix(strings.TrimSpace(l), ")") {
 				end = 0
 			}
 		default:
-			c.Append(TD_FUNC, l)
+			c.Append(TD_FUNC, i, l)
 			end += strings.Count(l, "{")
 			end -= strings.Count(l, "}")
 		}
+		c.End = i
 		if end == 0 && c.Type != TC_BLANKCOMMENT && c.Type != TC_HEADER && c.Type != TC_UNKNOWN {
 			p.Insert(c)
 			c = nil
@@ -54,7 +55,7 @@ func ParseFile(file string) Pkgbuild {
 	if lines, e := readFile(file); e == nil {
 		return Parse(lines)
 	}
-	return newPkgbuild()
+	return NewPkgbuild()
 }
 
 func Unparse(p Pkgbuild) []string {

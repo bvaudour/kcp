@@ -156,3 +156,28 @@ msgstr  ""
 msgid   "Please, type the URL to include:"
 msgstr  ""
 
+#: pckcp.go:36
+#, c-format
+msgid   "Modify %s in variable '%s'?"
+msgstr  ""
+
+#: pckcp.go:37
+#, c-format
+msgid   "Replace %s by... (leave blank to remove it):"
+msgstr  ""
+
+#: pckcp.go:44
+#, c-format
+msgid   "Modify %s as %s?"
+msgstr  ""
+
+#: pckcp.go:53
+#, c-format
+msgid   "Modifications saved in %s!"
+msgstr  ""
+
+#: pckcp.go:54
+#, c-format
+msgid   "Error on save file %s!"
+msgstr  ""
+

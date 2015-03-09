@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Parse a line of a PKGBUILD and get its type
 func lineType(l string) (int, int, []string) {
 	switch {
 	case R_BLANK.MatchString(l):
@@ -12,7 +13,7 @@ func lineType(l string) (int, int, []string) {
 	case R_COMMENT.MatchString(l):
 		return TD_COMMENT, 0, []string{strings.TrimSpace(l)}
 	case R_FUNCTION.MatchString(l):
-		return TD_FUNC, strings.Count(l, "{") - strings.Count(l, "}"), []string{R_FUNCTION.FindStringSubmatch(l)[0], strings.TrimSpace(l)}
+		return TD_FUNC, strings.Count(l, "{") - strings.Count(l, "}"), []string{R_FUNCTION.FindStringSubmatch(l)[1], strings.TrimSpace(l)}
 	case R_MVAR1.MatchString(l):
 		return TD_VARIABLE, 0, R_MVAR1.FindStringSubmatch(l)
 	case R_MVAR2.MatchString(l):
@@ -24,6 +25,7 @@ func lineType(l string) (int, int, []string) {
 	}
 }
 
+// Split a string into an array of strings
 func splitString(s string) []string {
 	s = strings.Trim(s, "() ")
 	out := make([]string, 0)
@@ -64,6 +66,7 @@ func splitString(s string) []string {
 			case len(sc) > 0:
 				out = append(out, string(sc))
 				sc = make([]rune, 0)
+				q = ""
 			}
 		default:
 			if ign {
@@ -75,9 +78,15 @@ func splitString(s string) []string {
 			ign = false
 		}
 	}
+	if len(sc) > 0 {
+		out = append(out, string(sc))
+	}
 	return out
 }
 
+// Join an array of strings into a string
+//  - spl: if true, add a space between entries
+//  - q  : if true, quotify the entries
 func joinData(data []*Data, spl, q bool) string {
 	s := ""
 	for _, d := range data {
@@ -95,6 +104,7 @@ func joinData(data []*Data, spl, q bool) string {
 	return s
 }
 
+// Add quotes (or double-quotes) on a string
 func quotify(s string) string {
 	if s == "" {
 		return s
@@ -109,6 +119,7 @@ func quotify(s string) string {
 	return q + s + q
 }
 
+// Search a container by its key's value and return the lines' file formatting
 func getLinesByKey(p Pkgbuild, order map[*Container]*Container, key string, lines *[]string) {
 	if c, ok := p[key]; ok {
 		for len(c) > 0 {
@@ -127,6 +138,7 @@ func getLinesByKey(p Pkgbuild, order map[*Container]*Container, key string, line
 	}
 }
 
+// Search a container by its type and return the lines' file formatting
 func getLinesByType(p Pkgbuild, order map[*Container]*Container, key int, lines *[]string) {
 	c, idx := make(LContainer, 0), make(map[*Container]int)
 	for _, cont := range p {

@@ -1,11 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"gettext"
-	"io/ioutil"
 	"os"
 	"os/exec"
+	"parser/pkgbuild"
 	"strings"
 )
 
@@ -18,7 +19,6 @@ const (
 
 const (
 	E_NOPKGBUILD   = "Current folder doesn't contain PKGBUILD!"
-	E_SAVEPKGBUILD = "PKGBUILD cannot be saved!"
 	I_HEADER       = "Header is clean."
 	W_HEADER       = "Header was found. Do not use names of maintainers or contributors in PKGBUILD, anyone can contribute, keep the header clean from this."
 	Q_HEADER       = "Remove header?"
@@ -33,20 +33,25 @@ const (
 	I_CONFLICTS    = "Variable '%s' is clean."
 	W_CONFLICTS    = "Variable '%s' contains name of the package. It is useless."
 	W_CONFLICTS2   = "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-	Q_CONFLICTS    = "Remove %s in variable '%s'?"
+	Q_CONFLICTS    = "Modify %s in variable '%s'?"
+	Q_CONFLICTS2   = "Replace %s by... (leave blank to remove it):"
 	W_SPLITTED     = "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains different packages!"
 	I_PACKAGE      = "package() function is present."
 	W_PACKAGE      = "package() function missing. You need to add it."
 	W_EMPTYDEPENDS = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not a missing."
 	I_DEPENDS      = "'%s' is clean."
 	W_DEPENDS      = "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-	Q_DEPENDS      = "Remove %s as %s?"
+	Q_DEPENDS      = "Modify %s as %s?"
+	Q_DEPENDS2     = "Replace %s by... (leave blank to remove it):"
 	I_URL          = "url is clean."
 	W_URL          = "No url specified."
 	Q_URL          = "Add url?"
 	T_URL          = "Please, type the URL to include:"
 	SYNOPSIS       = "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
 	LOCALE_DIR     = "/usr/share/locale"
+	NEWPKGBUILD    = "PKGBUILD.new"
+	I_SAVED        = "Modifications saved in %s!"
+	E_SAVED        = "Error on save file %s!"
 )
 
 // List of exceptions for depends
@@ -59,23 +64,7 @@ var exceptions = []string{
 	"phonon-backend-qt5",
 }
 
-func ReadFile(path string) (lines []string, err error) {
-	b, e := ioutil.ReadFile(path)
-	if e != nil {
-		err = e
-		lines = []string{}
-	} else {
-		lines = strings.Split(string(b), "\n")
-	}
-	return
-}
-
-func WriteFile(path string, lines []string) error {
-	b := append([]byte(strings.Join(lines, "\n")), '\n')
-	return ioutil.WriteFile(path, b, 0644)
-}
-
-func LaunchCommandWithResult(name string, args ...string) (string, error) {
+func launch(name string, args ...string) (string, error) {
 	cmd := exec.Command(name, args...)
 	if out, err := cmd.Output(); err == nil {
 		return string(out), nil
@@ -84,84 +73,71 @@ func LaunchCommandWithResult(name string, args ...string) (string, error) {
 	}
 }
 
-//TODO
+func pkgname(p pkgbuild.Pkgbuild) string {
+	if cc, ok := p[pkgbuild.PKGNAME]; ok {
+		if len(cc[0].Values) > 0 {
+			return cc[0].Values[0].String()
+		}
+	}
+	return ""
+}
+
+func exists_package(p string) bool {
+	switch {
+	case strings.Contains(p, "<"):
+		p = p[:strings.Index(p, "<")]
+	case strings.Contains(p, ">"):
+		p = p[:strings.Index(p, ">")]
+	case strings.Contains(p, "="):
+		p = p[:strings.Index(p, "=")]
+	}
+	for _, e := range exceptions {
+		if e == p {
+			return true
+		}
+	}
+	s, _ := launch("pacman", "-Si", p)
+	if s != "" {
+		return true
+	}
+	s, _ = launch("kcp", "-Ns", p)
+	for _, e := range strings.Split(s, "\n") {
+		if e == p {
+			return true
+		}
+	}
+	return false
+}
+
 func t(s string) string {
 	return gettext.Gettext(s)
 }
 
-func message(tpe int, s string, a ...interface{}) {
-	b := ""
-	switch tpe {
+func message(s string, a ...interface{}) {
+	fmt.Println(fmt.Sprintf(s, a...))
+}
+
+func message_check(t, l1, l2 int, s string, a ...interface{}) {
+	b := ":\033[m"
+	if l1 > 0 {
+		if l1 == l2 {
+			b = fmt.Sprintf(" (L.%d)%s", l1, b)
+		} else {
+			b = fmt.Sprintf(" (L.%d-%d)%s", l1, l2, b)
+		}
+	}
+	b = "\033[1;%sm%s" + b
+	var cl, tp string
+	switch t {
 	case E:
-		b = "\033[1;31mError:   \033[m"
+		cl, tp = "31", "Error"
 	case W:
-		b = "\033[1;33mWarning: \033[m"
+		cl, tp = "33", "Warning"
 	case I:
-		b = "\033[1;32mInfo:    \033[m"
+		cl, tp = "32", "Info"
 	}
-	s = fmt.Sprintf(s, a...)
-	fmt.Println(b + s)
-}
-
-func s2a(s string) []string {
-	s = strings.Trim(s, "()")
-	out := strings.Fields(s)
-	for i, e := range out {
-		if strings.HasPrefix(e, "\"") || strings.HasPrefix(e, "'") {
-			out[i] = strings.Trim(e, "'\"")
-		}
-	}
-	return out
-}
-
-func o2a(s string) []string {
-	s = strings.Trim(s, "()")
-	out := make([]string, 0)
-	p := 0
-	sc := make([]rune, 0)
-	for _, c := range s {
-		switch p {
-		case 0:
-			if c == '\'' || c == '"' {
-				p = 1
-			}
-		case 1:
-			if c == ':' || c == ' ' {
-				p = 2
-				out = append(out, string(sc))
-				sc = make([]rune, 0)
-			} else {
-				sc = append(sc, c)
-			}
-		case 2:
-			if c == '\'' || c == '"' {
-				p = 0
-			}
-		}
-	}
-	return out
-}
-
-func a2s(a []string) string {
-	out := ""
-	for _, e := range a {
-		if out != "" {
-			out += " "
-		}
-		out += "'" + e + "'"
-	}
-	return out
-}
-
-func leftSpaces(s string) string {
-	out := ""
-	for _, c := range s {
-		if c != ' ' {
-			break
-		}
-		out += " "
-	}
-	return out
+	message(b, cl, tp)
+	message("  "+s, a...)
 }
 
 func question(msg string, defaultValue bool) bool {
@@ -185,333 +161,273 @@ func question(msg string, defaultValue bool) bool {
 	}
 }
 
-func open_pkgbuild() []string {
-	var out []string
-	var e error
-	if out, e = ReadFile("PKGBUILD"); e != nil {
-		message(E, t(E_NOPKGBUILD))
-		os.Exit(1)
-	}
-	return out
+func response(msg string) string {
+	fmt.Print(msg + " ")
+	sc := bufio.NewScanner(os.Stdin)
+	sc.Scan()
+	return sc.Text()
 }
 
-func save_pkgbuild(lines []string) {
-	if e := WriteFile("PKGBUILD", lines); e != nil {
-		message(E, t(E_SAVEPKGBUILD))
-	}
-}
-
-func read_package(lines []string) string {
-	for _, l := range lines {
-		l := strings.TrimSpace(l)
-		if strings.HasPrefix(l, "pkgname=") {
-			return strings.Trim(strings.TrimPrefix(l, "pkgname="), "\"'")
-		}
-	}
-	return ""
-}
-
-func exists_package(p string) bool {
-	switch {
-	case strings.Contains(p, "<"):
-		p = p[:strings.Index(p, "<")]
-	case strings.Contains(p, ">"):
-		p = p[:strings.Index(p, ">")]
-	case strings.Contains(p, "="):
-		p = p[:strings.Index(p, "=")]
-	}
-	for _, e := range exceptions {
-		if e == p {
-			return true
-		}
-	}
-	s, _ := LaunchCommandWithResult("pacman", "-Si", p)
-	if s != "" {
-		return true
-	}
-	s, _ = LaunchCommandWithResult("kcp", "-Ns", p)
-	for _, e := range strings.Split(s, "\n") {
-		if e == p {
-			return true
-		}
-	}
-	return false
-}
-
-func check_header(lines []string, edit bool) []string {
-	p, h := -1, false
-	var out []string
-	for i, l := range lines {
-		l = strings.TrimSpace(l)
-		//if l == "" || strings.HasPrefix(l, "#") {
-		if strings.HasPrefix(l, "#") {
-			h = true
-			p = i + 1
-		} else {
-			break
+// Checkers
+func check_header(p pkgbuild.Pkgbuild, edit bool) {
+	b, e := 0, 0
+	h := true
+	var c *pkgbuild.Container
+	if cc, ok := p[pkgbuild.HEADER]; ok {
+		c = cc[0]
+		b, e = c.Begin+1, c.End+1
+		for _, d := range c.Values {
+			if d.Type == pkgbuild.TD_COMMENT {
+				h = false
+				break
+			}
 		}
 	}
 	if h {
-		message(W, t(W_HEADER))
-		if edit && question(t(Q_HEADER), true) {
-			out = lines[p:]
-		} else {
-			out = lines
-		}
+		message_check(I, b, e, t(I_HEADER))
 	} else {
-		message(I, t(I_HEADER))
-		out = lines
+		message_check(W, b, e, t(W_HEADER))
+		if edit && question(t(Q_HEADER), true) {
+			c.Values = make([]*pkgbuild.Data, 0)
+			c.Append(pkgbuild.TD_BLANK, b, "")
+		}
 	}
-	return out
 }
 
-func check_arch(lines []string, edit bool) []string {
-	out := make([]string, 0, len(lines))
-	checked := false
-	for _, l := range lines {
-		lt := strings.TrimSpace(l)
-		if strings.HasPrefix(lt, "arch=") {
-			checked = true
-			flds := s2a(strings.TrimPrefix(lt, "arch="))
-			ok := false
-			switch {
-			case len(flds) != 1:
-				message(E, t(W_ARCH))
-			case flds[0] != "x86_64":
-				message(E, t(W_ARCH))
-			default:
-				message(I, t(I_ARCH))
-				ok = true
-			}
-			if !ok && edit && question(t(Q_ARCH), true) {
-				l = "arch=('x86_64')"
-			}
+func check_arch(p pkgbuild.Pkgbuild, edit bool) {
+	b, e := 0, 0
+	h := false
+	var c *pkgbuild.Container
+	if cc, ok := p[pkgbuild.ARCH]; ok {
+		c = cc[0]
+		h = true
+		b, e = c.Begin+1, c.End+1
+		if len(c.Values) != 1 {
+			h = false
+		} else if c.Values[0].String() != "x86_64" {
+			h = false
 		}
-		out = append(out, l)
 	}
-	if !checked {
-		message(E, t(W_ARCH))
+	if h {
+		message_check(I, b, e, t(I_ARCH))
+	} else {
+		message_check(E, b, e, t(W_ARCH))
 		if edit && question(t(Q_ARCH), true) {
-			out = append(out, "arch=('x86_64')")
+			if c == nil {
+				c, _ = pkgbuild.NewContainer("arch=('x86_64')", -1)
+				c.End = -1
+				p.Insert(c)
+			} else {
+				c.Values = make([]*pkgbuild.Data, 0)
+				c.Append(pkgbuild.TD_VARIABLE, b, "x86_64")
+			}
 		}
 	}
-	return out
 }
 
-func check_pkgrel(lines []string, edit bool) []string {
-	out := make([]string, 0, len(lines))
-	for _, l := range lines {
-		lt := strings.TrimSpace(l)
-		if strings.HasPrefix(lt, "pkgrel=") {
-			if strings.TrimPrefix(lt, "pkgrel=") != "1" {
-				message(W, t(W_PKGREL))
-				if edit && question(t(Q_PKGREL), false) {
-					l = "pkgrel=1"
+func check_pkgrel(p pkgbuild.Pkgbuild, edit bool) {
+	b, e := 0, 0
+	h := false
+	var c *pkgbuild.Container
+	if cc, ok := p[pkgbuild.PKGREL]; ok {
+		c = cc[0]
+		h = true
+		b, e = c.Begin+1, c.End+1
+		if len(c.Values) != 1 || c.Values[0].String() != "1" {
+			h = false
+		}
+	}
+	if h {
+		message_check(I, b, e, t(I_PKGREL))
+	} else {
+		tp, d := W, false
+		if c == nil {
+			tp, d = E, true
+		}
+		message_check(tp, b, e, t(W_PKGREL))
+		if edit && question(t(Q_PKGREL), d) {
+			if c == nil {
+				c, _ = pkgbuild.NewContainer("pkgrel=1", -1)
+				c.End = -1
+				p.Insert(c)
+			} else {
+				c.Values = make([]*pkgbuild.Data, 0)
+				c.Append(pkgbuild.TD_VARIABLE, b, "1")
+			}
+		}
+	}
+}
+
+func check_conflicts(p pkgbuild.Pkgbuild, edit bool) {
+	pn := pkgname(p)
+	lconf := []string{pkgbuild.CONFLICTS, pkgbuild.PROVIDES, pkgbuild.REPLACES}
+	for _, n := range lconf {
+		cc, ok := p[n]
+		if !ok {
+			continue
+		}
+		for _, c := range cc {
+			b, e := c.Begin+1, c.End+1
+			if len(c.Values) == 0 {
+				continue
+			}
+			h := true
+			keep := make([]*pkgbuild.Data, 0, len(c.Values))
+			for _, d := range c.Values {
+				okt := true
+				if pn != "" && d.String() == pn {
+					okt = false
+					message_check(W, b, e, t(W_CONFLICTS), n)
+				} else if !exists_package(d.String()) {
+					okt = false
+					message_check(W, b, e, t(W_CONFLICTS2), d.String(), n)
+				}
+				if edit {
+					if okt {
+						keep = append(keep, d)
+					} else if question(fmt.Sprintf(t(Q_CONFLICTS), d.String(), n), true) {
+						d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_CONFLICTS2), d.String())))
+						if d.String() != "" {
+							keep = append(keep, d)
+						}
+					}
+				}
+			}
+			if edit {
+				c.Values = keep
+			}
+			if h {
+				message_check(I, b, e, t(I_CONFLICTS), n)
+			}
+		}
+	}
+}
+
+func check_depends(p pkgbuild.Pkgbuild, edit bool) {
+	lconf := []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS, pkgbuild.OPTDEPENDS, pkgbuild.CHECKDEPENDS}
+	for _, n := range lconf {
+		cc, ok := p[n]
+		if !ok {
+			continue
+		}
+		for _, c := range cc {
+			b, e := c.Begin+1, c.End+1
+			if len(c.Values) == 0 {
+				continue
+			}
+			h := true
+			keep := make([]*pkgbuild.Data, 0, len(c.Values))
+			for _, d := range c.Values {
+				okt := true
+				v := d.String()
+				if n == pkgbuild.OPTDEPENDS {
+					lst := strings.Split(v, ":")
+					v = lst[0]
+				}
+				if !exists_package(v) {
+					okt = false
+					message_check(W, b, e, t(W_DEPENDS), v, n)
+				}
+				if edit {
+					if okt {
+						keep = append(keep, d)
+					} else if question(fmt.Sprintf(t(Q_DEPENDS), v, n), true) {
+						d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_DEPENDS2), v)))
+						if d.String() != "" {
+							keep = append(keep, d)
+						}
+					}
+				}
+			}
+			if edit {
+				c.Values = keep
+			}
+			if h {
+				message_check(I, b, e, t(I_DEPENDS), n)
+			}
+		}
+	}
+}
+
+func check_emptyvar(p pkgbuild.Pkgbuild, edit bool) {
+	for k, cc := range p {
+		if len(cc) == 0 {
+			continue
+		}
+		if cc[0].Type != pkgbuild.TC_VARIABLE && cc[0].Type != pkgbuild.TC_UVARIABLE {
+			continue
+		}
+		if t, ok := pkgbuild.U_VARIABLES[k]; ok && (t == pkgbuild.TU_SINGLEVAR || t == pkgbuild.TU_SINGLEVARQ) {
+			continue
+		}
+		keep := make([]*pkgbuild.Container, 0, len(cc))
+		for _, c := range cc {
+			if c.Empty() {
+				message_check(W, c.Begin+1, c.End+1, t(W_EMPTYVAR), c.Name)
+				if edit && !question(fmt.Sprintf(t(Q_EMPTYVAR), c.Name), true) {
+					keep = append(keep, c)
 				}
 			} else {
-				message(I, t(I_PKGREL))
+				keep = append(keep, c)
 			}
 		}
-		out = append(out, l)
+		if edit {
+			p[k] = keep
+		}
 	}
-	return out
 }
 
-func check_emptyvar(lines []string, edit bool) []string {
-	out := make([]string, 0, len(lines))
-	for _, l := range lines {
-		lt := strings.TrimSpace(l)
-		if strings.HasSuffix(lt, "=()") {
-			lt = strings.TrimSuffix(lt, "=()")
-			message(W, t(W_EMPTYVAR), lt)
-			if edit && question(fmt.Sprintf(t(Q_EMPTYVAR), lt), true) {
-				continue
-			}
-		}
-		out = append(out, l)
-	}
-	return out
-}
-
-func check_conflicts(lines []string, edit bool) []string {
-	out := make([]string, 0, len(lines))
-	pkgname := read_package(lines)
-	for _, l := range lines {
-		lt := strings.TrimSpace(l)
-		v := ""
-		switch {
-		case strings.HasPrefix(lt, "provides="):
-			v = "provides"
-		case strings.HasPrefix(lt, "conflicts="):
-			v = "conflicts"
-		case strings.HasPrefix(lt, "replaces="):
-			v = "replaces"
-		}
-		if v != "" {
-			lst := s2a(strings.TrimPrefix(lt, v+"="))
-			keep := make([]string, 0, len(lst))
-			ok := true
-			for _, e := range lst {
-				okt := true
-				if e == pkgname {
-					okt = false
-					message(W, t(W_CONFLICTS), v)
-				} else if !exists_package(e) {
-					okt = false
-					message(W, t(W_CONFLICTS2), e, v)
-				}
-				if !okt {
-					ok = false
-					if !edit || !question(fmt.Sprintf(t(Q_CONFLICTS), e, v), true) {
-						keep = append(keep, e)
-					}
-				} else {
-					keep = append(keep, e)
-				}
-			}
-			if ok {
-				message(I, t(I_CONFLICTS), v)
-			}
-			if len(keep) == 0 {
-				continue
-			}
-			l = fmt.Sprintf("%s=(%s)", v, a2s(keep))
-		}
-		out = append(out, l)
-	}
-	return out
-}
-
-func check_package_func(lines []string, edit bool) []string {
-	has_p, splitted := false, false
-	for _, l := range lines {
-		l := strings.TrimSpace(l)
-		if strings.HasPrefix(l, "package()") {
-			has_p = true
-			break
-		}
-		if strings.HasPrefix(l, "package_") {
-			splitted = true
-			break
-		}
-	}
-	if splitted {
-		message(W, t(W_SPLITTED))
-	} else if has_p {
-		message(I, t(I_PACKAGE))
-	} else {
-		message(W, t(W_PACKAGE))
-	}
-	return lines
-}
-
-func check_empty_depend(lines []string, edit bool) []string {
+func check_emptydepends(p pkgbuild.Pkgbuild, edit bool) {
 	hasdepend := false
-	for _, l := range lines {
-		l = strings.TrimSpace(l)
-		if strings.HasPrefix(l, "depends=") || strings.HasPrefix(l, "makedepends=") {
+	for _, k := range []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS} {
+		if _, ok := p[k]; ok {
 			hasdepend = true
 			break
 		}
 	}
 	if !hasdepend {
-		message(W, t(W_EMPTYDEPENDS))
+		message_check(W, 0, 0, t(W_EMPTYDEPENDS))
 	}
-	return lines
 }
 
-func check_depends(lines []string, edit bool) []string {
-	out := make([]string, 0, len(lines))
-	v, ok, begin := "", false, false
-	for _, l := range lines {
-		sp := ""
-		lt := strings.TrimSpace(l)
-		switch {
-		case v != "":
-			sp = leftSpaces(l)
-		case strings.HasPrefix(lt, "depends="):
-			ok = true
-			v = "depends"
-			lt = strings.TrimPrefix(lt, "depends=")
-			begin = true
-		case strings.HasPrefix(lt, "makedepends="):
-			ok = true
-			v = "makedepends"
-			lt = strings.TrimPrefix(lt, "makedepends=")
-			begin = true
-		case strings.HasPrefix(lt, "optdepends="):
-			ok = true
-			v = "optdepends"
-			lt = strings.TrimPrefix(lt, "optdepends=")
-			begin = true
-		default:
-			out = append(out, l)
-			continue
+func check_package(p pkgbuild.Pkgbuild, edit bool) {
+	has_p, splitted := false, false
+	for k, cc := range p {
+		if k == pkgbuild.PACKAGE {
+			has_p = true
+		} else if strings.HasPrefix(k, pkgbuild.PACKAGE) {
+			splitted = true
+			c := cc[0]
+			b, e := c.Begin+1, c.End+1
+			message_check(W, b, e, t(W_SPLITTED))
 		}
-		end := strings.HasSuffix(lt, ")")
-		var lst []string
-		if v == "optdepends" {
-			lst = o2a(lt)
+	}
+	if !splitted {
+		if has_p {
+			message_check(I, 0, 0, t(I_PACKAGE))
 		} else {
-			lst = s2a(lt)
-		}
-		keep := make([]string, 0, len(lst))
-		for _, e := range lst {
-			if !exists_package(e) {
-				message(E, t(W_DEPENDS), e, v)
-				ok = false
-				if edit && question(t(Q_DEPENDS), true) {
-					continue
-				}
-			}
-			keep = append(keep, e)
-		}
-		if end && ok {
-			message(I, t(I_DEPENDS), v)
-		}
-		if !edit {
-			out = append(out, l)
-		} else if len(keep) > 0 {
-			if begin {
-				begin = false
-				lt = v + "=("
-			} else {
-				lt = sp
-			}
-			lt += a2s(keep)
-			if end {
-				lt += ")"
-			}
-			out = append(out, lt)
-		}
-		if end {
-			v = ""
+			message_check(E, 0, 0, t(W_PACKAGE))
 		}
 	}
-	return out
 }
 
-func check_url(lines []string, edit bool) []string {
-	url := false
-	for _, l := range lines {
-		l = strings.TrimSpace(l)
-		if strings.HasPrefix(l, "url=") {
-			url = true
-			break
-		}
-	}
-	if url {
-		message(I, t(I_URL))
+func check_url(p pkgbuild.Pkgbuild, edit bool) {
+	if cc, ok := p[pkgbuild.URL]; ok {
+		c := cc[0]
+		b, e := c.Begin+1, c.End+1
+		message_check(I, b, e, t(I_URL))
 	} else {
-		message(W, t(W_URL))
+		message_check(W, 0, 0, t(W_URL))
 		if edit && question(t(Q_URL), true) {
-			fmt.Print(t(T_URL), " ")
-			url_str := ""
-			fmt.Scan(&url_str)
-			lines = append(lines, fmt.Sprintf("url='%s'", url_str))
+			s := strings.TrimSpace(response(T_URL))
+			if s == "" {
+				return
+			}
+			c, _ := pkgbuild.NewContainer(fmt.Sprintf("url='%s'", s), -1)
+			c.End = -1
+			p.Insert(c)
 		}
 	}
-	return lines
 }
 
 func init() {
@@ -529,25 +445,33 @@ func main() {
 		if a == "-e" || a == "--edit" {
 			edit = true
 		} else if a == "-v" || a == "--version" {
-			v, _ := LaunchCommandWithResult("kcp", "-v")
-			message(N, v)
+			v, _ := launch("kcp", "-v")
+			message(v)
 			return
 		} else {
-			message(N, t(SYNOPSIS), os.Args[0])
+			message(t(SYNOPSIS), os.Args[0])
 			return
 		}
 	}
-	lines := open_pkgbuild()
-	lines = check_header(lines, edit)
-	lines = check_arch(lines, edit)
-	lines = check_pkgrel(lines, edit)
-	lines = check_emptyvar(lines, edit)
-	lines = check_conflicts(lines, edit)
-	lines = check_package_func(lines, edit)
-	lines = check_empty_depend(lines, edit)
-	lines = check_depends(lines, edit)
-	lines = check_url(lines, edit)
+	p := pkgbuild.ParseFile("PKGBUILD")
+	check_header(p, edit)
+	check_arch(p, edit)
+	check_pkgrel(p, edit)
+	check_conflicts(p, edit)
+	check_depends(p, edit)
+	check_emptyvar(p, edit)
+	check_emptydepends(p, edit)
+	check_package(p, edit)
+	check_url(p, edit)
 	if edit {
-		save_pkgbuild(lines)
+		e := pkgbuild.UnparseInFile(p, NEWPKGBUILD)
+		m, r := "\n\033[1;1m%s\033[m", 0
+		if e == nil {
+			m = fmt.Sprintf(m, I_SAVED)
+		} else {
+			m, r = fmt.Sprintf(m, E_SAVED), 1
+		}
+		message(m, NEWPKGBUILD)
+		os.Exit(r)
 	}
 }
