@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"parser/pkgbuild"
+	"regexp"
 	"strings"
 )
 
@@ -52,6 +53,10 @@ const (
 	NEWPKGBUILD    = "PKGBUILD.new"
 	I_SAVED        = "Modifications saved in %s!"
 	E_SAVED        = "Error on save file %s!"
+	I_INSTALL      = "install is clean."
+	W_INSTALL      = "%s doesn't exist!"
+	Q_INSTALL      = "Modify name of %s file?"
+	T_INSTALL      = "Replace %s by... (leave blank to remove it):"
 )
 
 // List of exceptions for depends
@@ -430,6 +435,44 @@ func check_url(p pkgbuild.Pkgbuild, edit bool) {
 	}
 }
 
+func check_install(p pkgbuild.Pkgbuild, edit bool) {
+	if cc, ok := p[pkgbuild.INSTALL]; ok {
+		install := ""
+		c := cc[0]
+		b, e := c.Begin+1, c.End+1
+		for _, d := range c.Values {
+			install += d.String()
+		}
+		r := regexp.MustCompile(`\$\w+|\$\{.+\}`)
+		if r.MatchString(install) {
+			v := r.FindStringSubmatch(install)[0]
+			k := strings.Trim(v, "${}")
+			repl := ""
+			if c2, ok := p[k]; ok && len(c2) > 0 {
+				for _, d := range c2[0].Values {
+					repl += d.String()
+				}
+			}
+			install = r.ReplaceAllString(install, repl)
+		}
+		if _, err := os.Stat(install); err == nil {
+			message_check(I, b, e, t(I_INSTALL))
+		} else {
+			message_check(W, b, e, t(W_INSTALL), install)
+			if edit && question(fmt.Sprintf(t(Q_INSTALL), install), true) {
+				install = response(fmt.Sprintf(t(T_INSTALL), install))
+				install = strings.TrimSpace(install)
+				if install == "" {
+					p.Remove(pkgbuild.INSTALL, 0)
+				} else {
+					c.Values = make([]*pkgbuild.Data, 0, 1)
+					c.Append(pkgbuild.TD_VARIABLE, c.Begin, install)
+				}
+			}
+		}
+	}
+}
+
 func init() {
 	// Init the locales
 	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
@@ -439,21 +482,32 @@ func init() {
 }
 
 func main() {
-	edit := false
+	edit, debug := false, false
 	if len(os.Args) > 1 {
 		a := os.Args[1]
-		if a == "-e" || a == "--edit" {
+		switch {
+		case a == "-e" || a == "--edit":
 			edit = true
-		} else if a == "-v" || a == "--version" {
+		case a == "-v" || a == "--version":
 			v, _ := launch("kcp", "-v")
 			message(v)
 			return
-		} else {
+		case a == "-d" || a == "--debug":
+			debug = true
+		default:
 			message(t(SYNOPSIS), os.Args[0])
 			return
 		}
 	}
 	p := pkgbuild.ParseFile("PKGBUILD")
+	if debug {
+		o := p.Sort()
+		for _, c := range o {
+			fmt.Println(c)
+			fmt.Println("---------------")
+		}
+		return
+	}
 	check_header(p, edit)
 	check_arch(p, edit)
 	check_pkgrel(p, edit)
@@ -463,6 +517,7 @@ func main() {
 	check_emptydepends(p, edit)
 	check_package(p, edit)
 	check_url(p, edit)
+	check_install(p, edit)
 	if edit {
 		e := pkgbuild.UnparseInFile(p, NEWPKGBUILD)
 		m, r := "\n\033[1;1m%s\033[m", 0

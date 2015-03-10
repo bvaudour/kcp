@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# fri, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-07 10:37+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-03-10 11:37+0000\n"
+"Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/kaos/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,41 +21,41 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s je jednoduchý kontrolor PKGBUILD pro balíčky společenství KaOS"
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr ""
+msgstr "%s není ani v úložišti ani v kcp. Proměnná '%s' je nepotřebuje obsahovat."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr ""
+msgstr "%s není ani v úložišti ani v kcp. Proměnná '%s' je nemá obsahovat."
 
 #: pckcp.go:40
 #, c-format
 msgid "'%s' is clean."
-msgstr ""
+msgstr "'%s' je čistý."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "nynější složka neobsahuje PKGBUILD!"
 
 #: pckcp.go:21
 msgid "Header is clean."
-msgstr ""
+msgstr "Hlavička je čistá."
 
 #: pckcp.go:22
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
+msgstr "Hlavička byla nalezena. Nepoužívejte v PKGBUILD jména údržbářů nebo přispěvatelů. Všichni mohou přispívat. Hlavičku udržujte bez těchto informací."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
-msgstr ""
+msgstr "PKGBUILD nelze uložit!"
 
 #: pckcp.go:36
 msgid ""
@@ -65,44 +66,44 @@ msgstr ""
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr ""
+msgstr "Odstranit %s jako %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr ""
+msgstr "Odstranit %s v proměnné '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr ""
+msgstr "Odstranit hlavičku?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr ""
+msgstr "Odstranit proměnnou '%s'?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr ""
+msgstr "Nastavit architekturu znovu na x86_64?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr ""
+msgstr "Nastavit pkgrel znovu na 1?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr ""
+msgstr "Proměnná '%s' obsahuje název balíčku. To je neužitečné."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr ""
+msgstr "Proměnná '%s' je čistá."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr ""
+msgstr "Proměnná '%s' je prázdná."
 
 #: pckcp.go:39
 msgid ""
@@ -112,48 +113,73 @@ msgstr ""
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr ""
+msgstr "architektura je čistá."
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr ""
+msgstr "architektura se liší od 'x86_64'. Protože KaOS podporuje pouze tuto architekturu, nebude zde přidána žádná jiná architektura."
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr ""
+msgstr "Je přítomna funkce package()."
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr ""
+msgstr "Funkce package() chybí. Měl byste ji přidat."
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr ""
+msgstr "Funkce package() chybí. Musíte ji přidat."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr ""
+msgstr "pkgrel je čistý."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "pkgrel je jiný než 1. To má být případ, jen když jsou sestavovací příkazy upravovány, ale ne pkgver."
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr ""
+msgstr "Adresa (URL) je čistá."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr ""
+msgstr "Není zadána žádná adresa (URL)."
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr ""
+msgstr "Přidat adresu (URL)?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr ""
+msgstr "Zadejte, prosím, adresu (URL), aby zahrnovala:"
+
+#: pckcp.go:36
+#, c-format
+msgid "Modify %s in variable '%s'?"
+msgstr "Změnit %s v proměnné '%s'?"
+
+#: pckcp.go:37
+#, c-format
+msgid "Replace %s by... (leave blank to remove it):"
+msgstr "Nahradit %s by... (ponechat prázdné pro odstranění):"
+
+#: pckcp.go:44
+#, c-format
+msgid "Modify %s as %s?"
+msgstr "Změnit %s jako %s?"
+
+#: pckcp.go:53
+#, c-format
+msgid "Modifications saved in %s!"
+msgstr "Změny uloženy v %s!"
+
+#: pckcp.go:54
+#, c-format
+msgid "Error on save file %s!"
+msgstr "Chyba při ukládání souboru %s!"

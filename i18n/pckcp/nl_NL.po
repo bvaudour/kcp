@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-07 15:45+0000\n"
+"PO-Revision-Date: 2015-03-10 15:25+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/kaos/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -158,3 +158,28 @@ msgstr "url toevoegen?"
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
 msgstr "Type aub de URL op te nemen:"
+
+#: pckcp.go:36
+#, c-format
+msgid "Modify %s in variable '%s'?"
+msgstr "Wijzig %s in variabel '%s'?"
+
+#: pckcp.go:37
+#, c-format
+msgid "Replace %s by... (leave blank to remove it):"
+msgstr "Vervang %s met... (laat leeg om het te verwijderen):"
+
+#: pckcp.go:44
+#, c-format
+msgid "Modify %s as %s?"
+msgstr "Wijzig %s als %s?"
+
+#: pckcp.go:53
+#, c-format
+msgid "Modifications saved in %s!"
+msgstr "Wijzigingen opgeslagen in %s!"
+
+#: pckcp.go:54
+#, c-format
+msgid "Error on save file %s!"
+msgstr "Fout in opslaan bestand %s!"

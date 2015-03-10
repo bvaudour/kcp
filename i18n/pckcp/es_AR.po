@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-07 23:01+0000\n"
+"PO-Revision-Date: 2015-03-10 11:16+0000\n"
 "Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/projects/p/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -158,3 +158,28 @@ msgstr "¿Agregar url?"
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
 msgstr "Por favor, escriba la URL a incluir:"
+
+#: pckcp.go:36
+#, c-format
+msgid "Modify %s in variable '%s'?"
+msgstr "¿Modificar %s en variable '%s'?"
+
+#: pckcp.go:37
+#, c-format
+msgid "Replace %s by... (leave blank to remove it):"
+msgstr "Reemplazar %s por... (dejar en blanco para eliminarlo):"
+
+#: pckcp.go:44
+#, c-format
+msgid "Modify %s as %s?"
+msgstr "¿Modificar %s como %s?"
+
+#: pckcp.go:53
+#, c-format
+msgid "Modifications saved in %s!"
+msgstr "¡Las Modificaciones se guardaron en %s!"
+
+#: pckcp.go:54
+#, c-format
+msgid "Error on save file %s!"
+msgstr "¡Error al guardar archivo %s!"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-07 10:37+0000\n"
+"PO-Revision-Date: 2015-03-10 10:38+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/kaos/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -156,4 +156,29 @@ msgstr ""
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
+msgstr ""
+
+#: pckcp.go:36
+#, c-format
+msgid "Modify %s in variable '%s'?"
+msgstr ""
+
+#: pckcp.go:37
+#, c-format
+msgid "Replace %s by... (leave blank to remove it):"
+msgstr ""
+
+#: pckcp.go:44
+#, c-format
+msgid "Modify %s as %s?"
+msgstr ""
+
+#: pckcp.go:53
+#, c-format
+msgid "Modifications saved in %s!"
+msgstr ""
+
+#: pckcp.go:54
+#, c-format
+msgid "Error on save file %s!"
 msgstr ""

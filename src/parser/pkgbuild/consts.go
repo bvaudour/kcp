@@ -153,4 +153,6 @@ var R_COMMENT = regexp.MustCompile(`^\s*(#.*)$`)
 var R_MVAR1 = regexp.MustCompile(`^\s*(\S+)=(\(.*\))\s*$`)
 var R_MVAR2 = regexp.MustCompile(`^\s*(\S+)=(\(.*)\s*$`)
 var R_MVAR3 = regexp.MustCompile(`^\s*(\S+)=(.*)\s*$`)
-var R_FUNCTION = regexp.MustCompile(`^\s*(\S+)\s*\(\s*\)\s*\{\s*$`)
+var R_FUNCTION = regexp.MustCompile(`^\s*(\S+)\s*\(\s*\).*$`)
+
+//var R_FUNCTION = regexp.MustCompile(`^\s*(\S+)\s*\(\s*\)\s*\{\s*$`)

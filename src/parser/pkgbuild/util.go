@@ -1,9 +1,124 @@
 package pkgbuild
 
 import (
+	"fmt"
 	"io/ioutil"
 	"strings"
 )
+
+// Get next string of a list
+func next(b *[]rune, d *rune) string {
+	sc := make([]rune, 0, len(*b))
+	n, ig := -1, false
+l1:
+	for i, c := range *b {
+		switch {
+		case ig:
+			if c != *d {
+				if *d != ' ' || (c != '\'' && c != '"' && c != '#') {
+					sc = append(sc, '\\')
+				}
+			}
+			sc = append(sc, c)
+			ig = false
+		case c == '\\':
+			ig = true
+		case *d != ' ':
+			if c != *d {
+				sc = append(sc, c)
+			} else {
+				*d = ' '
+			}
+		case c == '\'' || c == '"':
+			*d = c
+		case c == '#':
+			if len(sc) == 0 {
+				sc = (*b)[i:]
+				break l1
+			}
+			sc = append(sc, c)
+		case c == ' ':
+			if len(sc) > 0 {
+				n = i + 1
+				break l1
+			}
+		default:
+			sc = append(sc, c)
+		}
+	}
+	if n > 0 {
+		*b = (*b)[n:]
+	} else {
+		*b = make([]rune, 0)
+	}
+	out := strings.TrimRight(string(sc), " \t")
+	if *d != ' ' {
+		out += "\n"
+	}
+	return out
+}
+
+// Split a string into a list of strings
+func list(s string, d *rune) []string {
+	out := make([]string, 0)
+	b := []rune(s)
+	for len(b) > 0 {
+		sc := next(&b, d)
+		if sc != "" {
+			out = append(out, sc)
+		}
+	}
+	return out
+}
+
+// Update delimiter
+func delimiter(s string, d *rune) {
+	ig := false
+	for _, c := range s {
+		switch {
+		case ig:
+			ig = false
+		case c == '\\':
+			ig = true
+		case *d != ' ':
+			if c == *d {
+				*d = ' '
+			}
+		case c == '\'' || c == '"':
+			*d = c
+		case c == '#':
+			return
+		}
+	}
+}
+
+// Count significant chars of a string
+func count(s string, d rune, l rune) int {
+	out, ig := 0, false
+	for _, c := range s {
+		switch {
+		case ig:
+			ig = false
+		case c == '\\':
+			ig = true
+		case d != ' ':
+			if c == d {
+				d = ' '
+			}
+		case c == '\'' || c == '"':
+			d = c
+		case c == '#':
+			return out
+		case c == l:
+			out++
+		}
+	}
+	return out
+}
+
+func level(s string, d rune, l1, l2 rune) int {
+	return count(s, d, l1) - count(s, d, l2)
+}
 
 // Parse a line of a PKGBUILD and get its type
 func lineType(l string) (int, int, []string) {
@@ -182,4 +297,9 @@ func readFile(path string) (lines []string, err error) {
 func writeFile(path string, lines []string) error {
 	b := append([]byte(strings.Join(lines, "\n")), '\n')
 	return ioutil.WriteFile(path, b, 0644)
+}
+
+func debug(i ...interface{}) {
+	fmt.Print("\033[1;31mdebug: \033[m")
+	fmt.Println(i...)
 }

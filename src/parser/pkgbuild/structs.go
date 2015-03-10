@@ -95,7 +95,7 @@ func (d *Data) String() string {
 }
 
 func (c *Container) String() string {
-	return fmt.Sprintf("%s\n%s", c.Name, c.StringWithoutName())
+	return fmt.Sprintf("%s\n%d-%d\n%s", c.Name, c.Begin+1, c.End+1, c.StringWithoutName())
 }
 
 func (p Pkgbuild) String() string {
@@ -106,7 +106,7 @@ func (p Pkgbuild) String() string {
 		}
 		s = fmt.Sprintf("%s\033[1;31m%s\033[m", s, k)
 		for _, c := range cont {
-			s = fmt.Sprintf("%s\n-------------------------\n%s", s, c.StringWithoutName())
+			s = fmt.Sprintf("%s\n-------------------------\n\033[1;m%d-%d\033[m\n%s", s, c.Begin+1, c.End+1, c.StringWithoutName())
 		}
 		s += "\n-------------------------"
 	}
