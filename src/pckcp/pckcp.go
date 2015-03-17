@@ -78,10 +78,12 @@ func launch(name string, args ...string) (string, error) {
 	}
 }
 
-func pkgname(p pkgbuild.Pkgbuild) string {
-	if cc, ok := p[pkgbuild.PKGNAME]; ok {
-		if len(cc[0].Values) > 0 {
-			return cc[0].Values[0].String()
+func pkgname(p *pkgbuild.Pkgbuild) string {
+	if bl, ok := p.Variables[pkgbuild.PKGNAME]; ok {
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE {
+				return d.String()
+			}
 		}
 	}
 	return ""
@@ -174,218 +176,216 @@ func response(msg string) string {
 }
 
 // Checkers
-func check_header(p pkgbuild.Pkgbuild, edit bool) {
-	b, e := 0, 0
-	h := true
-	var c *pkgbuild.Container
-	if cc, ok := p[pkgbuild.HEADER]; ok {
-		c = cc[0]
-		b, e = c.Begin+1, c.End+1
-		for _, d := range c.Values {
-			if d.Type == pkgbuild.TD_COMMENT {
-				h = false
+func check_header(p *pkgbuild.Pkgbuild, edit bool) {
+	b, e, ok := 0, 0, true
+	bl := p.Header
+	if bl != nil {
+		b, e = bl.Begin, bl.End
+		for _, d := range bl.Header {
+			if d.Type == pkgbuild.DT_COMMENT {
+				ok = false
 				break
 			}
 		}
 	}
-	if h {
+	if ok {
 		message_check(I, b, e, t(I_HEADER))
 	} else {
 		message_check(W, b, e, t(W_HEADER))
 		if edit && question(t(Q_HEADER), true) {
-			c.Values = make([]*pkgbuild.Data, 0)
-			c.Append(pkgbuild.TD_BLANK, b, "")
+			if bl.Header[0].Type == pkgbuild.DT_BLANK {
+				bl.Header = bl.Header[:1]
+			} else {
+				bl.Header = make([]*pkgbuild.Data, 0)
+			}
 		}
 	}
 }
 
-func check_arch(p pkgbuild.Pkgbuild, edit bool) {
-	b, e := 0, 0
-	h := false
-	var c *pkgbuild.Container
-	if cc, ok := p[pkgbuild.ARCH]; ok {
-		c = cc[0]
-		h = true
-		b, e = c.Begin+1, c.End+1
-		if len(c.Values) != 1 {
-			h = false
-		} else if c.Values[0].String() != "x86_64" {
-			h = false
+func check_arch(p *pkgbuild.Pkgbuild, edit bool) {
+	b, e, ok := 0, 0, false
+	bl, _ := p.Variables[pkgbuild.ARCH]
+	if bl != nil {
+		b, e, ok = bl.Begin, bl.End, true
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE && d.String() != "x86_64" {
+				ok = false
+				break
+			}
 		}
 	}
-	if h {
+	if ok {
 		message_check(I, b, e, t(I_ARCH))
 	} else {
 		message_check(E, b, e, t(W_ARCH))
 		if edit && question(t(Q_ARCH), true) {
-			if c == nil {
-				c, _ = pkgbuild.NewContainer("arch=('x86_64')", -1)
-				c.End = -1
-				p.Insert(c)
+			if bl == nil {
+				bl = pkgbuild.NewBlock(pkgbuild.ARCH, -1, pkgbuild.BT_VARIABLE)
+				bl.End = -1
+				p.Append(bl)
 			} else {
-				c.Values = make([]*pkgbuild.Data, 0)
-				c.Append(pkgbuild.TD_VARIABLE, b, "x86_64")
+				bl.Values = make([]*pkgbuild.Data, 0)
 			}
+			bl.AppendDataString("x86_64", pkgbuild.DT_VARIABLE, bl.Begin)
 		}
 	}
 }
 
-func check_pkgrel(p pkgbuild.Pkgbuild, edit bool) {
-	b, e := 0, 0
-	h := false
-	var c *pkgbuild.Container
-	if cc, ok := p[pkgbuild.PKGREL]; ok {
-		c = cc[0]
-		h = true
-		b, e = c.Begin+1, c.End+1
-		if len(c.Values) != 1 || c.Values[0].String() != "1" {
-			h = false
+func check_pkgrel(p *pkgbuild.Pkgbuild, edit bool) {
+	b, e, ok := 0, 0, false
+	bl, _ := p.Variables[pkgbuild.PKGREL]
+	if bl != nil {
+		b, e, ok = bl.Begin, bl.End, true
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE && d.String() != "1" {
+				ok = false
+				break
+			}
 		}
 	}
-	if h {
+	if ok {
 		message_check(I, b, e, t(I_PKGREL))
 	} else {
 		tp, d := W, false
-		if c == nil {
+		if bl == nil {
 			tp, d = E, true
 		}
 		message_check(tp, b, e, t(W_PKGREL))
 		if edit && question(t(Q_PKGREL), d) {
-			if c == nil {
-				c, _ = pkgbuild.NewContainer("pkgrel=1", -1)
-				c.End = -1
-				p.Insert(c)
+			if bl == nil {
+				bl = pkgbuild.NewBlock(pkgbuild.PKGREL, -1, pkgbuild.BT_VARIABLE)
+				bl.End = -1
+				p.Append(bl)
 			} else {
-				c.Values = make([]*pkgbuild.Data, 0)
-				c.Append(pkgbuild.TD_VARIABLE, b, "1")
+				bl.Values = make([]*pkgbuild.Data, 0)
 			}
+			bl.AppendDataString("1", pkgbuild.DT_VARIABLE, bl.Begin)
 		}
 	}
 }
 
-func check_conflicts(p pkgbuild.Pkgbuild, edit bool) {
+func check_conflicts(p *pkgbuild.Pkgbuild, edit bool) {
 	pn := pkgname(p)
 	lconf := []string{pkgbuild.CONFLICTS, pkgbuild.PROVIDES, pkgbuild.REPLACES}
 	for _, n := range lconf {
-		cc, ok := p[n]
+		bl, ok := p.Variables[n]
 		if !ok {
 			continue
 		}
-		for _, c := range cc {
-			b, e := c.Begin+1, c.End+1
-			if len(c.Values) == 0 {
+		b, e := bl.Begin, bl.End
+		c, keep := 0, make([]*pkgbuild.Data, 0)
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_COMMENT {
+				if edit {
+					keep = append(keep, d)
+				}
 				continue
 			}
-			h := true
-			keep := make([]*pkgbuild.Data, 0, len(c.Values))
-			for _, d := range c.Values {
-				okt := true
-				if pn != "" && d.String() == pn {
-					okt = false
-					message_check(W, b, e, t(W_CONFLICTS), n)
-				} else if !exists_package(d.String()) {
-					okt = false
-					message_check(W, b, e, t(W_CONFLICTS2), d.String(), n)
-				}
-				if edit {
-					if okt {
+			c++
+			okt := true
+			if pn != "" && d.String() == pn {
+				okt = false
+				message_check(W, b, e, t(W_CONFLICTS), n)
+			} else if !exists_package(d.String()) {
+				okt = false
+				message_check(W, b, e, t(W_CONFLICTS2), d.String(), n)
+			}
+			if edit {
+				if okt {
+					keep = append(keep, d)
+				} else if question(fmt.Sprintf(t(Q_CONFLICTS), d.String(), n), true) {
+					d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_CONFLICTS2), d.String())))
+					if d.String() != "" {
 						keep = append(keep, d)
-					} else if question(fmt.Sprintf(t(Q_CONFLICTS), d.String(), n), true) {
-						d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_CONFLICTS2), d.String())))
-						if d.String() != "" {
-							keep = append(keep, d)
-						}
 					}
 				}
 			}
-			if edit {
-				c.Values = keep
-			}
-			if h {
-				message_check(I, b, e, t(I_CONFLICTS), n)
-			}
-		}
-	}
-}
-
-func check_depends(p pkgbuild.Pkgbuild, edit bool) {
-	lconf := []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS, pkgbuild.OPTDEPENDS, pkgbuild.CHECKDEPENDS}
-	for _, n := range lconf {
-		cc, ok := p[n]
-		if !ok {
-			continue
-		}
-		for _, c := range cc {
-			b, e := c.Begin+1, c.End+1
-			if len(c.Values) == 0 {
-				continue
-			}
-			h := true
-			keep := make([]*pkgbuild.Data, 0, len(c.Values))
-			for _, d := range c.Values {
-				okt := true
-				v := d.String()
-				if n == pkgbuild.OPTDEPENDS {
-					lst := strings.Split(v, ":")
-					v = lst[0]
-				}
-				if !exists_package(v) {
-					okt = false
-					message_check(W, b, e, t(W_DEPENDS), v, n)
-				}
-				if edit {
-					if okt {
-						keep = append(keep, d)
-					} else if question(fmt.Sprintf(t(Q_DEPENDS), v, n), true) {
-						d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_DEPENDS2), v)))
-						if d.String() != "" {
-							keep = append(keep, d)
-						}
-					}
-				}
-			}
-			if edit {
-				c.Values = keep
-			}
-			if h {
-				message_check(I, b, e, t(I_DEPENDS), n)
-			}
-		}
-	}
-}
-
-func check_emptyvar(p pkgbuild.Pkgbuild, edit bool) {
-	for k, cc := range p {
-		if len(cc) == 0 {
-			continue
-		}
-		if cc[0].Type != pkgbuild.TC_VARIABLE && cc[0].Type != pkgbuild.TC_UVARIABLE {
-			continue
-		}
-		if t, ok := pkgbuild.U_VARIABLES[k]; ok && (t == pkgbuild.TU_SINGLEVAR || t == pkgbuild.TU_SINGLEVARQ) {
-			continue
-		}
-		keep := make([]*pkgbuild.Container, 0, len(cc))
-		for _, c := range cc {
-			if c.Empty() {
-				message_check(W, c.Begin+1, c.End+1, t(W_EMPTYVAR), c.Name)
-				if edit && !question(fmt.Sprintf(t(Q_EMPTYVAR), c.Name), true) {
-					keep = append(keep, c)
-				}
-			} else {
-				keep = append(keep, c)
+			if !okt {
+				ok = false
 			}
 		}
 		if edit {
-			p[k] = keep
+			bl.Values = keep
+		}
+		if ok && c > 0 {
+			message_check(I, b, e, t(I_CONFLICTS), n)
 		}
 	}
 }
 
-func check_emptydepends(p pkgbuild.Pkgbuild, edit bool) {
+func check_depends(p *pkgbuild.Pkgbuild, edit bool) {
+	lconf := []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS, pkgbuild.OPTDEPENDS, pkgbuild.CHECKDEPENDS}
+	for _, n := range lconf {
+		bl, ok := p.Variables[n]
+		if !ok {
+			continue
+		}
+		b, e := bl.Begin, bl.End
+		c, keep := 0, make([]*pkgbuild.Data, 0)
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_COMMENT {
+				if edit {
+					keep = append(keep, d)
+				}
+				continue
+			}
+			c++
+			okt := true
+			v := d.String()
+			if n == pkgbuild.OPTDEPENDS {
+				lst := strings.Split(v, ":")
+				v = lst[0]
+			}
+			if !exists_package(v) {
+				okt = false
+				message_check(W, b, e, t(W_DEPENDS), v, n)
+			}
+			if edit {
+				if okt {
+					keep = append(keep, d)
+				} else if question(fmt.Sprintf(t(Q_DEPENDS), v, n), true) {
+					d.Value = strings.TrimSpace(response(fmt.Sprintf(t(Q_DEPENDS2), v)))
+					if d.String() != "" {
+						keep = append(keep, d)
+					}
+				}
+			}
+			if !okt {
+				ok = false
+			}
+		}
+		if edit {
+			bl.Values = keep
+		}
+		if ok && c > 0 {
+			message_check(I, b, e, t(I_DEPENDS), n)
+		}
+	}
+}
+
+func check_emptyvar(p *pkgbuild.Pkgbuild, edit bool) {
+	for _, bl := range p.Variables {
+		n, b, e := bl.Name, bl.Begin, bl.End
+		ok := false
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE {
+				ok = true
+				break
+			}
+		}
+		if !ok {
+			message_check(W, b, e, t(W_EMPTYVAR), n)
+			if edit && !question(fmt.Sprintf(t(Q_EMPTYVAR), n), true) {
+				delete(p.Variables, n)
+			}
+		}
+	}
+}
+
+func check_emptydepends(p *pkgbuild.Pkgbuild, edit bool) {
 	hasdepend := false
-	for _, k := range []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS} {
-		if _, ok := p[k]; ok {
+	for _, n := range []string{pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS} {
+		if _, ok := p.Variables[n]; ok {
 			hasdepend = true
 			break
 		}
@@ -395,32 +395,24 @@ func check_emptydepends(p pkgbuild.Pkgbuild, edit bool) {
 	}
 }
 
-func check_package(p pkgbuild.Pkgbuild, edit bool) {
-	has_p, splitted := false, false
-	for k, cc := range p {
+func check_package(p *pkgbuild.Pkgbuild, edit bool) {
+	ok := false
+	for k, bl := range p.Functions {
 		if k == pkgbuild.PACKAGE {
-			has_p = true
+			ok = true
+			message_check(I, bl.Begin, bl.End, t(I_PACKAGE))
 		} else if strings.HasPrefix(k, pkgbuild.PACKAGE) {
-			splitted = true
-			c := cc[0]
-			b, e := c.Begin+1, c.End+1
-			message_check(W, b, e, t(W_SPLITTED))
+			message_check(W, bl.Begin, bl.End, t(W_SPLITTED))
 		}
 	}
-	if !splitted {
-		if has_p {
-			message_check(I, 0, 0, t(I_PACKAGE))
-		} else {
-			message_check(E, 0, 0, t(W_PACKAGE))
-		}
+	if !ok {
+		message_check(E, 0, 0, t(W_PACKAGE))
 	}
 }
 
-func check_url(p pkgbuild.Pkgbuild, edit bool) {
-	if cc, ok := p[pkgbuild.URL]; ok {
-		c := cc[0]
-		b, e := c.Begin+1, c.End+1
-		message_check(I, b, e, t(I_URL))
+func check_url(p *pkgbuild.Pkgbuild, edit bool) {
+	if bl, ok := p.Variables[pkgbuild.URL]; ok {
+		message_check(I, bl.Begin, bl.End, t(I_URL))
 	} else {
 		message_check(W, 0, 0, t(W_URL))
 		if edit && question(t(Q_URL), true) {
@@ -428,46 +420,58 @@ func check_url(p pkgbuild.Pkgbuild, edit bool) {
 			if s == "" {
 				return
 			}
-			c, _ := pkgbuild.NewContainer(fmt.Sprintf("url='%s'", s), -1)
-			c.End = -1
-			p.Insert(c)
+			bl := pkgbuild.NewBlock(pkgbuild.URL, -1, pkgbuild.BT_VARIABLE)
+			bl.End = -1
+			bl.AppendDataString(s, pkgbuild.DT_VARIABLE, bl.Begin)
+			p.Append(bl)
 		}
 	}
 }
 
-func check_install(p pkgbuild.Pkgbuild, edit bool) {
-	if cc, ok := p[pkgbuild.INSTALL]; ok {
-		install := ""
-		c := cc[0]
-		b, e := c.Begin+1, c.End+1
-		for _, d := range c.Values {
-			install += d.String()
+func check_install(p *pkgbuild.Pkgbuild, edit bool) {
+	bl, ok := p.Variables[pkgbuild.INSTALL]
+	if !ok {
+		return
+	}
+	b, e := bl.Begin, bl.End
+	install, ok := "", false
+	for _, d := range bl.Values {
+		if d.Type == pkgbuild.DT_VARIABLE {
+			install = d.String()
+			ok = true
+			break
 		}
-		r := regexp.MustCompile(`\$\w+|\$\{.+\}`)
-		if r.MatchString(install) {
-			v := r.FindStringSubmatch(install)[0]
-			k := strings.Trim(v, "${}")
-			repl := ""
-			if c2, ok := p[k]; ok && len(c2) > 0 {
-				for _, d := range c2[0].Values {
-					repl += d.String()
+	}
+	if !ok {
+		return
+	}
+	r := regexp.MustCompile(`\$\w+|\$\{.+\}`)
+	if r.MatchString(install) {
+		v := r.FindStringSubmatch(install)[0]
+		k := strings.Trim(v, "${}")
+		repl := ""
+		if bl2, ok := p.Variables[k]; ok {
+			for _, d := range bl2.Values {
+				if d.Type == pkgbuild.DT_VARIABLE {
+					repl = d.String()
+					break
 				}
 			}
-			install = r.ReplaceAllString(install, repl)
 		}
-		if _, err := os.Stat(install); err == nil {
-			message_check(I, b, e, t(I_INSTALL))
-		} else {
-			message_check(W, b, e, t(W_INSTALL), install)
-			if edit && question(fmt.Sprintf(t(Q_INSTALL), install), true) {
-				install = response(fmt.Sprintf(t(T_INSTALL), install))
-				install = strings.TrimSpace(install)
-				if install == "" {
-					p.Remove(pkgbuild.INSTALL, 0)
-				} else {
-					c.Values = make([]*pkgbuild.Data, 0, 1)
-					c.Append(pkgbuild.TD_VARIABLE, c.Begin, install)
-				}
+		install = r.ReplaceAllString(v, repl)
+	}
+	if _, err := os.Stat(install); err == nil {
+		message_check(I, b, e, t(I_INSTALL))
+	} else {
+		message_check(W, b, e, t(W_INSTALL), install)
+		if edit && question(fmt.Sprintf(t(Q_INSTALL), install), true) {
+			install = response(fmt.Sprintf(t(T_INSTALL), install))
+			install = strings.TrimSpace(install)
+			if install == "" {
+				delete(p.Variables, pkgbuild.INSTALL)
+			} else {
+				bl.Values = make([]*pkgbuild.Data, 0, 1)
+				bl.AppendDataString(install, pkgbuild.DT_VARIABLE, bl.Begin)
 			}
 		}
 	}
@@ -499,13 +503,13 @@ func main() {
 			return
 		}
 	}
-	p := pkgbuild.ParseFile("PKGBUILD")
+	p, e := pkgbuild.Parse("PKGBUILD")
+	if e != nil {
+		message(t(E_NOPKGBUILD))
+		os.Exit(1)
+	}
 	if debug {
-		o := p.Sort()
-		for _, c := range o {
-			fmt.Println(c)
-			fmt.Println("---------------")
-		}
+		fmt.Println(p)
 		return
 	}
 	check_header(p, edit)
@@ -519,7 +523,7 @@ func main() {
 	check_url(p, edit)
 	check_install(p, edit)
 	if edit {
-		e := pkgbuild.UnparseInFile(p, NEWPKGBUILD)
+		e := pkgbuild.Unparse(p, NEWPKGBUILD)
 		m, r := "\n\033[1;1m%s\033[m", 0
 		if e == nil {
 			m = fmt.Sprintf(m, I_SAVED)

@@ -1,40 +1,27 @@
 package pkgbuild
 
-import (
-	"regexp"
+// Type of data
+type DataType int
+
+const (
+	DT_UNKNOWN DataType = iota
+	DT_BLANK
+	DT_COMMENT
+	DT_VARIABLE
+	DT_FUNCTION
 )
 
-// Types of data
-const (
-	TD_UNKNOWN int = iota
-	TD_VARIABLE
-	TD_BLANK
-	TD_COMMENT
-	TD_FUNC
-)
+// Type of container
+type BlockType int
 
-// Types of containers
 const (
-	TC_UNKNOWN int = iota
-	TC_HEADER
-	TC_VARIABLE
-	TC_UVARIABLE
-	TC_FUNCTION
-	TC_UFUNCTION
-	TC_SFUNCTION
-	TC_BLANKCOMMENT
-)
-
-// Types of unparing
-const (
-	TU_SINGLEVAR int = iota
-	TU_SINGLEVARQ
-	TU_OPTIONAL
-	TU_OPTIONALQ
-	TU_MULTIPLEVAR
-	TU_MULTIPLEVARQ
-	TU_MULTIPLELINES
-	TU_LINES
+	BT_NONE BlockType = iota
+	BT_UNKNOWN
+	BT_HEADER
+	BT_VARIABLE
+	BT_UVARIABLE
+	BT_FUNCTION
+	BT_UFUNCTION
 )
 
 // List of standard variables
@@ -96,35 +83,6 @@ var L_VARIABLES = []string{
 	SHA256SUMS,
 }
 
-var U_VARIABLES = map[string]int{
-	PKGBASE:      TU_SINGLEVAR,
-	PKGNAME:      TU_OPTIONAL,
-	PKGVER:       TU_SINGLEVAR,
-	PKGREL:       TU_SINGLEVAR,
-	EPOCH:        TU_SINGLEVAR,
-	PKGDESC:      TU_SINGLEVARQ,
-	ARCH:         TU_MULTIPLEVARQ,
-	URL:          TU_SINGLEVARQ,
-	LICENSE:      TU_MULTIPLEVARQ,
-	GROUPS:       TU_MULTIPLEVARQ,
-	DEPENDS:      TU_MULTIPLEVARQ,
-	MAKEDEPENDS:  TU_MULTIPLEVARQ,
-	CHECKDEPENDS: TU_MULTIPLEVARQ,
-	OPTDEPENDS:   TU_MULTIPLELINES,
-	PROVIDES:     TU_MULTIPLEVARQ,
-	CONFLICTS:    TU_MULTIPLEVARQ,
-	REPLACES:     TU_MULTIPLEVARQ,
-	BACKUP:       TU_MULTIPLEVARQ,
-	OPTIONS:      TU_MULTIPLEVAR,
-	INSTALL:      TU_SINGLEVARQ,
-	CHANGELOG:    TU_SINGLEVARQ,
-	SOURCE:       TU_MULTIPLELINES,
-	NOEXTRACT:    TU_MULTIPLEVARQ,
-	MD5SUMS:      TU_MULTIPLELINES,
-	SHA1SUMS:     TU_MULTIPLELINES,
-	SHA256SUMS:   TU_MULTIPLELINES,
-}
-
 // List of common functions
 const (
 	PREPARE = "prepare"
@@ -134,6 +92,7 @@ const (
 )
 
 var L_FUNCTIONS = []string{
+	PKGVER,
 	PREPARE,
 	BUILD,
 	CHECK,
@@ -143,16 +102,48 @@ var L_FUNCTIONS = []string{
 // Other
 const (
 	HEADER  = "<header>"
-	BLANK   = "<blank>"
 	UNKNOWN = "<unknown>"
 )
 
-// Regexp
-var R_BLANK = regexp.MustCompile(`^\s*$`)
-var R_COMMENT = regexp.MustCompile(`^\s*(#.*)$`)
-var R_MVAR1 = regexp.MustCompile(`^\s*(\S+)=(\(.*\))\s*$`)
-var R_MVAR2 = regexp.MustCompile(`^\s*(\S+)=(\(.*)\s*$`)
-var R_MVAR3 = regexp.MustCompile(`^\s*(\S+)=(.*)\s*$`)
-var R_FUNCTION = regexp.MustCompile(`^\s*(\S+)\s*\(\s*\).*$`)
+// Types of unparsing
+type UnparseType int
 
-//var R_FUNCTION = regexp.MustCompile(`^\s*(\S+)\s*\(\s*\)\s*\{\s*$`)
+const (
+	UT_SINGLEVAR UnparseType = iota
+	UT_SINGLEVARQ
+	UT_OPTIONAL
+	UT_OPTIONALQ
+	UT_MULTIPLEVAR
+	UT_MULTIPLEVARQ
+	UT_MULTIPLELINES
+	UT_LINES
+)
+
+var U_VARIABLES = map[string]UnparseType{
+	PKGBASE:      UT_SINGLEVAR,
+	PKGNAME:      UT_OPTIONAL,
+	PKGVER:       UT_SINGLEVAR,
+	PKGREL:       UT_SINGLEVAR,
+	EPOCH:        UT_SINGLEVAR,
+	PKGDESC:      UT_SINGLEVARQ,
+	ARCH:         UT_MULTIPLEVARQ,
+	URL:          UT_SINGLEVARQ,
+	LICENSE:      UT_MULTIPLEVARQ,
+	GROUPS:       UT_MULTIPLEVARQ,
+	DEPENDS:      UT_MULTIPLEVARQ,
+	MAKEDEPENDS:  UT_MULTIPLEVARQ,
+	CHECKDEPENDS: UT_MULTIPLEVARQ,
+	OPTDEPENDS:   UT_MULTIPLELINES,
+	PROVIDES:     UT_MULTIPLEVARQ,
+	CONFLICTS:    UT_MULTIPLEVARQ,
+	REPLACES:     UT_MULTIPLEVARQ,
+	BACKUP:       UT_MULTIPLEVARQ,
+	OPTIONS:      UT_MULTIPLEVAR,
+	INSTALL:      UT_SINGLEVARQ,
+	CHANGELOG:    UT_SINGLEVARQ,
+	SOURCE:       UT_MULTIPLELINES,
+	NOEXTRACT:    UT_MULTIPLEVARQ,
+	MD5SUMS:      UT_MULTIPLELINES,
+	SHA1SUMS:     UT_MULTIPLELINES,
+	SHA256SUMS:   UT_MULTIPLELINES,
+}

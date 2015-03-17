@@ -1,0 +1,12 @@
+[main]
+host = https://www.transifex.com
+
+[kaos.kcppot]
+file_filter = i18n/kcp/<lang>.po
+source_lang = en
+type = PO
+
+[kaos.pckcppot]
+file_filter = i18n/pckcp/<lang>.po
+source_lang = en
+type = PO
