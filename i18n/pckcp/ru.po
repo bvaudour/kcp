@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-17 18:00+0000\n"
+"PO-Revision-Date: 2015-03-19 04:19+0000\n"
 "Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/kaos/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -21,18 +21,18 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s это простой PKGBUILD контролер для пакетов сообщества KaOS."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr ""
+msgstr "%s не находится ни в repo ни в kcp. Переменной '%s' нет нужды содержать это."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr ""
+msgstr "%s не находится ни в repo ни в kcp. Переменная '%s' не должна содержать это."
 
 #: pckcp.go:40
 #, c-format
@@ -41,7 +41,7 @@ msgstr "'%s' очищен."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "Текущая папка не содержит PKGBUILD!"
 
 #: pckcp.go:21
 msgid "Header is clean."
@@ -51,7 +51,7 @@ msgstr "Заголовок очищен."
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
+msgstr "Заголовок был найден. Не используйте имена ведущих или участников в PKGBUILD, любой может внести вклад, оставляя заголовок чистым."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
@@ -61,125 +61,125 @@ msgstr "PKGBUILD не может быть сохранён!"
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "PKGBUILD это раздельный PKGBUILD. Сделайте больше PKGBUILD по количеству в пакетов в нём!"
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr ""
+msgstr "Удалить %s как %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr ""
+msgstr "Удалить %s в переменной '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr ""
+msgstr "Удалить заголовок?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr ""
+msgstr "Удалить переменную '%s'?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr ""
+msgstr "Сбросить архитектуру на x86_64?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr ""
+msgstr "Сбросить pkgrel на 1?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr ""
+msgstr "Переменная '%s' содержит имя пакета. Это бесполезно."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr ""
+msgstr "Переменная '%s' чистая."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr ""
+msgstr "Переменная '%s' пустая."
 
 #: pckcp.go:39
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr ""
+msgstr "Переменные 'depends' и 'makedepends' пусты. Вы должны проверить вручную если этого не достаточно."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr ""
+msgstr "архитектура чистая."
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr ""
+msgstr "архитектура отлична от 'x86_64'. Так как KaOS поддерживает только эту архитектуру, никакая другая не будет добавлена."
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr ""
+msgstr "package() функция присутствует."
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr ""
+msgstr "package() функция отсутствует. Вы должны добавить её."
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr ""
+msgstr "package() функция отсутствует. Вам нужно добавить её."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr ""
+msgstr "pkgrel чистый."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "pkgrel отличается от 1. Это должно быть только если инструкции сборки отредактированы, кроме pkgver."
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr ""
+msgstr "URL чистый."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr ""
+msgstr "Не указан URL."
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr ""
+msgstr "Добавить URL?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr ""
+msgstr "Наберите содержимое URL:"
 
 #: pckcp.go:36
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr ""
+msgstr "Изменить %s в переменной '%s'?"
 
 #: pckcp.go:37
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr ""
+msgstr "Заменить %s на... (оставить пустым для удаления):"
 
 #: pckcp.go:44
 #, c-format
 msgid "Modify %s as %s?"
-msgstr ""
+msgstr "Изменить %s как %s?"
 
 #: pckcp.go:53
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr ""
+msgstr "Изменения сохраняются в %s!"
 
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr ""
+msgstr "Ошибка сохранения файла %s!"
