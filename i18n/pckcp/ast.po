@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-17 23:11+0000\n"
+"PO-Revision-Date: 2015-03-20 17:48+0000\n"
 "Last-Translator: enolp <enolp@softastur.org>\n"
 "Language-Team: Asturian (http://www.transifex.com/projects/p/kaos/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s ye un comprobador de PKGBUILD simple pa los paquetes comunitarios de KaOS."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
@@ -61,7 +61,7 @@ msgstr "¡Nun pue guardase'l PKGBUILD!"
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "El PKGBUILD ye ún dividíu. ¡Fai tantos PKGBUILD como paquetes necesites!"
 
 #: pckcp.go:42
 #, c-format
@@ -141,7 +141,7 @@ msgstr "pkgrel ta llimpiu."
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "pkgrel ye distintu de 1. Debería ser el casu namái si les instrucciones de construcción s'editen pero nun hai pkgver."
 
 #: pckcp.go:44
 msgid "url is clean."
@@ -182,4 +182,4 @@ msgstr "¡Modificaciones guardaes en %s!"
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr ""
+msgstr "¡Fallu nel ficheru de guarda %s!"

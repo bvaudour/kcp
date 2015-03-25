@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2015
+# Rebel450, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-10 10:38+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-03-20 11:39+0000\n"
+"Last-Translator: Rebel450\n"
 "Language-Team: German (http://www.transifex.com/projects/p/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,165 +22,165 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s ein einfacher PKGBUILD Checker für die KaOS Community Packages"
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr ""
+msgstr "%s ist weder in repo noch in kcp. Variable '%s' wurde nicht benötigt"
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr ""
+msgstr "%s ist weder in repo noch in kcp. Variable '%s' ist nicht beinhaltet"
 
 #: pckcp.go:40
 #, c-format
 msgid "'%s' is clean."
-msgstr ""
+msgstr "'%s' ist leer"
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "Aktueller Ordner enthält kein PKGBUILD"
 
 #: pckcp.go:21
 msgid "Header is clean."
-msgstr ""
+msgstr " Header ist leer"
 
 #: pckcp.go:22
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
+msgstr "Header gefunden.  Verwenden Sie keine Namen von maintainern oder Mitwirkenden im PKGBUILD header, da jeder ihn verändern kann. Halten Sie ihn frei von dergleichen "
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
-msgstr ""
+msgstr " PKGBUILD kann nicht gespeichert werden !"
 
 #: pckcp.go:36
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "PKGBUILD ist ein Teil- PKGBUILD. Erstellen Sie so viele PKGBUILDs, wie es verschiedene packages enthält !"
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr ""
+msgstr "Entferne %s sowie %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr ""
+msgstr "Entferne %s in variable '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr ""
+msgstr "header entfernen ?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr ""
+msgstr "variable '%s' entfernen ? "
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr ""
+msgstr "Arch zurücksetzen auf x86_64 ?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr ""
+msgstr "pkgrel zurücksetzen auf 1 ?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr ""
+msgstr "Variable '%s' enthält den Namen des package. Das ist überflüssig."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr ""
+msgstr "Variable '%s' ist leer."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr ""
+msgstr "Variable '%s' ist leer."
 
 #: pckcp.go:39
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr ""
+msgstr "Variablen 'depends' und 'makedepends' sind leer. Sie sollten selbst prüfen, ob etwas fehlt."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr ""
+msgstr "Arch ist leer"
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr ""
+msgstr "Arch ist unterschiedlich zu  'x86_64'. Da KaOS nur diese Architektur unterstützt, wird hier kein anderes Arch hinzugefügt"
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr ""
+msgstr "package() function is bereit"
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr ""
+msgstr "package() Funktion fehlt. Sie sollten sie hinzufügen"
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr ""
+msgstr "package() Funktion fehlt. Sie müssen sie hinzufügen !"
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr ""
+msgstr "pkgrel ist leer."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "pkgrel ist unterschiedlich zu 1. Es sollte nur so sein, das build instructions editiert sind, aber nicht pkdver"
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr ""
+msgstr "url ist leer."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr ""
+msgstr "Keine url angegeben"
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr ""
+msgstr "url hinzufügen ?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr ""
+msgstr "Bitte url eingeben"
 
 #: pckcp.go:36
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr ""
+msgstr " Änderung %s in Variable '%s' ?"
 
 #: pckcp.go:37
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr ""
+msgstr "Ersetze %s mit... (zum Entfernen leer lassen):"
 
 #: pckcp.go:44
 #, c-format
 msgid "Modify %s as %s?"
-msgstr ""
+msgstr "Ändere %s sowie %s ?"
 
 #: pckcp.go:53
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr ""
+msgstr "Änderungen gespeichert in %s !"
 
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr ""
+msgstr "Fehler beim speichern in Datei %s !"

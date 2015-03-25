@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2014-2015
+# Rebel450, 2015
+# Rebel450, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-02-21 09:56+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-03-20 12:03+0000\n"
+"Last-Translator: Rebel450\n"
 "Language-Team: German (http://www.transifex.com/projects/p/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,12 +39,12 @@ msgstr "<unbekannt>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr "Eine Instanz von KCP läuft bereits."
+msgstr "Eine andere Instanz von KCP läuft bereits !"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr "Verzeichnis  %s existiert bereits."
+msgstr "Verzeichnis  %s existiert bereits !"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
@@ -58,7 +60,7 @@ msgstr "Wollen sie das PKGBUILD editieren ?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr "Starten sie dieses Programm bitte nicht als Administrator."
+msgstr "Starten Sie dieses Programm nicht als \"root\" !"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
@@ -78,15 +80,15 @@ msgstr "Kein Paket gefunden"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "KCP listet keine Versionpackete auf, wenn '--fast' mit '--search' oder '--list' gesucht wird."
+msgstr "Drucken Sie nicht die KCP Version"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "KCP sortiert Pakete nach absteigenden Sternsymbolen, wenn '--sort' mit '--search', '--list' oder '--outdated' verwendet wird."
+msgstr "Sortiert die Pakete nach absteigenden Sternsymbolen"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "KCP installiert das Paket <app>, welches darauf hinweist, das dieses Paket von einem anderen abhängt. Es ermöglicht eine saubere Deinstallation mit 'pacman -Rs"
+msgstr "Wird als Abhängigkeit installiert"
 
 #: kcp.go:325
 msgid "Package not found!"
@@ -102,7 +104,7 @@ msgstr "Druckversion"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr "KCP sucht nach allen Paketen, die das Schlüsselwort \"<app>\" enthalten, oder deren Beschreibung das Schlüsselwort enthält."
+msgstr "Sucht nach ' motif Paketen in KCP und zeigt diese an"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
@@ -110,7 +112,7 @@ msgstr "Kommandozeilenprogramm für die KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr "Unbekannter Fehler"
+msgstr "Unbekannter Fehler !"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
@@ -118,11 +120,11 @@ msgstr "[OPTIONEN] [APP]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr "Fehlerverbesserungswerkzeug"
+msgstr "debug Modus"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr "Suche nach Paketen in KCP und zeige diese an"
+msgstr "Sucht nach Paketen in KCP und zeigt diese an"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
@@ -138,23 +140,23 @@ msgstr "Zeige nur Pakete mit mindestens einem Stern an"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr "Zeige nur die Namen der Pakete an."
+msgstr "Zeige nur die Namen der Pakete an"
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr "Aktualisiert die lokale Datenbank."
+msgstr "Aktualisiert die lokale Datenbank"
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr "Zeige nur die installierten Pakete an."
+msgstr "Zeige nur die installierten Pakete an"
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr "Vollführe ein vollständiges Update, wenn die Datenbank aktualisiert wird."
+msgstr "Führt ein vollständiges Update aus, wenn die Datenbank aktualisiert wird"
 
 #: kcp.go:159
 msgid "Refresh the local database"
-msgstr "Aktualisiere die lokale Datenbank."
+msgstr "Aktualisiere die lokale Datenbank"
 
 #: const.go:46
 #, c-format
@@ -173,14 +175,14 @@ msgstr "[Installiert]"
 #: const.go:47
 #, c-format
 msgid "%d entries added!"
-msgstr "%d Einträge hinzugefügt!"
+msgstr "%d Einträge hinzugefügt !"
 
 #: const.go:48
 #, c-format
 msgid "%d entries deleted!"
-msgstr "%d Einträge gelöscht"
+msgstr "%d Einträge gelöscht !"
 
 #: const.go:44
 #, c-format
 msgid "Do you want to edit %s?"
-msgstr ""
+msgstr "Wollen Sie %s editieren ?"
