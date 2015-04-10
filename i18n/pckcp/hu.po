@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-19 11:17+0000\n"
-"Last-Translator: teknos.ferenc <teknos.ferenc@gmail.com>\n"
+"PO-Revision-Date: 2015-04-07 17:13+0000\n"
+"Last-Translator: Laszlo Espadas <kw@kardiweb.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/kaos/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,18 +22,18 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr ""
+msgstr "%s egy egyszerű PKGBUILD Ellenörző a Kaos Közösségi Csomagok számára."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr ""
+msgstr "%s nem található a KCP tárolóban. '%s' változót nem kell tartalmaznia."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr ""
+msgstr "%s nem található a KCP tárolóban. '%s' változót kell tartalmaznia."
 
 #: pckcp.go:40
 #, c-format
@@ -42,7 +42,7 @@ msgstr "'%s' tiszta."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "Aktuális könyvtár nem tartalmaz PKGBUILD fájlt!"
 
 #: pckcp.go:21
 msgid "Header is clean."
@@ -52,7 +52,7 @@ msgstr "Fejrész tiszta."
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
+msgstr "Fejrész található. Ne használjunk a PKGBUILD fájlban fejrészt. Tartsuk tisztán."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
@@ -62,17 +62,17 @@ msgstr "PKGBUILD nincsen elmentve!"
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "A PKGBUILD egy osztott PKGBUILD fájl. Annyi PKGBUILD fájlt hozzunk létre ahány csomag áll rendelkezésre."
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr "Törli   %s mint %s?"
+msgstr "Töröljük %s mint %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr ""
+msgstr "%s változó törlés '%s'"
 
 #: pckcp.go:23
 msgid "Remove header?"
@@ -81,7 +81,7 @@ msgstr "Töröljük a fejrészt?"
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr ""
+msgstr "'%s' változót töröljük?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
@@ -89,12 +89,12 @@ msgstr "Vissza állítjuk az architektúrát erre x86_64 ?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr ""
+msgstr "pkgrel visszaállítása 1 értékre?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr ""
+msgstr "'%s' változó tartalmaz csomag nevet. Ez haszontalan."
 
 #: pckcp.go:32
 #, c-format
@@ -110,17 +110,17 @@ msgstr "'%s' változó üres."
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr ""
+msgstr "A \"függőségek\" és a \"függőségek létrehozása\" üresek. Manuálisan kell ellenőrizni."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr ""
+msgstr "arch tiszta."
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr ""
+msgstr "A processzor architektúrája eltér a KaOS rendszerben alkalmazott 'x86_64' architektúrától. Vegyük figyelemben, hogy a KaOS nem támogatja a 32 bites processzorokat."
 
 #: pckcp.go:37
 msgid "package() function is present."
@@ -142,45 +142,45 @@ msgstr "pkgrel  tiszta."
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr ""
+msgstr "A pkgrel eltér ettől: 1. Ha ez fennáll szerkesszük a PKGBUILD fájlt."
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr ""
+msgstr "hivatkozás tiszta."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr ""
+msgstr "Nincs hivatkozás megadva."
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr ""
+msgstr "Hivatkozás hozzáadás?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr ""
+msgstr "Adjuk meg a tartalmazó hivatkozást:"
 
 #: pckcp.go:36
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr ""
+msgstr "%s változó módosítás '%s'"
 
 #: pckcp.go:37
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr ""
+msgstr "%s javítás... (hagyjuk üresen):"
 
 #: pckcp.go:44
 #, c-format
 msgid "Modify %s as %s?"
-msgstr ""
+msgstr "%s - %s módosítás?"
 
 #: pckcp.go:53
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr ""
+msgstr "%s módosításai elmentve!"
 
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr ""
+msgstr "%s mentése közben hiba lépett fel!"
