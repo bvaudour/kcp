@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Slobodan Simić (Слободан Симић) <slsimic@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-02-21 09:56+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
+"PO-Revision-Date: 2015-04-15 07:27+0000\n"
+"Last-Translator: Slobodan Simić (Слободан Симић) <slsimic@gmail.com>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/projects/p/kaos/language/sr_RS@latin/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,166 +21,166 @@ msgstr ""
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr ""
+msgstr " [instalirano: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr ""
+msgstr " [instalirano]"
 
 #: kcp.go:73
 msgid "<app>"
-msgstr ""
+msgstr "<apl>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr ""
+msgstr "<nepoznato>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr ""
+msgstr "Još jedan KCP radi!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Direktorijum %s postoji!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr ""
+msgstr "Prikaži sve zastarele pakete iz KCP-a"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Prikaži sve pakete KCP-a"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Želite li da izmenite PKGBUILD?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr ""
+msgstr "Ne pokrećite ovaj program kao root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr ""
+msgstr "Preuzimam potrebne fajlove za gradnju paketa"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Instaliraj paket iz KCP-a"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Prekinuo korisnik..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr ""
+msgstr "Nema paketa"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "Kad prikazuješ, ne ispisuj KCP verziju"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr ""
+msgstr "Kad prikazuješ,  sortiraj opadajuće po ocenama"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr ""
+msgstr "Pri instalaciji, instaliraj kao zavisnost"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr ""
+msgstr "Paket nije nađen!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr ""
+msgstr "prikazuje ovu pomoć"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr ""
+msgstr "prikazuje verziju"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr ""
+msgstr "Pretražuje frazu u KCP i prikazuje pakete"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Alatke komandne linije za KaOS pakete zajednice"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr ""
+msgstr "Nepoznata greška!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr ""
+msgstr "[OPCIJE] [APL]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr ""
+msgstr "režim otkrivanja grešaka"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr ""
+msgstr "Pretražuje pakete KCP-a i prikazuje ih"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
-msgstr ""
+msgstr "Kad prikazuješ,  prikaži samo instalirane"
 
 #: kcp.go:172
 msgid "On display action, display only outdated packages"
-msgstr ""
+msgstr "Kad prikazuješ, prikaži samo zastarele pakete"
 
 #: kcp.go:170
 msgid "On display action, display only packages with at least one star"
-msgstr ""
+msgstr "Kad prikazuješ, prikaži samo pakete sa bar jednom zvezdicom"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr ""
+msgstr "Kad prikazuješ, prikaži samo ime paketa"
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr ""
+msgstr "Kad prikazuješ, prisili osvežavanje lokalne baze"
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr ""
+msgstr "Kad listaš, prikaži samo instalirane pakete"
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr ""
+msgstr "Pri osvežavanju baze, prisili potpuno osvežavanje"
 
 #: kcp.go:159
 msgid "Refresh the local database"
-msgstr ""
+msgstr "Osveži lokalnu bazu"
 
 #: const.go:46
 #, c-format
 msgid "%d entries updated!"
-msgstr ""
+msgstr "%d unosa ažurirano!"
 
 #: const.go:54
 #, c-format
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[instalirano: %s]"
 
 #: const.go:53
 msgid "[installed]"
-msgstr ""
+msgstr "[instalirano]"
 
 #: const.go:47
 #, c-format
 msgid "%d entries added!"
-msgstr ""
+msgstr "%d unosa dodato!"
 
 #: const.go:48
 #, c-format
 msgid "%d entries deleted!"
-msgstr ""
+msgstr "%d unosa obrisano!"
 
 #: const.go:44
 #, c-format
 msgid "Do you want to edit %s?"
-msgstr ""
+msgstr "Želite li da izmenite %s?"
