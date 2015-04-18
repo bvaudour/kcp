@@ -3,183 +3,183 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Slobodan Simić (Слободан Симић) <slsimic@gmail.com>, 2015
+# wantoyo <wantoyo@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-04-17 20:12+0000\n"
-"Last-Translator: Slobodan Simić (Слободан Симић) <slsimic@gmail.com>\n"
-"Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/projects/p/kaos/language/sr_RS@latin/)\n"
+"PO-Revision-Date: 2015-04-18 16:00+0000\n"
+"Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
+"Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr_RS@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: id_ID\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr "%s je jednostavan proveravač PKGBUILD fajla za pakete KaOS zajednice."
+msgstr "%s adalah sebuah Pengecek PKGBUILD sederhana untuk Paket Komunitas KaOS."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr "%s nije u riznicama niti u KCP-u. Promenljiva „%s“ ne mora da ga sadrži."
+msgstr "%s tidak ada di repo tidak ada di kcp. Variabel '%s' tidak perlu berisi itu."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr "%s nije u riznicama niti u KCP-u. Promenljiva „%s“ ne mora da ga sadrži."
+msgstr "%s tidak di repo tidak ada di kcp. Variabel '%s' tidak harus berisi itu."
 
 #: pckcp.go:40
 #, c-format
 msgid "'%s' is clean."
-msgstr "„%s“ je čist."
+msgstr "'%s telah bersih."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr "Trenutna fascikla ne sadrži PKGBUILD!"
+msgstr "Folder saat ini tidak berisi PKGBUILD!"
 
 #: pckcp.go:21
 msgid "Header is clean."
-msgstr "Zaglavlje je čisto."
+msgstr "Sundulan bersih."
 
 #: pckcp.go:22
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr "Zaglavlje je pronađeno. Ne upisujte imena održavalaca i doprinosilaca u PKGBUILD. Svako može pomoći. Ne zatrpavajte zaglavlje time."
+msgstr "Sundulan ditemukan. Jangan gunakan nama-nama pengelola atau kontributor di PKGBUILD, setiap orang dapat berkontribusi, menjaga sundulan bersih dari ini."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
-msgstr "PKGBUILD se ne može sačuvati!"
+msgstr "PKGBUILD tidak bisa disimpan!"
 
 #: pckcp.go:36
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr "PKGBUILD je podeljeni PKGBUILD. Napravite koliko želite PKGBUILD kao ovaj sa različitim paketima!"
+msgstr "PKGBUILD adalah sepenggal PKGBUILD. Membuat sebanyak PKGBUILD ini berisi paket-paket berbeda!"
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr "Ukloni %s kao %s?"
+msgstr "Buang %s sama %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr "Ukloniti %s iz promenljive „%s“?"
+msgstr "Buang %s di variabel '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr "Ukloniti zaglavlje?"
+msgstr "Buang sundulan?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr "Ukloniti promenljivu „%s“?"
+msgstr "Buang variabel '%s'?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr "Vratiti arhitekturu na x86_64?"
+msgstr "Set ulang arsitektur ke x86_64?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr "Vratiti pkgrel na 1?"
+msgstr "Set ulang pkgrel ke 1?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr "Promenljiva „%s“ sadrži naziv paketa. Beskorisna je."
+msgstr "Variabel '%s' berisi nama dari paket. Percuma saja."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr "Promenljiva „%s“ je čista."
+msgstr "Variabel '%s' telah bersih."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr "Promenljiva „%s“ je prazna."
+msgstr "Variabel '%s' telah kosong."
 
 #: pckcp.go:39
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr "Promenljive „depends“ i „makedepends“ su prazne. Proverite da li je greška."
+msgstr "Variabel 'tanggungan' dan 'membuat-tanggungan' telah kosong. Anda harus memeriksa secara manual sekiranya tidak hilang."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr "arch je prazno."
+msgstr "arsitek telah bersih"
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr "arch nije „x86_64“. Kako KaOS podržava samo tu arhitekturu, nijedna druga se ne može dodati ovde."
+msgstr "arsitek ini berbeda dari 'x86_64'. Sejak KaOS hanya mendukung arsitektur ini, tidak ada arsitek lain yang akan ditambahkan di sini."
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr "package() funkcija postoji."
+msgstr "paket() berfungsi telah hadir."
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr "package() nedostaje. Trebalo bi da je dodate."
+msgstr "paket() berfungsi yang hilang. Anda harus menambahkannya."
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr "package() funkcija nedostaje. Morate da je dodate."
+msgstr "paket() berfungsi yang hilang. Anda perlu menambahkannya."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr "pkgrel je prazno."
+msgstr "pkgrel telah bersih."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr "pkgrel nije 1. To može biti samo u slučaju da su  uputstva gradnje izmenjena ali ne i pkgver."
+msgstr "pkgrel berbeda dari 1. Itu harus terjadi hanya jika instruksi bangun disunting tetapi pkgver tidak."
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr "url je prazno."
+msgstr "url telah bersih."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr "Nije naveden URL."
+msgstr "Tidak ada url yang ditetapkan."
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr "Dodati URL?"
+msgstr "Tambahkan url?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr "Unesite URL koji želite:"
+msgstr "Silakan, ketik URL untuk memasukkan:"
 
 #: pckcp.go:36
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr "Izmeniti %s u promenljivoj „%s“?"
+msgstr "Memodifikasi %s dalam variabel '%s'?"
 
 #: pckcp.go:37
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr "Zameni %s sa... (ostavite prazno za uklanjanje):"
+msgstr "Ganti %s menurut... (biarkan kosong untuk membuangnya):"
 
 #: pckcp.go:44
 #, c-format
 msgid "Modify %s as %s?"
-msgstr "Izmeni %s kao %s?"
+msgstr "Memodifikasi %s sebagai %s?"
 
 #: pckcp.go:53
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr "Izmene sačuvane u %s!"
+msgstr "Modifikasi disimpan di %s!"
 
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr "Greška pri upisu fajla %s!"
+msgstr "Galat saat menyimpan berkas %s!"

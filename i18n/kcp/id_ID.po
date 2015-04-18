@@ -3,29 +3,29 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# Slobodan Simić (Слободан Симић) <slsimic@gmail.com>, 2015
+# wantoyo <wantoyo@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-04-17 20:03+0000\n"
-"Last-Translator: Slobodan Simić (Слободан Симић) <slsimic@gmail.com>\n"
-"Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/projects/p/kaos/language/sr_RS@latin/)\n"
+"PO-Revision-Date: 2015-04-18 16:00+0000\n"
+"Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
+"Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr_RS@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: id_ID\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: kcp.go:147
 #, c-format
 msgid " [installed: %s]"
-msgstr " [instalirano: %s]"
+msgstr "[terpasang: %s]"
 
 #: kcp.go:145
 msgid " [installed]"
-msgstr " [instalirano]"
+msgstr "[terpasang]"
 
 #: kcp.go:73
 msgid "<app>"
@@ -33,154 +33,154 @@ msgstr "<apl>"
 
 #: kcp.go:136
 msgid "<unknown>"
-msgstr "<nepoznato>"
+msgstr "<tidak diketahui>"
 
 #: kcp.go:48
 msgid "Another instance of kcp is running!"
-msgstr "Još jedan KCP radi!"
+msgstr "Sesuatu hal selain kcp telah berjalan!"
 
 #: kcp.go:47
 #, c-format
 msgid "Dir %s already exists!"
-msgstr "Direktorijum %s postoji!"
+msgstr "Dir %s sudah ada!"
 
 #: kcp.go:66
 msgid "Display all outdated packages from KCP"
-msgstr "Prikaži sve zastarele pakete iz KCP-a"
+msgstr "Tampilan semua paket kedaluarsa dari KCP"
 
 #: kcp.go:65
 msgid "Display all packages of KCP"
-msgstr "Prikaži sve pakete KCP-a"
+msgstr "Tampilkan semua paket KCP"
 
 #: kcp.go:50
 msgid "Do you want to edit PKGBUILD?"
-msgstr "Želite li da izmenite PKGBUILD?"
+msgstr "Apakah Anda ingin menyunting PKGBUILD?"
 
 #: kcp.go:46
 msgid "Don't launch this program as root!"
-msgstr "Ne pokrećite ovaj program kao root!"
+msgstr "Jangan luncurkan program ini sebagai root!"
 
 #: kcp.go:68
 msgid "Download needed files to build a package"
-msgstr "Preuzimam potrebne fajlove za gradnju paketa"
+msgstr "Unduh berkas yang diperlukan untuk membangun paket"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr "Instaliraj paket iz KCP-a"
+msgstr "Pasang sebuah paket dari KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
-msgstr "Prekinuo korisnik..."
+msgstr "Menyela menurut pengguna..."
 
 #: kcp.go:45
 msgid "No package found"
-msgstr "Nema paketa"
+msgstr "Tidak ada paket yang ditemukan"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "kad listaš, ne ispisuj KCP verziju"
+msgstr "Pada tampilan tindakan, jangan cetak versi KCP"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "kad listaš,  sortiraj opadajuće po ocenama"
+msgstr "Pada tampilan tindakan, mengurutkan paket-paket dengan bintang yang menurun"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "kad instalaciraš, instaliraj kao zavisnost"
+msgstr "Pada tindakan pasang, pasang sebagai ketergantungan"
 
 #: kcp.go:325
 msgid "Package not found!"
-msgstr "Paket nije nađen!"
+msgstr "Paket tidak ditemukan!"
 
 #: kcp.go:63
 msgid "Print this help"
-msgstr "prikazuje ovu pomoć"
+msgstr "Cetak bantuan ini"
 
 #: kcp.go:64
 msgid "Print version"
-msgstr "prikazuje verziju"
+msgstr "Cetak versi"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr "pretražuje frazu u KCP i prikazuje pakete"
+msgstr "Cari motif paket-paket di KCP dan tampilannya"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Alatke komandne linije za pakete KaOS zajednice"
+msgstr "Alat dalam baris-perintah untuk Paket Komunitas KaOS"
 
 #: kcp.go:51
 msgid "Unknown error!"
-msgstr "Nepoznata greška!"
+msgstr "Galat tidak diketahui!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr "[OPCIJE] [APLIKACIJA]"
+msgstr "[OPSI] [APL]"
 
 #: kcp.go:471
 msgid "debug mode"
-msgstr "režim otkrivanja grešaka"
+msgstr "mode awakutu"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr "pretražuje pakete KCP-a i prikazuje ih"
+msgstr "Pencarian paket-paket di KCP dan tampilannya"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
-msgstr "kad listaš,  prikaži samo instalirane"
+msgstr "Pada tampilan tindakan, hanya menampilkan paket-paket yang terpasang"
 
 #: kcp.go:172
 msgid "On display action, display only outdated packages"
-msgstr "kad listaš, prikaži samo zastarele pakete"
+msgstr "Pada tampilan tindakan, hanya menampilkan paket-paket kedaluarsa"
 
 #: kcp.go:170
 msgid "On display action, display only packages with at least one star"
-msgstr "kad listaš, prikaži samo pakete sa bar jednom zvezdicom"
+msgstr "Pada tampilan tindakan, hanya menampilkan paket-paket dengan paling sedikit satu bintang"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr "kad listaš, prikaži samo ime paketa"
+msgstr "Pada tampilan tindakan, hanya menampilkan nama dari paket"
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr "kad listaš, prisili osvežavanje lokalne baze"
+msgstr "Pada tampilan tindakan, menyegarkan paksa basis data lokal"
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr "kad listaš, prikaži samo instalirane pakete"
+msgstr "Pada daftar tindakan, hanya menampilkan paket-paket yang terpasang"
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr "kad osvežavaš bazu, prisili potpuno osvežavanje"
+msgstr "Pada tindakan penyegaran basis data, paksa pembaruan sepenuhnya"
 
 #: kcp.go:159
 msgid "Refresh the local database"
-msgstr "Osveži lokalnu bazu"
+msgstr "Segarkan basis data lokal"
 
 #: const.go:46
 #, c-format
 msgid "%d entries updated!"
-msgstr "%d unosa ažurirano!"
+msgstr "%d entri diperbarui!"
 
 #: const.go:54
 #, c-format
 msgid "[installed: %s]"
-msgstr "[instalirano: %s]"
+msgstr "[terpasang: %s]"
 
 #: const.go:53
 msgid "[installed]"
-msgstr "[instalirano]"
+msgstr "[terpasang]"
 
 #: const.go:47
 #, c-format
 msgid "%d entries added!"
-msgstr "%d unosa dodato!"
+msgstr "%d entri ditambahkan!"
 
 #: const.go:48
 #, c-format
 msgid "%d entries deleted!"
-msgstr "%d unosa obrisano!"
+msgstr "%d entri dihapus!"
 
 #: const.go:44
 #, c-format
 msgid "Do you want to edit %s?"
-msgstr "Želite li da izmenite %s?"
+msgstr "Apakah Anda ingin menyunting %s?"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-04-14 10:02+0000\n"
+"PO-Revision-Date: 2015-04-17 17:50+0000\n"
 "Last-Translator: Slobodan Simić (Слободан Симић) <slsimic@gmail.com>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/kaos/language/sr_RS/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr "%s је једноставан проверавач PKGBUILD-а за КаОС пакете заједнице."
+msgstr "%s је једноставан проверавач PKGBUILD фајла за пакете КаОС заједнице."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
@@ -61,7 +61,7 @@ msgstr "PKGBUILD се не може сачувати!"
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr "PKGBUILD је подељен PKGBUILD. Направите колико желите PKGBUILD као овај са различитим пакетима!"
+msgstr "PKGBUILD је подељени PKGBUILD. Направите колико желите PKGBUILD као овај са различитим пакетима!"
 
 #: pckcp.go:42
 #, c-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-04-14 09:44+0000\n"
+"PO-Revision-Date: 2015-04-17 17:47+0000\n"
 "Last-Translator: Slobodan Simić (Слободан Симић) <slsimic@gmail.com>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/kaos/language/sr_RS/)\n"
 "MIME-Version: 1.0\n"
@@ -78,15 +78,15 @@ msgstr "Нема пакета"
 
 #: kcp.go:70
 msgid "On display action, don't print KCP version"
-msgstr "Кад приказујеш, не исписуј КЦП верзију"
+msgstr "кад листаш, не исписуј КЦП верзију"
 
 #: kcp.go:71
 msgid "On display action, sort packages by stars descending"
-msgstr "Кад приказујеш,  сортирај опадајуће по оценама"
+msgstr "кад листаш,  сортирај опадајуће по оценама"
 
 #: kcp.go:72
 msgid "On install action, install as a dependence"
-msgstr "При инсталацији, инсталирај као зависност"
+msgstr "кад инсталацираш, инсталирај као зависност"
 
 #: kcp.go:325
 msgid "Package not found!"
@@ -102,11 +102,11 @@ msgstr "приказује верзију"
 
 #: kcp.go:67
 msgid "Search packages' motif in KCP and display them"
-msgstr "Претражује фразу у КЦП и приказује пакете"
+msgstr "претражује фразу у КЦП и приказује пакете"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Алатке командне линије за КаОС пакете заједнице"
+msgstr "Алатке командне линије за пакете КаОС заједнице"
 
 #: kcp.go:51
 msgid "Unknown error!"
@@ -114,7 +114,7 @@ msgstr "Непозната грешка!"
 
 #: kcp.go:62
 msgid "[OPTIONS] [APP]"
-msgstr "[ОПЦИЈЕ] [АПЛ]"
+msgstr "[ОПЦИЈЕ] [АПЛИКАЦИЈА]"
 
 #: kcp.go:471
 msgid "debug mode"
@@ -122,35 +122,35 @@ msgstr "режим откривања грешака"
 
 #: kcp.go:67
 msgid "Search packages in KCP and display them"
-msgstr "Претражује пакете КЦП-а и приказује их"
+msgstr "претражује пакете КЦП-а и приказује их"
 
 #: kcp.go:171
 msgid "On display action, display only installed packages"
-msgstr "Кад приказујеш,  прикажи само инсталиране"
+msgstr "кад листаш,  прикажи само инсталиране"
 
 #: kcp.go:172
 msgid "On display action, display only outdated packages"
-msgstr "Кад приказујеш, прикажи само застареле пакете"
+msgstr "кад листаш, прикажи само застареле пакете"
 
 #: kcp.go:170
 msgid "On display action, display only packages with at least one star"
-msgstr "Кад приказујеш, прикажи само пакете са бар једном звездицом"
+msgstr "кад листаш, прикажи само пакете са бар једном звездицом"
 
 #: kcp.go:169
 msgid "On display action, display only the name of the package"
-msgstr "Кад приказујеш, прикажи само име пакета"
+msgstr "кад листаш, прикажи само име пакета"
 
 #: kcp.go:168
 msgid "On display action, force refreshing local database"
-msgstr "Кад приказујеш, присили освежавање локалне базе"
+msgstr "кад листаш, присили освежавање локалне базе"
 
 #: kcp.go:166
 msgid "On list action, display only installed packages"
-msgstr "Кад листаш, прикажи само инсталиране пакете"
+msgstr "кад листаш, прикажи само инсталиране пакете"
 
 #: kcp.go:167
 msgid "On refreshing database action, force complete update"
-msgstr "При освежавању базе, присили потпуно освежавање"
+msgstr "кад освежаваш базу, присили потпуно освежавање"
 
 #: kcp.go:159
 msgid "Refresh the local database"
