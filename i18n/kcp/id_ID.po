@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-04-18 16:00+0000\n"
+"PO-Revision-Date: 2015-04-18 22:17+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr "Unduh berkas yang diperlukan untuk membangun paket"
 
 #: kcp.go:69
 msgid "Install a package from KCP"
-msgstr "Pasang sebuah paket dari KCP"
+msgstr "Pasang paket dari KCP"
 
 #: kcp.go:49
 msgid "Interrupt by user..."
