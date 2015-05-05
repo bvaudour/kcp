@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-04-18 16:00+0000\n"
+"PO-Revision-Date: 2015-04-30 05:18+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr "%s adalah sebuah Pengecek PKGBUILD sederhana untuk Paket Komunitas KaOS."
+msgstr "%s adalah sebuah PKGBUILD Checker sederhana untuk KaOS Community Packages."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format

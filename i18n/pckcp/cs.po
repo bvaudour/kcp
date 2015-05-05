@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-10 11:37+0000\n"
+"PO-Revision-Date: 2015-05-01 09:06+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/kaos/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "PKGBUILD nelze uložit!"
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr ""
+msgstr "PKGBUILD je rozdělený PKGBUILD. Udělejte tolik PKGBUILDs kolik tento obsahuje různých stran!"
 
 #: pckcp.go:42
 #, c-format
@@ -109,7 +109,7 @@ msgstr "Proměnná '%s' je prázdná."
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr ""
+msgstr "Proměnné 'depends' a 'makedepends' jsou prázdné Měl byste ručně zjistit, zda nechybí."
 
 #: pckcp.go:27
 msgid "arch is clean."

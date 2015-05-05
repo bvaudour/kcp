@@ -97,15 +97,9 @@ function __fish_kcp_needs_command
 			if __fish_kcp_contains f force-update $cmd
 				return 0
 			end
-			if __fish_kcp_contains c complete $cmd
-				return 0
-			end
 		case u update-database
 			if __fish_kcp_contains l list $cmd
 				return 1
-			end
-			if __fish_kcp_contains c complete $cmd
-				return 0
 			end
 		case s search
 			if __fish_kcp_contains l list $cmd
@@ -124,6 +118,9 @@ function __fish_kcp_needs_command
 				return 0
 			end
 			if __fish_kcp_contains x sort $cmd
+				return 0
+			end
+			if __fish_kcp_contains f force-update $cmd
 				return 0
 			end
 		case i install
@@ -156,11 +153,11 @@ function __fish_kcp_needs_command
 				return 0
 			end
 		case f force-update
-			if __fish_kcp_contains s search $cmd
-				return 1
-			end
 			if __fish_kcp_contains u update-database $cmd
 				return 1
+			end
+			if __fish_kcp_contains s search $cmd
+				return 0
 			end
 			if __fish_kcp_contains l list $cmd
 				return 0
@@ -178,19 +175,6 @@ function __fish_kcp_needs_command
 				return 0
 			end
 			if __fish_kcp_contains x sort $cmd
-				return 0
-			end
-			if __fish_kcp_contains c complete $cmd
-				return 0
-			end
-		case c complete
-			if __fish_kcp_contains l list $cmd
-				return 0
-			end
-			if __fish_kcp_contains u update-database $cmd
-				return 0
-			end
-			if __fish_kcp_contains f force-update $cmd
 				return 0
 			end
 		case d asdeps
@@ -219,8 +203,6 @@ complete -f  -c kcp -n '__fish_kcp_empty' -a '-lI --only-installed' -d 'Display 
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lO --only-outdated'  -d 'Display only the outdated packages'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lx --sort'           -d 'Sort results by popularity'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lf --force-update'   -d 'Force refreshing database'
-complete -f  -c kcp -n '__fish_kcp_empty' -a '-lfc'                 -d 'Force complete refreshing database'
-complete -f  -c kcp -n '__fish_kcp_empty' -a '--complete'           -d 'Complete refresh of database'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-di --asdeps'         -d 'install as dependence'
 
 
@@ -235,7 +217,6 @@ complete -f -c kcp -n '__fish_kcp_needs_command I only-installed'  -a '-I --only
 complete -f -c kcp -n '__fish_kcp_needs_command O only-outdated'   -a '-O --only-outdated'   -d 'Display only the outdated packages'
 complete -f -c kcp -n '__fish_kcp_needs_command x sort'            -a '-x --sort'            -d 'Sort results by popularity'
 complete -f -c kcp -n '__fish_kcp_needs_command f force-update'    -a '-f --force-update'    -d 'Force refreshing database'
-complete -f -c kcp -n '__fish_kcp_needs_command c complete'        -a '-c --complete'        -d 'Complete refresh of database'
 complete -f -c kcp -n '__fish_kcp_needs_command d asdeps'          -a '-d --asdeps'         -d 'install as dependence'
 
 # Available packages

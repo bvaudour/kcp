@@ -64,10 +64,10 @@ _kcp() {
 	pprev="${COMP_WORDS[COMP_CWORD-2]}"
 	opts='--help --version --list --update-database --search --get --install
 				--only-name --only-starred --only-installed --only-outdated
-				--sort --force-update --complete --asdeps
+				--sort --force-update --asdeps
 				-h -v -l -u -s -g -i
 				-lN -lS -lI -lO
-				-lx -lf -lfc -uc -di'
+				-lx -lf -di'
 	lst=()
 
 	_kcpMatch $prev h help v version && return 0
@@ -77,14 +77,13 @@ _kcp() {
 		lst=( $( kcp -lN | sort ) )
 	elif _kcpIsInstall ${COMP_WORDS[@]}; then
 		_kcpContains d asdeps ${COMP_WORDS[@]} || lst=(--asdeps)
-	elif _kcpIsUpdate ${COMP_WORDS[@]}; then
-		_kcpContains c complete ${COMP_WORDS[@]} || lst=(--complete)
 	elif _kcpIsSearch ${COMP_WORDS[@]}; then
 		_kcpContains x sort ${COMP_WORDS[@]} || lst=(${lst[@]} --sort)
 		_kcpContains N only-name ${COMP_WORDS[@]} || lst=(${lst[@]} --only-name)
 		_kcpContains S only-starred ${COMP_WORDS[@]} || lst=(${lst[@]} --only-starred)
 		_kcpContains I only-installed ${COMP_WORDS[@]} || lst=(${lst[@]} --only-installed)
 		_kcpContains O only-outdated ${COMP_WORDS[@]} || lst=(${lst[@]} --only-outdated)
+		_kcpContains f force-update ${COMP_WORDS[@]} || lst=(${lst[@]} --force-update)
 	elif _kcpIsList ${COMP_WORDS[@]}; then
 		_kcpContains x sort ${COMP_WORDS[@]} || lst=(${lst[@]} --sort)
 		_kcpContains N only-name ${COMP_WORDS[@]} || lst=(${lst[@]} --only-name)
@@ -92,21 +91,14 @@ _kcp() {
 		_kcpContains I only-installed ${COMP_WORDS[@]} || lst=(${lst[@]} --only-installed)
 		_kcpContains O only-outdated ${COMP_WORDS[@]} || lst=(${lst[@]} --only-outdated)
 		_kcpContains f force-update ${COMP_WORDS[@]} || lst=(${lst[@]} --force-update)
-		_kcpContains c complete ${COMP_WORDS[@]} || lst=(${lst[@]} --complete)
 	elif _kcpContains f force-update ${COMP_WORDS[@]}; then
-		lst=(--list)
-		_kcpContains c complete ${COMP_WORDS[@]} || lst=(${lst[@]} --complete)
-	elif _kcpContains c complete ${COMP_WORDS[@]}; then
-		lst=(--update-database --force-update)
-	elif _kcpContains c complete ${COMP_WORDS[@]}; then
-		lst=(--search --list)
+		lst=(--list --search)
 		_kcpContains x sort ${COMP_WORDS[@]} || lst=(${lst[@]} --sort)
 		_kcpContains N only-name ${COMP_WORDS[@]} || lst=(${lst[@]} --only-name)
 		_kcpContains S only-starred ${COMP_WORDS[@]} || lst=(${lst[@]} --only-starred)
 		_kcpContains I only-installed ${COMP_WORDS[@]} || lst=(${lst[@]} --only-installed)
 		_kcpContains O only-outdated ${COMP_WORDS[@]} || lst=(${lst[@]} --only-outdated)
 		_kcpContains f force-update ${COMP_WORDS[@]} || lst=(${lst[@]} --force-update)
-		_kcpContains c complete ${COMP_WORDS[@]} || lst=(${lst[@]} --complete)
 	fi
 
 	lst="${lst[@]}"

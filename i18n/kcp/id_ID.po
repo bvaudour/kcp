@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-04-18 22:17+0000\n"
+"PO-Revision-Date: 2015-05-02 10:58+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Cari motif paket-paket di KCP dan tampilannya"
 
 #: kcp.go:61
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Alat dalam baris-perintah untuk Paket Komunitas KaOS"
+msgstr "Alat dalam baris-perintah untuk KaOS Community Packages"
 
 #: kcp.go:51
 msgid "Unknown error!"

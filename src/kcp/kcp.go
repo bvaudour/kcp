@@ -6,6 +6,7 @@ import (
 	"kcp/api"
 	"os"
 	"parser/pargs"
+	"strings"
 )
 
 // Filter methods
@@ -182,7 +183,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.70.4"
+	VERSION         = "0.71"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -285,6 +286,44 @@ func update() {
 }
 
 func search(app string) {
+	var m api.PMap
+	var e error
+	if *flag_forceupdate {
+		m, e = api.KcpMapAllWithVersions(*flag_debug)
+	} else if db, ok := load(); ok {
+		m = db
+	} else {
+		m, e = api.KcpMapAllWithVersions(*flag_debug)
+	}
+	if e != nil {
+		printerror(e)
+		os.Exit(1)
+	} else {
+		api.SaveDB(m)
+		filters := make([]func(*api.Package) bool, 0)
+		if *flag_onlyinstalled {
+			filters = append(filters, filtInstalled)
+		} else if *flag_onlyoutdated {
+			filters = append(filters, filtInstalled, filtOutdated)
+		}
+		if *flag_onlystarred {
+			filters = append(filters, filtStarred)
+		}
+		if len(filters) > 0 {
+			m = filtermap(m, filters...)
+		}
+		msearch := make(api.PMap)
+		for k, p := range m {
+			if strings.Contains(p.Name, app) || strings.Contains(p.Description, app) {
+				msearch[k] = p
+			}
+		}
+		packagesprint(msearch, *flag_sorted, *flag_onlyname)
+	}
+}
+
+/*
+func search(app string) {
 	l, e := api.KcpListSearch(app, *flag_debug)
 	if e != nil {
 		printerror(e)
@@ -308,6 +347,7 @@ func search(app string) {
 		packagesprint(&l, *flag_sorted, *flag_onlyname)
 	}
 }
+*/
 
 func get(app string) {
 	e := api.Get(app)
@@ -370,7 +410,7 @@ func init() {
 	argparser.Group("-h", "-v", "-l", "-s", "-g", "-i", "-u")
 	//argparser.Require("--complete", "-u", "-f")
 	argparser.Require("--sort", "-l", "-s")
-	argparser.Require("--force-update", "-l")
+	argparser.Require("--force-update", "-l", "-s")
 	argparser.Require("--only-name", "-l", "-s")
 	argparser.Require("--only-starred", "-l", "-s")
 	argparser.Require("--only-installed", "-l", "-s")
