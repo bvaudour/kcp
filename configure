@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Flag variables
-#withgccgo='no'
+withgccgo='no'
 withman='yes'
 withbash='yes'
 withfish='yes'
@@ -34,7 +34,7 @@ _generate() {
 	_addline '# Go variables...'
 	_addline 'GOCMD  = go build'
 	_addline 'GOPATH = ${PWD}'
-#	_addline 'GOFLAG = --compiler gccgo'
+	_addline 'GOFLAG = --compiler gccgo'
 	_addline 'export $(GOPATH)'
 	_emptyline
 
@@ -94,16 +94,16 @@ _generate() {
 
 	_addline 'build:'
 	_addline_t 'mkdir -p $(BUILDDIR)'
-#	case "$withgccgo" in
-#		'yes')
-#			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)'
-#			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
-#			;;
-#		*)
+	case "$withgccgo" in
+		'yes')
+			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)'
+			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
+			;;
+		*)
 			_addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)'
 			_addline_t '$(GOCMD) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
-#			;;
-#	esac
+			;;
+	esac
 #	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
 	_emptyline
 
@@ -139,13 +139,13 @@ _help() {
 for i in ${@}; do
 	case $i in
 		"-h"|"--help") _help; exit 0;;
-#		"--enable-gccgo")
-#			if e=$(which gccgo > /dev/null); then
-#				withgccgo='yes'
-#			else
-#				echo -e '\033[1;31mgccgo is not installed!\033[m'; exit 1
-#			fi
-#			;;
+		"--enable-gccgo")
+			if e=$(which gccgo > /dev/null); then
+				withgccgo='yes'
+			else
+				echo -e '\033[1;31mgccgo is not installed!\033[m'; exit 1
+			fi
+			;;
 		"--disable-man") withman='no';;
 		"--disable-bash") withbash='no';;
 		"--disable-fish") withfish='no';;
