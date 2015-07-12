@@ -76,7 +76,7 @@ _generate() {
 	_addline 'DESTBIN  = $(DESTDIR)/usr/bin'
 	_addline 'DESTMAN  = $(DESTDIR)/usr/share/man/man1'
 	_addline 'DESTBASH = $(DESTDIR)/etc/bash_completion.d'
-	_addline 'DESTFISH = $(DESTDIR)/usr/share/fish/completions'
+	_addline 'DESTFISH = $(DESTDIR)/usr/share/fish/vendor_completions.d'
 	_emptyline
 
 	_addline '# Destination files'
