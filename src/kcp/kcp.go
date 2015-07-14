@@ -5,7 +5,9 @@ import (
 	"gettext"
 	"kcp/api"
 	"os"
+	"os/signal"
 	"parser/pargs"
+	"parser/pkgbuild"
 	"strings"
 )
 
@@ -177,13 +179,14 @@ var flag_onlyname, flag_onlystarred, flag_onlyinstalled, flag_onlyoutdated *bool
 var flag_asdeps *bool
 var flag_debug *bool
 var flag_fast *bool
+var flag_information *string
 
 // Parser's descriptions
 const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.71.1"
+	VERSION         = "0.72"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -322,33 +325,6 @@ func search(app string) {
 	}
 }
 
-/*
-func search(app string) {
-	l, e := api.KcpListSearch(app, *flag_debug)
-	if e != nil {
-		printerror(e)
-		os.Exit(1)
-	} else {
-		filters := make([]func(*api.Package) bool, 0)
-		if *flag_onlyinstalled {
-			filters = append(filters, filtInstalled)
-		} else if *flag_onlyoutdated {
-			filters = append(filters, filtInstalled, filtOutdated)
-		}
-		if *flag_onlystarred {
-			filters = append(filters, filtStarred)
-		}
-		if len(filters) > 0 {
-			l = filterlist(&l, filters...)
-		}
-		for _, p := range l {
-			p.KcpVersion = api.KcpVersion(p.Name)
-		}
-		packagesprint(&l, *flag_sorted, *flag_onlyname)
-	}
-}
-*/
-
 func get(app string) {
 	e := api.Get(app)
 	if e != nil {
@@ -368,6 +344,59 @@ func install(app string, asdeps bool) {
 		<-f
 		api.SaveDB(db)
 	}
+}
+
+func information(app string) {
+	tmpdir := os.TempDir()
+	wdir := tmpdir + "/" + app
+	os.Chdir(tmpdir)
+	end := func() {
+		os.RemoveAll(wdir)
+	}
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	go func() {
+		<-c
+		end()
+		fmt.Println(t(api.MSG_INTERRUPT))
+	}()
+	defer end()
+	get(app)
+	os.Chdir(wdir)
+	p, err := pkgbuild.Parse("PKGBUILD")
+	if err != nil {
+		printerror(err)
+		os.Exit(1)
+	}
+	prtbl := func(bl *pkgbuild.Block, title string) {
+		v := ""
+		ok := false
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE {
+				if ok {
+					v += " "
+				}
+				v += d.String()
+				ok = true
+			}
+		}
+		if ok {
+			fmt.Printf("\033[1m%s\033[m\t%s\n", title, v)
+		}
+	}
+	if bl, ok := p.Variables[pkgbuild.URL]; ok {
+		prtbl(bl, "url")
+	}
+	if bl, ok := p.Variables[pkgbuild.LICENSE]; ok {
+		prtbl(bl, "license")
+	}
+	if bl, ok := p.Variables[pkgbuild.ARCH]; ok {
+		prtbl(bl, "arch")
+	}
+	if bl, ok := p.Variables[pkgbuild.DEPENDS]; ok {
+		prtbl(bl, "depends")
+	}
+	end()
 }
 
 func checkUser() {
@@ -405,6 +434,7 @@ func init() {
 	flag_onlyoutdated, _ = argparser.Bool("-O", "--only-outdated", t(D_ONLYOUTDATED))
 	flag_asdeps, _ = argparser.Bool("-d", "--asdeps", t(D_ASDEPS))
 	flag_debug, _ = argparser.Bool("-D", "--debug", "debug mode")
+	flag_information, _ = argparser.String("", "--information", "informations about a package", VALUENAME, "")
 
 	// Init flags groups/requirements
 	argparser.Group("-h", "-v", "-l", "-s", "-g", "-i", "-u")
@@ -417,6 +447,7 @@ func init() {
 	argparser.Require("--only-outdated", "-l", "-s")
 	argparser.Require("--asdeps", "-i")
 	argparser.GetFlag("--debug").Set(pargs.HIDDEN, true)
+	argparser.GetFlag("--information").Set(pargs.HIDDEN, true)
 	// To ensure compatibility with completion
 	//flag_fast, _ = argparser.Bool("", "--fast", "")
 	//argparser.GetFlag("--fast").Set(pargs.HIDDEN, true)
@@ -449,6 +480,8 @@ func main() {
 		get(*flag_get)
 	case *flag_install != "":
 		install(*flag_install, *flag_asdeps)
+	case *flag_information != "":
+		information(*flag_information)
 	default:
 		help()
 		os.Exit(1) // Should not happen
