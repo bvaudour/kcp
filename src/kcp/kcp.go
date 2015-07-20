@@ -186,7 +186,7 @@ const (
 	LONGDESCRIPTION = `Provides a tool to make the use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
-	VERSION         = "0.72"
+	VERSION         = "0.73"
 	AUTHOR          = "B. VAUDOUR"
 	APP_DESCRIPTION = "Tool in command-line for KaOS Community Packages"
 	SYNOPSIS        = "[OPTIONS] [APP]"
@@ -325,8 +325,9 @@ func search(app string) {
 	}
 }
 
-func get(app string) {
-	e := api.Get(app)
+func get(app string, stderr bool) {
+
+	e := api.Get(app, stderr)
 	if e != nil {
 		printerror(e)
 		os.Exit(1)
@@ -361,7 +362,7 @@ func information(app string) {
 		fmt.Println(t(api.MSG_INTERRUPT))
 	}()
 	defer end()
-	get(app)
+	get(app, false)
 	os.Chdir(wdir)
 	p, err := pkgbuild.Parse("PKGBUILD")
 	if err != nil {
@@ -384,6 +385,29 @@ func information(app string) {
 			fmt.Printf("\033[1m%s\033[m\t%s\n", title, v)
 		}
 	}
+	if bl, ok := p.Variables[pkgbuild.PKGVER]; ok {
+		v := ""
+		for _, d := range bl.Values {
+			if d.Type == pkgbuild.DT_VARIABLE {
+				v = strings.TrimSpace(d.String())
+				break
+			}
+		}
+		if v != "" {
+			if bl, ok := p.Variables[pkgbuild.PKGREL]; ok {
+				for _, d := range bl.Values {
+					if d.Type == pkgbuild.DT_VARIABLE {
+						v = v + "-" + strings.TrimSpace(d.String())
+						break
+					}
+				}
+				fmt.Printf("\033[1m%s\033[m\t%s\n", "version", v)
+			}
+		}
+	}
+	if bl, ok := p.Variables[pkgbuild.PKGDESC]; ok {
+		prtbl(bl, "description")
+	}
 	if bl, ok := p.Variables[pkgbuild.URL]; ok {
 		prtbl(bl, "url")
 	}
@@ -395,6 +419,9 @@ func information(app string) {
 	}
 	if bl, ok := p.Variables[pkgbuild.DEPENDS]; ok {
 		prtbl(bl, "depends")
+	}
+	if bl, ok := p.Variables[pkgbuild.MAKEDEPENDS]; ok {
+		prtbl(bl, "makedepends")
 	}
 	end()
 }
@@ -477,7 +504,7 @@ func main() {
 	case *flag_search != "":
 		search(*flag_search)
 	case *flag_get != "":
-		get(*flag_get)
+		get(*flag_get, true)
 	case *flag_install != "":
 		install(*flag_install, *flag_asdeps)
 	case *flag_information != "":

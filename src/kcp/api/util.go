@@ -54,9 +54,12 @@ func parseFromDatabase(o pjson.Object) *Package {
 }
 
 // System operations
-func launchCommand(name string, args ...string) error {
+func launchCommand(name string, stderr bool, args ...string) error {
 	cmd := exec.Command(name, args...)
-	cmd.Stdin, cmd.Stdout, cmd.Stderr = os.Stdin, os.Stdout, os.Stderr
+	cmd.Stdin, cmd.Stdout = os.Stdin, os.Stdout
+	if stderr {
+		cmd.Stderr = os.Stderr
+	}
 	return cmd.Run()
 }
 
@@ -122,7 +125,7 @@ func editFile(f string) error {
 	if editor == "" {
 		editor = DEFAULT_EDITOR
 	}
-	return launchCommand(editor, f)
+	return launchCommand(editor, true, f)
 }
 
 func editPkgbuild() error {
@@ -173,7 +176,9 @@ func cd(dir string) { os.Chdir(dir) }
 func userDir() string { return os.Getenv("HOME") }
 
 // Git operations
-func cloneRepo(app string) error { return launchCommand("git", "clone", fmt.Sprintf(URL_REPO, app)) }
+func cloneRepo(app string, stderr bool) error {
+	return launchCommand("git", stderr, "clone", fmt.Sprintf(URL_REPO, app))
+}
 
 // Install operations
 func endInstall(wdir, lck string) {

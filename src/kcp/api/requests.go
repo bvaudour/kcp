@@ -86,7 +86,7 @@ func KcpVersion2(app string) string {
 }
 
 // Git clone
-func Get(app string) error {
+func Get(app string, stderr bool) error {
 	if !repoExists(app) {
 		return errors.New(Translate(MSG_NOT_FOUND))
 	}
@@ -94,7 +94,7 @@ func Get(app string) error {
 	if pathExists(path) {
 		return errors.New(Translatef(MSG_DIREXISTS, path))
 	}
-	return cloneRepo(app)
+	return cloneRepo(app, stderr)
 }
 
 // Install app
@@ -117,7 +117,7 @@ func Install(app string, asdeps bool) error {
 	}()
 	defer endInstall(wdir, lck)
 
-	if e := Get(app); e != nil {
+	if e := Get(app, true); e != nil {
 		endInstall(wdir, lck)
 		return e
 	}
@@ -139,9 +139,9 @@ func Install(app string, asdeps bool) error {
 
 	var e error
 	if asdeps {
-		e = launchCommand("makepkg", "-si", "--asdeps")
+		e = launchCommand("makepkg", true, "-si", "--asdeps")
 	} else {
-		e = launchCommand("makepkg", "-si")
+		e = launchCommand("makepkg", true, "-si")
 	}
 	endInstall(wdir, lck)
 	return e
