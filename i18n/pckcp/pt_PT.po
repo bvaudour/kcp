@@ -3,183 +3,184 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Davidmp <medipas@gmail.com>, 2015
+# Arnt <qtgzmanager@gmail.com>, 2015
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-10 09:28+0000\n"
-"Last-Translator: Davidmp <medipas@gmail.com>\n"
-"Language-Team: Catalan (http://www.transifex.com/kaos/kaos/language/ca/)\n"
+"PO-Revision-Date: 2015-08-09 16:06+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/kaos/kaos/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
+"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: pckcp.go:43
 #, c-format
 msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
-msgstr "%s és un comprovador simple de PKGBUILD per als paquets de comunitat del KaOS."
+msgstr "%s é um avaliador simples para ficheiros PKGBUILD provenientes dos Pacotes Comunitários do KaOS."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid ""
 "%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
-msgstr "%s no és ni al repositori ni al kcp. No cal que la variable \"%s\" el contingui."
+msgstr "%s não está no repositório nem no kcp. Variável '%s' não precisa contê-lo."
 
 #: pckcp.go:34 pckcp.go:41
 #, c-format
 msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
-msgstr "%s no és ni al repositori ni al kcp. La variable \"%s\" no l'hauria de contenir."
+msgstr "%s não está no repositório nem no kcp. Variável '%s' não deveria contê-lo."
 
 #: pckcp.go:40
 #, c-format
 msgid "'%s' is clean."
-msgstr "'%s' és net."
+msgstr "'%s' está adequado."
 
 #: pckcp.go:19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr "La carpeta actual no conté el PKGBUILD!"
+msgstr "A pasta corrente não contém o arquivo PKGBUILD!"
 
 #: pckcp.go:21
 msgid "Header is clean."
-msgstr "La capçalera és neta."
+msgstr "O cabeçalho está adequado."
 
 #: pckcp.go:22
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr "S'ha trobat la capçalera. No useu noms de maintenidors o contribuïdors al PKGBUILD, qualsevol persona hi pot contribuir, mantingueu-ne la capçalera neta."
+msgstr "Um cabeçalho foi encontrado. Não utilize nomes de mantenedores nem contribuintes nos arquivos PKGBUILD, pois qualquer um pode contribuir. Mantenha o cabeçalho livre deste tipo de informação."
 
 #: pckcp.go:20
 msgid "PKGBUILD cannot be saved!"
-msgstr "El PKGBUILD no es pot desar!"
+msgstr "O ficheiro PKGBUILD não pode ser salvo!"
 
 #: pckcp.go:36
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr "El PKGBUILD és un PKGBUILD dividit. Feu tants PKGBUILD, ja que això conté paquets diferents!"
+msgstr "O arquivo PKGBUILD é um PKGBUILD dividido. Crie tantos arquivos PKGBUILD quantos forem o número de pacotes diferentes!"
 
 #: pckcp.go:42
 #, c-format
 msgid "Remove %s as %s?"
-msgstr "Suprimir %s com a %s?"
+msgstr "Remover %s como %s?"
 
 #: pckcp.go:35
 #, c-format
 msgid "Remove %s in variable '%s'?"
-msgstr "Suprimir %s a la variable \"%s\"?"
+msgstr "Remover %s da variável '%s'?"
 
 #: pckcp.go:23
 msgid "Remove header?"
-msgstr "Suprimir la capçalera?"
+msgstr "Remover o cabeçalho?"
 
 #: pckcp.go:31
 #, c-format
 msgid "Remove variable '%s'?"
-msgstr "Suprimir la variable \"%s\"?"
+msgstr "Remover a variável '%s'?"
 
 #: pckcp.go:29
 msgid "Reset arch to x86_64?"
-msgstr "Restablir l'arquitectura a x86_64?"
+msgstr "Alterar a arquitetura para x86_64?"
 
 #: pckcp.go:26
 msgid "Reset pkgrel to 1?"
-msgstr "Restablir pkgrel a 1?"
+msgstr "Alterar pkgrel para 1?"
 
 #: pckcp.go:33
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
-msgstr "La variable \"%s\" conté el nom del paquet. No serveix per a res."
+msgstr "Variável '%s' contém um nome do pacote. É inútil."
 
 #: pckcp.go:32
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr "La variable \"%s\" és neta."
+msgstr "Variável '%s' está adequada."
 
 #: pckcp.go:30
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr "La variable \"%s\" és buida."
+msgstr "Variável '%s' está vazia."
 
 #: pckcp.go:39
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr "Les variables \"depends\" i \"makedepends\" són buides. Hauríeu de comprovar manualment que no sigui una mancança."
+msgstr "Variável 'depends' e 'makedepends' estão vazias. Você deve indicar manualmente se isto não se trata de um equívoco."
 
 #: pckcp.go:27
 msgid "arch is clean."
-msgstr "l'arquitectura és neta."
+msgstr "Arquitetura está adequada."
 
 #: pckcp.go:28
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
-msgstr "L'arquitectura és diferent de \"x86_64\". Ja que el KaOS només té suport per a aquesta arquitectura, no s'afegirà cap altra arquitectura aquí."
+msgstr "Arquitetura é diferente de 'x86_64'. Uma vez que o KaOS suporta apenas esta arquitetura, nenhuma outra poderá ser usada aqui."
 
 #: pckcp.go:37
 msgid "package() function is present."
-msgstr "la funció del paquet() és present."
+msgstr "A função package() está presente."
 
 #: pckcp.go:38
 msgid "package() function missing. You should have to add it."
-msgstr "La funció del paquet() no és present. L'hauríeu d'afegir."
+msgstr "A função package() não foi encontrada. Você deverá adicioná-la."
 
 #: pckcp.go:38
 msgid "package() function missing. You need to add it."
-msgstr "La funció del paquet() no és present. Cal que l'afegiu."
+msgstr "A função package() não foi encontrada. Você precisará adicioná-la."
 
 #: pckcp.go:24
 msgid "pkgrel is clean."
-msgstr "pkgrel és net."
+msgstr "pkgrel está adequado."
 
 #: pckcp.go:25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
-msgstr "El pkgrel és diferent d'1. Només hauria de ser així si s'editen les instruccions de construcció però no el pkgver."
+msgstr "pkgrel é diferente de 1. Este somente deve ser o caso se as instruções para montagem foram editadas, com exceção do pkgver."
 
 #: pckcp.go:44
 msgid "url is clean."
-msgstr "L'url és net."
+msgstr "url está adequada."
 
 #: pckcp.go:45
 msgid "No url specified."
-msgstr "Cap url especificat."
+msgstr "Nenhuma url especificada."
 
 #: pckcp.go:46
 msgid "Add url?"
-msgstr "Afegir url?"
+msgstr "Adicionar url?"
 
 #: pckcp.go:47
 msgid "Please, type the URL to include:"
-msgstr "Si us plau, escriviu l'URL a incloure:"
+msgstr "Por favor, digite a URL a incluir:"
 
 #: pckcp.go:36
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr "Modificar %s a la variable \"%s\"?"
+msgstr "Alterar %s na variável '%s'?"
 
 #: pckcp.go:37
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr "Reemplaçar %s amb... (deixeu-ho en blanc per suprimir-ho):"
+msgstr "Substituir %s por... (deixar em branco para removê-la):"
 
 #: pckcp.go:44
 #, c-format
 msgid "Modify %s as %s?"
-msgstr "Modificar %s com a %s?"
+msgstr "Trocar %s por %s?"
 
 #: pckcp.go:53
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr "Modificacions desades a %s!"
+msgstr "Alterações salvas em %s!"
 
 #: pckcp.go:54
 #, c-format
 msgid "Error on save file %s!"
-msgstr "Error en desar el fitxer %s!"
+msgstr "Erro ao salvar ficheiro %s!"
