@@ -1,30 +1,6 @@
 package pkgbuild
 
-// Type of data
-type DataType int
-
-const (
-	DT_UNKNOWN DataType = iota
-	DT_BLANK
-	DT_COMMENT
-	DT_VARIABLE
-	DT_FUNCTION
-)
-
-// Type of container
-type BlockType int
-
-const (
-	BT_NONE BlockType = iota
-	BT_UNKNOWN
-	BT_HEADER
-	BT_VARIABLE
-	BT_UVARIABLE
-	BT_FUNCTION
-	BT_UFUNCTION
-)
-
-// List of standard variables
+//List of standard variables
 const (
 	PKGBASE      = "pkgbase"
 	PKGNAME      = "pkgname"
@@ -83,7 +59,17 @@ var L_VARIABLES = []string{
 	SHA256SUMS,
 }
 
-// List of common functions
+var L_NEEDED = []string{
+	PKGNAME,
+	PKGVER,
+	PKGREL,
+	PKGDESC,
+	ARCH,
+	URL,
+	LICENSE,
+}
+
+//List of common functions
 const (
 	PREPARE = "prepare"
 	BUILD   = "build"
@@ -99,51 +85,43 @@ var L_FUNCTIONS = []string{
 	PACKAGE,
 }
 
-// Other
+//List of unparsing types
 const (
-	HEADER  = "<header>"
-	UNKNOWN = "<unknown>"
+	uSingleVar = iota
+	uSingleVarQ
+	uOptional
+	uOptionalQ
+	uMultipleVar
+	uMultipleVarQ
+	uMultipleLines
+	uLines
 )
 
-// Types of unparsing
-type UnparseType int
-
-const (
-	UT_SINGLEVAR UnparseType = iota
-	UT_SINGLEVARQ
-	UT_OPTIONAL
-	UT_OPTIONALQ
-	UT_MULTIPLEVAR
-	UT_MULTIPLEVARQ
-	UT_MULTIPLELINES
-	UT_LINES
-)
-
-var U_VARIABLES = map[string]UnparseType{
-	PKGBASE:      UT_SINGLEVAR,
-	PKGNAME:      UT_OPTIONAL,
-	PKGVER:       UT_SINGLEVAR,
-	PKGREL:       UT_SINGLEVAR,
-	EPOCH:        UT_SINGLEVAR,
-	PKGDESC:      UT_SINGLEVARQ,
-	ARCH:         UT_MULTIPLEVARQ,
-	URL:          UT_SINGLEVARQ,
-	LICENSE:      UT_MULTIPLEVARQ,
-	GROUPS:       UT_MULTIPLEVARQ,
-	DEPENDS:      UT_MULTIPLEVARQ,
-	MAKEDEPENDS:  UT_MULTIPLEVARQ,
-	CHECKDEPENDS: UT_MULTIPLEVARQ,
-	OPTDEPENDS:   UT_MULTIPLELINES,
-	PROVIDES:     UT_MULTIPLEVARQ,
-	CONFLICTS:    UT_MULTIPLEVARQ,
-	REPLACES:     UT_MULTIPLEVARQ,
-	BACKUP:       UT_MULTIPLEVARQ,
-	OPTIONS:      UT_MULTIPLEVAR,
-	INSTALL:      UT_SINGLEVARQ,
-	CHANGELOG:    UT_SINGLEVARQ,
-	SOURCE:       UT_MULTIPLELINES,
-	NOEXTRACT:    UT_MULTIPLEVARQ,
-	MD5SUMS:      UT_MULTIPLELINES,
-	SHA1SUMS:     UT_MULTIPLELINES,
-	SHA256SUMS:   UT_MULTIPLELINES,
+var uVariables = map[string]int{
+	PKGBASE:      uSingleVar,
+	PKGNAME:      uOptional,
+	PKGVER:       uSingleVar,
+	PKGREL:       uSingleVar,
+	EPOCH:        uSingleVar,
+	PKGDESC:      uSingleVarQ,
+	ARCH:         uMultipleVarQ,
+	URL:          uSingleVarQ,
+	LICENSE:      uMultipleVarQ,
+	GROUPS:       uMultipleVarQ,
+	DEPENDS:      uMultipleVarQ,
+	MAKEDEPENDS:  uMultipleVarQ,
+	CHECKDEPENDS: uMultipleVarQ,
+	OPTDEPENDS:   uMultipleVarQ,
+	PROVIDES:     uMultipleVarQ,
+	CONFLICTS:    uMultipleVarQ,
+	REPLACES:     uMultipleVarQ,
+	BACKUP:       uMultipleVarQ,
+	OPTIONS:      uMultipleVarQ,
+	INSTALL:      uSingleVarQ,
+	CHANGELOG:    uSingleVarQ,
+	SOURCE:       uMultipleLines,
+	NOEXTRACT:    uMultipleVarQ,
+	MD5SUMS:      uMultipleLines,
+	SHA1SUMS:     uMultipleLines,
+	SHA256SUMS:   uMultipleLines,
 }

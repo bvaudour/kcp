@@ -1,4 +1,4 @@
-package pargs
+package flag
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ const (
 	HIDDEN
 )
 
-// Waiting property's type following key
+// Excepted property's type following key (true if boolean, false if string)
 var ktype = map[int]bool{
 	NAME:            false,
 	SHORT:           false,
@@ -97,9 +97,9 @@ func (p *property) set(v interface{}) error {
 		}
 	}
 	if p.isBool {
-		return invalidValue(v, "boolean")
+		return newErrorf(invalidValue, v, "boolean")
 	}
-	return invalidValue(v, "string")
+	return newErrorf(invalidValue, v, "string")
 }
 func (p *property) String() string { return fmt.Sprintf("%v", p.value) }
 
@@ -117,7 +117,7 @@ func flagProps() properties   { return newProperties(kflag) }
 func (p properties) set(k int, v interface{}) error {
 	prop, ok := p[k]
 	if !ok {
-		return unknownProperty(k)
+		return newErrorf(unknownProperty, k)
 	}
 	return prop.set(v)
 }

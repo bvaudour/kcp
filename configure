@@ -49,6 +49,7 @@ _generate() {
 	_addline 'COMPDIR  = ${PWD}/completion'
 	_addline 'BUILDDIR = ${PWD}/build'
 	_addline 'MANDIR   = ${PWD}/man'
+	_addline 'ETCDIR   = ${PWD}/etc/pckcp'
 	_emptyline
 
 	_addline '# Base files'
@@ -59,6 +60,7 @@ _generate() {
 	_addline 'GOFILEC  = $(PACKAGEC).go'
 	_addline 'BASHFILE = $(PACKAGE).bash'
 	_addline 'FISHFILE = $(PACKAGE).fish'
+	_addline 'EXCEPTS  = exceptions'
 	_emptyline
 
 	_addline '# Source files'
@@ -69,14 +71,16 @@ _generate() {
 	_addline 'SRCGOFILEC  = $(SRCDIRC)/$(GOFILEC)'
 	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
 	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
+	_addline 'SRCEXCEPTF  = $(ETCDIR)/$(EXCEPTS)'
 	_emptyline
 
 	_addline '# Destination directories'
-	_addline 'DESTDIR ?='
-	_addline 'DESTBIN  = $(DESTDIR)/usr/bin'
-	_addline 'DESTMAN  = $(DESTDIR)/usr/share/man/man1'
-	_addline 'DESTBASH = $(DESTDIR)/etc/bash_completion.d'
-	_addline 'DESTFISH = $(DESTDIR)/usr/share/fish/vendor_completions.d'
+	_addline 'DESTDIR   ?='
+	_addline 'DESTBIN    = $(DESTDIR)/usr/bin'
+	_addline 'DESTMAN    = $(DESTDIR)/usr/share/man/man1'
+	_addline 'DESTBASH   = $(DESTDIR)/etc/bash_completion.d'
+	_addline 'DESTFISH   = $(DESTDIR)/usr/share/fish/vendor_completions.d'
+	_addline 'DESTEXCEPT = $(DESTDIR)/$(EXCEPTS)'
 	_emptyline
 
 	_addline '# Destination files'
@@ -85,6 +89,7 @@ _generate() {
 	_addline 'DESTMANFILE  = $(DESTMAN)/$(MANFILE)'
 	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
 	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
+	_addline 'DESTEXCEPTF  = $(DESTEXCEPT)/$(EXCEPTS)'
 	_emptyline
 
 	_addline '.PHONY: default build install clean'
@@ -112,17 +117,19 @@ _generate() {
 	_addline_cond "$withman"  'mkdir -p $(DESTMAN)'
 	_addline_cond "$withbash" 'mkdir -p $(DESTBASH)'
 	_addline_cond "$withfish" 'mkdir -p $(DESTFISH)'
+	_addline_t 'mkdir -p $(DESTEXCEPT)'
 	_addline_t 'cp $(SRCBINFILE) $(DESTBINFILE)'
 	_addline_t 'cp $(SRCBINFILEC) $(DESTBINFILEC)'
 	_addline_cond "$withman"  'cp $(SRCMANFILE) $(DESTMANFILE)'
 	_addline_cond "$withbash" 'cp $(SRCBASHFILE) $(DESTBASHFILE)'
 	_addline_cond "$withfish" 'cp $(SRCFISHFILE) $(DESTFISHFILE)'
+	_addline_t 'cp $(SRCEXCEPTF) $(DESTEXCEPTF)'
 	_emptyline
 
 	_addline 'clean:'
 	_addline_t 'rm $(SRCBINFILE)'
 	_addline_t 'rm $(SRCBINFILEC)'
-	_addline_cond "$withman" 'rm $(SRCMANFILE)'
+#	_addline_cond "$withman" 'rm $(SRCMANFILE)'
 	_addline_t 'rmdir $(BUILDDIR)'
 }
 

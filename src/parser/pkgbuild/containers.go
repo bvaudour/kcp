@@ -1,400 +1,447 @@
 package pkgbuild
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"io/ioutil"
+	"regexp"
+	"sort"
 	"strings"
 )
 
+//DataType is the type of the data.
+type DataType int
+
+const (
+	DT_UNKNOWN DataType = iota
+	DT_BLANK
+	DT_COMMENT
+	DT_VARIABLE
+	DT_FUNCTION
+)
+
+//Data is an atomic element of the PKGBUILD.
 type Data struct {
 	Type  DataType
 	Line  int
 	Value string
 }
 
-func (d *Data) Append(s string) {
-	d.Value += s
-}
+//BlocType is the type of the block.
+type BlockType int
 
-func (d *Data) AppendRunes(r ...rune) {
-	d.Append(string(r))
-}
+const (
+	BT_UNKNOWN BlockType = iota
+	BT_HEADER
+	BT_VARIABLE
+	BT_FUNCTION
+)
 
-func (d *Data) String() string {
-	return d.Value
-}
-
+//Block is a group of data in the PKGBUILD.
 type Block struct {
-	Name       string
-	Type       BlockType
-	Begin, End int
-	Header     []*Data
-	Values     []*Data
+	Name     string
+	Type     BlockType
+	From, To int
+	Values   []*Data
 }
 
-func NewBlock(n string, b int, t BlockType) *Block {
-	out := new(Block)
-	out.Name = n
-	out.Begin = b
-	out.Type = t
-	out.Header = []*Data{}
-	out.Values = []*Data{}
-	return out
-}
-
-func emptyBlock(begin int) *Block {
-	return NewBlock("", begin, BT_NONE)
-}
-
-func initb(begin int, line string) *Block {
-	b, d := emptyBlock(begin), initd()
-	t, v := parse_line(line)
-	switch t {
-	case DT_UNKNOWN:
-		b.Name, b.Type = UNKNOWN, BT_UNKNOWN
-		b.AppendDataString(line, t, begin)
-	case DT_VARIABLE:
-		b.Name, b.Type = v[0], BT_UVARIABLE
-		b.update_type()
-		b.AppendData(split_var(v[1], begin, d)...)
-	case DT_FUNCTION:
-		b.Name, b.Type = v[0], BT_UFUNCTION
-		b.update_type()
-	default:
-		if begin == 1 {
-			b.Name, b.Type = HEADER, BT_HEADER
-		}
-		b.AppendHeaderString(line, t, begin)
-	}
-	return b
-}
-
-func (b *Block) AppendHeader(d ...*Data) {
-	b.Header = append(b.Header, d...)
-}
-
-func (b *Block) AppendHeaderString(s string, t DataType, l int) {
-	b.AppendHeader(&Data{t, l, s})
-}
-
-func (b *Block) AppendData(d ...*Data) {
-	b.Values = append(b.Values, d...)
-}
-
-func (b *Block) AppendDataString(s string, t DataType, l int) {
-	b.AppendData(&Data{t, l, s})
-}
-
-func (b *Block) FusionData(d ...*Data) {
-	if len(d) > 0 {
-		if l := len(b.Values) - 1; l >= 0 {
-			b.Values[l].Append("\n" + d[0].String())
-			b.AppendData(d[1:]...)
-			return
-		}
-	}
-	b.AppendData(d...)
-}
-
-func (b *Block) update_type() {
-	a, t := L_VARIABLES, BT_VARIABLE
-	if b.Type == BT_UFUNCTION {
-		a, t = L_FUNCTIONS, BT_UFUNCTION
-	}
-	for _, e := range a {
-		if b.Name == e {
-			b.Type = t
-			return
-		}
+func newBlock(t BlockType, l int) *Block {
+	return &Block{
+		Type: t,
+		From: l,
+		To:   l,
 	}
 }
 
-func (b *Block) s_name(unknown bool) string {
-	n := b.Name
-	if b.Type == BT_FUNCTION || b.Type == BT_UFUNCTION {
-		n += "()"
-	}
-	out := fmt.Sprintf("\033[1;31m%s (%d-%d)\033[m", n, b.Begin, b.End)
-	if unknown && b.Type != BT_UNKNOWN {
-		out += " [unknown]"
-	}
-	return out
+func (b *Block) add(d *Data) {
+	b.Values = append(b.Values, d)
+	b.To = d.Line
 }
 
-func (b *Block) s_header() string {
-	out := ""
-	for _, d := range b.Header {
-		out = fmt.Sprintf("%s\n%s", out, d.String())
-	}
-	return out
-}
-
-func (b *Block) s_values() string {
-	out := ""
-	for _, d := range b.Values {
-		out = fmt.Sprintf("%s\n  - '%s'", out, d.String())
-		if d.Type == DT_COMMENT {
-			out += " [comment]"
-		}
-	}
-	return out
-}
-
-func (b *Block) stringer(unknown bool) string {
-	out := b.s_name(unknown)
-	out += "\n------------------------------------"
-	out += b.s_header()
-	out += "\n------------------------------------"
-	out += b.s_values()
-	out += "\n------------------------------------"
-	return out
-}
-
-func (b *Block) String() string {
-	return b.stringer(false)
-}
-
-func (b *Block) l_header() []string {
-	out := make([]string, 0, len(b.Header))
-	if b.Type == BT_HEADER {
-		if len(b.Header) > 0 && b.Header[0].Type == DT_BLANK {
-			out = append(out, "")
-		}
-	} else if b.Type != BT_VARIABLE && b.Type != BT_UVARIABLE {
-		out = append(out, "")
-	}
-	for _, d := range b.Header {
-		if d.Type != DT_BLANK {
-			out = append(out, d.String())
-		}
-	}
-	return out
-}
-
-func (b *Block) l_values() []string {
-	out := make([]string, 0, len(b.Values))
+func (b *Block) str() string {
+	buf := new(bytes.Buffer)
 	switch b.Type {
 	case BT_VARIABLE:
-		fallthrough
-	case BT_UVARIABLE:
-		out = append(out, fmt.Sprintf("%s=%s", b.Name, join_data(b)))
+		buf.WriteString(b.Name)
+		buf.WriteRune('=')
+		buf.WriteString(joinData(b))
 	case BT_FUNCTION:
-		fallthrough
-	case BT_UFUNCTION:
-		out = append(out, fmt.Sprintf("%s() {", b.Name))
-		d := join_data(b)
-		if d != "" {
-			out = append(out, d)
+		buf.WriteString(b.Name)
+		buf.WriteString("() {")
+		i := 0
+		if len(b.Values) > 0 && b.Values[i].Type == DT_FUNCTION {
+			buf.WriteByte('\n')
+			buf.WriteString(b.Values[i].Value)
+			buf.WriteByte('\n')
+			i++
 		}
-		out = append(out, "}")
+		buf.WriteString("}")
+		for _, v := range b.Values[i:] {
+			if v.Type == DT_COMMENT {
+				buf.WriteByte(' ')
+			}
+			buf.WriteString(v.Value)
+		}
+		buf.WriteByte('\n')
 	default:
-		d := join_data(b)
-		if d != "" {
-			out = append(out, d)
+		for _, d := range b.Values {
+			buf.WriteString(d.Value)
+			buf.WriteByte('\n')
 		}
 	}
-	return out
+	return buf.String()
 }
 
-func (b *Block) Lines() []string {
-	out := b.l_header()
-	out = append(out, b.l_values()...)
-	return out
+//Sort engine
+type blockSorter struct {
+	l []*Block
+	f func(*Block, *Block) bool
 }
 
+func (s *blockSorter) Len() int           { return len(s.l) }
+func (s *blockSorter) Less(i, j int) bool { return s.f(s.l[i], s.l[j]) }
+func (s *blockSorter) Swap(i, j int)      { s.l[i], s.l[j] = s.l[j], s.l[i] }
+
+func sortBlocks(l []*Block, f func(*Block, *Block) bool) {
+	s := &blockSorter{l, f}
+	sort.Sort(s)
+}
+
+//Pkgbuild represents the parsed PKGBUILD.
 type Pkgbuild struct {
-	Header    *Block
-	Variables map[string]*Block
-	Functions map[string]*Block
-	Unknowns  []*Block
+	Headers   map[int]*Block
+	Variables map[string][]*Block
+	Functions map[string][]*Block
+	Unknown   []*Block
 }
 
-func NewPkgbuild() *Pkgbuild {
-	p := new(Pkgbuild)
-	p.Variables = make(map[string]*Block)
-	p.Functions = make(map[string]*Block)
-	p.Unknowns = make([]*Block, 0)
-	return p
-}
-
-func (p *Pkgbuild) Append(b *Block) {
-	switch b.Type {
-	case BT_HEADER:
-		p.Header = b
-	case BT_VARIABLE:
-		fallthrough
-	case BT_UVARIABLE:
-		if _, ok := p.Variables[b.Name]; ok {
-			p.Unknowns = append(p.Unknowns, b)
-		} else {
-			p.Variables[b.Name] = b
-		}
-	case BT_FUNCTION:
-		fallthrough
-	case BT_UFUNCTION:
-		if _, ok := p.Functions[b.Name]; ok {
-			p.Unknowns = append(p.Unknowns, b)
-		} else {
-			p.Functions[b.Name] = b
-		}
-	default:
-		p.Unknowns = append(p.Unknowns, b)
+func strDt(t DataType) string {
+	switch t {
+	case DT_BLANK:
+		return "<blank>"
+	case DT_COMMENT:
+		return "<comment>"
+	case DT_FUNCTION:
+		return "<function>"
+	case DT_VARIABLE:
+		return "<variable>"
 	}
+	return "<unknown>"
 }
 
+//String is the string representation of the parsed PKGBUILD (for debug).
 func (p *Pkgbuild) String() string {
-	out := ""
-	if p.Header != nil {
-		out = p.Header.String()
-	}
-	for _, b := range p.Variables {
-		if out != "" {
-			out += "\n"
+	b := new(bytes.Buffer)
+	sep0 := "\n#######################"
+	sep1 := "\n+++++++++++++++++++++++"
+	sep2 := "\n-----------------------"
+	sep3 := "\n#######################"
+	b.WriteString(fmt.Sprintf("Header (%d)", len(p.Headers)))
+	b.WriteString(sep0)
+	for _, bl := range p.Headers {
+		b.WriteString(fmt.Sprintf("\n(%d-%d)", bl.From, bl.To))
+		b.WriteString(sep1)
+		for _, d := range bl.Values {
+			b.WriteString(fmt.Sprintf("\n%s (%d)\nø%sø", strDt(d.Type), d.Line, d.Value))
+			b.WriteString(sep2)
 		}
-		out += b.String()
 	}
-	for _, b := range p.Functions {
-		if out != "" {
-			out += "\n"
+	b.WriteString(fmt.Sprintf("\nVariables (%d)", len(p.Variables)))
+	b.WriteString(sep0)
+	for n, l := range p.Variables {
+		b.WriteString(fmt.Sprintf("\n%s (%d)", n, len(l)))
+		b.WriteString(sep3)
+		for _, bl := range l {
+			b.WriteString(fmt.Sprintf("\n(%d-%d)", bl.From, bl.To))
+			b.WriteString(sep1)
+			for _, d := range bl.Values {
+				b.WriteString(fmt.Sprintf("\n%s (%d)\nø%sø", strDt(d.Type), d.Line, d.Value))
+				b.WriteString(sep2)
+			}
 		}
-		out += b.String()
 	}
-	for _, b := range p.Unknowns {
-		if out != "" {
-			out += "\n"
+	b.WriteString(fmt.Sprintf("\nFunctions (%d)", len(p.Functions)))
+	b.WriteString(sep0)
+	for n, l := range p.Functions {
+		b.WriteString(fmt.Sprintf("\n%s (%d)", n, len(l)))
+		b.WriteString(sep3)
+		for _, bl := range l {
+			b.WriteString(fmt.Sprintf("\n(%d-%d)", bl.From, bl.To))
+			b.WriteString(sep1)
+			for _, d := range bl.Values {
+				b.WriteString(fmt.Sprintf("\n%s (%d)\nø%sø", strDt(d.Type), d.Line, d.Value))
+				b.WriteString(sep2)
+			}
 		}
-		out += b.stringer(true)
 	}
-	return out
+	b.WriteString(fmt.Sprintf("\nUnkowns (%d)", len(p.Unknown)))
+	b.WriteString(sep0)
+	for _, bl := range p.Unknown {
+		b.WriteString(fmt.Sprintf("\n(%d-%d)", bl.From, bl.To))
+		b.WriteString(sep1)
+		if bl.Name != "" {
+			b.WriteString(fmt.Sprintf("\nø%sø", bl.Name))
+			b.WriteString(sep2)
+		} else {
+			for _, d := range bl.Values {
+				b.WriteString(fmt.Sprintf("\n%s (%d)\nø%sø", strDt(d.Type), d.Line, d.Value))
+				b.WriteString(sep2)
+			}
+		}
+	}
+	return b.String()
 }
 
-func add_lines(mb map[string]*Block, key string, lines *[]string) {
-	if b, ok := mb[key]; ok {
-		*lines = append(*lines, b.Lines()...)
-	}
-}
-func add_ulines(mb map[string]*Block, tpe BlockType, lines *[]string) {
-	for _, b := range mb {
-		if b.Type == tpe {
-			*lines = append(*lines, b.Lines()...)
-		}
+//Add append a new block into the PKGBUILD.
+func (p *Pkgbuild) Add(b *Block) {
+	switch b.Type {
+	case BT_UNKNOWN:
+		p.Unknown = append(p.Unknown, b)
+	case BT_HEADER:
+		p.Headers[b.To] = b
+	case BT_FUNCTION:
+		p.Functions[b.Name] = append(p.Functions[b.Name], b)
+	case BT_VARIABLE:
+		p.Variables[b.Name] = append(p.Variables[b.Name], b)
 	}
 }
 
-func (p *Pkgbuild) Lines() []string {
-	out := make([]string, 0)
-	if p.Header != nil {
-		out = p.Header.Lines()
+//Clean removes all uneeded comments and invalid data.
+func (p *Pkgbuild) Clean() {
+	p.Unknown = []*Block{}
+	headers := make(map[int]*Block)
+	for _, h := range p.Headers {
+		if h.From == 1 {
+			if len(h.Values) > 0 && h.Values[0].Type == DT_BLANK {
+				h.Values = []*Data{&Data{Type: DT_BLANK}}
+				headers[h.To] = h
+			}
+			break
+		}
+	}
+	p.Headers = headers
+	variables := make(map[string][]*Block)
+	for k, l := range p.Variables {
+		bl := l[len(l)-1]
+		var data []*Data
+		for _, v := range bl.Values {
+			if v.Type == DT_VARIABLE {
+				data = append(data, v)
+			}
+		}
+		if len(data) > 0 {
+			bl.Values = data
+			variables[k] = []*Block{bl}
+		}
+	}
+	p.Variables = variables
+	functions := make(map[string][]*Block)
+	for k, l := range p.Functions {
+		bl := l[len(l)-1]
+		var data []*Data
+		for _, v := range bl.Values {
+			if v.Type == DT_FUNCTION {
+				data = append(data, v)
+			}
+		}
+		if len(data) > 0 {
+			bl.Values = data
+			functions[k] = []*Block{bl}
+		}
+	}
+	p.Functions = functions
+}
+
+//Variable returns the string represention of the elements of the needed variable.
+func (p *Pkgbuild) Variable(name string) string {
+	if l, ok := p.Variables[name]; ok && len(l) > 0 {
+		var a []string
+		for _, d := range l[0].Values {
+			if d.Type == DT_VARIABLE {
+				v := d.Value
+				r := regexp.MustCompile(`(\$\w+|\$\{.+?\})`)
+				if r.MatchString(v) {
+					for _, l := range r.FindAllStringSubmatch(v, -1) {
+						e := strings.Trim(l[0], "${}")
+						v = strings.Replace(v, l[0], p.Variable(e), -1)
+					}
+				}
+				a = append(a, v)
+			}
+		}
+		return strings.Join(a, " ")
+	}
+	return ""
+}
+
+//Version returns the complete version of the PKGBUILD (pkgver+pkgrel).
+func (p *Pkgbuild) Version() string { return p.Variable(PKGVER) + "-" + p.Variable(PKGREL) }
+
+//Name returns the packages' name of the PKGBUILD.
+func (p *Pkgbuild) Name() string {
+	if l, ok := p.Variables[PKGNAME]; ok {
+		for _, bl := range l {
+			for _, v := range bl.Values {
+				if v.Type == DT_VARIABLE {
+					return v.Value
+				}
+			}
+		}
+	}
+	return ""
+}
+
+//Parse reads a PKGBUILD and parses it.
+func Parse(file string) (*Pkgbuild, error) {
+	b, e := ioutil.ReadFile(file)
+	if e != nil {
+		return nil, e
+	}
+	rd := bytes.NewBuffer(b)
+	if p, e := parse(rd); e == nil || e == io.EOF {
+		return p, nil
+	} else {
+		return nil, e
+	}
+}
+
+//ParseBytes reads PKGBUILD and parses it.
+func ParseBytes(b []byte) (*Pkgbuild, error) {
+	rd := bytes.NewBuffer(b)
+	if p, e := parse(rd); e == nil || e == io.EOF {
+		return p, nil
+	} else {
+		return nil, e
+	}
+}
+
+//Unparse returns a formatted PKGBUILD.
+func (p *Pkgbuild) Unparse(clean bool) []byte {
+	if clean {
+		p.Clean()
+	}
+	b := new(bytes.Buffer)
+	mheader := make(map[int]bool)
+	mvf := make(map[string]bool)
+	if clean {
+		for i, h := range p.Headers {
+			mheader[i] = true
+			b.WriteString(h.str())
+		}
 	}
 	for _, k := range L_VARIABLES {
-		add_lines(p.Variables, k, &out)
+		l, ok := p.Variables[k]
+		if !ok {
+			continue
+		}
+		for _, v := range l {
+			if h, ok := p.Headers[v.From-1]; ok && !mheader[v.From-1] {
+				b.WriteString(h.str())
+				mheader[h.To] = true
+			}
+			b.WriteString(v.str())
+			b.WriteByte('\n')
+		}
+		mvf[k] = true
 	}
-	add_ulines(p.Variables, BT_UVARIABLE, &out)
+	var bl []*Block
+	for k, l := range p.Variables {
+		if !mvf[k] {
+			bl = append(bl, l...)
+		}
+	}
+	sortBlocks(bl, func(b1, b2 *Block) bool { return b1.Name < b2.Name || (b1.Name == b2.Name && b1.From < b2.From) })
+	for _, v := range bl {
+		if h, ok := p.Headers[v.From-1]; ok && !mheader[v.From-1] {
+			b.WriteString(h.str())
+			mheader[h.To] = true
+		}
+		b.WriteString(v.str())
+		b.WriteByte('\n')
+	}
 	for _, k := range L_FUNCTIONS {
-		add_lines(p.Functions, k, &out)
+		l, ok := p.Functions[k]
+		if !ok {
+			continue
+		}
+		for _, f := range l {
+			if clean {
+				b.WriteByte('\n')
+			}
+			if h, ok := p.Headers[f.From-1]; ok && !mheader[f.From-1] {
+				b.WriteString(h.str())
+				mheader[h.To] = true
+			}
+			b.WriteString(f.str())
+			b.WriteByte('\n')
+		}
+		mvf[k] = true
 	}
-	add_ulines(p.Functions, BT_UFUNCTION, &out)
-	for _, b := range p.Unknowns {
-		out = append(out, b.Lines()...)
+	bl = make([]*Block, 0, len(p.Functions))
+	for k, l := range p.Functions {
+		if !mvf[k] {
+			bl = append(bl, l...)
+		}
 	}
-	return out
+	sortBlocks(bl, func(b1, b2 *Block) bool { return b1.From < b2.From })
+	for _, f := range bl {
+		if clean {
+			b.WriteByte('\n')
+		}
+		if h, ok := p.Headers[f.From-1]; ok {
+			b.WriteString(h.str())
+			mheader[h.To] = true
+		}
+		b.WriteString(f.str())
+		b.WriteByte('\n')
+	}
+	if len(p.Unknown) > 0 {
+		b.WriteByte('\n')
+	}
+	for _, u := range p.Unknown {
+		if h, ok := p.Headers[u.From-1]; ok {
+			b.WriteString(h.str())
+			mheader[h.To] = true
+		}
+		b.WriteString(u.str())
+	}
+	bl = []*Block{}
+	for i, h := range p.Headers {
+		if !mheader[i] {
+			bl = append(bl, h)
+		}
+	}
+	if len(bl) > 0 {
+		sortBlocks(bl, func(b1, b2 *Block) bool { return b1.From < b2.From })
+		bh := new(bytes.Buffer)
+		for _, h := range bl {
+			bh.WriteString(h.str())
+		}
+		b.WriteTo(bh)
+		b = bh
+	}
+	return b.Bytes()
 }
 
-func append_data(d *[]*Data, l string, pos int) {
-	*d = append(*d, &Data{DT_UNKNOWN, pos, l})
-}
-
-func init_data(d *[]*Data, l string, pos int) {
-	*d = make([]*Data, 0, 1)
-	append_data(d, l, pos)
-}
-
-func (p *Pkgbuild) Parse(lines []string) {
-	var bc *Block
-	dc := make([]*Data, 0)
-	d := initd()
-	begin := false
-	for i, l := range lines {
-		lc := strings.TrimRight(l, " \t\r\n")
+//Version extracts the complete version (pkgver+pkgrel) of a PKGBUILD without parsing completely the file.
+func Version(b []byte) (string, bool) {
+	pkgver, pkgrel := "", ""
+	const v, r = "pkgver=", "pkgrel="
+loop:
+	for _, l := range strings.Split(string(b), "\n") {
+		l = strings.TrimSpace(l)
 		switch {
-		case bc == nil:
-			bc = initb(i+1, lc)
-			d.update(lc)
-			if bc.Type != BT_HEADER && bc.Type != BT_NONE {
-				init_data(&dc, lc, bc.Begin)
-				if bc.Type == BT_FUNCTION || bc.Type == BT_UFUNCTION {
-					if !strings.HasSuffix(lc, "{") {
-						begin = true
-					}
-				}
-			}
-		case bc.Type == BT_VARIABLE || bc.Type == BT_UVARIABLE:
-			append_data(&dc, lc, i+1)
-			if d.quote_opened() {
-				bc.FusionData(split_var(lc, i+1, d)...)
-			} else {
-				bc.AppendData(split_var(lc, i+1, d)...)
-			}
-		case bc.Type == BT_FUNCTION || bc.Type == BT_UFUNCTION:
-			append_data(&dc, lc, i+1)
-			d.update(lc)
-			switch {
-			case begin:
-				switch strings.TrimSpace(lc) {
-				case "":
-				case "{":
-					begin = false
-				default:
-					bc.Type = BT_UNKNOWN
-					bc.Values = dc
-					dc = make([]*Data, 0)
-					begin = false
-				}
-			case d.closed():
-				if strings.TrimSpace(lc) != "}" {
-					bc.Type = BT_UNKNOWN
-					bc.Values = dc
-					dc = make([]*Data, 0)
-				}
-			default:
-				bc.AppendDataString(lc, DT_FUNCTION, i+1)
-			}
-		case bc.Type == BT_UNKNOWN:
-			append_data(&dc, lc, i+1)
-			d.update(lc)
-			bc.AppendDataString(lc, DT_UNKNOWN, i+1)
+		case strings.HasPrefix(l, v):
+			pkgver = strings.TrimSpace(l[len(v):])
+		case strings.HasPrefix(l, r):
+			pkgrel = strings.TrimSpace(l[len(r):])
 		default:
-			bcn := initb(i+1, lc)
-			d.update(lc)
-			switch {
-			case bcn.Type == BT_NONE:
-				bc.AppendHeader(bcn.Header...)
-			case bc.Type == BT_HEADER:
-				p.Append(bc)
-				bc = bcn
-			default:
-				init_data(&dc, lc, bcn.Begin)
-				bcn.AppendHeader(bc.Header...)
-				bc = bcn
-				if bc.Type == BT_FUNCTION || bc.Type == BT_UFUNCTION {
-					if !strings.HasSuffix(lc, "{") {
-						begin = true
-					}
-				}
-			}
+			continue loop
 		}
-		bc.End = i + 1
-		if !begin && d.closed() && bc.Type != BT_HEADER && bc.Type != BT_NONE {
-			p.Append(bc)
-			bc = nil
+		if pkgver != "" && pkgrel != "" {
+			return pkgver + "-" + pkgrel, true
 		}
 	}
-	/*
-		if bc != nil {
-			if bc.Type != BT_HEADER {
-				bc.Type = BT_UNKNOWN
-			}
-			bc.Values = dc
-			p.Append(bc)
-		}
-	*/
+	return "", false
 }
