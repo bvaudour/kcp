@@ -1,186 +1,273 @@
 # TEMPLATE FOR KCP TRANSLATION.
-# Copyright (C) B.VAUDOUR 2014
+# Copyright (C) B.VAUDOUR 2014-2015
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# Laszlo Espadas <kw@kardiweb.org>, 2015
+# Laszlo Espadas <kardiweb@protonmail.ch>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-02-22 11:37+0000\n"
-"Last-Translator: Laszlo Espadas <kw@kardiweb.org>\n"
-"Language-Team: Hungarian (http://www.transifex.com/projects/p/kaos/language/hu/)\n"
+"PO-Revision-Date: 2015-08-27 10:07+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/kaos/kaos/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: kcp.go:147
-#, c-format
-msgid " [installed: %s]"
-msgstr "[telepítve: %s]"
+#: kcp/kcp.go, offset 1607, line 42, column 20
+msgid "Display informations about a package"
+msgstr ""
 
-#: kcp.go:145
-msgid " [installed]"
-msgstr "[telepítve]"
-
-#: kcp.go:73
-msgid "<app>"
-msgstr "<app>"
-
-#: kcp.go:136
-msgid "<unknown>"
-msgstr "<ismeretlen>"
-
-#: kcp.go:48
-msgid "Another instance of kcp is running!"
-msgstr "A KCP egy másik példánya fut!"
-
-#: kcp.go:47
-#, c-format
-msgid "Dir %s already exists!"
-msgstr "%s könyvtár már létezik!"
-
-#: kcp.go:66
-msgid "Display all outdated packages from KCP"
-msgstr "KCP összes elavult csomagjának megjelenítése"
-
-#: kcp.go:65
-msgid "Display all packages of KCP"
-msgstr "KCP összes csomagjának megjelenítése"
-
-#: kcp.go:50
-msgid "Do you want to edit PKGBUILD?"
-msgstr "Szerkesszük a PKGBUILD fájlt?"
-
-#: kcp.go:46
-msgid "Don't launch this program as root!"
-msgstr "Ne futtassuk a programot root felhasználóként!"
-
-#: kcp.go:68
-msgid "Download needed files to build a package"
-msgstr "Töltsük le az összes szükséges fájlt egy csomagban"
-
-#: kcp.go:69
-msgid "Install a package from KCP"
-msgstr "KCP csomagok telepítése"
-
-#: kcp.go:49
-msgid "Interrupt by user..."
-msgstr "Felhasználói művelet megszakítás..."
-
-#: kcp.go:45
-msgid "No package found"
-msgstr "Nem található csomag"
-
-#: kcp.go:70
-msgid "On display action, don't print KCP version"
-msgstr "Látható műveletben, ne írassuk ki a KCP verziót"
-
-#: kcp.go:71
-msgid "On display action, sort packages by stars descending"
-msgstr "Megjeleníthető művelet, csomagok csillagok szerinti csökkenése"
-
-#: kcp.go:72
-msgid "On install action, install as a dependence"
-msgstr "Telepítő művelet, függőségek telepítése"
-
-#: kcp.go:325
-msgid "Package not found!"
-msgstr "Csomag nem található!"
-
-#: kcp.go:63
-msgid "Print this help"
-msgstr "Súgó megtekintés"
-
-#: kcp.go:64
+#: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
 msgstr "Verzió kiíratás"
 
-#: kcp.go:67
-msgid "Search packages' motif in KCP and display them"
-msgstr "KCP csomagok keresése és megjelenítése"
+#: kcp/kcp.go, offset 885, line 32, column 20
+msgid "On display action, don't print KCP version"
+msgstr "Látható műveletben, ne írassuk ki a KCP verziót"
 
-#: kcp.go:61
-msgid "Tool in command-line for KaOS Community Packages"
-msgstr "KaOS közösségi csomagok parancssori eszköz"
-
-#: kcp.go:51
-msgid "Unknown error!"
-msgstr "Ismeretlen hiba!"
-
-#: kcp.go:62
-msgid "[OPTIONS] [APP]"
-msgstr "[OPTIONS] [APP]"
-
-#: kcp.go:471
-msgid "debug mode"
-msgstr "hibakereső mód"
-
-#: kcp.go:67
-msgid "Search packages in KCP and display them"
-msgstr "Keresés a KCP csomagok között és megjelenítés"
-
-#: kcp.go:171
-msgid "On display action, display only installed packages"
-msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
-
-#: kcp.go:172
-msgid "On display action, display only outdated packages"
-msgstr "Megjeleníthető művelet, csak az elavult csomagok megjelenítése"
-
-#: kcp.go:170
-msgid "On display action, display only packages with at least one star"
-msgstr "Megjeleníthető művelet, csak olyan csomagok megjelenítése amelyek rendelkeznek legalább egy csillaggal"
-
-#: kcp.go:169
-msgid "On display action, display only the name of the package"
-msgstr "Megjeleníthető művelet, csak a csomag nevének megjelenítése"
-
-#: kcp.go:168
-msgid "On display action, force refreshing local database"
-msgstr "Megjeleníthető művelet, kényszerített helyi adatbázis frissítés"
-
-#: kcp.go:166
+#: kcp/kcp.go, offset 1087, line 35, column 20
 msgid "On list action, display only installed packages"
 msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
 
-#: kcp.go:167
-msgid "On refreshing database action, force complete update"
-msgstr "Adatbázis frissítés művelet, kényszerített frissítés befejezés"
+#: kcp/kcp.go, offset 1230, line 37, column 20
+msgid "On display action, force refreshing local database"
+msgstr "Megjeleníthető művelet, kényszerített helyi adatbázis frissítés"
 
-#: kcp.go:159
-msgid "Refresh the local database"
-msgstr "Helyi adatbázis frissítése"
+#: kcp/kcp.go, offset 217, line 20, column 20
+msgid ""
+"Provides a tool to make the use of KaOS Community Packages.\n"
+"\n"
+"With this tool, you can search, get and install a package from KaOS Community Packages."
+msgstr ""
 
-#: const.go:46
+#: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
 msgid "%d entries updated!"
 msgstr "%d frissítve!"
 
-#: const.go:54
-#, c-format
-msgid "[installed: %s]"
-msgstr "[telepítve: %s]"
+#: kcp/kcp.go, offset 2556, line 69, column 18
+msgid "Name"
+msgstr ""
 
-#: const.go:53
-msgid "[installed]"
-msgstr "[telepítve]"
+#: kcp/kcp.go, offset 2779, line 77, column 18
+msgid "Optional Deps"
+msgstr ""
 
-#: const.go:47
+#: kcp/kcp.go, offset 2846, line 79, column 18
+msgid "Replaces"
+msgstr ""
+
+#: kcp/kcp.go, offset 617, line 27, column 20
+msgid "Display all packages of KCP"
+msgstr "KCP összes csomagjának megjelenítése"
+
+#: kcp/kcp.go, offset 2721, line 75, column 18
+msgid "Provides"
+msgstr ""
+
+#: kcp/kcp.go, offset 2874, line 80, column 18
+msgid "Install Script"
+msgstr ""
+
+#: kcp/kcp.go, offset 837, line 31, column 20
+msgid "Install a package from KCP"
+msgstr "KCP csomagok telepítése"
+
+#: kcp/kcp.go, offset 2186, line 58, column 24
 #, c-format
 msgid "%d entries added!"
 msgstr "%d hozzáadva!"
 
-#: const.go:48
+#: kcp/kcp.go, offset 2931, line 82, column 18
+msgid "No"
+msgstr ""
+
+#: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
 msgid "%d entries deleted!"
 msgstr "%d törölve!"
 
-#: const.go:44
+#: kcp/kcp.go, offset 2319, line 61, column 24
+msgid "Interrupt by user..."
+msgstr "Felhasználói művelet megszakítás..."
+
+#: kcp/kcp.go, offset 2365, line 62, column 24
+msgid "No package found"
+msgstr "Nem található csomag"
+
+#: kcp/kcp.go, offset 387, line 23, column 20
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "KaOS közösségi csomagok parancssori eszköz"
+
+#: kcp/kcp.go, offset 1302, line 38, column 20
+msgid "On display action, display only the name of the package"
+msgstr "Megjeleníthető művelet, csak a csomag nevének megjelenítése"
+
+#: kcp/kcp.go, offset 2749, line 76, column 18
+msgid "Depends on"
+msgstr ""
+
+#: kcp/kcp.go, offset 775, line 30, column 20
+msgid "Download needed files to build a package"
+msgstr "Töltsük le az összes szükséges fájlt egy csomagban"
+
+#: kcp/kcp.go, offset 2082, line 56, column 24
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Szerkesszük a PKGBUILD fájlt?"
+
+#: kcp/kcp.go, offset 666, line 28, column 20
+msgid "Refresh the local database"
+msgstr "Helyi adatbázis frissítése"
+
+#: kcp/kcp.go, offset 949, line 33, column 20
+msgid "On display action, sort packages by stars descending"
+msgstr "Megjeleníthető művelet, csomagok csillagok szerinti csökkenése"
+
+#: kcp/kcp.go, offset 1379, line 39, column 20
+msgid "On display action, display only packages with at least one star"
+msgstr "Megjeleníthető művelet, csak olyan csomagok megjelenítése amelyek rendelkeznek legalább egy csillaggal"
+
+#: kcp/kcp.go, offset 1536, line 41, column 20
+msgid "On display action, display only outdated packages"
+msgstr "Megjeleníthető művelet, csak az elavult csomagok megjelenítése"
+
+#: kcp/kcp.go, offset 2137, line 57, column 24
 #, c-format
 msgid "Do you want to edit %s?"
 msgstr "%s szerkesztés?"
+
+#: kcp/kcp.go, offset 2908, line 81, column 18
+msgid "Yes"
+msgstr ""
+
+#: kcp/kcp.go, offset 2670, line 73, column 18
+msgid "URL"
+msgstr ""
+
+#: kcp/kcp.go, offset 1023, line 34, column 20
+msgid "On install action, install as a dependence"
+msgstr "Telepítő művelet, függőségek telepítése"
+
+#: kcp/kcp.go, offset 2580, line 70, column 18
+msgid "Version"
+msgstr ""
+
+#: kcp/kcp.go, offset 1464, line 40, column 20
+msgid "On display action, display only installed packages"
+msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
+
+#: kcp/kcp.go, offset 2693, line 74, column 18
+msgid "Licenses"
+msgstr ""
+
+#: kcp/kcp.go, offset 2812, line 78, column 18
+msgid "Conflicts With"
+msgstr ""
+
+#: kcp/kcp.go, offset 714, line 29, column 20
+msgid "Search packages in KCP and display them"
+msgstr "Keresés a KCP csomagok között és megjelenítés"
+
+#: kcp/kcp.go, offset 2407, line 63, column 24
+msgid "Don't launch this program as root!"
+msgstr "Ne futtassuk a programot root felhasználóként!"
+
+#: kcp/kcp.go, offset 2467, line 64, column 24
+msgid "Another instance of kcp is running!"
+msgstr "A KCP egy másik példánya fut!"
+
+#: kcp/kcp.go, offset 2607, line 71, column 18
+msgid "Description"
+msgstr ""
+
+#: kcp/kcp.go, offset 2638, line 72, column 18
+msgid "Architecture"
+msgstr ""
+
+#: kcp/kcp.go, offset 545, line 25, column 20
+msgid "Print this help"
+msgstr "Súgó megtekintés"
+
+#: parser/flag/errors.go, offset 229, line 13, column 24
+#, c-format
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr ""
+
+#: parser/flag/errors.go, offset 289, line 14, column 24
+#, c-format
+msgid "Flag '%s' needs one of this flags: %v"
+msgstr ""
+
+#: parser/flag/errors.go, offset 543, line 19, column 24
+#, c-format
+msgid "Arg '%s' not in %v!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 588, line 20, column 24
+#, c-format
+msgid "Flag '%s' is already set!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 499, line 18, column 24
+#, c-format
+msgid "Unexpected arg: %s"
+msgstr ""
+
+#: parser/flag/errors.go, offset 639, line 21, column 24
+#, c-format
+msgid "Unknown property: %d"
+msgstr ""
+
+#: parser/flag/errors.go, offset 685, line 22, column 24
+#, c-format
+msgid "Unsupported flag '%s'"
+msgstr ""
+
+#: parser/flag/errors.go, offset 119, line 11, column 24
+#, c-format
+msgid "Invalid %s flag '%s': %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 170, line 12, column 24
+#, c-format
+msgid "Invalid value '%v': Must be a %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 352, line 15, column 24
+#, c-format
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 421, line 16, column 24
+#, c-format
+msgid "%s not allowed!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 462, line 17, column 24
+msgid "Arg needed!"
+msgstr ""
+
+#: repo/repo.go, offset 1080, line 43, column 20
+msgid "Dir %s already exists!"
+msgstr "%s könyvtár már létezik!"
+
+#: repo/repo.go, offset 1004, line 41, column 20
+msgid "Package not found!"
+msgstr "Csomag nem található!"
+
+#: repo/repo.go, offset 1124, line 44, column 20
+msgid "<unknown>"
+msgstr "<ismeretlen>"
+
+#: sysutil/util.go, offset 196, line 14, column 19
+msgid "[Y/n]"
+msgstr ""
+
+#: sysutil/util.go, offset 1708, line 68, column 12
+msgid "[y/N]"
+msgstr ""

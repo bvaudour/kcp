@@ -1,10 +1,10 @@
-.TH "kcp" 1 "2014-12-24" "kcp 0.34" "User Manuals"
+.TH "kcp" 1 "2015-08-27" "kcp 0.80" "User Manuals"
 
 .SH NAME
 kcp \- Tool in command-line for KaOS Community Packages
 
 .SH SYNOPSIS
-kcp (\-hvlusgicxfNSIOdD) [<app>]
+kcp (\-hvlusgicxfNSIOdDV) [<app>]
 
 .SH DESCRIPTION
 kcp provides a tool to make the use of KaOS Community Packages easier. With this tool, you can:
@@ -54,8 +54,12 @@ Display the list of all packages which contain the keyword <app> in the name or 
 Download the package <app> from KaOS Community Packages in the current directory.
 
 .TP
-.B \-i, \-\-install [<app>]
+.B \-i, \-\-install <app>
 Download, compile and install the package <app> from KaOS Community Packages.
+
+.TP
+.B \-V, \-\-information <app>
+Display information on a given package.
 
 
 .SH SPECIFIC OPTIONS

@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# TEMPLATE FOR PCKCP TRANSLATION.
+# Copyright (C) B.VAUDOUR 2014-2015
+# This file is distributed under the same license as the kcp package.
 # 
 # Translators:
 msgid ""
@@ -8,177 +8,311 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-03-10 10:38+0000\n"
-"Last-Translator: Anke Boersma <demm@kaosx.us>\n"
-"Language-Team: Hebrew (http://www.transifex.com/projects/p/kaos/language/he/)\n"
+"PO-Revision-Date: 2015-08-27 10:09+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>\n"
+"Language-Team: Hebrew (http://www.transifex.com/kaos/kaos/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: pckcp.go:43
+#: pckcp/pckcp.go, offset 1075, line 51, column 19
+msgid "package() function is present."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1432, line 56, column 19
 #, c-format
-msgid "%s is a simple PKGBUILD Checker for the KaOS Community Packages."
+msgid "Variable '%s' is present %d times (lines %s). Only one is expected."
 msgstr ""
 
-#: pckcp.go:34 pckcp.go:41
+#: pckcp/pckcp.go, offset 1976, line 66, column 19
+msgid "Remove uneeded duplicate variables?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
-msgid ""
-"%s isn't in repo neither in kcp. Variable '%s' doesn't need to contain it."
+msgid "Variable '%s' is missing."
 msgstr ""
 
-#: pckcp.go:34 pckcp.go:41
+#: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
-msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
+msgid "Modify %s as %s?"
 msgstr ""
 
-#: pckcp.go:40
-#, c-format
-msgid "'%s' is clean."
-msgstr ""
-
-#: pckcp.go:19
-msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
-
-#: pckcp.go:21
-msgid "Header is clean."
-msgstr ""
-
-#: pckcp.go:22
+#: pckcp/pckcp.go, offset 3059, line 84, column 19
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
 msgstr ""
 
-#: pckcp.go:20
-msgid "PKGBUILD cannot be saved!"
+#: pckcp/pckcp.go, offset 532, line 23, column 20
+msgid "Print version"
 msgstr ""
 
-#: pckcp.go:36
-msgid ""
-"PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
-"different packages!"
-msgstr ""
-
-#: pckcp.go:42
+#: pckcp/pckcp.go, offset 2460, line 76, column 19
 #, c-format
-msgid "Remove %s as %s?"
+msgid "Replace %s by... (leave blank to remove it):"
 msgstr ""
 
-#: pckcp.go:35
-#, c-format
-msgid "Remove %s in variable '%s'?"
+#: pckcp/pckcp.go, offset 1037, line 50, column 19
+msgid "install is clean."
 msgstr ""
 
-#: pckcp.go:23
-msgid "Remove header?"
-msgstr ""
-
-#: pckcp.go:31
-#, c-format
-msgid "Remove variable '%s'?"
-msgstr ""
-
-#: pckcp.go:29
-msgid "Reset arch to x86_64?"
-msgstr ""
-
-#: pckcp.go:26
+#: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
 msgstr ""
 
-#: pckcp.go:33
+#: pckcp/pckcp.go, offset 2381, line 75, column 19
+#, c-format
+msgid "Choose the line to keep among [%s] (last line by default)."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2593, line 78, column 19
 #, c-format
 msgid "Variable '%s' contains name of the package. It is useless."
 msgstr ""
 
-#: pckcp.go:32
+#: pckcp/pckcp.go, offset 2969, line 82, column 19
 #, c-format
-msgid "Variable '%s' is clean."
+msgid "Function '%s()' is empty."
 msgstr ""
 
-#: pckcp.go:30
-#, c-format
-msgid "Variable '%s' is empty."
-msgstr ""
-
-#: pckcp.go:39
+#: pckcp/pckcp.go, offset 2850, line 81, column 19
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
 msgstr ""
 
-#: pckcp.go:27
-msgid "arch is clean."
+#: pckcp/pckcp.go, offset 3444, line 88, column 19
+msgid ""
+"PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
+"different packages!"
 msgstr ""
 
-#: pckcp.go:28
+#: pckcp/pckcp.go, offset 495, line 22, column 20
+msgid "Print this help"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 807, line 39, column 6
+msgid "Warning"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 965, line 48, column 19
+#, c-format
+msgid "'%s' is clean."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1163, line 53, column 19
+#, c-format
+msgid "Modifications saved in %s!"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2098, line 69, column 19
+#, c-format
+msgid "Modify name of %s file?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 3252, line 86, column 19
+msgid "package() function missing. You need to add it."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2142, line 70, column 19
+#, c-format
+msgid "Add variable '%s'?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 3214, line 85, column 19
+#, c-format
+msgid "%s doesn't exist!"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 178, line 17, column 20
+msgid ""
+"Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
+"\n"
+"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 794, line 38, column 6
+msgid "Error"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 822, line 40, column 6
+msgid "Info"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1126, line 52, column 19
+msgid "pkgrel is clean."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1210, line 54, column 19
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
 msgstr ""
 
-#: pckcp.go:37
-msgid "package() function is present."
+#: pckcp/pckcp.go, offset 1732, line 61, column 19
+msgid "Reset arch to x86_64?"
 msgstr ""
 
-#: pckcp.go:38
-msgid "package() function missing. You should have to add it."
+#: pckcp/pckcp.go, offset 388, line 20, column 20
+msgid "Tool in command-line to manage common PKGBUILD errors"
 msgstr ""
 
-#: pckcp.go:38
-msgid "package() function missing. You need to add it."
+#: pckcp/pckcp.go, offset 1000, line 49, column 19
+msgid "Header is clean."
 msgstr ""
 
-#: pckcp.go:24
-msgid "pkgrel is clean."
+#: pckcp/pckcp.go, offset 1342, line 55, column 19
+#, c-format
+msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
 msgstr ""
 
-#: pckcp.go:25
+#: pckcp/pckcp.go, offset 1627, line 59, column 19
+#, c-format
+msgid "Error on save file %s!"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 3015, line 83, column 19
+#, c-format
+msgid "Variable '%s' is empty."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 921, line 47, column 19
+#, c-format
+msgid "Variable '%s' is clean."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1774, line 62, column 19
+msgid "Remove all uneeded comments before save?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2063, line 68, column 19
+msgid "Remove header?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1920, line 65, column 19
+msgid "Remove uneeded duplicate functions?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 567, line 24, column 20
+msgid "Interactive edition"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1566, line 58, column 19
+msgid "Current folder doesn't contain PKGBUILD!"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1670, line 60, column 19
+#, c-format
+msgid "'%s' is not valid. You should suppress it"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 1835, line 63, column 19
+#, c-format
+msgid "Modify %s in variable '%s'?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2525, line 77, column 19
+#, c-format
+msgid "Set variable '%s' with (leave blank to ignore):"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2761, line 80, column 19
+#, c-format
+msgid "%s isn't in repo neither in kcp. Variable '%s' shouldn't contain it."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 886, line 46, column 19
+msgid "arch is clean."
+msgstr ""
+
+#: pckcp/pckcp.go, offset 2220, line 72, column 19
+msgid "Remove it?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset 3320, line 87, column 19
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
 msgstr ""
 
-#: pckcp.go:44
-msgid "url is clean."
-msgstr ""
-
-#: pckcp.go:45
-msgid "No url specified."
-msgstr ""
-
-#: pckcp.go:46
-msgid "Add url?"
-msgstr ""
-
-#: pckcp.go:47
-msgid "Please, type the URL to include:"
-msgstr ""
-
-#: pckcp.go:36
+#: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
-msgid "Modify %s in variable '%s'?"
+msgid "Flag '%s' cannot be used with '%s'"
 msgstr ""
 
-#: pckcp.go:37
+#: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
-msgid "Replace %s by... (leave blank to remove it):"
+msgid "Flag '%s' needs one of this flags: %v"
 msgstr ""
 
-#: pckcp.go:44
+#: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
-msgid "Modify %s as %s?"
+msgid "Arg '%s' not in %v!"
 msgstr ""
 
-#: pckcp.go:53
+#: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
-msgid "Modifications saved in %s!"
+msgid "Flag '%s' is already set!"
 msgstr ""
 
-#: pckcp.go:54
+#: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
-msgid "Error on save file %s!"
+msgid "Unexpected arg: %s"
+msgstr ""
+
+#: parser/flag/errors.go, offset 639, line 21, column 24
+#, c-format
+msgid "Unknown property: %d"
+msgstr ""
+
+#: parser/flag/errors.go, offset 685, line 22, column 24
+#, c-format
+msgid "Unsupported flag '%s'"
+msgstr ""
+
+#: parser/flag/errors.go, offset 119, line 11, column 24
+#, c-format
+msgid "Invalid %s flag '%s': %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 170, line 12, column 24
+#, c-format
+msgid "Invalid value '%v': Must be a %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 352, line 15, column 24
+#, c-format
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 421, line 16, column 24
+#, c-format
+msgid "%s not allowed!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 462, line 17, column 24
+msgid "Arg needed!"
+msgstr ""
+
+#: repo/repo.go, offset 1080, line 43, column 20
+msgid "Dir %s already exists!"
+msgstr ""
+
+#: repo/repo.go, offset 1004, line 41, column 20
+msgid "Package not found!"
+msgstr ""
+
+#: repo/repo.go, offset 1124, line 44, column 20
+msgid "<unknown>"
+msgstr ""
+
+#: sysutil/util.go, offset 196, line 14, column 19
+msgid "[Y/n]"
+msgstr ""
+
+#: sysutil/util.go, offset 1708, line 68, column 12
+msgid "[y/N]"
 msgstr ""

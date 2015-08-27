@@ -58,14 +58,19 @@ _kcpIsList() {
 	return 1
 }
 
+_kcpIsInfo() {
+	_kcpContains V information $@ && return 0
+	return 1
+}
+
 _kcp() {
 	local cur prev words cword pprev opts lst
 	_init_completion || return
 	pprev="${COMP_WORDS[COMP_CWORD-2]}"
 	opts='--help --version --list --update-database --search --get --install
 				--only-name --only-starred --only-installed --only-outdated
-				--sort --force-update --asdeps
-				-h -v -l -u -s -g -i
+				--sort --force-update --asdeps --information
+				-h -v -l -u -s -g -i -V
 				-lN -lS -lI -lO
 				-lx -lf -di'
 	lst=()
@@ -73,7 +78,7 @@ _kcp() {
 	_kcpMatch $prev h help v version && return 0
 	if [[ $prev == "kcp" ]]; then
 		lst=($opts)
-	elif _kcpMatchLast $prev s search g get i install; then
+	elif _kcpMatchLast $prev s search g get i install V information; then
 		lst=( $( kcp -lN | sort ) )
 	elif _kcpIsInstall ${COMP_WORDS[@]}; then
 		_kcpContains d asdeps ${COMP_WORDS[@]} || lst=(--asdeps)

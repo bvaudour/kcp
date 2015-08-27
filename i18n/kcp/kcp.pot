@@ -176,6 +176,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset: 2693, line: 74, column: 18
 msgid "Licenses"
+msgstr "Licenses"
 
 #: kcp/kcp.go, offset: 2812, line: 78, column: 18
 msgid "Conflicts With"

@@ -1,5 +1,5 @@
 # TEMPLATE FOR KCP TRANSLATION.
-# Copyright (C) B.VAUDOUR 2014
+# Copyright (C) B.VAUDOUR 2014-2015
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-08 21:42+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2015-08-27 10:07+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/kaos/kaos/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,169 +18,256 @@ msgstr ""
 "Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: kcp.go:147
-#, c-format
-msgid " [installed: %s]"
-msgstr "[instalado: %s]"
+#: kcp/kcp.go, offset 1607, line 42, column 20
+msgid "Display informations about a package"
+msgstr ""
 
-#: kcp.go:145
-msgid " [installed]"
-msgstr "[instalado]"
-
-#: kcp.go:73
-msgid "<app>"
-msgstr "<app>"
-
-#: kcp.go:136
-msgid "<unknown>"
-msgstr "<unknown>"
-
-#: kcp.go:48
-msgid "Another instance of kcp is running!"
-msgstr "Há outra instância de kcp em execução!"
-
-#: kcp.go:47
-#, c-format
-msgid "Dir %s already exists!"
-msgstr "O diretório %s já existe!"
-
-#: kcp.go:66
-msgid "Display all outdated packages from KCP"
-msgstr "Exibir todos os pacotes desatualizados do KCP"
-
-#: kcp.go:65
-msgid "Display all packages of KCP"
-msgstr "Exibir todos os pacotes do KCP"
-
-#: kcp.go:50
-msgid "Do you want to edit PKGBUILD?"
-msgstr "Você deseja editar o PKGBUILD?"
-
-#: kcp.go:46
-msgid "Don't launch this program as root!"
-msgstr "Não execute este programa como root!"
-
-#: kcp.go:68
-msgid "Download needed files to build a package"
-msgstr "Transferir os ficheiros requeridos para construir um pacote"
-
-#: kcp.go:69
-msgid "Install a package from KCP"
-msgstr "Instalar um pacote do KCP"
-
-#: kcp.go:49
-msgid "Interrupt by user..."
-msgstr "Interrompido pelo utilizador..."
-
-#: kcp.go:45
-msgid "No package found"
-msgstr "Nenhum pacote encontrado"
-
-#: kcp.go:70
-msgid "On display action, don't print KCP version"
-msgstr "Ao exibir, não imprimir a versão do KCP"
-
-#: kcp.go:71
-msgid "On display action, sort packages by stars descending"
-msgstr "Ao exibir, pesquisar os pacotes pela avaliação, em ordem decrescente"
-
-#: kcp.go:72
-msgid "On install action, install as a dependence"
-msgstr "Ao instalar, fazê-lo como uma dependência"
-
-#: kcp.go:325
-msgid "Package not found!"
-msgstr "Pacote não encontrado!"
-
-#: kcp.go:63
-msgid "Print this help"
-msgstr "Imprimir esta ajuda"
-
-#: kcp.go:64
+#: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
 msgstr "Imprimir versão"
 
-#: kcp.go:67
-msgid "Search packages' motif in KCP and display them"
-msgstr "Procurar pacotes no KCP"
+#: kcp/kcp.go, offset 885, line 32, column 20
+msgid "On display action, don't print KCP version"
+msgstr "Ao exibir, não imprimir a versão do KCP"
 
-#: kcp.go:61
-msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Ferramenta em linha de comandos para os pacotes comunitários do KaOS"
-
-#: kcp.go:51
-msgid "Unknown error!"
-msgstr "Erro desconhecido!"
-
-#: kcp.go:62
-msgid "[OPTIONS] [APP]"
-msgstr "[OPÇÕES] [APLICAÇÕES]"
-
-#: kcp.go:471
-msgid "debug mode"
-msgstr "Modo de depuração"
-
-#: kcp.go:67
-msgid "Search packages in KCP and display them"
-msgstr "Procurar pacotes no KCP"
-
-#: kcp.go:171
-msgid "On display action, display only installed packages"
-msgstr "Ao exibir, mostrar somente os pacotes instalados"
-
-#: kcp.go:172
-msgid "On display action, display only outdated packages"
-msgstr "Ao exibir, mostrar somente os pacotes desatualizados"
-
-#: kcp.go:170
-msgid "On display action, display only packages with at least one star"
-msgstr "Ao exibir, mostrar somente os pacotes com uma estrela no mínimo"
-
-#: kcp.go:169
-msgid "On display action, display only the name of the package"
-msgstr "Ao exibir, mostrar somente o nome do pacote"
-
-#: kcp.go:168
-msgid "On display action, force refreshing local database"
-msgstr "Ao exibir, forçar a atualização da base de dados local"
-
-#: kcp.go:166
+#: kcp/kcp.go, offset 1087, line 35, column 20
 msgid "On list action, display only installed packages"
 msgstr "Ao listar, exibir somente os pacotes instalados"
 
-#: kcp.go:167
-msgid "On refreshing database action, force complete update"
-msgstr "Ao refrescar a base de dados, forçar uma atualização completa"
+#: kcp/kcp.go, offset 1230, line 37, column 20
+msgid "On display action, force refreshing local database"
+msgstr "Ao exibir, forçar a atualização da base de dados local"
 
-#: kcp.go:159
-msgid "Refresh the local database"
-msgstr "Refrescar a base de dados local"
+#: kcp/kcp.go, offset 217, line 20, column 20
+msgid ""
+"Provides a tool to make the use of KaOS Community Packages.\n"
+"\n"
+"With this tool, you can search, get and install a package from KaOS Community Packages."
+msgstr ""
 
-#: const.go:46
+#: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
 msgid "%d entries updated!"
 msgstr "%d entradas atualizadas!"
 
-#: const.go:54
-#, c-format
-msgid "[installed: %s]"
-msgstr "[instalado: %s]"
+#: kcp/kcp.go, offset 2556, line 69, column 18
+msgid "Name"
+msgstr ""
 
-#: const.go:53
-msgid "[installed]"
-msgstr "[instalado]"
+#: kcp/kcp.go, offset 2779, line 77, column 18
+msgid "Optional Deps"
+msgstr ""
 
-#: const.go:47
+#: kcp/kcp.go, offset 2846, line 79, column 18
+msgid "Replaces"
+msgstr ""
+
+#: kcp/kcp.go, offset 617, line 27, column 20
+msgid "Display all packages of KCP"
+msgstr "Exibir todos os pacotes do KCP"
+
+#: kcp/kcp.go, offset 2721, line 75, column 18
+msgid "Provides"
+msgstr ""
+
+#: kcp/kcp.go, offset 2874, line 80, column 18
+msgid "Install Script"
+msgstr ""
+
+#: kcp/kcp.go, offset 837, line 31, column 20
+msgid "Install a package from KCP"
+msgstr "Instalar um pacote do KCP"
+
+#: kcp/kcp.go, offset 2186, line 58, column 24
 #, c-format
 msgid "%d entries added!"
 msgstr "%d entradas adicionadas!"
 
-#: const.go:48
+#: kcp/kcp.go, offset 2931, line 82, column 18
+msgid "No"
+msgstr ""
+
+#: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
 msgid "%d entries deleted!"
 msgstr "%d entradas excluídas!"
 
-#: const.go:44
+#: kcp/kcp.go, offset 2319, line 61, column 24
+msgid "Interrupt by user..."
+msgstr "Interrompido pelo utilizador..."
+
+#: kcp/kcp.go, offset 2365, line 62, column 24
+msgid "No package found"
+msgstr "Nenhum pacote encontrado"
+
+#: kcp/kcp.go, offset 387, line 23, column 20
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "Ferramenta em linha de comandos para os pacotes comunitários do KaOS"
+
+#: kcp/kcp.go, offset 1302, line 38, column 20
+msgid "On display action, display only the name of the package"
+msgstr "Ao exibir, mostrar somente o nome do pacote"
+
+#: kcp/kcp.go, offset 2749, line 76, column 18
+msgid "Depends on"
+msgstr ""
+
+#: kcp/kcp.go, offset 775, line 30, column 20
+msgid "Download needed files to build a package"
+msgstr "Transferir os ficheiros requeridos para construir um pacote"
+
+#: kcp/kcp.go, offset 2082, line 56, column 24
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Você deseja editar o PKGBUILD?"
+
+#: kcp/kcp.go, offset 666, line 28, column 20
+msgid "Refresh the local database"
+msgstr "Refrescar a base de dados local"
+
+#: kcp/kcp.go, offset 949, line 33, column 20
+msgid "On display action, sort packages by stars descending"
+msgstr "Ao exibir, pesquisar os pacotes pela avaliação, em ordem decrescente"
+
+#: kcp/kcp.go, offset 1379, line 39, column 20
+msgid "On display action, display only packages with at least one star"
+msgstr "Ao exibir, mostrar somente os pacotes com uma estrela no mínimo"
+
+#: kcp/kcp.go, offset 1536, line 41, column 20
+msgid "On display action, display only outdated packages"
+msgstr "Ao exibir, mostrar somente os pacotes desatualizados"
+
+#: kcp/kcp.go, offset 2137, line 57, column 24
 #, c-format
 msgid "Do you want to edit %s?"
 msgstr "Você gostaria de editar %s?"
+
+#: kcp/kcp.go, offset 2908, line 81, column 18
+msgid "Yes"
+msgstr ""
+
+#: kcp/kcp.go, offset 2670, line 73, column 18
+msgid "URL"
+msgstr ""
+
+#: kcp/kcp.go, offset 1023, line 34, column 20
+msgid "On install action, install as a dependence"
+msgstr "Ao instalar, fazê-lo como uma dependência"
+
+#: kcp/kcp.go, offset 2580, line 70, column 18
+msgid "Version"
+msgstr ""
+
+#: kcp/kcp.go, offset 1464, line 40, column 20
+msgid "On display action, display only installed packages"
+msgstr "Ao exibir, mostrar somente os pacotes instalados"
+
+#: kcp/kcp.go, offset 2693, line 74, column 18
+msgid "Licenses"
+msgstr ""
+
+#: kcp/kcp.go, offset 2812, line 78, column 18
+msgid "Conflicts With"
+msgstr ""
+
+#: kcp/kcp.go, offset 714, line 29, column 20
+msgid "Search packages in KCP and display them"
+msgstr "Procurar pacotes no KCP"
+
+#: kcp/kcp.go, offset 2407, line 63, column 24
+msgid "Don't launch this program as root!"
+msgstr "Não execute este programa como root!"
+
+#: kcp/kcp.go, offset 2467, line 64, column 24
+msgid "Another instance of kcp is running!"
+msgstr "Há outra instância de kcp em execução!"
+
+#: kcp/kcp.go, offset 2607, line 71, column 18
+msgid "Description"
+msgstr ""
+
+#: kcp/kcp.go, offset 2638, line 72, column 18
+msgid "Architecture"
+msgstr ""
+
+#: kcp/kcp.go, offset 545, line 25, column 20
+msgid "Print this help"
+msgstr "Imprimir esta ajuda"
+
+#: parser/flag/errors.go, offset 229, line 13, column 24
+#, c-format
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr ""
+
+#: parser/flag/errors.go, offset 289, line 14, column 24
+#, c-format
+msgid "Flag '%s' needs one of this flags: %v"
+msgstr ""
+
+#: parser/flag/errors.go, offset 543, line 19, column 24
+#, c-format
+msgid "Arg '%s' not in %v!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 588, line 20, column 24
+#, c-format
+msgid "Flag '%s' is already set!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 499, line 18, column 24
+#, c-format
+msgid "Unexpected arg: %s"
+msgstr ""
+
+#: parser/flag/errors.go, offset 639, line 21, column 24
+#, c-format
+msgid "Unknown property: %d"
+msgstr ""
+
+#: parser/flag/errors.go, offset 685, line 22, column 24
+#, c-format
+msgid "Unsupported flag '%s'"
+msgstr ""
+
+#: parser/flag/errors.go, offset 119, line 11, column 24
+#, c-format
+msgid "Invalid %s flag '%s': %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 170, line 12, column 24
+#, c-format
+msgid "Invalid value '%v': Must be a %s!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 352, line 15, column 24
+#, c-format
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 421, line 16, column 24
+#, c-format
+msgid "%s not allowed!"
+msgstr ""
+
+#: parser/flag/errors.go, offset 462, line 17, column 24
+msgid "Arg needed!"
+msgstr ""
+
+#: repo/repo.go, offset 1080, line 43, column 20
+msgid "Dir %s already exists!"
+msgstr "O diretório %s já existe!"
+
+#: repo/repo.go, offset 1004, line 41, column 20
+msgid "Package not found!"
+msgstr "Pacote não encontrado!"
+
+#: repo/repo.go, offset 1124, line 44, column 20
+msgid "<unknown>"
+msgstr "<unknown>"
+
+#: sysutil/util.go, offset 196, line 14, column 19
+msgid "[Y/n]"
+msgstr ""
+
+#: sysutil/util.go, offset 1708, line 68, column 12
+msgid "[y/N]"
+msgstr ""

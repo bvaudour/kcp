@@ -197,6 +197,7 @@ complete -f  -c kcp -n '__fish_kcp_empty' -a '-u --update-database' -d 'Refresh 
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-s --search'          -d 'Search a package'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-g --get'             -d 'Download a package'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-i --install'         -d 'Install a package'
+complete -f  -c kcp -n '__fish_kcp_empty' -a '-V --information'     -d 'Information about a package'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lN --only-name'      -d 'Display only the packages name'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lS --only-starred'   -d 'Display only the popular packages'
 complete -f  -c kcp -n '__fish_kcp_empty' -a '-lI --only-installed' -d 'Display only the installed packages'
@@ -217,7 +218,7 @@ complete -f -c kcp -n '__fish_kcp_needs_command I only-installed'  -a '-I --only
 complete -f -c kcp -n '__fish_kcp_needs_command O only-outdated'   -a '-O --only-outdated'   -d 'Display only the outdated packages'
 complete -f -c kcp -n '__fish_kcp_needs_command x sort'            -a '-x --sort'            -d 'Sort results by popularity'
 complete -f -c kcp -n '__fish_kcp_needs_command f force-update'    -a '-f --force-update'    -d 'Force refreshing database'
-complete -f -c kcp -n '__fish_kcp_needs_command d asdeps'          -a '-d --asdeps'         -d 'install as dependence'
+complete -f -c kcp -n '__fish_kcp_needs_command d asdeps'          -a '-d --asdeps'          -d 'install as dependence'
 
 # Available packages
 complete -f -c kcp -n '__fish_kcp_needs_arg' -a '(__fish_kcp_listall)' -d 'Available packages'
