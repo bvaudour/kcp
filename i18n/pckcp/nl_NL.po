@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 14:58+0000\n"
+"PO-Revision-Date: 2015-08-27 15:47+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/kaos/kaos/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr "Variabel '%s' bevat de naam van het packet. It is useless."
 #: pckcp/pckcp.go, offset 2969, line 82, column 19
 #, c-format
 msgid "Function '%s()' is empty."
-msgstr ""
+msgstr "Functie '%s()' is leeg."
 
 #: pckcp/pckcp.go, offset 2850, line 81, column 19
 msgid ""
@@ -113,7 +113,7 @@ msgstr "Wijzigingen opgeslagen in %s!"
 #: pckcp/pckcp.go, offset 2098, line 69, column 19
 #, c-format
 msgid "Modify name of %s file?"
-msgstr ""
+msgstr "Bestand naam %s wijzigen?"
 
 #: pckcp/pckcp.go, offset 3252, line 86, column 19
 msgid "package() function missing. You need to add it."
@@ -122,19 +122,19 @@ msgstr "package() functie ontbreekt. Je moet het toevoegen."
 #: pckcp/pckcp.go, offset 2142, line 70, column 19
 #, c-format
 msgid "Add variable '%s'?"
-msgstr ""
+msgstr "Variabel toevoegen '%s'?"
 
 #: pckcp/pckcp.go, offset 3214, line 85, column 19
 #, c-format
 msgid "%s doesn't exist!"
-msgstr ""
+msgstr "%s bestaat niet!"
 
 #: pckcp/pckcp.go, offset 178, line 17, column 20
 msgid ""
 "Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
 "\n"
 "If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
-msgstr ""
+msgstr "Biedt een instrument om de geldigheid van een PKGBUILD volgens de KCP normen te controleren.\n\nAls de vlag -e wordt gebruikt, kan op veel voorkomende fouten worden gecontroleerd en een (potentieel) geldig PKGBUILD.new wordt gecreëerd."
 
 #: pckcp/pckcp.go, offset 794, line 38, column 6
 msgid "Error"
@@ -142,7 +142,7 @@ msgstr "Fout"
 
 #: pckcp/pckcp.go, offset 822, line 40, column 6
 msgid "Info"
-msgstr ""
+msgstr "Informatie"
 
 #: pckcp/pckcp.go, offset 1126, line 52, column 19
 msgid "pkgrel is clean."
@@ -160,7 +160,7 @@ msgstr "Reset arch naar x86_64?"
 
 #: pckcp/pckcp.go, offset 388, line 20, column 20
 msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr ""
+msgstr "Hulpprogramma in commandoregel  voor veel voorkomende PKGBUILD fouten"
 
 #: pckcp/pckcp.go, offset 1000, line 49, column 19
 msgid "Header is clean."
@@ -169,7 +169,7 @@ msgstr "Header is schoon"
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
 msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Functie '%s()' is %d keer aanwezig (lijnen %s). Slechts één is verwacht."
 
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
@@ -188,7 +188,7 @@ msgstr "Variabel '%s' is schoon."
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
-msgstr ""
+msgstr "Verwijder all onnodige opmerkingen voor bewaren?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -196,11 +196,11 @@ msgstr "Verwijder header?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
-msgstr ""
+msgstr "Verwijder onnodige dubbele functies?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
-msgstr ""
+msgstr "Interactieve editie"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
@@ -209,7 +209,7 @@ msgstr "Huidige map bevat geen PKGBUILD"
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
 msgid "'%s' is not valid. You should suppress it"
-msgstr ""
+msgstr "'%s' is ongeldig. Best het te onderdrukken"
 
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
@@ -219,7 +219,7 @@ msgstr "Wijzig %s in variabel '%s'?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr ""
+msgstr "Set variabel '%s' met (laat leeg om te negeren):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format
@@ -232,7 +232,7 @@ msgstr "arch is schoon."
 
 #: pckcp/pckcp.go, offset 2220, line 72, column 19
 msgid "Remove it?"
-msgstr ""
+msgstr "Verwijder het?"
 
 #: pckcp/pckcp.go, offset 3320, line 87, column 19
 msgid ""
@@ -243,61 +243,61 @@ msgstr "pkgrel is anders dan 1. Het zou slechts het geval zijn indien build inst
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Vlag '%s' kan niet worden gebruikt met '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Vlag '%s' heeft één van deze vlaggen nodgig: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Arg '%s' niet in %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Vlag '%s' is reeds gezet!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Onverwacht arg: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Onbekende eigenschap: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Niet ondersteunde vlag '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Ongeldig %s vlag '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Ongeldige waarde '%v': Moet een %s zijn!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Vlag '%s' staat geen meerdere argumenten toe!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s niet toegestaan!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Arg benodigd!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -313,8 +313,8 @@ msgstr "<onbekend>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[J/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[j/N]"

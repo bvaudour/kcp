@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 14:59+0000\n"
+"PO-Revision-Date: 2015-08-27 15:11+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr "Memodifikasi %s dalam variabel '%s'?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr ""
+msgstr "Setel variabel '%s' dengan (biarkan kosong untuk mengabaikan):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format
@@ -243,12 +243,12 @@ msgstr "pkgrel berbeda dari 1. Itu harus terjadi hanya jika instruksi bangun dis
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Bendera '%s' tidak bisa digunakan dengan '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Bendera '%s' membutuhkan salahsatu bendera ini: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
@@ -258,7 +258,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Bendera '%s' sudah disetel!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
