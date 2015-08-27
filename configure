@@ -80,7 +80,7 @@ _generate() {
 	_addline 'DESTMAN    = $(DESTDIR)/usr/share/man/man1'
 	_addline 'DESTBASH   = $(DESTDIR)/etc/bash_completion.d'
 	_addline 'DESTFISH   = $(DESTDIR)/usr/share/fish/vendor_completions.d'
-	_addline 'DESTEXCEPT = $(DESTDIR)/$(EXCEPTS)'
+	_addline 'DESTEXCEPT = $(DESTDIR)/etc/pckcp'
 	_emptyline
 
 	_addline '# Destination files'
