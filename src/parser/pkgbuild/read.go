@@ -66,7 +66,9 @@ loop:
 			case '}':
 				if q == 0 {
 					d--
-					break loop
+					if d == 0 {
+						break loop
+					}
 				}
 			}
 		}
@@ -129,69 +131,6 @@ loop:
 			}
 			r, e = read(rd)
 		}
-	}
-	return
-}
-
-func dataVariable(rd io.RuneReader, wr *bytes.Buffer, line int, q rune, ig bool) (r rune, e error, data *Data, nl int) {
-	r, e = read(rd)
-	nl = line
-loop:
-	for e == nil {
-		add := true
-		if ig {
-			ig = false
-			switch r {
-			case '\'':
-				if q == '"' {
-					wr.WriteRune('\\')
-				}
-			case '"':
-				if q == '\'' {
-					wr.WriteRune('\\')
-				}
-			case '$':
-				wr.WriteRune('\\')
-				if q == '\'' {
-					wr.WriteRune('\\')
-				}
-			case '\n', ' ', '\t', '#', '[', ']', '{', '}', '(', ')':
-				if q != 0 {
-					wr.WriteRune('\\')
-				}
-			}
-		} else {
-			switch r {
-			case '\'', '"':
-				if q == 0 {
-					q, add = r, false
-				} else if q == r {
-					q, add = 0, false
-				}
-			case '\\':
-				ig, add = true, false
-			case '$':
-				if q == '\'' {
-					wr.WriteRune('\\')
-				}
-			case '\n', ' ', '\t', ')':
-				if q == 0 {
-					break loop
-				}
-			}
-		}
-		if add {
-			wr.WriteRune(r)
-		}
-		if r == '\n' {
-			nl++
-		}
-		r, e = read(rd)
-	}
-	data = &Data{
-		Type:  DT_COMMENT,
-		Line:  line,
-		Value: wr.String(),
 	}
 	return
 }
@@ -298,6 +237,7 @@ loop:
 					if last == '#' {
 						data.Type = DT_COMMENT
 						blank.Reset()
+						blank.WriteRune('#')
 						last, e = readLine(rd, blank)
 					} else {
 						data.Type = DT_UNKNOWN
@@ -306,19 +246,52 @@ loop:
 					block.add(data)
 				}
 				if last != '\n' && e == nil {
-					mult := false
+					dl, ig, q := 0, false, rune(0)
 					if last == '(' {
-						mult = true
 						last, e = read(rd)
-					}
-					if e == nil {
-						q, ig, v, dl := rune(0), false, new(bytes.Buffer), 0
+					loop2:
+						for e == nil && last != ')' {
+							if last == '\n' {
+								l++
+							}
+							if strings.ContainsRune(" \t\n", last) {
+								last, e, dl = readAll(rd, new(bytes.Buffer), true, " \t\n")
+								l += dl
+								continue loop2
+							}
+							v, data := new(bytes.Buffer), new(Data)
+							switch last {
+							case '#':
+								v.WriteRune(last)
+								last, e = readLine(rd, v)
+								data.Type, data.Line, data.Value = DT_COMMENT, l, v.String()
+								block.add(data)
+								block.To = l
+								continue loop2
+							case '\'', '"':
+								q, ig = last, false
+							case '\\':
+								q, ig = 0, true
+							default:
+								q, ig = 0, false
+								v.WriteRune(last)
+							}
+							last, e, dl = readVariable(rd, v, q, ig)
+							data.Type, data.Line, data.Value = DT_VARIABLE, l, v.String()
+							l += dl
+							block.add(data)
+							block.To = l
+						}
+						last, e = read(rd)
+					} else {
+						v := new(bytes.Buffer)
 						switch last {
 						case '\'', '"':
-							q = last
+							q, ig = last, false
 						case '\\':
-							ig = true
+							q, ig = 0, true
 						default:
+							q, ig = 0, false
 							v.WriteRune(last)
 						}
 						last, e, dl = readVariable(rd, v, q, ig)
@@ -328,55 +301,22 @@ loop:
 							Value: v.String(),
 						}
 						block.add(data)
-						l += dl
-						block.To = l
-						if mult {
-							for e == nil && last != ')' {
-								last, e, dl = readAll(rd, new(bytes.Buffer), true, " \t\n")
-								l += dl
-								if e != nil || last == ')' {
-									break
-								}
-								v, data = new(bytes.Buffer), new(Data)
-								if last == '#' {
-									last, e = readLine(rd, v)
-									data.Type = DT_COMMENT
-								} else {
-									data.Type = DT_VARIABLE
-									q, ig = 0, false
-									switch last {
-									case '\'', '"':
-										q = last
-									case '\\':
-										ig = true
-									default:
-										v.WriteRune(last)
-									}
-									last, e, dl = readVariable(rd, v, q, ig)
-									l += dl
-								}
-								data.Line, data.Value = l, v.String()
-								block.add(data)
-								block.To = l
-								if last == '\n' {
-									l++
-								}
-							}
-							last, e = read(rd)
+					}
+					if strings.ContainsRune(" \t", last) {
+						last, e = readBlank(rd, new(bytes.Buffer))
+					}
+					if e == nil && last != '\n' {
+						data, v := new(Data), new(bytes.Buffer)
+						v.WriteRune(last)
+						if last == '#' {
+							data.Type = DT_COMMENT
+						} else {
+							data.Type = DT_UNKNOWN
 						}
+						last, e = readLine(rd, v)
+						data.Line, data.Value = l, v.String()
+						block.add(data)
 					}
-				}
-				if last != '\n' && e == nil {
-					data := new(Data)
-					if last == '#' {
-						blank.Reset()
-						data.Type = DT_COMMENT
-					} else {
-						data.Type = DT_UNKNOWN
-					}
-					last, e = readLine(rd, blank)
-					data.Line, data.Value = l, blank.String()
-					block.add(data)
 				}
 				p.Add(block)
 				block = nil

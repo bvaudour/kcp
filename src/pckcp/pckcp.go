@@ -277,7 +277,7 @@ func checkConflict(bl *pkgbuild.Block, pkgname string) bool {
 		exists := true
 		if pkgname == d.Value {
 			exists = false
-			message(W, bl.From, bl.To, trf(W_CONFLICTS, d.Value))
+			message(W, bl.From, bl.To, trf(W_CONFLICTS, bl.Name))
 		} else if !isPackageInRepo(d.Value) {
 			exists = false
 			message(W, bl.From, bl.To, trf(W_CONFLICTS2, d.Value, bl.Name))
