@@ -49,7 +49,7 @@ end
 
 function __fish_kcp_needs_arg
 	set cmd (commandline -opc)
-	if __fish_kcp_match_last $cmd[(count $cmd)] s i g search install get
+	if __fish_kcp_match_last $cmd[(count $cmd)] s i g V search install get information
 		return 0
 	end
 	return 1

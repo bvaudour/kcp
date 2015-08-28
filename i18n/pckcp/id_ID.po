@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 15:11+0000\n"
+"PO-Revision-Date: 2015-08-27 23:26+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "paket() berfungsi telah hadir."
 #: pckcp/pckcp.go, offset 1432, line 56, column 19
 #, c-format
 msgid "Variable '%s' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Variabel '%s' telah hadir %d kali (baris %s). Hanya satu yang diharapkan."
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
@@ -78,7 +78,7 @@ msgstr "Variabel '%s' berisi nama dari paket. Percuma saja."
 #: pckcp/pckcp.go, offset 2969, line 82, column 19
 #, c-format
 msgid "Function '%s()' is empty."
-msgstr ""
+msgstr "Fungsi '%s()' telah kosong."
 
 #: pckcp/pckcp.go, offset 2850, line 81, column 19
 msgid ""
@@ -169,7 +169,7 @@ msgstr "Sundulan bersih."
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
 msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Fungsi '%s()' telah hadir %d kali (baris %s). Hanya satu yang diharapkan."
 
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
@@ -200,7 +200,7 @@ msgstr "Buang fungsi diplikat yang tidak dibutuhkan?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
-msgstr ""
+msgstr "Edisi interaktif"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
@@ -209,7 +209,7 @@ msgstr "Folder saat ini tidak berisi PKGBUILD!"
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
 msgid "'%s' is not valid. You should suppress it"
-msgstr ""
+msgstr "'%s' tidak sah. Anda harus menekannya"
 
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
@@ -253,7 +253,7 @@ msgstr "Bendera '%s' membutuhkan salahsatu bendera ini: %v"
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Arg '%s' tidak dalam %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
@@ -263,17 +263,17 @@ msgstr "Bendera '%s' sudah disetel!"
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Arg tidak diharapkan: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Properti tidak diketahui: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Bendera '%s' tidak didukung"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
@@ -283,21 +283,21 @@ msgstr ""
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Nilai '%v' tidak sah: Seharusnya %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Bendera '%s' tidak memperbolehkan beberapa argumentasi!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s tidak diperbolehkan!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Diperlukan arg!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -313,8 +313,8 @@ msgstr "<tidak diketahui>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[Y/t]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[y/T]"

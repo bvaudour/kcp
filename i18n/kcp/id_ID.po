@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-27 14:26+0000\n"
+"PO-Revision-Date: 2015-08-28 01:00+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Nama"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "Opsi Ketergantungan"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
@@ -206,7 +206,7 @@ msgstr "Bendera '%s' membutuhkan salahsatu bendera ini: %v"
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Arg '%s' tidak dalam %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
@@ -216,7 +216,7 @@ msgstr "Bendera '%s' sudah disetel!"
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Arg tidak diharapkan: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
@@ -250,7 +250,7 @@ msgstr "%s tidak diperbolehkan!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Diperlukan arg!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
