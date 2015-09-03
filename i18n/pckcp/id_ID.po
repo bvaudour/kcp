@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 23:26+0000\n"
+"PO-Revision-Date: 2015-09-02 09:40+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -278,7 +278,7 @@ msgstr "Bendera '%s' tidak didukung"
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "%s tidak sah bendera '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
