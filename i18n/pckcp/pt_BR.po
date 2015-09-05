@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 10:38+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-09-05 20:57+0000\n"
+"Last-Translator: Arnt <qtgzmanager@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/kaos/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,16 +26,16 @@ msgstr "A função package() está presente."
 #: pckcp/pckcp.go, offset 1432, line 56, column 19
 #, c-format
 msgid "Variable '%s' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Variável '%s' está presente %d vezes (linhas %s). Apenas uma vez era esperada."
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
-msgstr ""
+msgstr "Remover as variáveis desnecessariamente duplicadas?"
 
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
 msgid "Variable '%s' is missing."
-msgstr ""
+msgstr "Variável '%s' está ausente."
 
 #: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
@@ -50,7 +50,7 @@ msgstr "Um cabeçalho foi encontrado. Não utilize nomes de mantenedores nem con
 
 #: pckcp/pckcp.go, offset 532, line 23, column 20
 msgid "Print version"
-msgstr ""
+msgstr "Exibe a versão"
 
 #: pckcp/pckcp.go, offset 2460, line 76, column 19
 #, c-format
@@ -59,7 +59,7 @@ msgstr "Substituir %s por... (deixar em branco para removê-la):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr ""
+msgstr "Instalação está limpa."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
@@ -68,7 +68,7 @@ msgstr "Alterar pkgrel para 1?"
 #: pckcp/pckcp.go, offset 2381, line 75, column 19
 #, c-format
 msgid "Choose the line to keep among [%s] (last line by default)."
-msgstr ""
+msgstr "Escolha a linha a ser mantida [%s] (a última linha por padrão),"
 
 #: pckcp/pckcp.go, offset 2593, line 78, column 19
 #, c-format
@@ -78,7 +78,7 @@ msgstr "Variável '%s' contém um nome do pacote. É inútil."
 #: pckcp/pckcp.go, offset 2969, line 82, column 19
 #, c-format
 msgid "Function '%s()' is empty."
-msgstr ""
+msgstr "Função '%s()' está vazia."
 
 #: pckcp/pckcp.go, offset 2850, line 81, column 19
 msgid ""
@@ -94,7 +94,7 @@ msgstr "O arquivo PKGBUILD é um PKGBUILD dividido. Crie tantos arquivos PKGBUIL
 
 #: pckcp/pckcp.go, offset 495, line 22, column 20
 msgid "Print this help"
-msgstr ""
+msgstr "Exibe esta ajuda."
 
 #: pckcp/pckcp.go, offset 807, line 39, column 6
 msgid "Warning"
@@ -113,7 +113,7 @@ msgstr "Alterações salvas em %s!"
 #: pckcp/pckcp.go, offset 2098, line 69, column 19
 #, c-format
 msgid "Modify name of %s file?"
-msgstr ""
+msgstr "Modificar o nome do arquivo %s?"
 
 #: pckcp/pckcp.go, offset 3252, line 86, column 19
 msgid "package() function missing. You need to add it."
@@ -122,19 +122,19 @@ msgstr "A função package() não foi encontrada. Você precisará adicioná-la.
 #: pckcp/pckcp.go, offset 2142, line 70, column 19
 #, c-format
 msgid "Add variable '%s'?"
-msgstr ""
+msgstr "Adicionar a variável '%s'?"
 
 #: pckcp/pckcp.go, offset 3214, line 85, column 19
 #, c-format
 msgid "%s doesn't exist!"
-msgstr ""
+msgstr "%s não existe!"
 
 #: pckcp/pckcp.go, offset 178, line 17, column 20
 msgid ""
 "Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
 "\n"
 "If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
-msgstr ""
+msgstr "Fornece uma ferramenta para verificar a validade de um PKGBUILD de acordo com o padrões do KCP\n\nSe o parâmetro -e é usado, os erros comuns poderão ser verificados e (potencialmente) um PKGBUILD.new válido será criado."
 
 #: pckcp/pckcp.go, offset 794, line 38, column 6
 msgid "Error"
@@ -142,7 +142,7 @@ msgstr "Erro"
 
 #: pckcp/pckcp.go, offset 822, line 40, column 6
 msgid "Info"
-msgstr ""
+msgstr "Informação"
 
 #: pckcp/pckcp.go, offset 1126, line 52, column 19
 msgid "pkgrel is clean."
@@ -160,7 +160,7 @@ msgstr "Alterar a arquitetura para x86_64?"
 
 #: pckcp/pckcp.go, offset 388, line 20, column 20
 msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr ""
+msgstr "Ferramenta de linha de comando para gerenciar erros comuns do PKGBUILD"
 
 #: pckcp/pckcp.go, offset 1000, line 49, column 19
 msgid "Header is clean."
@@ -169,7 +169,7 @@ msgstr "O cabeçalho está adequado."
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
 msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Função '%s()' está presente %d vezes (linhas %s). Apenas uma vez era esperada."
 
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
@@ -188,7 +188,7 @@ msgstr "Variável '%s' está adequada."
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
-msgstr ""
+msgstr "Remover todos os comentários desnecessários antes de salvar?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -196,11 +196,11 @@ msgstr "Remover o cabeçalho?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
-msgstr ""
+msgstr "Remover as funções duplicadas desnecessárias?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
-msgstr ""
+msgstr "Edição interativa"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
@@ -209,7 +209,7 @@ msgstr "A pasta corrente não contém o arquivo PKGBUILD!"
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
 msgid "'%s' is not valid. You should suppress it"
-msgstr ""
+msgstr "'%s' não é válido. Você deve suprimí-lo"
 
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
@@ -219,7 +219,7 @@ msgstr "Alterar %s na variável '%s'?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr ""
+msgstr "Atribuir o seguinte valor à variável '%s' (deixar em branco para ignorar):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format
@@ -232,7 +232,7 @@ msgstr "Arquitetura está adequada."
 
 #: pckcp/pckcp.go, offset 2220, line 72, column 19
 msgid "Remove it?"
-msgstr ""
+msgstr "Remover?"
 
 #: pckcp/pckcp.go, offset 3320, line 87, column 19
 msgid ""
@@ -243,78 +243,78 @@ msgstr "pkgrel é diferente de 1. Este somente deve ser o caso se as instruçõe
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "O flag '%s' não pode ser usado com '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "O flag '%s' precisa de um destes flags: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Argumento '%s' não está em %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "O flag '%s' já foi atribuído!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Argumento não esperado: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Propriedade desconhecida: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Flag '%s' não suportado"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Flag %s inválido '%s':%s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Valor '%v' inválido: Deve ser um %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "O flag '%s' não suporta múltiplos argumentos!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s não é permitido!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Argumento requerido!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Diretório %s já existe!"
 
 #: repo/repo.go, offset 1004, line 41, column 20
 msgid "Package not found!"
-msgstr ""
+msgstr "Pacote não encontrado!"
 
 #: repo/repo.go, offset 1124, line 44, column 20
 msgid "<unknown>"
-msgstr ""
+msgstr "<desconhecido>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[S/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[s/N]"
