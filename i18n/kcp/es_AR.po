@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-27 10:07+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-09-06 06:08+0000\n"
+"Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/kaos/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "Muestra información sobre un paquete"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
@@ -44,7 +44,7 @@ msgid ""
 "Provides a tool to make the use of KaOS Community Packages.\n"
 "\n"
 "With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr ""
+msgstr "Brinda una herramienta para hacer uso de KaOS Community Packages.\n\nCon esta herramienta, puede buscar, obtener e instalar un paquete desde KaOS Community Packages."
 
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
@@ -53,15 +53,15 @@ msgstr "%d entradas actualizadas!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "Dependencias Opcionales"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Reemplaza"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -69,11 +69,11 @@ msgstr "Muestra todos los paquetes de KCP"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
-msgstr ""
+msgstr "Provee"
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Script de Instalación"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -86,7 +86,7 @@ msgstr "¡Se añadieron %d entradas!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -111,7 +111,7 @@ msgstr "En una acción de visualización, muestra sólo el nombre del paquete"
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
-msgstr ""
+msgstr "Depende de"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -144,11 +144,11 @@ msgstr "¿Quiere editar %s?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -156,7 +156,7 @@ msgstr "Acción de instalación, instala como una dependencia"
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Versión"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -164,11 +164,11 @@ msgstr "En una acción de visualización, muestra sólo los paquetes instalados"
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Licencias"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "Conflicto con"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -184,11 +184,11 @@ msgstr "¡Se está ejecutando otra instancia de kcp!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Arquitectura"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -197,61 +197,61 @@ msgstr "Muestra esta ayuda"
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Modificador '%s' no puede ser usado con '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Modificador '%s' necesita uno de estos modificadores: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Arg '%s' no está en %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Modificador '%s' ya fue establecido!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Arg Inesperado: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Propiedad desconocida: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Modificador no soportado '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Modificador '%s' inválido %s: %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Valor inválido '%v': Debe ser un %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "El modificador '%s' no permite argumentos múltiples!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s no permitido!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Arg necesario!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -267,8 +267,8 @@ msgstr "<desconocido>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[S/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[s/N]"
