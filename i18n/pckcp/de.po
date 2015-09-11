@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-30 13:49+0000\n"
+"PO-Revision-Date: 2015-09-08 21:55+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,11 @@ msgstr "package() function is bereit"
 #: pckcp/pckcp.go, offset 1432, line 56, column 19
 #, c-format
 msgid "Variable '%s' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Variable '%s' ist %d Mal vorhanden (Zeilen %s). Nur eine wird erwartet."
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
-msgstr ""
+msgstr "Nicht benötige, doppelte Variablen entfernen?"
 
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
@@ -171,7 +171,7 @@ msgstr " Header ist leer"
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
 msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Funktion '%s()' ist %d Mal vorhanden (Zeilen %s). Nur eine wird erwartet."
 
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
@@ -190,7 +190,7 @@ msgstr "Variable '%s' ist leer."
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
-msgstr ""
+msgstr "Alle nicht benötigten Kommentare vor dem Speichern entfernen?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -198,11 +198,11 @@ msgstr "header entfernen ?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
-msgstr ""
+msgstr "Nicht benötige, doppelte Funktionen entfernen?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
-msgstr ""
+msgstr "Interaktive Edition"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
@@ -211,7 +211,7 @@ msgstr "Aktueller Ordner enthält kein PKGBUILD"
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
 msgid "'%s' is not valid. You should suppress it"
-msgstr ""
+msgstr "'%s' ist nicht gültig. Sie sollten es abstellen"
 
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
@@ -221,7 +221,7 @@ msgstr " Änderung %s in Variable '%s' ?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr ""
+msgstr "Variable '%s' festlegen mit (zum Ignorieren leer lassen):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format
@@ -270,7 +270,7 @@ msgstr "Unerwartetes Argument: %s"
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Unbekannte Eigenschaft: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-30 13:47+0000\n"
+"PO-Revision-Date: 2015-09-08 21:51+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -224,7 +224,7 @@ msgstr "Unerwartetes Argument: %s"
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Unbekannte Eigenschaft: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format

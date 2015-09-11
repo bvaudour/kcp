@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Demiray Muhterem <mdemiray@msn.com>, 2014-2015
+# Muha Aliss <muhaaliss@gmail.com>, 2015
 # Mustafa Kılıç <mustafa@fomus.org>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-27 10:07+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-09-07 01:42+0000\n"
+"Last-Translator: Muha Aliss <muhaaliss@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/kaos/kaos/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "Bir paket hakkında bilgi görüntülemek"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
@@ -53,7 +54,7 @@ msgstr "%d girdiler güncellendi!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "İsim"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
@@ -61,7 +62,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Yerini alır"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -69,11 +70,11 @@ msgstr "KCP ile tüm paketleri göster"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
-msgstr ""
+msgstr "Sağlar"
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Script kur"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -86,7 +87,7 @@ msgstr "%d girdiler eklendi!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -111,7 +112,7 @@ msgstr "Görüntüleme işleminde, sadece paketin adını göster"
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
-msgstr ""
+msgstr "Bağlıdır"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -144,11 +145,11 @@ msgstr "%s içeriğini düzenlemek istiyor musun?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "Link"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -156,7 +157,7 @@ msgstr "Kurulum işleminde bağımlı olarak kur"
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Sürüm"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -164,11 +165,11 @@ msgstr "Görüntüleme işleminde, sadece kurulmuş paketleri göster"
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Lisans"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "Çakışıyor"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -184,11 +185,11 @@ msgstr "KCP halen çalışıyor!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Mimari"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -251,7 +252,7 @@ msgstr ""
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Arg gerekli!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -267,8 +268,8 @@ msgstr "<bilinmeyen>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[E/h]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[e/H]"
