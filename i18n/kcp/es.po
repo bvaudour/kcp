@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Cellix <cellix@yandex.com>, 2015
 # Diego L. Velazquez <dlvelazquez@gmail.com>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:49+0000\n"
+"PO-Revision-Date: 2015-09-12 15:04+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/kaos/kaos/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -274,8 +275,8 @@ msgstr "[s/N]"
 
 #: kcpdb/db.go, offset 458, line 28, column 23
 msgid "[installed]"
-msgstr ""
+msgstr "[instalado]"
 
 #: kcpdb/db.go, offset 494, line 29, column 23
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[instalado: %s]"

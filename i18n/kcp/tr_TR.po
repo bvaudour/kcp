@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Cellix <cellix@yandex.com>, 2015
 # Demiray Muhterem <mdemiray@msn.com>, 2014-2015
 # Muha Aliss <muhaaliss@gmail.com>, 2015
 # Mustafa Kılıç <mustafa@fomus.org>, 2014-2015
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:49+0000\n"
+"PO-Revision-Date: 2015-09-12 15:07+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/kaos/kaos/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -276,8 +277,8 @@ msgstr "[e/H]"
 
 #: kcpdb/db.go, offset 458, line 28, column 23
 msgid "[installed]"
-msgstr ""
+msgstr "[kuruldu]"
 
 #: kcpdb/db.go, offset 494, line 29, column 23
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[kuruldu: %s]"
