@@ -61,7 +61,7 @@ func Question(msg string) string {
 	return strings.TrimSpace(sc.Text())
 }
 
-//QuestionNY displays a question to the output and returns the boolean response given by the user.
+//QuestionYN displays a question to the output and returns the boolean response given by the user.
 func QuestionYN(msg string, defaultResponse bool) bool {
 	defstr, resp := DEFAULT_YES, ""
 	if !defaultResponse {

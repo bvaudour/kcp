@@ -21,6 +21,7 @@
 #: parser/flag/errors.go:19 parser/flag/errors.go:20
 #: repo/repo.go:41 repo/repo.go:43 repo/repo.go:44
 #: sysutil/util.go:14 sysutil/util.go:68
+#: kcpdb/db.go:28 kcpdb/db.go:29
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
@@ -285,3 +286,10 @@ msgstr ""
 msgid "[y/N]"
 msgstr ""
 
+#: kcpdb/db.go, offset: 458, line: 28, column: 23
+msgid "[installed]"
+msgstr ""
+
+#: kcpdb/db.go, offset: 494, line: 29, column: 23
+msgid "[installed: %s]"
+msgstr ""
