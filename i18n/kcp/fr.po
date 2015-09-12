@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-08-27 10:27+0000\n"
+"PO-Revision-Date: 2015-09-12 14:50+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: French (http://www.transifex.com/kaos/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -271,3 +271,11 @@ msgstr "[Y/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[y/N]"
+
+#: kcpdb/db.go, offset 458, line 28, column 23
+msgid "[installed]"
+msgstr "[installé]"
+
+#: kcpdb/db.go, offset 494, line 29, column 23
+msgid "[installed: %s]"
+msgstr "[installé: %s]"
