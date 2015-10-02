@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-09-02 09:40+0000\n"
+"PO-Revision-Date: 2015-09-24 23:56+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgstr "Edisi interaktif"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr "Folder saat ini tidak berisi PKGBUILD!"
+msgstr "Map saat ini tidak berisi PKGBUILD!"
 
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
