@@ -326,3 +326,23 @@ msgstr ""
 msgid "[y/N]"
 msgstr ""
 
+#: pckcp/pckcp.go, offset: 632, line: 27, column: 20
+msgid "Generate a prototype of PKGBUILD"
+msgstr ""
+
+#: pckcp/pckcp.go, offset: 716, line: 28, column: 20
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr ""
+
+#: pckcp/pckcp.go, offset: 1857, line: 63, column: 19
+#, c-format
+msgid "%s is not a file!"
+msgstr ""
+
+#: pckcp/pckcp.go, offset: 2337, line: 73, column: 19
+msgid "PKGBUILD file already exists. Do you want to erase it?"
+msgstr ""
+
+#: pckcp/pckcp.go, offset: 3909, line: 95, column: 19
+msgid "Action cancelled"
+msgstr ""

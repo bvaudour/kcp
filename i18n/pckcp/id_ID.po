@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-09-24 23:56+0000\n"
+"PO-Revision-Date: 2015-10-18 03:10+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "Pasang telah bersih."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
-msgstr "Set ulang pkgrel ke 1?"
+msgstr "Setel ulang pkgrel ke 1?"
 
 #: pckcp/pckcp.go, offset 2381, line 75, column 19
 #, c-format
@@ -156,7 +156,7 @@ msgstr "arsitektur berbeda dari 'x86_64'. KaOS hanya mendukung arsitektur ini, t
 
 #: pckcp/pckcp.go, offset 1732, line 61, column 19
 msgid "Reset arch to x86_64?"
-msgstr "Set ulang arsitektur ke x86_64?"
+msgstr "Setel ulang arsitektur ke x86_64?"
 
 #: pckcp/pckcp.go, offset 388, line 20, column 20
 msgid "Tool in command-line to manage common PKGBUILD errors"
@@ -219,7 +219,7 @@ msgstr "Memodifikasi %s dalam variabel '%s'?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr "Setel variabel '%s' dengan (biarkan kosong untuk mengabaikan):"
+msgstr "Setel variabel '%s' dengan (biarkan kosong untuk abaikan):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format

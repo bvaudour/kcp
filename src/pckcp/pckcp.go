@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"gettext"
 	"io/ioutil"
 	"os"
 	"parser/flag"
 	"parser/pkgbuild"
+	"repo"
 	"strconv"
 	"strings"
 	"sysutil"
@@ -18,15 +20,17 @@ const (
 
 If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created.`
 	APP_DESCRIPTION = "Tool in command-line to manage common PKGBUILD errors"
-	SYNOPSIS        = "[-h|-e|-v]"
+	SYNOPSIS        = "[-h|-e|-v|-g[-c]]"
 	D_HELP          = "Print this help"
 	D_VERSION       = "Print version"
 	D_EDIT          = "Interactive edition"
+	D_GENERATE      = "Generate a prototype of PKGBUILD"
+	D_CLEAN         = "Removes the useless comments and blanks of the prototype"
 )
 
 var (
-	flags                          *flag.Parser
-	fHelp, fVersion, fEdit, fDebug *bool
+	flags                                             *flag.Parser
+	fHelp, fVersion, fEdit, fDebug, fGenerate, fClean *bool
 )
 
 //PKGBUILD declarations
@@ -56,6 +60,7 @@ const (
 	E_DUPLV        = "Variable '%s' is present %d times (lines %s). Only one is expected."
 	E_MISS         = "Variable '%s' is missing."
 	E_NOPKGBUILD   = "Current folder doesn't contain PKGBUILD!"
+	E_NOTAFILE     = "%s is not a file!" /*#*/
 	E_SAVED        = "Error on save file %s!"
 	E_UNKNOWN      = "'%s' is not valid. You should suppress it"
 	Q_ARCH         = "Reset arch to x86_64?"
@@ -65,6 +70,7 @@ const (
 	Q_DUPLF        = "Remove uneeded duplicate functions?"
 	Q_DUPLV        = "Remove uneeded duplicate variables?"
 	Q_EMPTY        = "Remove it?"
+	Q_ERASE        = "PKGBUILD file already exists. Do you want to erase it?"
 	Q_HEADER       = "Remove header?"
 	Q_INSTALL      = "Modify name of %s file?"
 	Q_MISS         = "Add variable '%s'?"
@@ -86,6 +92,7 @@ const (
 	W_PACKAGE      = "package() function missing. You need to add it."
 	W_PKGREL       = "pkgrel is different from 1. It should be the case only if build instructions are edited but not pkgver."
 	W_SPLITTED     = "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains different packages!"
+	W_CANCEL       = "Action cancelled"
 )
 
 //Files paths
@@ -436,6 +443,47 @@ func checkUnknowns(p *pkgbuild.Pkgbuild) {
 	p.Unknown = keep
 }
 
+//Generate proto
+func generate(clean bool) {
+	b, err := repo.PkgbuildProto()
+	if err != nil {
+		sysutil.PrintError(err)
+		os.Exit(1)
+	}
+	if info, err := os.Stat("PKGBUILD"); err == nil {
+		mode := info.Mode()
+		if !mode.IsRegular() {
+			sysutil.PrintError(trf(E_NOTAFILE, "PKGBUILD"))
+			os.Exit(1)
+		}
+		if !sysutil.QuestionYN(tr(Q_ERASE), false) {
+			sysutil.PrintWarning(tr(W_CANCEL))
+			return
+		}
+	}
+	if clean {
+		prefixes := []string{"prepare()", "build()", "check()", "package()"}
+		buf := new(bytes.Buffer)
+		for _, l := range strings.Split(string(b), "\n") {
+			if lt := strings.TrimSpace(l); lt != "" && lt[0] != '#' {
+				for _, pref := range prefixes {
+					if strings.HasPrefix(lt, pref) {
+						buf.WriteByte('\n')
+						break
+					}
+				}
+				buf.WriteString(l + "\n")
+			}
+		}
+		b = buf.Bytes()
+	}
+	if err := ioutil.WriteFile("PKGBUILD", b, 0644); err != nil {
+		sysutil.PrintError(trf(E_SAVED, "PKGBUILD"))
+		os.Exit(1)
+	}
+	sysutil.PrintWarning(trf(I_SAVED, "PKGBUILD"))
+}
+
 func init() {
 	//Init the locales
 	os.Setenv("LANGUAGE", os.Getenv("LC_MESSAGES"))
@@ -451,9 +499,14 @@ func init() {
 	fHelp, _ = flags.Bool("-h", "--help", tr(D_HELP))
 	fVersion, _ = flags.Bool("-v", "--version", tr(D_VERSION))
 	fEdit, _ = flags.Bool("-e", "--edit", tr(D_EDIT))
+	fGenerate, _ = flags.Bool("-g", "--generate", tr(D_GENERATE))
+
+	fClean, _ = flags.Bool("-c", "--clean", tr(D_CLEAN))
+	flags.Require("-c", "-g")
+
 	fDebug, _ = flags.Bool("-d", "--debug", "")
 	flags.GetFlag("--debug").Set(flag.HIDDEN, true)
-	flags.Group("-h", "-e", "-v")
+	flags.Group("-h", "-e", "-v", "-g")
 
 	//Init the depends exceptions
 	b, _ := ioutil.ReadFile(EXCEPTIONS)
@@ -477,6 +530,10 @@ func main() {
 	}
 	if *fVersion {
 		flags.PrintVersion()
+		return
+	}
+	if *fGenerate {
+		generate(*fClean)
 		return
 	}
 	p, e := pkgbuild.Parse("PKGBUILD")

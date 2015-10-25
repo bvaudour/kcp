@@ -17,13 +17,14 @@ import (
 
 //Needed URLs for requests
 const (
-	HEADER       = "application/vnd.github.v3+json"
-	SEARCH_ALL   = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100&%s"
-	URL_REPO     = "https://github.com/KaOS-Community-Packages/%s.git"
-	URL_PKGBUILD = "https://raw.githubusercontent.com/KaOS-Community-Packages/%s/master/PKGBUILD"
-	APP_ID       = "&client_id=11f5f3d9dab26c7fff24"
-	SECRET_ID    = "&client_secret=bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
-	IDENT        = APP_ID + SECRET_ID
+	HEADER        = "application/vnd.github.v3+json"
+	SEARCH_ALL    = "https://api.github.com/orgs/KaOS-Community-Packages/repos?page=%d&per_page=100&%s"
+	URL_REPO      = "https://github.com/KaOS-Community-Packages/%s.git"
+	URL_PKGBUILD  = "https://raw.githubusercontent.com/KaOS-Community-Packages/%s/master/PKGBUILD"
+	APP_ID        = "&client_id=11f5f3d9dab26c7fff24"
+	SECRET_ID     = "&client_secret=bb456e9fa4e2d0fe2df9e194974c98c2f9133ff5"
+	IDENT         = APP_ID + SECRET_ID
+	PKGBUILDPROTO = "https://raw.githubusercontent.com/kaos-addict/kaos-helpers/master/PKGBUILD.commented.kaos.proto"
 )
 
 //Json keys of github API
@@ -146,6 +147,15 @@ func kcpVersion(app string) string {
 //Pkgbuild returns the PKGBUILD of the given repo.
 func Pkgbuild(app string) ([]byte, error) {
 	b, e := launchRequest(false, "", URL_PKGBUILD, app)
+	if e == nil && string(b) == "Not Found" {
+		e = errors.New(tr(MSG_NOT_FOUND))
+	}
+	return b, e
+}
+
+//PkgbuildProto returns a PKGBUILD prototype.
+func PkgbuildProto() ([]byte, error) {
+	b, e := launchRequest(false, "", PKGBUILDPROTO)
 	if e == nil && string(b) == "Not Found" {
 		e = errors.New(tr(MSG_NOT_FOUND))
 	}
