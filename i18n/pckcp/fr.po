@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-08-27 10:23+0000\n"
+"PO-Revision-Date: 2015-10-25 17:14+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: French (http://www.transifex.com/kaos/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,10 @@ msgstr "La variable '%s' est présente %d fois (lignes %s). Une seule est attend
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
+msgstr "Supprimer les variables dupliquées non nécessaires ?"
+
+#: pckcp/pckcp.go, offset 1976, line 66, column 19
+msgid "Remove unneeded duplicate variables?"
 msgstr "Supprimer les variables dupliquées non nécessaires ?"
 
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
@@ -189,12 +193,20 @@ msgstr "La variable '%s' est propre."
 msgid "Remove all uneeded comments before save?"
 msgstr "Supprimer tous les commentaires inutiles avant la sauvegarde ?"
 
+#: pckcp/pckcp.go, offset 1774, line 62, column 19
+msgid "Remove all unneeded comments before save?"
+msgstr "Supprimer tous les commentaires inutiles avant la sauvegarde ?"
+
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
 msgstr "Supprimer l’en-tête ?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
+msgstr "Supprimer les fonctions dupliquées non nécessaires ?"
+
+#: pckcp/pckcp.go, offset 1920, line 65, column 19
+msgid "Remove unneeded duplicate functions?"
 msgstr "Supprimer les fonctions dupliquées non nécessaires ?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
@@ -317,3 +329,24 @@ msgstr "[Y/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[y/N]"
+
+#: pckcp/pckcp.go, offset 632, line 27, column 20
+msgid "Generate a prototype of PKGBUILD"
+msgstr "Génère un prototype de PKGBUILD"
+
+#: pckcp/pckcp.go, offset 716, line 28, column 20
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Supprime les commentaires et lignes blanches inutiles du prototype"
+
+#: pckcp/pckcp.go, offset 1857, line 63, column 19
+#, c-format
+msgid "%s is not a file!"
+msgstr "%s n’est pas un fichier !"
+
+#: pckcp/pckcp.go, offset 2337, line 73, column 19
+msgid "PKGBUILD file already exists. Do you want to erase it?"
+msgstr "Le fichier PKGBUILD existe déjà. Voulez-vous le supprimer ?"
+
+#: pckcp/pckcp.go, offset 3909, line 95, column 19
+msgid "Action cancelled"
+msgstr "Action annulée"
