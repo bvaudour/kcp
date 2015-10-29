@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-10-25 17:11+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-10-26 15:03+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,11 +32,11 @@ msgstr "Variable '%s' ist %d Mal vorhanden (Zeilen %s). Nur eine wird erwartet."
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
-msgstr "Nicht benötige, doppelte Variablen entfernen?"
+msgstr "Nicht benötigte, doppelte Variablen entfernen?"
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove unneeded duplicate variables?"
-msgstr ""
+msgstr "Nicht benötigte, doppelte Variablen entfernen?"
 
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
@@ -65,7 +65,7 @@ msgstr "Ersetze %s mit... (zum Entfernen leer lassen):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr ""
+msgstr "install ist leer."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
@@ -198,7 +198,7 @@ msgstr "Alle nicht benötigten Kommentare vor dem Speichern entfernen?"
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all unneeded comments before save?"
-msgstr ""
+msgstr "Alle nicht benötigten Kommentare vor dem Speichern entfernen?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -206,11 +206,11 @@ msgstr "header entfernen ?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
-msgstr "Nicht benötige, doppelte Funktionen entfernen?"
+msgstr "Nicht benötigte, doppelte Funktionen entfernen?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove unneeded duplicate functions?"
-msgstr ""
+msgstr "Nicht benötigte, doppelte Funktionen entfernen?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
@@ -335,7 +335,7 @@ msgstr "[j/N]"
 
 #: pckcp/pckcp.go, offset 632, line 27, column 20
 msgid "Generate a prototype of PKGBUILD"
-msgstr ""
+msgstr "Prototyp von PKGBUILD erzeugen"
 
 #: pckcp/pckcp.go, offset 716, line 28, column 20
 msgid "Removes the useless comments and blanks of the prototype"
@@ -344,12 +344,12 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1857, line 63, column 19
 #, c-format
 msgid "%s is not a file!"
-msgstr ""
+msgstr "%s ist keine Datei!"
 
 #: pckcp/pckcp.go, offset 2337, line 73, column 19
 msgid "PKGBUILD file already exists. Do you want to erase it?"
-msgstr ""
+msgstr "PKGBUILD-Datei ist bereits vorhanden. Möchten Sie sie löschen?"
 
 #: pckcp/pckcp.go, offset 3909, line 95, column 19
 msgid "Action cancelled"
-msgstr ""
+msgstr "Aktion abgebrochen"
