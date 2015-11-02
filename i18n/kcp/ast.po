@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-10-04 21:24+0000\n"
+"PO-Revision-Date: 2015-10-30 16:42+0000\n"
 "Last-Translator: enolp <enolp@softastur.org>\n"
 "Language-Team: Asturian (http://www.transifex.com/kaos/kaos/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -196,7 +196,7 @@ msgstr "Amuesa esta ayuda"
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Nun pue usase la bandera «%s» con «%s»"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
@@ -241,7 +241,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "¡La bandera «%s» nun permite argumentos múltiples!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
