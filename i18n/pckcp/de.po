@@ -7,13 +7,14 @@
 # Ettore Atalan <atalanttore@googlemail.com>, 2015
 # Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2015
 # Rebel450, 2015
+# watho <watho@web.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-10-26 15:03+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2015-12-07 08:50+0000\n"
+"Last-Translator: watho <watho@web.de>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgstr "Variable '%s' fehlt."
 #: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
 msgid "Modify %s as %s?"
-msgstr "Ändere %s sowie %s ?"
+msgstr " Änderung %s in Variable '%s' ?"
 
 #: pckcp/pckcp.go, offset 3059, line 84, column 19
 msgid ""
@@ -65,7 +66,7 @@ msgstr "Ersetze %s mit... (zum Entfernen leer lassen):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr "install ist leer."
+msgstr "install ist sauber"
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"

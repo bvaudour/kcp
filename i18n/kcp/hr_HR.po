@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Ivica  Kolić <ikoli@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:49+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-12-15 22:18+0000\n"
+"Last-Translator: Ivica  Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/kaos/kaos/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,15 +20,15 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "Prikaži informacije o paketu"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
-msgstr ""
+msgstr "Ispiši verziju"
 
 #: kcp/kcp.go, offset 885, line 32, column 20
 msgid "On display action, don't print KCP version"
-msgstr ""
+msgstr "U radnji prikaza, nemoj ispisati KCP verziju"
 
 #: kcp/kcp.go, offset 1087, line 35, column 20
 msgid "On list action, display only installed packages"
@@ -35,7 +36,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr ""
+msgstr "U radnji prikaza, prisili na osvježavanje lokalne baze podataka"
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
@@ -47,11 +48,11 @@ msgstr ""
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
 msgid "%d entries updated!"
-msgstr ""
+msgstr "%d unosa je ažurirano!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
@@ -59,11 +60,11 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Zamjenjuje"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
-msgstr ""
+msgstr "Prikaži sve KCP pakete"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
@@ -75,33 +76,33 @@ msgstr ""
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
-msgstr ""
+msgstr "Instaliraj paket iz KCP-a"
 
 #: kcp/kcp.go, offset 2186, line 58, column 24
 #, c-format
 msgid "%d entries added!"
-msgstr ""
+msgstr "%d unosa dodano!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
 msgid "%d entries deleted!"
-msgstr ""
+msgstr "%d unosa izbrisano!"
 
 #: kcp/kcp.go, offset 2319, line 61, column 24
 msgid "Interrupt by user..."
-msgstr ""
+msgstr "Prekinuo korisnik..."
 
 #: kcp/kcp.go, offset 2365, line 62, column 24
 msgid "No package found"
-msgstr ""
+msgstr "NIjedan paket nije pronađen"
 
 #: kcp/kcp.go, offset 387, line 23, column 20
 msgid "Tool in command-line for KaOS Community Packages"
-msgstr ""
+msgstr "Alat u naredbenom retku za KaOS pakete zajednice"
 
 #: kcp/kcp.go, offset 1302, line 38, column 20
 msgid "On display action, display only the name of the package"
@@ -109,7 +110,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
-msgstr ""
+msgstr "Zavisi o"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -117,11 +118,11 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2082, line 56, column 24
 msgid "Do you want to edit PKGBUILD?"
-msgstr ""
+msgstr "Želite li urediti PKGBUILD?"
 
 #: kcp/kcp.go, offset 666, line 28, column 20
 msgid "Refresh the local database"
-msgstr ""
+msgstr "Osvježi lokalnu bazu podataka"
 
 #: kcp/kcp.go, offset 949, line 33, column 20
 msgid "On display action, sort packages by stars descending"
@@ -138,15 +139,15 @@ msgstr ""
 #: kcp/kcp.go, offset 2137, line 57, column 24
 #, c-format
 msgid "Do you want to edit %s?"
-msgstr ""
+msgstr "Želite li urediti %s?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -154,7 +155,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Verzija"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -162,11 +163,11 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Licence"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "U sukobu sa"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -182,15 +183,15 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Arhitektura"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
-msgstr ""
+msgstr "Ispiši ovu pomoć"
 
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
@@ -220,7 +221,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Nepoznato svojstvo: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
@@ -235,7 +236,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Neispravna vrijednost '%v': Mora biti %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
@@ -245,7 +246,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s nije dopušten!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
@@ -253,28 +254,28 @@ msgstr ""
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Dir %s već postoji!"
 
 #: repo/repo.go, offset 1004, line 41, column 20
 msgid "Package not found!"
-msgstr ""
+msgstr "Paket nije nađen!"
 
 #: repo/repo.go, offset 1124, line 44, column 20
 msgid "<unknown>"
-msgstr ""
+msgstr "<nepoznato>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[D/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[d/N]"
 
 #: kcpdb/db.go, offset 458, line 28, column 23
 msgid "[installed]"
-msgstr ""
+msgstr "[instalirano]"
 
 #: kcpdb/db.go, offset 494, line 29, column 23
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[instalirano: %s]"

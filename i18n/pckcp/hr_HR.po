@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Ivica  Kolić <ikoli@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-10-25 17:11+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2015-12-15 22:08+0000\n"
+"Last-Translator: Ivica  Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/kaos/kaos/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,12 +38,12 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
 msgid "Variable '%s' is missing."
-msgstr ""
+msgstr "Varijabla '%s'  nedostaje."
 
 #: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
 msgid "Modify %s as %s?"
-msgstr ""
+msgstr "Izmjeni %s kao %s?"
 
 #: pckcp/pckcp.go, offset 3059, line 84, column 19
 msgid ""
@@ -52,7 +53,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 532, line 23, column 20
 msgid "Print version"
-msgstr ""
+msgstr "Ispiši verziju"
 
 #: pckcp/pckcp.go, offset 2460, line 76, column 19
 #, c-format
@@ -96,26 +97,26 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 495, line 22, column 20
 msgid "Print this help"
-msgstr ""
+msgstr "Ispiši ovu pomoć"
 
 #: pckcp/pckcp.go, offset 807, line 39, column 6
 msgid "Warning"
-msgstr ""
+msgstr "Upozorenje"
 
 #: pckcp/pckcp.go, offset 965, line 48, column 19
 #, c-format
 msgid "'%s' is clean."
-msgstr ""
+msgstr "'%s' je čisto."
 
 #: pckcp/pckcp.go, offset 1163, line 53, column 19
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr ""
+msgstr "Izmjene su spremljene u %s!"
 
 #: pckcp/pckcp.go, offset 2098, line 69, column 19
 #, c-format
 msgid "Modify name of %s file?"
-msgstr ""
+msgstr "Izmjeni ime %s datoteke?"
 
 #: pckcp/pckcp.go, offset 3252, line 86, column 19
 msgid "package() function missing. You need to add it."
@@ -124,12 +125,12 @@ msgstr ""
 #: pckcp/pckcp.go, offset 2142, line 70, column 19
 #, c-format
 msgid "Add variable '%s'?"
-msgstr ""
+msgstr "Dodati varijablu '%s'?"
 
 #: pckcp/pckcp.go, offset 3214, line 85, column 19
 #, c-format
 msgid "%s doesn't exist!"
-msgstr ""
+msgstr "%s ne postoji!"
 
 #: pckcp/pckcp.go, offset 178, line 17, column 20
 msgid ""
@@ -140,11 +141,11 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 794, line 38, column 6
 msgid "Error"
-msgstr ""
+msgstr "Greška"
 
 #: pckcp/pckcp.go, offset 822, line 40, column 6
 msgid "Info"
-msgstr ""
+msgstr "Informacije"
 
 #: pckcp/pckcp.go, offset 1126, line 52, column 19
 msgid "pkgrel is clean."
@@ -176,25 +177,25 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
 msgid "Error on save file %s!"
-msgstr ""
+msgstr "Greška pri spremanju datoteke %s!"
 
 #: pckcp/pckcp.go, offset 3015, line 83, column 19
 #, c-format
 msgid "Variable '%s' is empty."
-msgstr ""
+msgstr "Varijabla '%s' je prazna."
 
 #: pckcp/pckcp.go, offset 921, line 47, column 19
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr ""
+msgstr "Varijabla '%s' je čista."
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
-msgstr ""
+msgstr "Ukloniti sve nepotrebne komentare prije spremanja?"
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all unneeded comments before save?"
-msgstr ""
+msgstr "Ukloniti sve nepotrebne komentare prije spremanja?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -214,7 +215,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
-msgstr ""
+msgstr "Trenutna mapa ne sadrži PKGBUILD!"
 
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
@@ -224,7 +225,7 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
 msgid "Modify %s in variable '%s'?"
-msgstr ""
+msgstr "Izmjeni %s u varijabli '%s'?"
 
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
@@ -238,7 +239,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 886, line 46, column 19
 msgid "arch is clean."
-msgstr ""
+msgstr "arhitektura je čista."
 
 #: pckcp/pckcp.go, offset 2220, line 72, column 19
 msgid "Remove it?"
@@ -278,7 +279,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Nepoznato svojstvo: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
@@ -293,7 +294,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Neispravna vrijednost '%v': Mora biti %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
@@ -303,7 +304,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s nije dopušten!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
@@ -311,23 +312,23 @@ msgstr ""
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
-msgstr ""
+msgstr "Dir %s već postoji!"
 
 #: repo/repo.go, offset 1004, line 41, column 20
 msgid "Package not found!"
-msgstr ""
+msgstr "Paket nije nađen!"
 
 #: repo/repo.go, offset 1124, line 44, column 20
 msgid "<unknown>"
-msgstr ""
+msgstr "<nepoznato>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[D/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[d/N]"
 
 #: pckcp/pckcp.go, offset 632, line 27, column 20
 msgid "Generate a prototype of PKGBUILD"
@@ -344,7 +345,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 2337, line 73, column 19
 msgid "PKGBUILD file already exists. Do you want to erase it?"
-msgstr ""
+msgstr "PKGBUILD datoteka već postoji. Želite li je izbrisati?"
 
 #: pckcp/pckcp.go, offset 3909, line 95, column 19
 msgid "Action cancelled"
