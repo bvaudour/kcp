@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-12-07 08:50+0000\n"
+"PO-Revision-Date: 2015-12-24 13:59+0000\n"
 "Last-Translator: watho <watho@web.de>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -258,12 +258,12 @@ msgstr "pkgrel ist unterschiedlich zu 1. Es sollte nur so sein, das build instru
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Argument '%s' kann nicht zusammen mit '%s' verwendet werden"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Argument '%s' benötigt eines dieser Argumente: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
@@ -273,7 +273,7 @@ msgstr "Argument '%s' nicht in %v!"
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Argument '%s' bereits gesetzt!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
@@ -288,12 +288,12 @@ msgstr "Unbekannte Eigenschaft: %d"
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Nicht unterstütztes Argument '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Ungültiges %s Argument '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
@@ -303,7 +303,7 @@ msgstr "Ungültiger Wert '%v': Muss ein %s sein!"
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Argument '%s' erlaubt keine verschiedenen Werte!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
