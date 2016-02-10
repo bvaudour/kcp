@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# صفا الفليج <safaalfulaij@hotmail.com>, 2015
+# صفا الفليج <safaalfulaij@hotmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:49+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2016-02-04 07:17+0000\n"
+"Last-Translator: صفا الفليج <safaalfulaij@hotmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/kaos/kaos/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "اعرض المعلومات عن حزمة"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"

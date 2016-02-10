@@ -4,13 +4,13 @@
 # 
 # Translators:
 # Cellix <cellix@yandex.com>, 2015
-# wantoyo <wantoyo@yahoo.com>, 2015
+# wantoyo <wantoyo@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-10-28 03:24+0000\n"
+"PO-Revision-Date: 2016-01-18 10:29+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "Ganti %s menurut... (biarkan kosong untuk membuangnya):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr "Pasang telah bersih."
+msgstr "pasang telah bersih."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"

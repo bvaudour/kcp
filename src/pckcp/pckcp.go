@@ -271,7 +271,7 @@ func checkInstall(bl *pkgbuild.Block, install string) bool {
 	}
 	return true
 }
-func checkConflict(bl *pkgbuild.Block, pkgname string) bool {
+func checkConflict(bl *pkgbuild.Block, pkgname string, isOptDepend bool) bool {
 	var keep []*pkgbuild.Data
 	ok := true
 	for _, d := range bl.Values {
@@ -282,18 +282,24 @@ func checkConflict(bl *pkgbuild.Block, pkgname string) bool {
 			continue
 		}
 		exists := true
-		if pkgname == d.Value {
+		value := d.Value
+		if isOptDepend {
+			if i := strings.IndexByte(value, ':'); i >= 0 {
+				value = value[:i]
+			}
+		}
+		if pkgname == value {
 			exists = false
 			message(W, bl.From, bl.To, trf(W_CONFLICTS, bl.Name))
-		} else if !isPackageInRepo(d.Value) {
+		} else if !isPackageInRepo(value) {
 			exists = false
-			message(W, bl.From, bl.To, trf(W_CONFLICTS2, d.Value, bl.Name))
+			message(W, bl.From, bl.To, trf(W_CONFLICTS2, value, bl.Name))
 		}
 		if !exists {
 			ok = false
 			if *fEdit {
-				if sysutil.QuestionYN(trf(Q_CONFLICTS, d.Value, bl.Name), true) {
-					d.Value = sysutil.Question(trf(R_CONFLICTS, d.Value))
+				if sysutil.QuestionYN(trf(Q_CONFLICTS, value, bl.Name), true) {
+					d.Value = sysutil.Question(trf(R_CONFLICTS, value))
 					if d.Value != "" {
 						keep = append(keep, d)
 					}
@@ -394,7 +400,7 @@ loop:
 		case pkgbuild.CONFLICTS, pkgbuild.PROVIDES, pkgbuild.REPLACES:
 			fallthrough
 		case pkgbuild.DEPENDS, pkgbuild.MAKEDEPENDS, pkgbuild.OPTDEPENDS, pkgbuild.CHECKDEPENDS:
-			if !checkConflict(bl, pkgname) {
+			if !checkConflict(bl, pkgname, n == pkgbuild.OPTDEPENDS) {
 				delete(p.Variables, n)
 				continue loop
 			}
