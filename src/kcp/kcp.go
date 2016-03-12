@@ -342,6 +342,17 @@ func install() {
 		sysutil.PrintError(e)
 		os.Exit(1)
 	}
+	ok := false
+	if db, e := kcpdb.LoadBD(dbPath()); e == nil {
+		if p, exists := db[*fInstall]; exists {
+			ok = true
+			p.LocalVersion = sysutil.InstalledVersion(*fInstall)
+			db.SaveBD(dbPath())
+		}
+	}
+	if !ok {
+		update()
+	}
 }
 
 func init() {
