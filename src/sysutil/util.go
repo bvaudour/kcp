@@ -14,7 +14,7 @@ const (
 	DEFAULT_YES    = "[Y/n]"
 	DEFAULT_NO     = "[y/N]"
 	AUTHOR         = "B. VAUDOUR"
-	VERSION        = "0.83"
+	VERSION        = "0.84"
 	KCP_LOCK       = "kcp.lock"
 	KCP_DB         = ".kcp.json"
 	LOCALE_DIR     = "/usr/share/locale"

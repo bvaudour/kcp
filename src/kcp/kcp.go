@@ -74,6 +74,7 @@ const (
 	I_LICENSES    = "Licenses"
 	I_PROVIDES    = "Provides"
 	I_DEPENDS     = "Depends on"
+	I_MAKEDEPENDS = "Depends on (make)"
 	I_OPTDEPENDS  = "Optional Deps"
 	I_CONFLICTS   = "Conflicts With"
 	I_REPLACES    = "Replaces"
@@ -92,6 +93,7 @@ var labels = []string{
 	I_PROVIDES,
 	I_DEPENDS,
 	I_OPTDEPENDS,
+	I_MAKEDEPENDS,
 	I_CONFLICTS,
 	I_REPLACES,
 	I_INSTALL,
@@ -106,6 +108,7 @@ var mlabel = map[string]string{
 	I_PROVIDES:    pkgbuild.PROVIDES,
 	I_DEPENDS:     pkgbuild.DEPENDS,
 	I_OPTDEPENDS:  pkgbuild.OPTDEPENDS,
+	I_MAKEDEPENDS: pkgbuild.MAKEDEPENDS,
 	I_CONFLICTS:   pkgbuild.CONFLICTS,
 	I_REPLACES:    pkgbuild.REPLACES,
 	I_INSTALL:     pkgbuild.INSTALL,
