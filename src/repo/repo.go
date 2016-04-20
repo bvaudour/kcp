@@ -45,6 +45,11 @@ const (
 	UNKNOWN_VERSION = "<unknown>"
 )
 
+//List of ignore repos
+var ignoreRepo = map[string]bool{
+	"KaOS-Community-Packages.github.io": true,
+}
+
 var tr = gettext.Gettext
 
 //Conversions
@@ -117,7 +122,7 @@ func listPkg(search string, debug bool) (db kcpdb.Database, e error) {
 				wg.Add(1)
 				defer wg.Done()
 				p := o2p(o)
-				if p != nil {
+				if p != nil && !ignoreRepo[p.Name] {
 					p.LocalVersion = sysutil.InstalledVersion(p.Name)
 					p.KcpVersion = kcpVersion(p.Name)
 					mx.Lock()
