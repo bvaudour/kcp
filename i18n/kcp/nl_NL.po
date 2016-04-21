@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
-# Anke Boersma <demm@kaosx.us>, 2015
+# Translators:
+# Anke Boersma <demm@kaosx.us>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:50+0000\n"
+"PO-Revision-Date: 2016-04-21 01:33+0000\n"
 "Last-Translator: Anke Boersma <demm@kaosx.us>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/kaos/kaos/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +37,7 @@ msgstr "Op lijst actie, alleen weergave geïnstalleerde pakketten"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr "Getoonde actie, opfrissen van lokale database afdwingen "
+msgstr "Getoonde actie, forceer verfrissen lokale database"
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
@@ -111,6 +112,10 @@ msgstr "Getoonde actie, alleen de naam van het pakket weergeven"
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
 msgstr "Hangt af van"
+
+#: kcp/kcp.go, offset 2750, line 76, column 18
+msgid "Depends on (make)"
+msgstr "Hangt af van (make)"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -271,11 +276,3 @@ msgstr "[J/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[j/N]"
-
-#: kcpdb/db.go, offset 458, line 28, column 23
-msgid "[installed]"
-msgstr " [geïnstalleerd]"
-
-#: kcpdb/db.go, offset 494, line 29, column 23
-msgid "[installed: %s]"
-msgstr " [geïnstalleerd:%s]"

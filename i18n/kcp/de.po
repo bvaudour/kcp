@@ -3,8 +3,9 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Translators:
 # Cellix <cellix@yandex.com>, 2015
-# Ettore Atalan <atalanttore@googlemail.com>, 2015
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2016
 # Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2014-2015
 # Rebel450, 2015
 # Rebel450, 2015
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-12-24 13:59+0000\n"
-"Last-Translator: watho <watho@web.de>\n"
+"PO-Revision-Date: 2016-04-20 21:08+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr "Zeige nur die installierten Pakete an"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr "Aktualisiert die lokale Datenbank"
+msgstr ""
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
@@ -116,6 +117,10 @@ msgstr "Zeige nur die Namen der Pakete an"
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
 msgstr "Hängt ab von"
+
+#: kcp/kcp.go, offset 2750, line 76, column 18
+msgid "Depends on (make)"
+msgstr "Hängt ab von (make)"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -276,11 +281,3 @@ msgstr "[J/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[j/N]"
-
-#: kcpdb/db.go, offset 458, line 28, column 23
-msgid "[installed]"
-msgstr "[Installiert]"
-
-#: kcpdb/db.go, offset 494, line 29, column 23
-msgid "[installed: %s]"
-msgstr "[Installiert: %s]"

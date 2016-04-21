@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Translators:
 # Cellix <cellix@yandex.com>, 2015
-# Diego L. Velazquez <dlvelazquez@gmail.com>, 2014-2015
+# Diego L. Velazquez <dlvelazquez@gmail.com>, 2014-2016
 # Franco Longstaff <franco.longstaff@openmailbox.org>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 15:05+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2016-04-20 17:52+0000\n"
+"Last-Translator: Diego L. Velazquez <dlvelazquez@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/kaos/kaos/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +31,11 @@ msgstr "Muestra la versión"
 
 #: kcp/kcp.go, offset 885, line 32, column 20
 msgid "On display action, don't print KCP version"
-msgstr "En una acción de visualización, no muestra versión de KCP"
+msgstr "En una acción de visualización, no muestra la versión de KCP"
 
 #: kcp/kcp.go, offset 1087, line 35, column 20
 msgid "On list action, display only installed packages"
-msgstr "En una acción de lista, muestra sólo los paquetes instalados"
+msgstr "En una acción de listado, muestra sólo los paquetes instalados"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
@@ -66,7 +67,7 @@ msgstr "Reemplaza"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
-msgstr "Muestra todos los paquetes de KCP"
+msgstr "Muestra todos los paquetes existentes en KCP"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
@@ -114,6 +115,10 @@ msgstr "En una acción de visualización, muestra sólo el nombre del paquete"
 msgid "Depends on"
 msgstr "Depende de"
 
+#: kcp/kcp.go, offset 2750, line 76, column 18
+msgid "Depends on (make)"
+msgstr "Depende de (make)"
+
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
 msgstr "Descargar los archivos necesarios para compilar un paquete"
@@ -128,11 +133,11 @@ msgstr "Renovar la base de datos local"
 
 #: kcp/kcp.go, offset 949, line 33, column 20
 msgid "On display action, sort packages by stars descending"
-msgstr "Acción de visualización, ordena lo paquetes por orden descendiente de votación"
+msgstr "En una acción de visualización, ordena los paquetes por orden descendiente de votación"
 
 #: kcp/kcp.go, offset 1379, line 39, column 20
 msgid "On display action, display only packages with at least one star"
-msgstr "En una acción de visualización, muestra sólo los paquetes con al menos una estrella"
+msgstr "En una acción de visualización, muestra sólo los paquetes con al menos un voto."
 
 #: kcp/kcp.go, offset 1536, line 41, column 20
 msgid "On display action, display only outdated packages"
@@ -153,7 +158,7 @@ msgstr "URL"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
-msgstr "Acción de instalación, instala como una dependencia"
+msgstr "En una acción de instalación, instala el paquete como una dependencia"
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
@@ -273,11 +278,3 @@ msgstr "[S/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[s/N]"
-
-#: kcpdb/db.go, offset 458, line 28, column 23
-msgid "[installed]"
-msgstr "[instalado]"
-
-#: kcpdb/db.go, offset 494, line 29, column 23
-msgid "[installed: %s]"
-msgstr "[instalado: %s]"

@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Translators:
+# Adam Sádovský <adam@234.cz>, 2016
 # fri, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 14:49+0000\n"
+"PO-Revision-Date: 2016-04-20 17:46+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Czech (http://www.transifex.com/kaos/kaos/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +22,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "Zobrazí informace o balíčku"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
@@ -36,14 +38,14 @@ msgstr "Při činnosti sestavení seznamu zobrazit jen nainstalované balíčky"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr "Při činnosti zobrazení vynutit obnovení místní databáze"
+msgstr ""
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
 "Provides a tool to make the use of KaOS Community Packages.\n"
 "\n"
 "With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr ""
+msgstr "Poskytuje nástroj pro práci s komunitními balíčky KaOS.\n\nS tímto nástrojem můžete vyhledávat, získat a instalovat balíčky z komunitního repozitáře KaOS."
 
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
@@ -52,15 +54,15 @@ msgstr "Aktualizováno %d záznamů!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "Volitelné závislosti"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Náhrady"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -68,11 +70,11 @@ msgstr "Zobrazit všechny balíčky KCP"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
-msgstr ""
+msgstr "Poskytuje"
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Instalační skript"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -85,7 +87,7 @@ msgstr "Přidáno %d záznamů!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -110,6 +112,10 @@ msgstr "Při činnosti zobrazení zobrazit jen název balíčku"
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
+msgstr "Zavisí na"
+
+#: kcp/kcp.go, offset 2750, line 76, column 18
+msgid "Depends on (make)"
 msgstr ""
 
 #: kcp/kcp.go, offset 775, line 30, column 20
@@ -143,11 +149,11 @@ msgstr "Chcete upravit %s?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -155,7 +161,7 @@ msgstr "Při činnosti instalace nainstalovat jako závislost"
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Verze"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -163,11 +169,11 @@ msgstr "Při činnosti zobrazení zobrazit jen nainstalované balíčky"
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Licence"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "Koliduje s"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -183,11 +189,11 @@ msgstr "Běží jiná instance kcp!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Architektura"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -196,61 +202,61 @@ msgstr "Vypsat tuto nápovědu"
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Příznak '%s' nemůže být použit s '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Příznak '%s' vyžaduje jeden z těchto příznaků: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Argument '%s' není v %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Příznak '%s' je již nastaven!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Neočekávaný argument: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Neznámá vlastnost: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Nepodporovaný příznak '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Příznak %s je špatný: '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Špatná hodnota '%v': Musí být %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Příznak '%s' nedovoluje více argumentů!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s není povoleno!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Vyžadován argument!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -266,16 +272,8 @@ msgstr "<neznámý>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[A/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
-
-#: kcpdb/db.go, offset 458, line 28, column 23
-msgid "[installed]"
-msgstr ""
-
-#: kcpdb/db.go, offset 494, line 29, column 23
-msgid "[installed: %s]"
-msgstr ""
+msgstr "[a/N]"

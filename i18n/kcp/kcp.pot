@@ -126,7 +126,7 @@ msgstr ""
 msgid "Depends on"
 msgstr ""
 
-#: kcp/kcp.go, offset: 2749, line: 77, column: 18
+#: kcp/kcp.go, offset: 2750, line: 77, column: 18
 msgid "Depends on (make)"
 msgstr ""
 

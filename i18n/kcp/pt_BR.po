@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Translators:
 # Arnt <qtgzmanager@gmail.com>, 2014-2015
 # Cellix <cellix@yandex.com>, 2015
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2015-09-12 15:04+0000\n"
+"PO-Revision-Date: 2016-04-20 17:46+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/kaos/kaos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +38,7 @@ msgstr "Ao listar, exibir somente os pacotes instalados"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr "Ao exibir, forçar a atualização da base de dados local"
+msgstr ""
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
@@ -112,6 +113,10 @@ msgstr "Ao exibir, mostrar somente o nome do pacote"
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
 msgstr "Depende de"
+
+#: kcp/kcp.go, offset 2750, line 76, column 18
+msgid "Depends on (make)"
+msgstr ""
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -272,11 +277,3 @@ msgstr "[S/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[s/N]"
-
-#: kcpdb/db.go, offset 458, line 28, column 23
-msgid "[installed]"
-msgstr "[instalado]"
-
-#: kcpdb/db.go, offset 494, line 29, column 23
-msgid "[installed: %s]"
-msgstr "[instalado: %s]"

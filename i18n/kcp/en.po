@@ -36,7 +36,7 @@ msgstr "On list action, display only installed packages"
 
 #: kcp/kcp.go, offset: 1230, line: 37, column: 20
 msgid "On display action, force refreshing local database"
-msgstr "n display action, force refreshing local database"
+msgstr "On display action, force refreshing local database"
 
 #: kcp/kcp.go, offset: 217, line: 20, column: 20
 msgid "Provides a tool to make the use of KaOS Community Packages.\n\nWith this tool, you can search, get and install a package from KaOS Community Packages."
@@ -108,6 +108,10 @@ msgstr "On display action, display only the name of the package"
 #: kcp/kcp.go, offset: 2749, line: 76, column: 18
 msgid "Depends on"
 msgstr "Depends on"
+
+#: kcp/kcp.go, offset: 2750, line: 76, column: 18
+msgid "Depends on (make)"
+msgstr "Depends on (make)"
 
 #: kcp/kcp.go, offset: 775, line: 30, column: 20
 msgid "Download needed files to build a package"

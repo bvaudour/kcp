@@ -5,13 +5,14 @@
 # Translators:
 # Arnt <qtgzmanager@gmail.com>, 2015
 # Cellix <cellix@yandex.com>, 2015
+# Cellix <cellix@yandex.com>, 2015
 # Hugo Carvalho <hugokarvalho@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2015-10-25 17:11+0000\n"
+"PO-Revision-Date: 2016-04-20 18:03+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/kaos/kaos/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
