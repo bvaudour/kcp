@@ -32,7 +32,7 @@ _generate() {
 	fi
 
 	_addline '# Go variables...'
-	_addline 'GOCMD  = go build'
+	_addline 'GOCMD  = go build -ldflags="-s -w"'
 	_addline 'GOPATH = ${PWD}'
 	_addline 'GOFLAG = --compiler gccgo'
 	_addline 'export $(GOPATH)'
