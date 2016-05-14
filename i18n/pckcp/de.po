@@ -6,7 +6,7 @@
 # Cellix <cellix@yandex.com>, 2015
 # Cellix <cellix@yandex.com>, 2015
 # Ettore Atalan <atalanttore@googlemail.com>, 2015-2016
-# Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2015
+# Matthias Schuster Scharmer <shalokshalom@riseup.net>, 2015-2016
 # Rebel450, 2015
 # Rebel450, 2015
 # watho <watho@web.de>, 2015
@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-04-20 21:12+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2016-05-01 21:13+0000\n"
+"Last-Translator: Matthias Schuster Scharmer <shalokshalom@riseup.net>\n"
 "Language-Team: German (http://www.transifex.com/kaos/kaos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 1075, line 51, column 19
 msgid "package() function is present."
-msgstr "Funktion package() ist bereit"
+msgstr "Funktion package() ist vorhanden."
 
 #: pckcp/pckcp.go, offset 1432, line 56, column 19
 #, c-format
@@ -68,7 +68,7 @@ msgstr "Ersetze %s mit... (zum Entfernen leer lassen):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr "install ist sauber"
+msgstr "install ist in Ordnung."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
@@ -112,7 +112,7 @@ msgstr "Warnung"
 #: pckcp/pckcp.go, offset 965, line 48, column 19
 #, c-format
 msgid "'%s' is clean."
-msgstr "'%s' ist leer."
+msgstr "'%s' ist in Ordnung"
 
 #: pckcp/pckcp.go, offset 1163, line 53, column 19
 #, c-format
@@ -155,7 +155,7 @@ msgstr "Info"
 
 #: pckcp/pckcp.go, offset 1126, line 52, column 19
 msgid "pkgrel is clean."
-msgstr "pkgrel ist leer."
+msgstr "pkgrel ist in Ordnung"
 
 #: pckcp/pckcp.go, offset 1210, line 54, column 19
 msgid ""
@@ -165,7 +165,7 @@ msgstr "Arch ist unterschiedlich zu  'x86_64'. Da KaOS nur diese Architektur unt
 
 #: pckcp/pckcp.go, offset 1732, line 61, column 19
 msgid "Reset arch to x86_64?"
-msgstr "Arch auf x86_64 zurücksetzen?"
+msgstr "Architektur auf x86_64 zurücksetzen?"
 
 #: pckcp/pckcp.go, offset 388, line 20, column 20
 msgid "Tool in command-line to manage common PKGBUILD errors"
@@ -173,7 +173,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 1000, line 49, column 19
 msgid "Header is clean."
-msgstr " Header ist leer"
+msgstr " Header ist in Ordnung"
 
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
@@ -193,7 +193,7 @@ msgstr "Variable '%s' ist leer."
 #: pckcp/pckcp.go, offset 921, line 47, column 19
 #, c-format
 msgid "Variable '%s' is clean."
-msgstr "Variable '%s' ist leer."
+msgstr "Variable '%s' ist in Ordnung"
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
@@ -245,7 +245,7 @@ msgstr "%s ist weder in repo noch in kcp. Variable '%s' sollte es nicht beinhalt
 
 #: pckcp/pckcp.go, offset 886, line 46, column 19
 msgid "arch is clean."
-msgstr "Arch ist leer"
+msgstr "Architektur ist in Ordnung"
 
 #: pckcp/pckcp.go, offset 2220, line 72, column 19
 msgid "Remove it?"

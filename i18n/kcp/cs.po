@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Translators:
-# Adam Sádovský <adam@234.cz>, 2016
-# fri, 2015
+# AdamSadovsky <adam@234.cz>, 2016
+# fri, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2016-04-23 06:19+0000\n"
-"Last-Translator: Adam Sádovský <adam@234.cz>\n"
+"PO-Revision-Date: 2016-05-13 19:36+0000\n"
+"Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/kaos/kaos/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "Při činnosti sestavení seznamu zobrazit jen nainstalované balíčky"
 
 #: kcp/kcp.go, offset 1230, line 37, column 20
 msgid "On display action, force refreshing local database"
-msgstr "Při činnosti zobrazení vynutit obnovení lokální databáze"
+msgstr "Při činnosti zobrazení vynutit obnovení místní databáze"
 
 #: kcp/kcp.go, offset 217, line 20, column 20
 msgid ""
