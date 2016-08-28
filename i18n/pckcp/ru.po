@@ -5,14 +5,14 @@
 # Translators:
 # Cellix <cellix@yandex.com>, 2015
 # Cellix <cellix@yandex.com>, 2015
-# Анатолий Валерианович <ffox909@mail.ru>, 2015
+# Анатолий Валерианович <ffox909@mail.ru>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-04-20 18:02+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2016-08-28 18:51+0000\n"
+"Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/kaos/kaos/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,27 +31,27 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove uneeded duplicate variables?"
-msgstr ""
+msgstr "Удалить ненужные дубликаты переменных?"
 
 #: pckcp/pckcp.go, offset 1976, line 66, column 19
 msgid "Remove unneeded duplicate variables?"
-msgstr ""
+msgstr "Удалить ненужные дубликаты переменных?"
 
 #: pckcp/pckcp.go, offset 1520, line 57, column 19
 #, c-format
 msgid "Variable '%s' is missing."
-msgstr ""
+msgstr "Переменная '%s' отсутсвует."
 
 #: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
 msgid "Modify %s as %s?"
-msgstr "Изменить %s как %s?"
+msgstr "Изменить %s на %s?"
 
 #: pckcp/pckcp.go, offset 3059, line 84, column 19
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr "Заголовок был найден. Не используйте имена ведущих или участников в PKGBUILD, любой может внести вклад, оставляя заголовок чистым."
+msgstr "Заголовок был найден. Не используйте имена ведущих или участников в PKGBUILD, любой может содействовать, оставляя заголовок чистым."
 
 #: pckcp/pckcp.go, offset 532, line 23, column 20
 msgid "Print version"
@@ -64,7 +64,7 @@ msgstr "Заменить %s на... (оставить пустым для уда
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr ""
+msgstr "Установка очищена."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
@@ -73,7 +73,7 @@ msgstr "Сбросить pkgrel на 1?"
 #: pckcp/pckcp.go, offset 2381, line 75, column 19
 #, c-format
 msgid "Choose the line to keep among [%s] (last line by default)."
-msgstr ""
+msgstr "Выберите строку среди [%s] чтобы оставить (по умолчанию последняя строка)."
 
 #: pckcp/pckcp.go, offset 2593, line 78, column 19
 #, c-format
@@ -83,7 +83,7 @@ msgstr "Переменная '%s' содержит имя пакета. Это �
 #: pckcp/pckcp.go, offset 2969, line 82, column 19
 #, c-format
 msgid "Function '%s()' is empty."
-msgstr ""
+msgstr "Функция '%s()' пустая."
 
 #: pckcp/pckcp.go, offset 2850, line 81, column 19
 msgid ""
@@ -95,7 +95,7 @@ msgstr "Переменные 'depends' и 'makedepends' пусты. Вы дол�
 msgid ""
 "PKGBUILD is a split PKGBUILD. Make as many PKGBUILDs as this contains "
 "different packages!"
-msgstr "PKGBUILD это раздельный PKGBUILD. Сделайте больше PKGBUILD по количеству в пакетов в нём!"
+msgstr "PKGBUILD это разделённый PKGBUILD. Сделайте больше PKGBUILD по количеству в пакетов в нём!"
 
 #: pckcp/pckcp.go, offset 495, line 22, column 20
 msgid "Print this help"
@@ -113,33 +113,33 @@ msgstr "'%s' очищен."
 #: pckcp/pckcp.go, offset 1163, line 53, column 19
 #, c-format
 msgid "Modifications saved in %s!"
-msgstr "Изменения сохраняются в %s!"
+msgstr "Изменения сохранены в %s!"
 
 #: pckcp/pckcp.go, offset 2098, line 69, column 19
 #, c-format
 msgid "Modify name of %s file?"
-msgstr ""
+msgstr "Изменить имя файла %s?"
 
 #: pckcp/pckcp.go, offset 3252, line 86, column 19
 msgid "package() function missing. You need to add it."
-msgstr "package() функция отсутствует. Вам нужно добавить её."
+msgstr "package() функция отсутствует. Вам нужно её добавить."
 
 #: pckcp/pckcp.go, offset 2142, line 70, column 19
 #, c-format
 msgid "Add variable '%s'?"
-msgstr ""
+msgstr "Добавить переменную '%s'?"
 
 #: pckcp/pckcp.go, offset 3214, line 85, column 19
 #, c-format
 msgid "%s doesn't exist!"
-msgstr ""
+msgstr "%s не существует!"
 
 #: pckcp/pckcp.go, offset 178, line 17, column 20
 msgid ""
 "Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
 "\n"
 "If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
-msgstr ""
+msgstr "Предоставляет инструмент для проверки верности PKGBUILD согласно стандартам KCP.\n\nЕсли использован флаг -e, распространённые ошибки могут быть проверены и (потенциально) создан верный PKGBUILD.new ."
 
 #: pckcp/pckcp.go, offset 794, line 38, column 6
 msgid "Error"
@@ -147,7 +147,7 @@ msgstr "Ошибка"
 
 #: pckcp/pckcp.go, offset 822, line 40, column 6
 msgid "Info"
-msgstr ""
+msgstr "информация"
 
 #: pckcp/pckcp.go, offset 1126, line 52, column 19
 msgid "pkgrel is clean."
@@ -165,7 +165,7 @@ msgstr "Сбросить архитектуру на x86_64?"
 
 #: pckcp/pckcp.go, offset 388, line 20, column 20
 msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr ""
+msgstr "Инструмент командой строки для управления простыми ошибками PKGBUILD"
 
 #: pckcp/pckcp.go, offset 1000, line 49, column 19
 msgid "Header is clean."
@@ -174,7 +174,7 @@ msgstr "Заголовок очищен."
 #: pckcp/pckcp.go, offset 1342, line 55, column 19
 #, c-format
 msgid "Function '%s()' is present %d times (lines %s). Only one is expected."
-msgstr ""
+msgstr "Функция '%s()' присутствует %d раз (%s строки). Предполагается только одна."
 
 #: pckcp/pckcp.go, offset 1627, line 59, column 19
 #, c-format
@@ -193,11 +193,11 @@ msgstr "Переменная '%s' чистая."
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all uneeded comments before save?"
-msgstr ""
+msgstr "Удалить все ненужные комментарии перед сохранением?"
 
 #: pckcp/pckcp.go, offset 1774, line 62, column 19
 msgid "Remove all unneeded comments before save?"
-msgstr ""
+msgstr "Удалить все ненужные комментарии перед сохранением?"
 
 #: pckcp/pckcp.go, offset 2063, line 68, column 19
 msgid "Remove header?"
@@ -205,15 +205,15 @@ msgstr "Удалить заголовок?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove uneeded duplicate functions?"
-msgstr ""
+msgstr "Удалить ненужные дубликаты функций?"
 
 #: pckcp/pckcp.go, offset 1920, line 65, column 19
 msgid "Remove unneeded duplicate functions?"
-msgstr ""
+msgstr "Удалить ненужные дубликаты функций?"
 
 #: pckcp/pckcp.go, offset 567, line 24, column 20
 msgid "Interactive edition"
-msgstr ""
+msgstr "интерактивное редактирование"
 
 #: pckcp/pckcp.go, offset 1566, line 58, column 19
 msgid "Current folder doesn't contain PKGBUILD!"
@@ -222,7 +222,7 @@ msgstr "Текущая папка не содержит PKGBUILD!"
 #: pckcp/pckcp.go, offset 1670, line 60, column 19
 #, c-format
 msgid "'%s' is not valid. You should suppress it"
-msgstr ""
+msgstr "'%s' не верно. Вы должны запретить это"
 
 #: pckcp/pckcp.go, offset 1835, line 63, column 19
 #, c-format
@@ -232,7 +232,7 @@ msgstr "Изменить %s в переменной '%s'?"
 #: pckcp/pckcp.go, offset 2525, line 77, column 19
 #, c-format
 msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr ""
+msgstr "Установить переменную '%s' с (оставьте пустым, чтобы игнорировать):"
 
 #: pckcp/pckcp.go, offset 2761, line 80, column 19
 #, c-format
@@ -245,7 +245,7 @@ msgstr "архитектура чистая."
 
 #: pckcp/pckcp.go, offset 2220, line 72, column 19
 msgid "Remove it?"
-msgstr ""
+msgstr "Удалить это?"
 
 #: pckcp/pckcp.go, offset 3320, line 87, column 19
 msgid ""
@@ -256,61 +256,61 @@ msgstr "pkgrel отличается от 1. Это должно быть тол�
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Флаг '%s' не может быть использован с '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Флаг '%s' нуждается в одном из флагов: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Аргумента '%s' нет в %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Флаг '%s' уже установлен!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Неожиданный аргумент: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Неизвестное свойство: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Не поддерживаемый флаг '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Не верный %s флаг '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Не верное значение '%v': Должно быть %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Флаг '%s' не допускает нескольких аргументов!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s не допустимо!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Аргумент необходим!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -326,29 +326,29 @@ msgstr "<unknown>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[Y/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[y/N]"
 
 #: pckcp/pckcp.go, offset 632, line 27, column 20
 msgid "Generate a prototype of PKGBUILD"
-msgstr ""
+msgstr "Генерировать  прототип PKGBUILD"
 
 #: pckcp/pckcp.go, offset 716, line 28, column 20
 msgid "Removes the useless comments and blanks of the prototype"
-msgstr ""
+msgstr "Удаляются ненужные комментарии и пробелы прототипа"
 
 #: pckcp/pckcp.go, offset 1857, line 63, column 19
 #, c-format
 msgid "%s is not a file!"
-msgstr ""
+msgstr "%s не файл!"
 
 #: pckcp/pckcp.go, offset 2337, line 73, column 19
 msgid "PKGBUILD file already exists. Do you want to erase it?"
-msgstr ""
+msgstr "Файл PKGBUILD уже существует. Вы хотите стереть его?"
 
 #: pckcp/pckcp.go, offset 3909, line 95, column 19
 msgid "Action cancelled"
-msgstr ""
+msgstr "Действие отменено"
