@@ -49,10 +49,6 @@ msgid "Variable '%s' is present %d times (lines %s). Only one is expected."
 msgstr ""
 
 #: pckcp/pckcp.go, offset: 1976, line: 66, column: 19
-msgid "Remove uneeded duplicate variables?"
-msgstr ""
-
-#: pckcp/pckcp.go, offset: 1976, line: 66, column: 19
 msgid "Remove unneeded duplicate variables?"
 msgstr ""
 
@@ -200,19 +196,11 @@ msgid "Variable '%s' is clean."
 msgstr ""
 
 #: pckcp/pckcp.go, offset: 1774, line: 62, column: 19
-msgid "Remove all uneeded comments before save?"
-msgstr ""
-
-#: pckcp/pckcp.go, offset: 1774, line: 62, column: 19
 msgid "Remove all unneeded comments before save?"
 msgstr ""
 
 #: pckcp/pckcp.go, offset: 2063, line: 68, column: 19
 msgid "Remove header?"
-msgstr ""
-
-#: pckcp/pckcp.go, offset: 1920, line: 65, column: 19
-msgid "Remove uneeded duplicate functions?"
 msgstr ""
 
 #: pckcp/pckcp.go, offset: 1920, line: 65, column: 19
