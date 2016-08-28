@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the kcp package.
 # 
 # Translators:
+# Cellix <cellix@yandex.com>, 2016
 # Diego L. Velazquez <dlvelazquez@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-08-28 19:34+0000\n"
+"PO-Revision-Date: 2016-08-28 20:00+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/kaos/kaos/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -317,3 +318,24 @@ msgstr "[S/n]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[s/N]"
+
+#: pckcp/pckcp.go, offset 632, line 27, column 20
+msgid "Generate a prototype of PKGBUILD"
+msgstr "Generar un prototipo de PKGBUILD"
+
+#: pckcp/pckcp.go, offset 716, line 28, column 20
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Eliminar los comentarios inútiles y espaciosn en blanco del prototipo"
+
+#: pckcp/pckcp.go, offset 1857, line 63, column 19
+#, c-format
+msgid "%s is not a file!"
+msgstr "%s no es un archivo!"
+
+#: pckcp/pckcp.go, offset 2337, line 73, column 19
+msgid "PKGBUILD file already exists. Do you want to erase it?"
+msgstr "El archivo PKGBUILD ya existe. ¿Quiere borrarlo?"
+
+#: pckcp/pckcp.go, offset 3909, line 95, column 19
+msgid "Action cancelled"
+msgstr "Acción cancelada"

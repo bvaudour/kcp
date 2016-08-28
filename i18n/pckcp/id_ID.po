@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Cellix <cellix@yandex.com>, 2015
-# Cellix <cellix@yandex.com>, 2015
+# Cellix <cellix@yandex.com>, 2015-2016
 # wantoyo <wantoyo@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-08-28 19:34+0000\n"
+"PO-Revision-Date: 2016-08-28 19:58+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/kaos/kaos/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Fungsi '%s()' telah kosong."
 msgid ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
-msgstr "Variabel 'tanggungan' dan 'membuat-tanggungan' telah kosong. kamu harus memeriksa secara manual sekiranya tidak hilang."
+msgstr "Variabel 'tanggungan' dan 'membuat-tanggungan' telah kosong. Anda harus memeriksa secara manual sekiranya tidak hilang."
 
 #: pckcp/pckcp.go, offset 3444, line 88, column 19
 msgid ""
@@ -319,3 +319,24 @@ msgstr "[Y/t]"
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
 msgstr "[y/T]"
+
+#: pckcp/pckcp.go, offset 632, line 27, column 20
+msgid "Generate a prototype of PKGBUILD"
+msgstr "Menghasilkan prototipe PKGBUILD"
+
+#: pckcp/pckcp.go, offset 716, line 28, column 20
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Hapusan komentar yang tidak terpakai dan kosong pada prototipe"
+
+#: pckcp/pckcp.go, offset 1857, line 63, column 19
+#, c-format
+msgid "%s is not a file!"
+msgstr "%s adalah bukan sebuah berkas!"
+
+#: pckcp/pckcp.go, offset 2337, line 73, column 19
+msgid "PKGBUILD file already exists. Do you want to erase it?"
+msgstr "Berkas PKGBUILD sudah ada. Apakah Anda ingin menyetipnya?"
+
+#: pckcp/pckcp.go, offset 3909, line 95, column 19
+msgid "Action cancelled"
+msgstr "Tindakan dibatalkan"
