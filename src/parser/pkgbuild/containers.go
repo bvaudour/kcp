@@ -374,7 +374,6 @@ func (p *Pkgbuild) Unparse(clean bool) []byte {
 				mheader[h.To] = true
 			}
 			b.WriteString(f.str())
-			b.WriteByte('\n')
 		}
 		mvf[k] = true
 	}
@@ -394,7 +393,6 @@ func (p *Pkgbuild) Unparse(clean bool) []byte {
 			mheader[h.To] = true
 		}
 		b.WriteString(f.str())
-		b.WriteByte('\n')
 	}
 	if len(p.Unknown) > 0 {
 		b.WriteByte('\n')
