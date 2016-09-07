@@ -307,6 +307,8 @@ func checkConflict(bl *pkgbuild.Block, pkgname string, isOptDepend bool) bool {
 					keep = append(keep, d)
 				}
 			}
+		} else {
+			keep = append(keep, d)
 		}
 	}
 	if ok {
