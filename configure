@@ -5,6 +5,7 @@ withgccgo='no'
 withman='yes'
 withbash='yes'
 withfish='yes'
+withzsh='yes'
 
 _addline() {
 	echo -e $1 >> Makefile
@@ -60,6 +61,7 @@ _generate() {
 	_addline 'GOFILEC  = $(PACKAGEC).go'
 	_addline 'BASHFILE = $(PACKAGE).bash'
 	_addline 'FISHFILE = $(PACKAGE).fish'
+	_addline 'ZSHFILE  = $(PACKAGE).zsh'
 	_addline 'EXCEPTS  = exceptions'
 	_emptyline
 
@@ -71,6 +73,7 @@ _generate() {
 	_addline 'SRCGOFILEC  = $(SRCDIRC)/$(GOFILEC)'
 	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
 	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
+	_addline 'SRCZSHFILE  = $(COMPDIR)/$(ZSHFILE)'
 	_addline 'SRCEXCEPTF  = $(ETCDIR)/$(EXCEPTS)'
 	_emptyline
 
@@ -80,6 +83,7 @@ _generate() {
 	_addline 'DESTMAN    = $(DESTDIR)/usr/share/man/man1'
 	_addline 'DESTBASH   = $(DESTDIR)/etc/bash_completion.d'
 	_addline 'DESTFISH   = $(DESTDIR)/usr/share/fish/vendor_completions.d'
+	_addline 'DESTZSH    = $(DESTDIR)/usr/share/zsh/site-functions'
 	_addline 'DESTEXCEPT = $(DESTDIR)/etc/pckcp'
 	_emptyline
 
@@ -89,6 +93,7 @@ _generate() {
 	_addline 'DESTMANFILE  = $(DESTMAN)/$(MANFILE)'
 	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
 	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
+	_addline 'DESTZSHFILE  = $(DESTZSH)/_$(PACKAGE)'
 	_addline 'DESTEXCEPTF  = $(DESTEXCEPT)/$(EXCEPTS)'
 	_emptyline
 
@@ -117,12 +122,14 @@ _generate() {
 	_addline_cond "$withman"  'mkdir -p $(DESTMAN)'
 	_addline_cond "$withbash" 'mkdir -p $(DESTBASH)'
 	_addline_cond "$withfish" 'mkdir -p $(DESTFISH)'
+	_addline_cond "$withzsh"  'mkdir -p $(DESTZSH)'
 	_addline_t 'mkdir -p $(DESTEXCEPT)'
 	_addline_t 'cp $(SRCBINFILE) $(DESTBINFILE)'
 	_addline_t 'cp $(SRCBINFILEC) $(DESTBINFILEC)'
 	_addline_cond "$withman"  'cp $(SRCMANFILE) $(DESTMANFILE)'
 	_addline_cond "$withbash" 'cp $(SRCBASHFILE) $(DESTBASHFILE)'
 	_addline_cond "$withfish" 'cp $(SRCFISHFILE) $(DESTFISHFILE)'
+	_addline_cond "$withzsh" 'cp $(SRCZSHFILE) $(DESTZSHFILE)'
 	_addline_t 'cp $(SRCEXCEPTF) $(DESTEXCEPTF)'
 	_emptyline
 
@@ -141,6 +148,7 @@ _help() {
 	echo -e "\t--disable-man\tInstall man file [enable]"
 	echo -e "\t--disable-bash\tInstall bash completion [enable]"
 	echo -e "\t--disable-fish\tInstall fish completion [enable]"
+	echo -e "\t--disable-zsh\tInstall zsh completion [enable]"
 }
 
 for i in ${@}; do
@@ -156,6 +164,7 @@ for i in ${@}; do
 		"--disable-man") withman='no';;
 		"--disable-bash") withbash='no';;
 		"--disable-fish") withfish='no';;
+		"--disable-zsh") withzsh='no';;
 		*)
 			echo -e '\033[1;31mUnsupported arg!\033[m'; exit 1;;
 	esac
