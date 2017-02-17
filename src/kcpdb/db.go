@@ -84,18 +84,8 @@ func LoadPkg(o json.Object) (p *Package) {
 }
 
 //Packages' list sorting tool.
-type plSorter struct {
-	l []*Package
-	f func(*Package, *Package) bool
-}
-
-func (s *plSorter) Len() int           { return len(s.l) }
-func (s *plSorter) Less(i, j int) bool { return s.f(s.l[i], s.l[j]) }
-func (s *plSorter) Swap(i, j int)      { s.l[i], s.l[j] = s.l[j], s.l[i] }
-
 func sortList(l []*Package, f func(*Package, *Package) bool) {
-	s := &plSorter{l, f}
-	sort.Sort(s)
+	sort.Slice(l, func(i, j int) bool { return f(l[i], l[j]) })
 }
 
 //Database is the database of the KCP packages.

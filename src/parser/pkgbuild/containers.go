@@ -94,18 +94,8 @@ func (b *Block) str() string {
 }
 
 //Sort engine
-type blockSorter struct {
-	l []*Block
-	f func(*Block, *Block) bool
-}
-
-func (s *blockSorter) Len() int           { return len(s.l) }
-func (s *blockSorter) Less(i, j int) bool { return s.f(s.l[i], s.l[j]) }
-func (s *blockSorter) Swap(i, j int)      { s.l[i], s.l[j] = s.l[j], s.l[i] }
-
 func sortBlocks(l []*Block, f func(*Block, *Block) bool) {
-	s := &blockSorter{l, f}
-	sort.Sort(s)
+	sort.Slice(l, func(i, j int) bool { return f(l[i], l[j]) })
 }
 
 //Pkgbuild represents the parsed PKGBUILD.
