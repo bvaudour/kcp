@@ -6,14 +6,14 @@
 # Cellix <cellix@yandex.com>, 2015
 # Cellix <cellix@yandex.com>, 2015
 # Demiray Muhterem <mdemiray@msn.com>, 2015
-# Muha Aliss <muhaaliss@gmail.com>, 2015
+# Muha Aliss <muhaaliss@gmail.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-08-28 19:54+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2017-03-03 17:09+0000\n"
+"Last-Translator: Muha Aliss <muhaaliss@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/kaos/kaos/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
-msgstr ""
+msgstr "Temiz kurulum."
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
@@ -332,12 +332,12 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1857, line 63, column 19
 #, c-format
 msgid "%s is not a file!"
-msgstr ""
+msgstr "%s bir dosya değil!"
 
 #: pckcp/pckcp.go, offset 2337, line 73, column 19
 msgid "PKGBUILD file already exists. Do you want to erase it?"
-msgstr ""
+msgstr "PKGBUILD dosyası zaten var. Silmek istiyor musun?"
 
 #: pckcp/pckcp.go, offset 3909, line 95, column 19
 msgid "Action cancelled"
-msgstr ""
+msgstr "Işlem iptal edildi"

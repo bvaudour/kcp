@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Translators:
-# Slobodan Simić <slsimic@gmail.com>, 2016
+# Slobodan Simić <slsimic@gmail.com>, 2016-2017
 # Slobodan Simić <slsimic@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2016-10-22 08:56+0000\n"
+"PO-Revision-Date: 2017-02-27 11:11+0000\n"
 "Last-Translator: Slobodan Simić <slsimic@gmail.com>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/kaos/kaos/language/sr_RS/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid ""
 "Provides a tool to make the use of KaOS Community Packages.\n"
 "\n"
 "With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr ""
+msgstr "Омогућава коришћење пакета КаОС заједнице.\n\nОвим алатом можете претраживати, добављати и инсталирати пакете из КаОС заједнице."
 
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
@@ -54,15 +54,15 @@ msgstr "%d уноса ажурирано!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "назив"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "опционе зависности"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "замењује"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -70,11 +70,11 @@ msgstr "Прикажи све пакете КЦП-а"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
-msgstr ""
+msgstr "омогућава"
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Инсталирај скрипту"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -87,7 +87,7 @@ msgstr "%d уноса додато!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "Не"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -112,11 +112,11 @@ msgstr "кад листаш, прикажи само име пакета"
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
-msgstr ""
+msgstr "зависи од"
 
 #: kcp/kcp.go, offset 2750, line 76, column 18
 msgid "Depends on (make)"
-msgstr ""
+msgstr "зависи од (make)"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -149,11 +149,11 @@ msgstr "Желите ли да измените %s?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "УРЛ"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -161,7 +161,7 @@ msgstr "кад инсталацираш, инсталирај као завис�
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "верзија"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -169,11 +169,11 @@ msgstr "кад листаш,  прикажи само инсталиране"
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Лиценце"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "у сукобу са"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -189,11 +189,11 @@ msgstr "Још један КЦП ради!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "опис"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "архитектура"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -252,11 +252,11 @@ msgstr ""
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s није допуштен!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Потребан аргумент!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"

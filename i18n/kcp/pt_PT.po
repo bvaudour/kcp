@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Translators:
-# Alexandre Miguel <alexmigf@gmail.com>, 2016
+# Alexandre Miguel <alexmigf@gmail.com>, 2016-2017
 # Hugo Carvalho <hugokarvalho@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2016-08-28 00:47+0000\n"
+"PO-Revision-Date: 2017-03-13 09:11+0000\n"
 "Last-Translator: Alexandre Miguel <alexmigf@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/kaos/kaos/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -217,7 +217,7 @@ msgstr "O argumento '%s' não está em %v!"
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr "A marca '%s' já está definida!"
+msgstr "A flag '%s' já está definida!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format

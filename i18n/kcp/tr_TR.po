@@ -6,15 +6,15 @@
 # Translators:
 # Cellix <cellix@yandex.com>, 2015
 # Demiray Muhterem <mdemiray@msn.com>, 2014-2015
-# Muha Aliss <muhaaliss@gmail.com>, 2015
+# Muha Aliss <muhaaliss@gmail.com>, 2015,2017
 # Mustafa Kılıç <mustafa@fomus.org>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2016-04-20 17:46+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2017-03-03 17:06+0000\n"
+"Last-Translator: Muha Aliss <muhaaliss@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/kaos/kaos/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -229,17 +229,17 @@ msgstr ""
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Bilinmeyen özellik: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Desteklenmeyen bayrak '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Geçersiz %s bayrak '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
@@ -254,7 +254,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s izin verilmedi!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
