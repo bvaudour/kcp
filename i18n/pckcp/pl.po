@@ -4,19 +4,20 @@
 # 
 # Translators:
 # Artur Pychowski <artifakt@poczta.onet.pl>, 2016
+# Mufflon M <mufflon@int.pl>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-08-28 19:54+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2017-07-15 14:30+0000\n"
+"Last-Translator: Mufflon M <mufflon@int.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/kaos/kaos/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: pckcp/pckcp.go, offset 1075, line 51, column 19
 msgid "package() function is present."
@@ -93,7 +94,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 495, line 22, column 20
 msgid "Print this help"
-msgstr ""
+msgstr "Wydrukuj ten tekst pomocy"
 
 #: pckcp/pckcp.go, offset 807, line 39, column 6
 msgid "Warning"

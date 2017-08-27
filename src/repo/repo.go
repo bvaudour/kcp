@@ -2,6 +2,7 @@
 package repo
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"gettext"
@@ -9,7 +10,6 @@ import (
 	"kcpdb"
 	"net/http"
 	"os"
-	"parser/json"
 	"parser/pkgbuild"
 	"sync"
 	"sysutil"
@@ -35,6 +35,7 @@ const (
 	ITEMS         = "items"
 	MESSAGE       = "message"
 	DOCUMENTATION = "documentation_url"
+	PUSHED_AT     = "pushed_at"
 )
 
 //Messages
@@ -43,7 +44,17 @@ const (
 	MSG_UNKNOWN     = "Unknown error!"
 	MSG_PATH_EXISTS = "Dir %s already exists!"
 	UNKNOWN_VERSION = "<unknown>"
+	MSG_SYNC_ERROR  = "Failed on synchronize database. Please, try later."
 )
+
+type kcpPackage struct {
+	Name         string `json:"name"`
+	LocalVersion string `json:"localversion"`
+	KcpVersion   string `json:"kcpversion"`
+	Description  string `json:"description"`
+	Stars        int64  `json:"stargazers_count"`
+	PushedAt     string `json:"pushed_at"`
+}
 
 //List of ignore repos
 var ignoreRepo = map[string]bool{
@@ -52,23 +63,16 @@ var ignoreRepo = map[string]bool{
 
 var tr = gettext.Gettext
 
-//Conversions
-func o2p(o json.Object) (p *kcpdb.Package) {
-	if s, e := o.GetString(NAME); e == nil {
-		p = new(kcpdb.Package)
-		p.Name = s
-		p.Description, _ = o.GetString(DESCRIPTION)
-		p.Stars, _ = o.GetInt64(STARS)
-	}
-	return
-}
-func o2e(o json.Object) error {
-	msg, e1 := o.GetString(MESSAGE)
-	doc, e2 := o.GetString(DOCUMENTATION)
-	if e1 != nil || e2 != nil {
+func o2e(b []byte) error {
+	msg := struct {
+		Message       string `json:"message"`
+		Documentation string `json:"documentation_url"`
+	}{}
+	e := json.Unmarshal(b, &msg)
+	if e != nil {
 		return errors.New(tr(MSG_UNKNOWN))
 	}
-	return fmt.Errorf("%s\n%s\n", msg, doc)
+	return fmt.Errorf("%s\n%s\n", msg.Message, msg.Documentation)
 }
 
 func launchRequest(debug bool, header string, searchbase string, v ...interface{}) (b []byte, e error) {
@@ -91,10 +95,10 @@ func launchRequest(debug bool, header string, searchbase string, v ...interface{
 	return
 }
 
-func listPkg(search string, debug bool) (db kcpdb.Database, e error) {
+func listPkg(search string, debug bool, last_pushed int64) (db *kcpdb.Database, e error) {
 	db = kcpdb.New()
 	var wg sync.WaitGroup
-	var mx = new(sync.Mutex)
+	var mx = new(sync.RWMutex)
 	end := false
 	for i := 1; ; i++ {
 		if end {
@@ -106,30 +110,37 @@ func listPkg(search string, debug bool) (db kcpdb.Database, e error) {
 			e = err
 			return
 		}
-		obj, err := json.ArrayObjectBytes(b)
+		var packages []kcpPackage
+		err = json.Unmarshal(b, &packages)
 		if err != nil {
 			end = true
-			o, _ := json.ObjectBytes(b)
-			e = o2e(o)
+			e = o2e(b)
 			return
 		}
-		if len(obj) == 0 {
+		if len(packages) == 0 {
 			end = true
 			break
 		}
-		for _, o := range obj {
-			go func(o json.Object) {
+		for _, p := range packages {
+			go func(p kcpPackage) {
 				wg.Add(1)
 				defer wg.Done()
-				p := o2p(o)
-				if p != nil && !ignoreRepo[p.Name] {
-					p.LocalVersion = sysutil.InstalledVersion(p.Name)
-					p.KcpVersion = kcpVersion(p.Name)
+				if p.Name != "" && !ignoreRepo[p.Name] {
+					pp := &kcpdb.Package{
+						Name:         p.Name,
+						Description:  p.Description,
+						Stars:        p.Stars,
+						PushedAt:     p.PushedAt,
+						LocalVersion: sysutil.InstalledVersion(p.Name),
+					}
+					if d := sysutil.StrToTimestamp(p.PushedAt); d > last_pushed {
+						pp.KcpVersion = kcpVersion(pp.Name)
+					}
 					mx.Lock()
-					db.Add(p)
+					db.Add(pp)
 					mx.Unlock()
 				}
-			}(o)
+			}(p)
 		}
 		if end {
 			break
@@ -146,7 +157,7 @@ func kcpVersion(app string) string {
 			return v
 		}
 	}
-	return UNKNOWN_VERSION
+	return "" //UNKNOWN_VERSION
 }
 
 //Pkgbuild returns the PKGBUILD of the given repo.
@@ -168,7 +179,9 @@ func PkgbuildProto() ([]byte, error) {
 }
 
 //List returns the complete list of repos in KCP.
-func List(debug bool) (db kcpdb.Database, e error) { return listPkg(SEARCH_ALL, debug) }
+func List(debug bool, pushed_at int64) (db *kcpdb.Database, e error) {
+	return listPkg(SEARCH_ALL, debug, pushed_at)
+}
 
 //Exists checks the existence of the given repo.
 func Exists(app string) bool {

@@ -273,3 +273,10 @@ msgstr "[Y/n]"
 msgid "[y/N]"
 msgstr "[y/N]"
 
+#: kcpdb/db.go, offset: 458, line: 28, column: 23
+msgid "[installed]"
+msgstr "[installed]"
+
+#: kcpdb/db.go, offset: 494, line: 29, column: 23
+msgid "[installed: %s]"
+msgstr "[installed: %s]"

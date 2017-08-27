@@ -143,7 +143,7 @@ func filters() (f []func(*kcpdb.Package) bool) {
 	}
 	return
 }
-func displayPackages(db kcpdb.Database) {
+func displayPackages(db *kcpdb.Database) {
 	switch {
 	case *fOnlyName:
 		for _, p := range db.Names() {
@@ -158,7 +158,7 @@ func displayPackages(db kcpdb.Database) {
 			fmt.Println(p)
 		}
 	}
-	if len(db) == 0 {
+	if len(db.List) == 0 {
 		sysutil.PrintWarning("")
 		sysutil.PrintWarning(tr(MSG_NOPACKAGE))
 	}
@@ -178,15 +178,15 @@ func pathOf(file string) string {
 
 //Commands
 func list() {
-	var db kcpdb.Database
+	var db *kcpdb.Database
 	var e error
 	save := false
 	if db, e = kcpdb.LoadBD(dbPath()); e != nil {
-		db, _ = repo.List(false)
+		db, e = repo.List(false, 0)
 		save = true
 	} else if *fForceUpdate {
-		var rdb kcpdb.Database
-		rdb, e = repo.List(false)
+		var rdb *kcpdb.Database
+		rdb, e = repo.List(false, db.LastSynchronization())
 		if e == nil {
 			db.Merge(rdb)
 			save = true
@@ -206,7 +206,7 @@ func list() {
 }
 func update() {
 	db, _ := kcpdb.LoadBD(dbPath())
-	rdb, e := repo.List(false)
+	rdb, e := repo.List(false, db.LastSynchronization())
 	if e == nil {
 		u, a, d := db.Merge(rdb)
 		displayCount(MSG_ENTRIES_UPDATED, u)
@@ -220,15 +220,15 @@ func update() {
 	}
 }
 func search() {
-	var db kcpdb.Database
+	var db *kcpdb.Database
 	var e error
 	save := false
 	if db, e = kcpdb.LoadBD(dbPath()); e != nil {
-		db, _ = repo.List(false)
+		db, _ = repo.List(false, 0)
 		save = true
 	} else if *fForceUpdate {
-		var rdb kcpdb.Database
-		rdb, e = repo.List(false)
+		var rdb *kcpdb.Database
+		rdb, e = repo.List(false, db.LastSynchronization())
 		if e == nil {
 			db.Merge(rdb)
 			save = true
@@ -347,7 +347,7 @@ func install() {
 	}
 	ok := false
 	if db, e := kcpdb.LoadBD(dbPath()); e == nil {
-		if p, exists := db[*fInstall]; exists {
+		if p, exists := db.List[*fInstall]; exists {
 			ok = true
 			p.LocalVersion = sysutil.InstalledVersion(*fInstall)
 			db.SaveBD(dbPath())

@@ -5,16 +5,16 @@
 # Translators:
 # Cellix <cellix@yandex.com>, 2015
 # Cellix <cellix@yandex.com>, 2015
+# Laszlo Espadas <kardiweb@protonmail.ch>, 2015,2017
 # Laszlo Espadas <kardiweb@protonmail.ch>, 2015
-# Laszlo Espadas <kardiweb@protonmail.ch>, 2015
-# teknos.ferenc <teknos.ferenc@gmail.com>, 2015
-# teknos.ferenc <teknos.ferenc@gmail.com>, 2015
+# Ferenc Teknős <teknos.ferenc@gmail.com>, 2015
+# Ferenc Teknős <teknos.ferenc@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 13:22+0100\n"
-"PO-Revision-Date: 2016-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-08-06 21:45+0000\n"
 "Last-Translator: Laszlo Espadas <kardiweb@protonmail.ch>\n"
 "Language-Team: Hungarian (http://www.transifex.com/kaos/kaos/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -44,13 +44,13 @@ msgstr ""
 #: pckcp/pckcp.go, offset 1883, line 64, column 19
 #, c-format
 msgid "Modify %s as %s?"
-msgstr "%s - %s módosítás?"
+msgstr "Módosítja %s - %s?"
 
 #: pckcp/pckcp.go, offset 3059, line 84, column 19
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr "Fejrész található. Ne használjunk a PKGBUILD fájlban fejrészt. Tartsuk tisztán."
+msgstr "Fejrész található. Ne használjon a PKGBUILD fájlban fejrészt. Tartsa tisztán."
 
 #: pckcp/pckcp.go, offset 532, line 23, column 20
 msgid "Print version"
@@ -59,7 +59,7 @@ msgstr "Verzió kiíratás"
 #: pckcp/pckcp.go, offset 2460, line 76, column 19
 #, c-format
 msgid "Replace %s by... (leave blank to remove it):"
-msgstr "%s javítás... (hagyjuk üresen):"
+msgstr "%s javítás... (hagyja üresen):"
 
 #: pckcp/pckcp.go, offset 1037, line 50, column 19
 msgid "install is clean."
@@ -67,7 +67,7 @@ msgstr ""
 
 #: pckcp/pckcp.go, offset 2181, line 71, column 19
 msgid "Reset pkgrel to 1?"
-msgstr "pkgrel visszaállítása 1 értékre?"
+msgstr "Visszaállítja a pkgrel -t 1 értékre?"
 
 #: pckcp/pckcp.go, offset 2381, line 75, column 19
 #, c-format

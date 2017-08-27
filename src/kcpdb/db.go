@@ -2,14 +2,16 @@
 package kcpdb
 
 import (
+	"encoding/json"
 	"fmt"
 	"gettext"
+	"io"
 	"io/ioutil"
 	"os"
-	"parser/json"
 	"path/filepath"
 	"sort"
 	"strings"
+	"sysutil"
 )
 
 var tr = gettext.Gettext
@@ -21,6 +23,7 @@ const (
 	DB_STARS        = "stars"
 	DB_LOCALVERSION = "localversion"
 	DB_KCPVERSION   = "kcpversion"
+	DB_PUSHED_AT    = "pushed_at"
 )
 
 //Output elements
@@ -31,11 +34,12 @@ const (
 
 //Package groups the useful informations about a package.
 type Package struct {
-	Name         string
-	Description  string
-	LocalVersion string
-	KcpVersion   string
-	Stars        int64
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	LocalVersion string `json:"localversion"`
+	KcpVersion   string `json:"kcpversion"`
+	Stars        int64  `json:"stars"`
+	PushedAt     string `json:"pushed_at"`
 }
 
 //String returns the string representation of a package.
@@ -59,45 +63,24 @@ func (p *Package) String() string {
 	return fmt.Sprintf("\033[1;35mkcp/\033[m%s %s %s %s %s", name, kcpversion, localversion, stars, description)
 }
 
-//Object converts the package to a json object
-func (p *Package) Object() json.Object {
-	o := make(json.Object)
-	o[DB_NAME] = p.Name
-	o[DB_DESCRIPTION] = p.Description
-	o[DB_LOCALVERSION] = p.LocalVersion
-	o[DB_KCPVERSION] = p.KcpVersion
-	o[DB_STARS] = p.Stars
-	return o
-}
-
-//LoadPkg converts an object to a package type.
-func LoadPkg(o json.Object) (p *Package) {
-	if s, e := o.GetString(DB_NAME); e == nil {
-		p = new(Package)
-		p.Name = s
-		p.Description, _ = o.GetString(DB_DESCRIPTION)
-		p.LocalVersion, _ = o.GetString(DB_LOCALVERSION)
-		p.KcpVersion, _ = o.GetString(DB_KCPVERSION)
-		p.Stars, _ = o.GetInt64(DB_STARS)
-	}
-	return
-}
-
 //Packages' list sorting tool.
 func sortList(l []*Package, f func(*Package, *Package) bool) {
 	sort.Slice(l, func(i, j int) bool { return f(l[i], l[j]) })
 }
 
 //Database is the database of the KCP packages.
-type Database map[string]*Package
+type Database struct {
+	LastSync string              `json:"lastsync"`
+	List     map[string]*Package `json:"packages"`
+}
 
 //Add appends the given package to the database.
-func (db Database) Add(p *Package) { db[p.Name] = p }
+func (db *Database) Add(p *Package) { db.List[p.Name] = p }
 
 //Names returns the packages' names of the database.
 func (db Database) Names() []string {
-	names := make([]string, 0, len(db))
-	for n := range db {
+	names := make([]string, 0, len(db.List))
+	for n := range db.List {
 		names = append(names, n)
 	}
 	sort.Strings(names)
@@ -106,39 +89,43 @@ func (db Database) Names() []string {
 
 //Packages returns the packages contained in the database.
 func (db Database) Packages() []*Package {
-	packages := make([]*Package, 0, len(db))
-	for _, p := range db {
+	packages := make([]*Package, 0, len(db.List))
+	for _, p := range db.List {
 		packages = append(packages, p)
 	}
 	return packages
 }
 
+//LastSynchronization returns the timestamp of the last sync date
+func (db *Database) LastSynchronization() int64 { return sysutil.StrToTimestamp(db.LastSync) }
+
 //Filter returns a new database matching all filters.
-func (db Database) Filter(filters ...func(*Package) bool) Database {
+func (db *Database) Filter(filters ...func(*Package) bool) *Database {
 	dbf := New()
+	dbf.LastSync = db.LastSync
 loop:
-	for n, p := range db {
+	for _, p := range db.List {
 		for _, f := range filters {
 			if !f(p) {
 				continue loop
 			}
 		}
-		dbf[n] = p
+		dbf.Add(p)
 	}
 	return dbf
 }
 
 //Sorted returns a sorted list of package according to the given sort criteria.
-func (db Database) Sorted(f func(*Package, *Package) bool) []*Package {
+func (db *Database) Sorted(f func(*Package, *Package) bool) []*Package {
 	packages := db.Packages()
 	sortList(packages, f)
 	return packages
 }
 
 //Merge fusions the actual database with the new.
-func (db Database) Merge(dbn Database) (updated int, added int, deleted int) {
-	for n, p := range dbn {
-		p_db, ok := db[n]
+func (db *Database) Merge(dbn *Database) (updated int, added int, deleted int) {
+	for n, p := range dbn.List {
+		p_db, ok := db.List[n]
 		if !ok {
 			db.Add(p)
 			added++
@@ -160,13 +147,17 @@ func (db Database) Merge(dbn Database) (updated int, added int, deleted int) {
 			ok = false
 			p_db.KcpVersion = p.KcpVersion
 		}
+		if p.PushedAt != p_db.PushedAt {
+			ok = false
+			p_db.PushedAt = p.PushedAt
+		}
 		if !ok {
 			updated++
 		}
 	}
-	for n := range db {
-		if _, ok := dbn[n]; !ok {
-			delete(db, n)
+	for n := range db.List {
+		if _, ok := dbn.List[n]; !ok {
+			delete(db.List, n)
 			deleted++
 		}
 	}
@@ -174,12 +165,9 @@ func (db Database) Merge(dbn Database) (updated int, added int, deleted int) {
 }
 
 //Save saves the database into a local file.
-func (db Database) SaveBD(file string) error {
-	o := make([]json.Object, 0)
-	for _, p := range db {
-		o = append(o, p.Object())
-	}
-	b, e := json.Marshal(o)
+func (db *Database) SaveBD(file string) error {
+	db.LastSync = sysutil.TimestampToString(sysutil.Now())
+	b, e := json.Marshal(db)
 	if e == nil {
 		if e = os.MkdirAll(filepath.Dir(file), 0755); e == nil {
 			e = ioutil.WriteFile(file, b, 0644)
@@ -189,20 +177,20 @@ func (db Database) SaveBD(file string) error {
 }
 
 //New returns an empty database.
-func New() Database { return make(Database) }
+func New() *Database {
+	return &Database{
+		List: make(map[string]*Package),
+	}
+}
 
 //LoadDB loads a database from a local file.
-func LoadBD(file string) (db Database, e error) {
+func LoadBD(file string) (db *Database, e error) {
 	db = New()
 	var f *os.File
 	if f, e = os.Open(file); e == nil {
-		var o []json.Object
-		if o, e = json.ArrayObjectReader(f); e == nil {
-			for _, v := range o {
-				if p := LoadPkg(v); p != nil {
-					db.Add(p)
-				}
-			}
+		dc := json.NewDecoder(f)
+		if e = dc.Decode(db); e == io.EOF {
+			e = nil
 		}
 	}
 	return

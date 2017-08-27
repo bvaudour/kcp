@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 const (
@@ -14,7 +15,7 @@ const (
 	DEFAULT_YES    = "[Y/n]"
 	DEFAULT_NO     = "[y/N]"
 	AUTHOR         = "B. VAUDOUR"
-	VERSION        = "0.87.5"
+	VERSION        = "0.90.0"
 	KCP_LOCK       = "kcp.lock"
 	KCP_DB         = ".kcp.json"
 	LOCALE_DIR     = "/usr/share/locale"
@@ -88,4 +89,27 @@ func PrintError(e interface{}) { fmt.Fprintf(os.Stderr, "\033[1;31m%v\033[m\n", 
 //PrintWarning print a yellow message in the stderr.
 func PrintWarning(e interface{}) {
 	fmt.Fprintf(os.Stderr, "\033[1;33m%v\033[m\n", e)
+}
+
+//Now returns the UNIX timestamp from the current time
+func Now() int64 {
+	return time.Now().UTC().Unix()
+}
+
+//StrToTimeStamp converts a formatted string date to a timestamp
+func StrToTimestamp(date string) int64 {
+	if date == "" {
+		return 0
+	}
+	utc, _ := time.LoadLocation("")
+	d, _ := time.ParseInLocation(time.RFC3339, date, utc)
+	return d.Unix()
+}
+
+//TimestampTostring convertis an UNIX timestamp to a formatted string
+func TimestampToString(unix int64) string {
+	if unix == 0 {
+		return ""
+	}
+	return time.Unix(unix, 0).UTC().Format(time.RFC3339)
 }
