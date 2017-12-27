@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Translators:
+# Antonio Del Rosso <delrosso.antonio@gmail.com>, 2017
 # chaosphere <t.clipa@protonmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2017-09-21 19:05+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2017-11-18 12:16+0000\n"
+"Last-Translator: Antonio Del Rosso <delrosso.antonio@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/kaos/kaos/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 1607, line 42, column 20
 msgid "Display informations about a package"
-msgstr ""
+msgstr "Mostra informazioni riguardo al pacchetto"
 
 #: kcp/kcp.go, offset 582, line 26, column 20
 msgid "Print version"
@@ -44,7 +45,7 @@ msgid ""
 "Provides a tool to make the use of KaOS Community Packages.\n"
 "\n"
 "With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr ""
+msgstr "Mette a disposizione un tool per usare KaOS Community Packages\n\nCon questo tool puoi cercare, scaricare e installare un programma facente parte di KaOS Community Packages."
 
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
@@ -53,15 +54,15 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "dipendenze opzionali"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Sostituisce"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -69,11 +70,11 @@ msgstr "Mostra tutti i pacchetti disponibili su KCP"
 
 #: kcp/kcp.go, offset 2721, line 75, column 18
 msgid "Provides"
-msgstr ""
+msgstr "Provvede"
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Installa Script"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -86,7 +87,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -111,11 +112,11 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2749, line 76, column 18
 msgid "Depends on"
-msgstr ""
+msgstr "Dipende da"
 
 #: kcp/kcp.go, offset 2750, line 76, column 18
 msgid "Depends on (make)"
-msgstr ""
+msgstr "dipende da (make)"
 
 #: kcp/kcp.go, offset 775, line 30, column 20
 msgid "Download needed files to build a package"
@@ -127,7 +128,7 @@ msgstr "Vuoi modificare il PKGBUILD?"
 
 #: kcp/kcp.go, offset 666, line 28, column 20
 msgid "Refresh the local database"
-msgstr ""
+msgstr "Aggiorna il database locale"
 
 #: kcp/kcp.go, offset 949, line 33, column 20
 msgid "On display action, sort packages by stars descending"
@@ -144,15 +145,15 @@ msgstr ""
 #: kcp/kcp.go, offset 2137, line 57, column 24
 #, c-format
 msgid "Do you want to edit %s?"
-msgstr ""
+msgstr "Vuoi editarlo %s?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "Indirizzo"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -160,7 +161,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Versione"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -168,11 +169,11 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Licenze"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
-msgstr ""
+msgstr "Conflitti con"
 
 #: kcp/kcp.go, offset 714, line 29, column 20
 msgid "Search packages in KCP and display them"
@@ -188,11 +189,11 @@ msgstr "Un'altra istanza di kcp è in esecuzione!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Architettura"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -201,61 +202,61 @@ msgstr "Stampa questo aiuto"
 #: parser/flag/errors.go, offset 229, line 13, column 24
 #, c-format
 msgid "Flag '%s' cannot be used with '%s'"
-msgstr ""
+msgstr "Flag '%s' non può essere usata con '%s'"
 
 #: parser/flag/errors.go, offset 289, line 14, column 24
 #, c-format
 msgid "Flag '%s' needs one of this flags: %v"
-msgstr ""
+msgstr "Flag '%s' necessita di una di queste flag: %v"
 
 #: parser/flag/errors.go, offset 543, line 19, column 24
 #, c-format
 msgid "Arg '%s' not in %v!"
-msgstr ""
+msgstr "Argomento '%s' non è in %v!"
 
 #: parser/flag/errors.go, offset 588, line 20, column 24
 #, c-format
 msgid "Flag '%s' is already set!"
-msgstr ""
+msgstr "Flag '%s' è stata già settata!"
 
 #: parser/flag/errors.go, offset 499, line 18, column 24
 #, c-format
 msgid "Unexpected arg: %s"
-msgstr ""
+msgstr "Argomento inaspettato: %s"
 
 #: parser/flag/errors.go, offset 639, line 21, column 24
 #, c-format
 msgid "Unknown property: %d"
-msgstr ""
+msgstr "Proprietà sconosciuta: %d"
 
 #: parser/flag/errors.go, offset 685, line 22, column 24
 #, c-format
 msgid "Unsupported flag '%s'"
-msgstr ""
+msgstr "Flag non supportato '%s'"
 
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Invalido %s flag '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
 msgid "Invalid value '%v': Must be a %s!"
-msgstr ""
+msgstr "Valore non valido di '%v': Deve essere %s!"
 
 #: parser/flag/errors.go, offset 352, line 15, column 24
 #, c-format
 msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr ""
+msgstr "Flag '%s' non permette argomenti multipli!"
 
 #: parser/flag/errors.go, offset 421, line 16, column 24
 #, c-format
 msgid "%s not allowed!"
-msgstr ""
+msgstr "%s non permesso!"
 
 #: parser/flag/errors.go, offset 462, line 17, column 24
 msgid "Arg needed!"
-msgstr ""
+msgstr "Argomento necessario!"
 
 #: repo/repo.go, offset 1080, line 43, column 20
 msgid "Dir %s already exists!"
@@ -271,16 +272,16 @@ msgstr "<sconosiuto>"
 
 #: sysutil/util.go, offset 196, line 14, column 19
 msgid "[Y/n]"
-msgstr ""
+msgstr "[S/n]"
 
 #: sysutil/util.go, offset 1708, line 68, column 12
 msgid "[y/N]"
-msgstr ""
+msgstr "[s/N]"
 
 #: kcpdb/db.go, offset 458, line 28, column 23
 msgid "[installed]"
-msgstr ""
+msgstr "[installato]"
 
 #: kcpdb/db.go, offset 494, line 29, column 23
 msgid "[installed: %s]"
-msgstr ""
+msgstr "[installato: %s]"
