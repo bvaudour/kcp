@@ -5,14 +5,15 @@
 # Translators:
 # Translators:
 # Antonio Del Rosso <delrosso.antonio@gmail.com>, 2017
+# Sabbio <fractalys@posteo.net>, 2018
 # chaosphere <t.clipa@protonmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2017-11-18 12:16+0000\n"
-"Last-Translator: Antonio Del Rosso <delrosso.antonio@gmail.com>\n"
+"PO-Revision-Date: 2018-02-15 15:34+0000\n"
+"Last-Translator: Sabbio <fractalys@posteo.net>\n"
 "Language-Team: Italian (http://www.transifex.com/kaos/kaos/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +51,7 @@ msgstr "Mette a disposizione un tool per usare KaOS Community Packages\n\nCon qu
 #: kcp/kcp.go, offset 2274, line 60, column 24
 #, c-format
 msgid "%d entries updated!"
-msgstr ""
+msgstr "%d voci aggiornate!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
@@ -83,7 +84,7 @@ msgstr "Installa un pacchetto da KCP"
 #: kcp/kcp.go, offset 2186, line 58, column 24
 #, c-format
 msgid "%d entries added!"
-msgstr ""
+msgstr "%d voci aggiunte!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
@@ -92,7 +93,7 @@ msgstr "No"
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
 msgid "%d entries deleted!"
-msgstr ""
+msgstr "%d voci eliminate!"
 
 #: kcp/kcp.go, offset 2319, line 61, column 24
 msgid "Interrupt by user..."

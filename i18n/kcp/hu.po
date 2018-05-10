@@ -5,14 +5,15 @@
 # Translators:
 # Translators:
 # Akos Szederjei <akos@szederjei.eu>, 2016
-# Kardos László <lacesz@ox.io>, 2015
+# Kardos László, 2018
+# Laszlo Espadas, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 20:05+0100\n"
-"PO-Revision-Date: 2017-09-23 20:51+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
+"PO-Revision-Date: 2018-01-02 14:19+0000\n"
+"Last-Translator: Kardos László\n"
 "Language-Team: Hungarian (http://www.transifex.com/kaos/kaos/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,15 +55,15 @@ msgstr "%d frissítve!"
 
 #: kcp/kcp.go, offset 2556, line 69, column 18
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #: kcp/kcp.go, offset 2779, line 77, column 18
 msgid "Optional Deps"
-msgstr ""
+msgstr "Tetszőleges függőségek"
 
 #: kcp/kcp.go, offset 2846, line 79, column 18
 msgid "Replaces"
-msgstr ""
+msgstr "Javítások"
 
 #: kcp/kcp.go, offset 617, line 27, column 20
 msgid "Display all packages of KCP"
@@ -74,7 +75,7 @@ msgstr ""
 
 #: kcp/kcp.go, offset 2874, line 80, column 18
 msgid "Install Script"
-msgstr ""
+msgstr "Telepítő Szkript"
 
 #: kcp/kcp.go, offset 837, line 31, column 20
 msgid "Install a package from KCP"
@@ -87,7 +88,7 @@ msgstr "%d hozzáadva!"
 
 #: kcp/kcp.go, offset 2931, line 82, column 18
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
 #: kcp/kcp.go, offset 2229, line 59, column 24
 #, c-format
@@ -149,11 +150,11 @@ msgstr "%s szerkesztés?"
 
 #: kcp/kcp.go, offset 2908, line 81, column 18
 msgid "Yes"
-msgstr ""
+msgstr "Igen"
 
 #: kcp/kcp.go, offset 2670, line 73, column 18
 msgid "URL"
-msgstr ""
+msgstr "Hivatkozás"
 
 #: kcp/kcp.go, offset 1023, line 34, column 20
 msgid "On install action, install as a dependence"
@@ -161,7 +162,7 @@ msgstr "Telepítő művelet, függőségek telepítése"
 
 #: kcp/kcp.go, offset 2580, line 70, column 18
 msgid "Version"
-msgstr ""
+msgstr "Verzió"
 
 #: kcp/kcp.go, offset 1464, line 40, column 20
 msgid "On display action, display only installed packages"
@@ -169,7 +170,7 @@ msgstr "Megjeleníthető művelet, csak a telepített csomagok megjelenítése"
 
 #: kcp/kcp.go, offset 2693, line 74, column 18
 msgid "Licenses"
-msgstr ""
+msgstr "Licenc"
 
 #: kcp/kcp.go, offset 2812, line 78, column 18
 msgid "Conflicts With"
@@ -189,11 +190,11 @@ msgstr "A KCP egy másik példánya fut!"
 
 #: kcp/kcp.go, offset 2607, line 71, column 18
 msgid "Description"
-msgstr ""
+msgstr "Leírás"
 
 #: kcp/kcp.go, offset 2638, line 72, column 18
 msgid "Architecture"
-msgstr ""
+msgstr "Architektüra"
 
 #: kcp/kcp.go, offset 545, line 25, column 20
 msgid "Print this help"
@@ -237,7 +238,7 @@ msgstr ""
 #: parser/flag/errors.go, offset 119, line 11, column 24
 #, c-format
 msgid "Invalid %s flag '%s': %s!"
-msgstr ""
+msgstr "Érvénytelen %s jelölő '%s': %s!"
 
 #: parser/flag/errors.go, offset 170, line 12, column 24
 #, c-format
