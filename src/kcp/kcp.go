@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"repo"
 	"strings"
+	"syscall"
 	"sysutil"
 	"unicode/utf8"
 )
@@ -303,7 +304,7 @@ func install() {
 		os.Remove(lck)
 	}
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, os.Interrupt, os.Kill, syscall.SIGQUIT, syscall.SIGABRT, syscall.SIGHUP)
 	go func() {
 		<-c
 		rem()
