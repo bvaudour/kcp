@@ -1,0 +1,36 @@
+pkgname=PKGNAME
+pkgver=0.1
+pkgrel=1
+pkgdesc='Commented PKGBUILD example for KaOS Linux'
+arch=('x86_64')
+url='https://kaosx.us'
+license=('GPL')
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+backup=()
+install="${pkgname}.install"
+source=("http://yoursources.com/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('')
+
+prepare() {
+ cd "${pkgname}-${pkgver}"
+ patch -p1 -i "$srcdir/${pkgname}-${pkgver}.patch"
+}
+
+build() {
+ cd "${pkgname}-${pkgver}"
+ ./configure --prefix=/usr
+ make
+}
+
+check() {
+ cd "${pkgname}-${pkgver}"
+ make -k check
+}
+
+package() {
+ cd "${pkgname}-${pkgver}"
+ make DESTDIR="${pkgdir}/" install
+}

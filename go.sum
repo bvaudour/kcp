@@ -1,0 +1,4 @@
+github.com/leonelquinteros/gotext v1.4.0 h1:2NHPCto5IoMXbrT0bldPrxj0qM5asOCwtb1aUQZ1tys=
+github.com/leonelquinteros/gotext v1.4.0/go.mod h1:yZGXREmoGTtBvZHNcc+Yfug49G/2spuF/i/Qlsvz1Us=
+github.com/maximilien/i18n4go v0.2.6 h1:qJfc1pY0E8QAiVwz190blB+FhGB+x/pjOzjdR1/JeIw=
+github.com/maximilien/i18n4go v0.2.6/go.mod h1:qGi+vR2xY056r0saPwcQd6LXZH9MJCn7hkpWeof6mMU=

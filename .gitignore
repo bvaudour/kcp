@@ -1,3 +1,7 @@
 Makefile
 build
 pkg
+tmp
+cache
+vendor
+common/consts_dev.go

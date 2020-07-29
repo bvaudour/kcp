@@ -1,0 +1,118 @@
+# This is an example PKGBUILD file for KaOS Linux. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'. 
+# (you can use sed -i 's/#.*$//;/^$/d' /this/PKGBUILD)
+
+### Formatting standards for KCP:
+# 
+# To get to a reasonable standard in submitting, maintaining and contributing packages to KCP, 
+# use the following guidelines to get to a uniform way of providing PKGBUILD files, readme info and common courtesy in KCP.
+# 
+#     Do not use names of maintainers or contributors in PKGBUILD, anyone can contribute, keep the header clean from this
+#     Every package, application, support package or needed library has its own Github repository
+#     KaOS has no i686, reflect that in arch=(‘x86_64′) line
+#     Avoid code with “if” for x86_64 and i686 sources/md5sum, just use the x86_64 version
+#     Discuss in the issue section what you want to contribute or change to an existing package
+#     Use the “star” button to vote for a package, packages with some votes will be moved to the KaOS repositories
+#     Provide relative links in the readme to packages needed for your applications, which are not in the repositories,
+#     But need to be build from KCP also. And show the URL for the package.
+#	
+#	Example for readme.md code, providing relative links:
+# 
+#     owncloud-client
+#     ===============
+#     Description:
+#     ownCloud is a software system for what is commonly termed cloud storage, for your personal Server. 
+#     http://owncloud.org/
+#     Needed packages from KCP:
+#     Download and run makepkg -si in the package directory (with Dolphin and F4): 
+#     [qtkeychain](../../../qtkeychain)
+#     [iniparser](../../../iniparser)
+#     [ocsync](../../../ocsync)
+
+### Commented PKGBUILD variables:
+
+#The name(s) of the package(s). 
+# This should consist of lowercase alphanumerics and any of the following characters: @, ., _, +, -
+# (at symbol, dot, underscore, plus, hyphen). 
+# Names are not allowed to start with hyphens. 
+#For the sake of consistency, pkgname should match the name of the source tarball of the software
+pkgname=PKGNAME
+
+# The version of the package. This should be the same as the version released by the author of the package.
+pkgver=0.1
+
+# Release number: this value allows users to differentiate between consecutive builds of the same version of a package. 
+pkgrel=1
+
+# Only used to force the package to be seen as newer than any previous version with a lower epoch
+# epoch=
+
+# The description of the package. This is recommended to be 80 characters or less and should not include the package name
+# in a self-referencing way, unless the application name differs from the package name.
+# For example, use pkgdesc="Text editor for X11" instead of pkgdesc="Nedit is a text editor for X11".
+pkgdesc="Commented PKGBUILD example for KaOS Linux"
+
+# KaOS only support x86_64 so next line shouldn't be changed
+arch=('x86_64')
+
+# The URL of the official site of the software being packaged.
+url="https://kaosx.us"
+
+# The license under which the software is distributed. If it's unknown, then put 'unknown'.
+license=('GPL')
+
+# The group the package belongs in. Optional.
+# groups=()
+
+# An array of packages that must be installed before the software can be run. 
+# Version restrictions can be specified with comparison operators, e.g. depends=('foobar>=1.8.0')
+depends=()
+
+# An array of packages that are only required to build the software. 
+makedepends=()
+
+# An array of packages that the software depends on to run its test suite, but are not needed at runtime.
+checkdepends=()
+
+# An array of packages that are not needed for the software to function, but provide additional features. 
+optdepends=()
+
+# An array of files that can contain user-made changes and should be preserved during upgrade or removal.
+backup=()
+
+# The name of the .install script to be included in the package. 
+# This should be the same as pkgname.
+install=${pkgname}.install
+
+# The name of the package changelog. If any...
+#changelog=
+
+# An array of files needed to build the package. It must contain the location of the software source, 
+# which in most cases is a full HTTP or FTP URL. The previously set variables pkgname and pkgver can be used here.
+source=("http://yoursources.com/${pkgname}-${pkgver}.tar.gz")
+ 
+# This variable is array whose items are checksum strings that will be used to verify the integrity
+# of the respective files in the source array.
+sha512sums=('')
+
+# Classical configure/make/make install with patch
+prepare() {
+ cd "${pkgname}-${pkgver}"
+ patch -p1 -i "$srcdir/${pkgname}-${pkgver}.patch"
+}
+
+build() {
+ cd "${pkgname}-${pkgver}"
+ ./configure --prefix=/usr
+ make
+}
+
+check() {
+ cd "${pkgname}-${pkgver}"
+ make -k check
+}
+
+package() {
+ cd "${pkgname}-${pkgver}"
+ make DESTDIR="${pkgdir}/" install
+}
