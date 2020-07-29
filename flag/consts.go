@@ -9,7 +9,7 @@ const (
 	errInvalidFlag         = "Invalid %s flag '%s': %s!"
 	errInvalidValue        = "Invalid value '%v': Must be a %s!"
 	errMustBeAlternative   = "Flag '%s' cannot be used with '%s'"
-	errNeedRequirment      = "Flag '%s' needs one of this flags: %v"
+	errNeedRequirment      = "Flag '%s' needs one of these flags: %v"
 	errNoMultipleAllowed   = "Flag '%s' doesn't allow multiple arguments!"
 	errNotAllowed          = "%s not allowed!"
 	errNotEnoughArg        = "Arg needed!"
