@@ -46,6 +46,7 @@ func Load(fpath string, ignored ...string) (db *Database, err error) {
 	}
 	defer f.Close()
 	err = db.Decode(f)
+	db.IgnoreRepos = ignored
 	return
 }
 

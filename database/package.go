@@ -363,11 +363,32 @@ func (pl Packages) Sort(sorters ...SorterFunc) Packages {
 	return pl
 }
 
+//Get returns the package with the given name.
+//If no package found, ok is false.
+func (pl Packages) Get(name string) (p *Package, ok bool) {
+	for pp := range pl.Iterator() {
+		if ok = pp.Name == name; ok {
+			p = pp
+			return
+		}
+	}
+	return
+}
+
 //Names returns the list of the packages’ names.
 func (pl Packages) Names() []string {
 	names := make([]string, 0, len(pl))
 	pl.Iterate(func(p *Package) { names = append(names, p.Name) })
 	return names
+}
+
+//String returns the string representation of the list.
+func (pl Packages) String() string {
+	out := make([]string, len(pl))
+	for i, p := range pl {
+		out[i] = p.String()
+	}
+	return strings.Join(out, "\n")
 }
 
 //PackageSet is a safe-thread
