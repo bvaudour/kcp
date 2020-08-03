@@ -1,6 +1,6 @@
 #!/usr/bin/env elvish
 
-local:workdir  = tmp
+local:workdir  = cache
 local:alldir   = all
 local:transdir = kcp
 

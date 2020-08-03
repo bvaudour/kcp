@@ -164,8 +164,7 @@ func Load(filepath string) (c *Configuration, err error) {
 //Save encodes the configuration on the file at the given path.
 func Save(filepath string, c *Configuration) (err error) {
 	var f *os.File
-	f, err = os.Create(filepath)
-	if err != nil {
+	if f, err = os.Create(filepath); err != nil {
 		return
 	}
 	defer f.Close()

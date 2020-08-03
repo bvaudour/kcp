@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/bvaudour/kcp/color"
 	"github.com/leonelquinteros/gotext"
 )
 
@@ -60,7 +61,7 @@ func QuestionYN(msg string, defaultResponse bool) bool {
 	if !defaultResponse {
 		defstr = Tr(cDefaultNo)
 	}
-	fmt.Printf("\033[1;33m%s %s \033[m", msg, Tr(defstr))
+	fmt.Print(color.Yellow.Format("%s %s", msg, Tr(defstr)))
 	if _, e := fmt.Scanf("%v", &resp); e != nil || len(resp) == 0 {
 		return defaultResponse
 	}
@@ -81,12 +82,12 @@ func QuestionYN(msg string, defaultResponse bool) bool {
 
 //PrintError print a red message in the stderr.
 func PrintError(e interface{}) {
-	fmt.Fprintf(os.Stderr, "\033[1;31m%v\033[m\n", e)
+	fmt.Fprintln(os.Stderr, color.Red.Colorize(e))
 }
 
 //PrintWarning print a yellow message in the stderr.
 func PrintWarning(e interface{}) {
-	fmt.Fprintf(os.Stderr, "\033[1;33m%v\033[m\n", e)
+	fmt.Fprintln(os.Stderr, color.Yellow.Colorize(e))
 }
 
 //Now returns the UNIX timestamp from the current time

@@ -100,10 +100,31 @@ func (p *PKGBUILD) GetValues() map[string]string {
 	return p.info.GetValues()
 }
 
+//GetArrayValues is same as GetValues but it returns all values by variable.
+func (p *PKGBUILD) GetArrayValues() map[string][]string {
+	out := make(map[string][]string)
+	for _, v := range p.info.Variables() {
+		out[v.Name()] = v.ArrayValue()
+	}
+	return out
+}
+
 //GetValue returns the real value of a variable or
 //an empty string if the variable doesn’t exist.
 func (p *PKGBUILD) GetValue(name string) string {
 	return p.info.GetValue(name)
+}
+
+//GetArrayValue returns the real array value of a variable or
+//an empty array if the variable doesn’t exist.
+func (p *PKGBUILD) GetArrayValue(name string) []string {
+	var out []string
+	for _, v := range p.info.Variables() {
+		if v.Name() == name {
+			out = v.ArrayValue()
+		}
+	}
+	return out
 }
 
 //HasValue returns true if it is the name of a variable
@@ -261,6 +282,17 @@ func Decode(r io.Reader) (p *PKGBUILD, err error) {
 func DecodeFast(r io.Reader) (p *PKGBUILD, err error) {
 	p = New()
 	sc := scanner.NewFastScanner(r)
+	if err = p.Scan(sc, true); err != nil {
+		p = nil
+	}
+	return
+}
+
+//DecodeVars is same as Decode but it decodes only
+//variables declarations.
+func DecodeVars(r io.Reader) (p *PKGBUILD, err error) {
+	p = New()
+	sc := scanner.NewVarScanner(r)
 	if err = p.Scan(sc, true); err != nil {
 		p = nil
 	}

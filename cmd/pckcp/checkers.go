@@ -6,55 +6,37 @@ import (
 	"os"
 	"strings"
 
+	"github.com/bvaudour/kcp/color"
 	. "github.com/bvaudour/kcp/common"
 	"github.com/bvaudour/kcp/pkgbuild"
 	"github.com/bvaudour/kcp/pkgbuild/atom"
 	"github.com/bvaudour/kcp/pkgbuild/standard"
 )
 
-type color int
-
 const (
-	cNone color = iota
-	cRed
-	cGreen
-	cYellow
-
 	urlHook = "https://jlk.fjfi.cvut.cz/arch/manpages/man/alpm-hooks.5"
 )
 
 var (
-	colorType = map[string]color{
-		typeError:   cRed,
-		typeWarning: cYellow,
-		typeInfo:    cGreen,
+	colorType = map[string]color.Color{
+		typeError:   color.Red,
+		typeWarning: color.Yellow,
+		typeInfo:    color.Green,
 	}
 )
-
-func (c color) String() string {
-	if c == 0 {
-		return "\033[m"
-	}
-	return fmt.Sprintf("\033[1;3%dm", c)
-}
 
 func message(t string, l1, l2 int, msg string) {
 	var position string
 	if l1 > 0 {
 		if l1 == l2 {
-			position = fmt.Sprintf(" (L.%d)", l1)
+			position = fmt.Sprintf("(L.%d)", l1)
 		} else {
-			position = fmt.Sprintf(" (L.%d-%d)", l1, l2)
+			position = fmt.Sprintf("(L.%d-%d)", l1, l2)
 		}
 	}
 	fmt.Printf(
-		`%s%s%s%s:
-  %s
-`,
-		colorType[t],
-		t,
-		position,
-		cNone,
+		"%s:\n  %s\n",
+		colorType[t].Format("%s %s", t, position),
 		msg,
 	)
 }
