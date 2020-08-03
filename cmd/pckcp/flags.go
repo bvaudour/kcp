@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	. "github.com/bvaudour/kcp/common"
@@ -34,7 +33,6 @@ func initFlags() {
 func parseFlags() {
 	if err := flags.Parse(os.Args); err != nil {
 		PrintError(err)
-		fmt.Fprintln(os.Stderr)
 		flags.PrintHelp()
 		os.Exit(1)
 	}

@@ -18,6 +18,10 @@ var (
 
 	ConfigBaseDir string
 	ConfigFile    string
+
+	Organization string
+	User         string
+	Password     string
 )
 
 //Initialized at execution time
@@ -79,4 +83,13 @@ func init() {
 
 	// Load locales
 	gotext.Configure(LocaleBaseDir, Language, LocaleDomain)
+
+	// Load custom github config
+	org, user, passwd := Config.Get("github.organization"), Config.Get("github.user"), Config.Get("github.password")
+	if org != "" {
+		Organization = org
+	}
+	if user != "" && passwd != "" {
+		User, Password = user, passwd
+	}
 }
