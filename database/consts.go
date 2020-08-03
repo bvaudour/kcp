@@ -21,4 +21,8 @@ const (
 	cNo               = "No"
 
 	errPathExists = "Dir %s already exists!"
+
+	msgAdded   = "%d entries added!"
+	msgDeleted = "%d entries deleted!"
+	msgUpdated = "%d entries updated!"
 )

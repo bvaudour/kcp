@@ -1,9 +1,11 @@
 package database
 
 import (
+	"strings"
 	"sync"
 	"time"
 
+	"github.com/bvaudour/kcp/common"
 	"github.com/google/go-github/v32/github"
 )
 
@@ -20,6 +22,21 @@ type Counter struct {
 	Updated int
 	Deleted int
 	Added   int
+}
+
+//String returns the string representation of the counter
+func (c Counter) String() string {
+	var out []string
+	if c.Added > 0 {
+		out = append(out, common.Tr(msgAdded, c.Added))
+	}
+	if c.Deleted > 0 {
+		out = append(out, common.Tr(msgDeleted, c.Deleted))
+	}
+	if c.Updated > 0 {
+		out = append(out, common.Tr(msgUpdated, c.Updated))
+	}
+	return strings.Join(out, "\n")
 }
 
 //Diff refresh the counter comparing 2 package sets.

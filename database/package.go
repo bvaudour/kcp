@@ -246,8 +246,12 @@ func (p *Package) Detail() string {
 	}
 	result := make([]string, len(labels))
 	for i, l := range labels {
+		v := values[i]
+		if v == "" {
+			v = "--"
+		}
 		sep := strings.Repeat(" ", s-utf8.RuneCountInString(l))
-		result[i] = fmt.Sprintf("%s%s : %", l, sep, values[i])
+		result[i] = fmt.Sprintf("%s%s : %", l, sep, v)
 	}
 	return strings.Join(result, "\n")
 }
@@ -255,10 +259,11 @@ func (p *Package) Detail() string {
 //Clone clone the git repo corresponding to the package
 //on the given dir.
 //if ssh it clones using ssh.
-func (p *Package) Clone(dir string, ssh bool) (err error) {
-	fullDir := path.Join(dir, p.Name)
+func (p *Package) Clone(dir string, ssh bool) (fullDir string, err error) {
+	fullDir = path.Join(dir, p.Name)
 	if common.FileExists(fullDir) {
-		return errors.New(common.Tr(errPathExists, fullDir))
+		err = errors.New(common.Tr(errPathExists, fullDir))
+		return
 	}
 	if err = os.Chdir(dir); err != nil {
 		return
@@ -267,7 +272,8 @@ func (p *Package) Clone(dir string, ssh bool) (err error) {
 	if ssh {
 		url = p.SshUrl
 	}
-	return common.LaunchCommand("git", "clone", url)
+	err = common.LaunchCommand("git", "clone", url)
+	return
 }
 
 type PackageFunc func(*Package)
