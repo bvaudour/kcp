@@ -5,3 +5,5 @@ tmp
 cache
 vendor
 common/consts_dev.go
+cmd/pckcp/pckcp
+cmd/kcp/kcp
