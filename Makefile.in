@@ -1,0 +1,89 @@
+# Configuration options
+VERSION      := %version%
+DATE         := $(shell date)
+CONFIGDIR    := %configdir%
+CONFIGFILE   := %configfile%
+LOCALEDIR    := %localedir%
+DOMAIN       := %domain%
+ORGANIZATION := %organization%
+USER         := %user%
+PASSWORD     := %password%
+
+DESTDIR ?=
+WD       = build
+
+# Flags associated to the configuration
+cflag = $(if $(1),-X "github.com/bvaudour/kcp/common.$(2)=$(1)",)
+
+LDFLAGS := $(call cflag,$(VERSION),Version)
+LDFLAGS += $(call cflag,$(DATE),BuildTime)
+LDFLAGS += $(call cflag,$(CONFIGDIR),ConfigBaseDir)
+LDFLAGS += $(call cflag,$(CONFIGFILE),ConfigFile)
+LDFLAGS += $(call cflag,$(LOCALEDIR),LocaleBaseDir)
+LDFLAGS += $(call cflag,$(DOMAIN),LocaleDomain)
+LDFLAGS += $(call cflag,$(ORGANIZATION),Organization)
+LDFLAGS += $(call cflag,$(USER),User)
+LDFLAGS += $(call cflag,$(PASSWORD),Password)
+
+
+# Go build variables
+GOFLAGS  ?= -v -trimpath -mod=readonly -modcacherw
+GOCMD    := go build $(GOFLAGS) -ldflags='-s -w $(LDFLAGS)'
+BINARIES := kcp \
+            pckcp
+
+# Locale build variables
+LOCALESRCDIR := resources/i18n
+POFILES      := $(wildcard $(LOCALESRCDIR)/*.po)
+LANGS        := $(notdir $(basename $(POFILES)))
+MOFILES      := $(addprefix $(WD)/,$(addsuffix .mo,$(LANGS)))
+
+# Working directory           
+
+.PHONY: default build install clean gobuild uninstall
+
+default: build
+
+#$(WD):
+#	mkdir $(WD)
+
+${WD}/%.mo: ${LOCALESRCDIR}/%.po
+	msgfmt $< -o $@
+
+gobuild:
+	for b in $(BINARIES); do \
+		$(GOCMD) -o $(WD)/$${b} ./cmd/$${b}; \
+	done
+
+clean:
+	rm -rf $(WD)
+
+build: gobuild $(MOFILES)
+
+install: build
+	for b in $(BINARIES); do \
+		install -Dm755 $(WD)/$${b} $(DESTDIR)/usr/bin/$${b}; \
+		install -Dm644 resources/man/$${b} $(DESTDIR)/usr/share/man1/$${b}.1; \
+	done
+	for l in $(LANGS); do \
+		install -Dm644 $(WD)/$${l}.mo $(DESTDIR)$(LOCALEDIR)/$${l}/LC_MESSAGES/$(DOMAIN).mo; \
+	done
+	install -Dm644 resources/completion/kcp.bash $(DESTDIR)/etc/bash-completion.d/kcp
+	install -Dm644 resources/completion/kcp.zsh $(DESTDIR)/usr/share/zsh/site-functions/_kcp
+	install -Dm644 resources/completion/kcp.fish $(DESTDIR)/usr/share/fish/vendor_completions.d/kcp.fish
+	install -Dm644 resources/conf/kcp.conf $(DESTDIR)$(CONFIGDIR)/$(CONFIGFILE)
+	install -Dm644 resources/conf/exceptions $(DESTDIR)$(CONFIGDIR)/exceptions
+	install -Dm644 resources/conf/PKGBUILD.commented.kaos.proto $(DESTDIR)$(CONFIGDIR)/PKGBUILD.commented.kaos.proto
+
+uninstall:
+	for b in $(BINARIES); do \
+		rm -f $(DESTDIR)/usr/bin/$${b}; \
+		rm -f $(DESTDIR)/usr/share/man1/$${b}.1; \
+	done
+	for l in $(LANGS); do \
+		rm -f $(DESTDIR)$(LOCALEDIR)/$${l}/LC_MESSAGES/$(DOMAIN).mo; \
+	done
+	rm -f $(DESTDIR)/etc/bash-completion.d/kcp
+	rm -f $(DESTDIR)/usr/share/zsh/site-functions/_kcp
+	rm -f $(DESTDIR)/usr/share/fish/vendor_completions.d/kcp.fish
+	rm -rf $(DESTDIR)$(CONFIGDIR)

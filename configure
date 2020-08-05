@@ -1,174 +1,71 @@
 #!/usr/bin/env bash
 
-# Flag variables
-withgccgo='no'
-withman='yes'
-withbash='yes'
-withfish='yes'
-withzsh='yes'
-
-_addline() {
-	echo -e $1 >> Makefile
-}
-
-_emptyline() {
-	_addline ''
-}
-
-_addline_t() {
-	_addline "\t$1"
-}
-
-_addline_cond() {
-	case "$1" in
-		'yes') _addline_t "$2";;
-		*) ;;
-	esac
-}
-
-_generate() {
-
-	if [[ -e Makefile ]]; then
-		rm Makefile
-	fi
-
-	_addline '# Go variables...'
-	_addline 'GOCMD  = go build -ldflags="-s -w"'
-	_addline 'GOPATH = ${PWD}'
-	_addline 'GOFLAG = --compiler gccgo'
-	_addline 'export $(GOPATH)'
-	_emptyline
-
-	_addline 'PACKAGE     = kcp'
-	_addline 'PACKAGEC    = pckcp'
-	_addline 'PACKAGEFLAG = --create-manpage'
-	_emptyline
-
-	_addline '# Source directories'
-	_addline 'SRCDIR   = ${PWD}/src/kcp'
-	_addline 'SRCDIRC  = ${PWD}/src/pckcp'
-	_addline 'COMPDIR  = ${PWD}/completion'
-	_addline 'BUILDDIR = ${PWD}/build'
-	_addline 'MANDIR   = ${PWD}/man'
-	_addline 'ETCDIR   = ${PWD}/etc/pckcp'
-	_emptyline
-
-	_addline '# Base files'
-	_addline 'BINFILE  = $(PACKAGE)'
-	_addline 'BINFILEC = $(PACKAGEC)'
-	_addline 'MANFILE  = $(PACKAGE).1'
-	_addline 'GOFILE   = $(PACKAGE).go'
-	_addline 'GOFILEC  = $(PACKAGEC).go'
-	_addline 'BASHFILE = $(PACKAGE).bash'
-	_addline 'FISHFILE = $(PACKAGE).fish'
-	_addline 'ZSHFILE  = $(PACKAGE).zsh'
-	_addline 'EXCEPTS  = exceptions'
-	_emptyline
-
-	_addline '# Source files'
-	_addline 'SRCBINFILE  = $(BUILDDIR)/$(BINFILE)'
-	_addline 'SRCBINFILEC = $(BUILDDIR)/$(BINFILEC)'
-	_addline 'SRCMANFILE  = $(MANDIR)/$(MANFILE)'
-	_addline 'SRCGOFILE   = $(SRCDIR)/$(GOFILE)'
-	_addline 'SRCGOFILEC  = $(SRCDIRC)/$(GOFILEC)'
-	_addline 'SRCBASHFILE = $(COMPDIR)/$(BASHFILE)'
-	_addline 'SRCFISHFILE = $(COMPDIR)/$(FISHFILE)'
-	_addline 'SRCZSHFILE  = $(COMPDIR)/$(ZSHFILE)'
-	_addline 'SRCEXCEPTF  = $(ETCDIR)/$(EXCEPTS)'
-	_emptyline
-
-	_addline '# Destination directories'
-	_addline 'DESTDIR   ?='
-	_addline 'DESTBIN    = $(DESTDIR)/usr/bin'
-	_addline 'DESTMAN    = $(DESTDIR)/usr/share/man/man1'
-	_addline 'DESTBASH   = $(DESTDIR)/etc/bash_completion.d'
-	_addline 'DESTFISH   = $(DESTDIR)/usr/share/fish/vendor_completions.d'
-	_addline 'DESTZSH    = $(DESTDIR)/usr/share/zsh/site-functions'
-	_addline 'DESTEXCEPT = $(DESTDIR)/etc/pckcp'
-	_emptyline
-
-	_addline '# Destination files'
-	_addline 'DESTBINFILE  = $(DESTBIN)/$(BINFILE)'
-	_addline 'DESTBINFILEC = $(DESTBIN)/$(BINFILEC)'
-	_addline 'DESTMANFILE  = $(DESTMAN)/$(MANFILE)'
-	_addline 'DESTBASHFILE = $(DESTBASH)/$(PACKAGE)'
-	_addline 'DESTFISHFILE = $(DESTFISH)/$(FISHFILE)'
-	_addline 'DESTZSHFILE  = $(DESTZSH)/_$(PACKAGE)'
-	_addline 'DESTEXCEPTF  = $(DESTEXCEPT)/$(EXCEPTS)'
-	_emptyline
-
-	_addline '.PHONY: default build install clean'
-	_emptyline
-	_addline 'default: build'
-	_emptyline
-
-	_addline 'build:'
-	_addline_t 'mkdir -p $(BUILDDIR)'
-	case "$withgccgo" in
-		'yes')
-			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILE) $(SRCGOFILE)'
-			_addline_t '$(GOCMD) $(GOFLAG) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
-			;;
-		*)
-			_addline_t '$(GOCMD) -v -o $(SRCBINFILE) $(SRCGOFILE)'
-			_addline_t '$(GOCMD) -v -o $(SRCBINFILEC) $(SRCGOFILEC)'
-			;;
-	esac
-#	_addline_cond "$withman" '$(SRCBINFILE) $(PACKAGEFLAG) >> $(SRCMANFILE)'
-	_emptyline
-
-	_addline 'install:'
-	_addline_t 'mkdir -p $(DESTBIN)'
-	_addline_cond "$withman"  'mkdir -p $(DESTMAN)'
-	_addline_cond "$withbash" 'mkdir -p $(DESTBASH)'
-	_addline_cond "$withfish" 'mkdir -p $(DESTFISH)'
-	_addline_cond "$withzsh"  'mkdir -p $(DESTZSH)'
-	_addline_t 'mkdir -p $(DESTEXCEPT)'
-	_addline_t 'cp $(SRCBINFILE) $(DESTBINFILE)'
-	_addline_t 'cp $(SRCBINFILEC) $(DESTBINFILEC)'
-	_addline_cond "$withman"  'cp $(SRCMANFILE) $(DESTMANFILE)'
-	_addline_cond "$withbash" 'cp $(SRCBASHFILE) $(DESTBASHFILE)'
-	_addline_cond "$withfish" 'cp $(SRCFISHFILE) $(DESTFISHFILE)'
-	_addline_cond "$withzsh" 'cp $(SRCZSHFILE) $(DESTZSHFILE)'
-	_addline_t 'cp $(SRCEXCEPTF) $(DESTEXCEPTF)'
-	_emptyline
-
-	_addline 'clean:'
-	_addline_t 'rm $(SRCBINFILE)'
-	_addline_t 'rm $(SRCBINFILEC)'
-#	_addline_cond "$withman" 'rm $(SRCMANFILE)'
-	_addline_t 'rmdir $(BUILDDIR)'
-}
+VERSION=
+CONFIGDIR=/etc/kcp
+CONFIGFILE=kcp.conf
+LOCALEDIR=/usr/share/locale
+DOMAIN=kcp
+ORGANIZATION=KaOS-Community-Packages
+USER=
+PASSWORD=
 
 _help() {
 	echo "Usage: $0 [options]"
 	echo "Options:"
 	echo -e "\t-h, --help\tPrint this help"
-	echo -e "\t--enable-gccgo\tCompile with gccgo [disable]"
-	echo -e "\t--disable-man\tInstall man file [enable]"
-	echo -e "\t--disable-bash\tInstall bash completion [enable]"
-	echo -e "\t--disable-fish\tInstall fish completion [enable]"
-	echo -e "\t--disable-zsh\tInstall zsh completion [enable]"
+	echo -e "\t--version\tVersion of the application"
+	echo -e "\t--config-dir\tFinal configuration directory [/etc/kcp]"
+	echo -e "\t--config-file\tName of the configuration file [kcp.conf]"
+	echo -e "\t--locale-dir\tFinal locale directory [/usr/share/locale]"
+	echo -e "\t--locale-domain\tDomain name of the locales [kcp]"
+	echo -e "\t--organization\tGithub organization [KaOS-Community-Packages]"
+	echo -e "\t--user\tUser to use for the github API requests"
+	echo -e "\t--password\tPassword to use for the github API requests"
 }
 
-for i in ${@}; do
-	case $i in
-		"-h"|"--help") _help; exit 0;;
-		"--enable-gccgo")
-			if e=$(which gccgo > /dev/null); then
-				withgccgo='yes'
-			else
-				echo -e '\033[1;31mgccgo is not installed!\033[m'; exit 1
-			fi
-			;;
-		"--disable-man") withman='no';;
-		"--disable-bash") withbash='no';;
-		"--disable-fish") withfish='no';;
-		"--disable-zsh") withzsh='no';;
-		*)
-			echo -e '\033[1;31mUnsupported arg!\033[m'; exit 1;;
-	esac
-done
+_parseArgs() {
+	while (( $# > 0 )); do
+		local flag=$1
+		local arg=$2
+		shift
+		shift
+		case $flag in
+		-h|--help) _help; exit;;
+		--version) VERSION=$arg;;
+		--config-dir) CONFIGDIR=$arg;;
+		--config-file) CONFIGFILE=$arg;;
+		--locale-dir) LOCALEDIR=$arg;;
+		--locale-domain) DOMAIN=$arg;;
+		--organization) ORGANIZATION=$arg;;
+		--user) USER=$arg;;
+		--password) PASSWORD=$arg;;
+		*) echo "Invalid flag: '${flag}'. Type $0 -h for help."; exit 1;;
+		esac
+	done
+}
 
-_generate
-exit 0
+_checkVersion () {
+	if [[ -z ${VERSION} ]]; then
+		if [[ -e .git ]]; then
+			VERSION=$(git rev-parse HEAD)
+		else
+			VERSION='<unknown>'
+		fi
+	fi
+}
+
+_makeMakefile() {
+	cp -f Makefile.in Makefile
+	sed -i "s|%version%|${VERSION}|" Makefile
+	sed -i "s|%configdir%|${CONFIGDIR}|" Makefile
+	sed -i "s|%configfile%|${CONFIGFILE}|" Makefile
+	sed -i "s|%localedir%|${LOCALEDIR}|" Makefile
+	sed -i "s|%domain%|${DOMAIN}|" Makefile
+	sed -i "s|%organization%|${ORGANIZATION}|" Makefile
+	sed -i "s|%user%|${USER}|" Makefile
+	sed -i "s|%password%|${PASSWORD}|" Makefile
+}
+
+_parseArgs $@
+_checkVersion
+_makeMakefile
