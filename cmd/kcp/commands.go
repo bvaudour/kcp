@@ -30,14 +30,20 @@ func getDb() (db *database.Database, err error) {
 	return database.Load(fpath, ignore...)
 }
 
-func updateDb(db *database.Database) (counters database.Counter, err error) {
-	return db.Update(Organization, User, Password)
+func updateDb(db *database.Database, debug bool) (counters database.Counter, err error) {
+	return db.Update(Organization, debug, User, Password)
 }
 
-func loadDb(forceUpdate bool) *database.Database {
+func loadDb(debug, forceUpdate bool) *database.Database {
 	db, err := getDb()
+	if debug {
+		fmt.Fprintln(os.Stderr, "Trying to open db")
+	}
 	if err != nil || forceUpdate {
-		updateDb(db)
+		if debug {
+			fmt.Fprintln(os.Stderr, "Trying to update db")
+		}
+		updateDb(db, debug)
 	}
 	return db
 }
@@ -47,7 +53,7 @@ func saveDb(db *database.Database) error {
 }
 
 func filter(debug, forceUpdate, onlyName bool, f []database.FilterFunc, s []database.SorterFunc) {
-	db := loadDb(forceUpdate)
+	db := loadDb(debug, forceUpdate)
 	if forceUpdate {
 		saveDb(db)
 	}
@@ -103,8 +109,14 @@ func getSorters(sortByStar bool) []database.SorterFunc {
 }
 
 func update(debug bool) {
+	if debug {
+		fmt.Fprintln(os.Stderr, "Open db")
+	}
 	db, _ := getDb()
-	counters, err := updateDb(db)
+	if debug {
+		fmt.Fprintln(os.Stderr, "Trying to update db")
+	}
+	counters, err := updateDb(db, debug)
 	if err != nil {
 		PrintError(err)
 		os.Exit(1)
@@ -148,7 +160,7 @@ func search(
 }
 
 func info(debug bool, app string) {
-	db := loadDb(false)
+	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
 		PrintWarning(Tr(errNoPackage))
@@ -158,7 +170,7 @@ func info(debug bool, app string) {
 }
 
 func get(debug bool, app string) {
-	db := loadDb(false)
+	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
 		PrintWarning(Tr(errNoPackageOrNeedUpdate))
@@ -174,7 +186,7 @@ func get(debug bool, app string) {
 }
 
 func install(debug bool, app string, asdep bool) {
-	db := loadDb(false)
+	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
 		PrintWarning(Tr(errNoPackageOrNeedUpdate))

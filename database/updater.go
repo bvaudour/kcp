@@ -64,11 +64,11 @@ func NewUpdater(db *Database, repo *Repository) *Updater {
 	}
 }
 
-func (u *Updater) updatePackage(p *Package, ps *PackageSet) {
+func (u *Updater) updatePackage(p *Package, ps *PackageSet, debug ...bool) {
 	p.LocalVersion = p.GetLocaleVersion()
 	p1, ok := ps.Get(p.Name)
 	if !ok || u.db.LastUpdate.IsZero() || u.db.LastUpdate.Before(p.PushedAt) {
-		if pkg, err := p.GetPKGBUID(); err == nil {
+		if pkg, err := p.GetPKGBUID(debug...); err == nil {
 			p.udpateFromPKGBUILD(pkg)
 			return
 		}
@@ -79,7 +79,7 @@ func (u *Updater) updatePackage(p *Package, ps *PackageSet) {
 
 //Update updates the local database
 //and returns the counter of modifications.
-func (u *Updater) Update() (c Counter, err error) {
+func (u *Updater) Update(debug ...bool) (c Counter, err error) {
 	ps1 := u.db.ToSet()
 	ignore := s2m(u.db.IgnoreRepos)
 	opt := &github.RepositoryListByOrgOptions{
@@ -93,7 +93,7 @@ func (u *Updater) Update() (c Counter, err error) {
 	var nextPage int
 	var wg sync.WaitGroup
 	for {
-		if pl, nextPage, err = u.repo.GetPage(opt); err != nil {
+		if pl, nextPage, err = u.repo.GetPage(opt, debug...); err != nil {
 			break
 		}
 		for p := range pl.Iterator() {
@@ -104,7 +104,7 @@ func (u *Updater) Update() (c Counter, err error) {
 					return
 				}
 				ps2.Add(p)
-				u.updatePackage(p, ps1)
+				u.updatePackage(p, ps1, debug...)
 			})(p)
 		}
 		if nextPage == 0 {

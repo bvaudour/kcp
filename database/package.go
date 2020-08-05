@@ -126,17 +126,27 @@ func (p *Package) GetLocaleVersion() string {
 
 //GetPKGBUILD reads and parses the remote PKGBUILD
 //from the github organization URL.
-func (p *Package) GetPKGBUID() (pkg *pkgbuild.PKGBUILD, err error) {
+func (p *Package) GetPKGBUID(debug ...bool) (pkg *pkgbuild.PKGBUILD, err error) {
 	url := p.PkgbuildUrl
+	printDebug := len(debug) > 0 && debug[0]
 	var req *http.Request
 	if req, err = http.NewRequest("GET", url, nil); err != nil {
+		if printDebug {
+			fmt.Fprintf(os.Stderr, "%s %s\n", color.Red.Format("[Error: %s]", err), url)
+		}
 		return
 	}
 	var resp *http.Response
 	if resp, err = new(http.Client).Do(req); err != nil {
+		if printDebug {
+			fmt.Fprintf(os.Stderr, "%s %s\n", color.Red.Format("[Error: %s]", err), url)
+		}
 		return
 	}
 	defer resp.Body.Close()
+	if printDebug {
+		fmt.Fprintf(os.Stderr, "%s %s\n", color.Green.Format("[Success]"), url)
+	}
 	return pkgbuild.DecodeVars(resp.Body)
 }
 
@@ -204,7 +214,7 @@ func (p *Package) String() string {
 		color.Green.Colorize(p.RepoVersion),
 	)
 	if p.LocalVersion != "" {
-		fmt.Print(" ")
+		fmt.Fprint(&w, " ")
 		if p.LocalVersion == p.RepoVersion {
 			fmt.Fprint(&w, color.Cyan.Colorize(cInstalled))
 		} else {
@@ -251,7 +261,7 @@ func (p *Package) Detail() string {
 			v = "--"
 		}
 		sep := strings.Repeat(" ", s-utf8.RuneCountInString(l))
-		result[i] = fmt.Sprintf("%s%s : %", l, sep, v)
+		result[i] = fmt.Sprintf("%s%s : %s", l, sep, v)
 	}
 	return strings.Join(result, "\n")
 }
@@ -311,6 +321,7 @@ type Packages []*Package
 func (pl Packages) Iterator() <-chan *Package {
 	ch := make(chan *Package)
 	go (func() {
+		defer close(ch)
 		for _, p := range pl {
 			ch <- p
 		}
@@ -415,6 +426,7 @@ func NewPackageSet() *PackageSet {
 func (ps *PackageSet) Iterator() <-chan *Package {
 	ch := make(chan *Package)
 	go (func() {
+		defer close(ch)
 		for _, p := range ps.packages {
 			ch <- p
 		}

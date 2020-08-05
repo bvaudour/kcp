@@ -51,6 +51,7 @@ func init() {
 	setIfZero(&ConfigBaseDir, fbConfigBaseDir)
 	setIfZero(&ConfigFile, fbConfigFile)
 	setIfZero(&UserBaseDir, fbConfigUserDir)
+	setIfZero(&Organization, fbOrganization)
 
 	// Init runtime
 	Language = os.Getenv("LANGUAGE")

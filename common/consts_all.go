@@ -9,4 +9,5 @@ const (
 	fbConfigBaseDir = "/etc/kcp"
 	fbConfigUserDir = ""
 	fbConfigFile    = "kcp.conf"
+	fbOrganization  = "KaOS-Community-Packages"
 )

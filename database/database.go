@@ -63,8 +63,8 @@ func Save(fpath string, db *Database) (err error) {
 //Update updates the database from a github organization.
 //If optional user and password are given, requests are done
 //with authentification in order to have a better rate limit.
-func (db *Database) Update(organization string, opt ...string) (counter Counter, err error) {
+func (db *Database) Update(organization string, debug bool, opt ...string) (counter Counter, err error) {
 	r := NewRepository(organization, opt...)
 	u := NewUpdater(db, r)
-	return u.Update()
+	return u.Update(debug)
 }

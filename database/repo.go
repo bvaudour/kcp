@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 
+	"github.com/bvaudour/kcp/color"
 	"github.com/google/go-github/v32/github"
 )
 
@@ -49,7 +51,7 @@ func (r *Repository) getRepos(opt *github.RepositoryListByOrgOptions) (repos []*
 
 //GetPage the returns the remote packages’ infos on
 //the repositories list page of the organization.
-func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions) (packages Packages, nextPage int, err error) {
+func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions, debug ...bool) (packages Packages, nextPage int, err error) {
 	var repos []*github.Repository
 	var resp *github.Response
 	if repos, resp, err = r.getRepos(opt); err == nil {
@@ -69,6 +71,22 @@ func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions) (packages P
 				Stars:       *repo.StargazersCount,
 			}
 		}
+	}
+	if len(debug) > 0 && debug[0] {
+		var t string
+		if err == nil {
+			t = color.Green.Colorize("[Success]")
+		} else {
+			t = color.Red.Format("[Error: %s]", err)
+		}
+		fmt.Fprintf(
+			os.Stderr,
+			"%s https://api.github.com/%s/repos?page=%d&per_page=%d\n",
+			t,
+			r.organization,
+			opt.Page,
+			opt.PerPage,
+		)
 	}
 	return
 }
