@@ -1,0 +1,26 @@
+.TH "pckcp" 1 "August 5, 2020" "dev" ""
+.SH NAME
+pckcp \- Tool in command-line to manage common PKGBUILD errors
+.SH SYNOPSIS
+pckcp  [\-h|\-\-help] [\-v|\-\-version] [\-e|\-\-edit] [\-g|\-\-generate] [\-c|\-\-clean] [\-d|\-\-debug]
+.SH DESCRIPTION
+Provides a tool to check the validity of a PKGBUILD according to the KCP standards.
+.PP
+If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created.
+
+.SH OPTIONS
+.TP
+\-h|\-\-help
+	Print this help
+.TP
+\-v|\-\-version
+	Print version
+.TP
+\-e|\-\-edit
+	Interactive edition
+.TP
+\-g|\-\-generate
+	Generate a prototype of PKGBUILD
+.TP
+\-c|\-\-clean
+	Removes the useless comments and blanks of the prototype

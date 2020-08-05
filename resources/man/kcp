@@ -1,0 +1,56 @@
+.TH "kcp" 1 "August 5, 2020" "dev" ""
+.SH NAME
+kcp \- Tool in command-line for KaOS Community Packages
+.SH SYNOPSIS
+kcp  [\-h|\-\-help] [\-v|\-\-version] [\-l|\-\-list] [\-u|\-\-update-database] [\-s|\-\-search [<app>]] [\-g|\-\-get [<app>]] [\-i|\-\-install [<app>]] [\-x|\-\-sort] [\-f|\-\-force-update] [\-N|\-\-only-name] [\-S|\-\-only-starred] [\-I|\-\-only-installed] [\-O|\-\-only-outdated] [\-d|\-\-asdeps] [\-V|\-\-information [<app>]] [\-\-debug]
+.SH DESCRIPTION
+Provides a tool to make the use of KaOS Community Packages.
+.PP
+With this tool, you can search, get and install a package from KaOS Community Packages.
+
+.SH OPTIONS
+.TP
+\-h|\-\-help
+	Print this help
+.TP
+\-v|\-\-version
+	Print version
+.TP
+\-l|\-\-list
+	Display all packages of KCP
+.TP
+\-u|\-\-update-database
+	Refresh the local database
+.TP
+\-s|\-\-search [<app>]
+	Search packages in KCP and display them
+.TP
+\-g|\-\-get [<app>]
+	Download needed files to build a package
+.TP
+\-i|\-\-install [<app>]
+	Install a package from KCP
+.TP
+\-x|\-\-sort
+	On display action, sort packages by stars descending
+.TP
+\-f|\-\-force-update
+	On display action, force refreshing local database
+.TP
+\-N|\-\-only-name
+	On display action, display only the name of the package
+.TP
+\-S|\-\-only-starred
+	On display action, display only packages with at least one star
+.TP
+\-I|\-\-only-installed
+	On display action, display only installed packages
+.TP
+\-O|\-\-only-outdated
+	On display action, display only outdated packages
+.TP
+\-d|\-\-asdeps
+	On install action, install as a dependence
+.TP
+\-V|\-\-information [<app>]
+	Display informations about a package
