@@ -17,7 +17,8 @@ fn extract_all []{
 
 fn extract_trans []{
   put **/consts.go | each [file]{
-    i18n4go -c extract-strings -v --po -f $file -o $workdir/$transdir --ignore-regexp $ignored -output-match-package
+    local:d = $workdir/$transdir/(dirname $file)
+    i18n4go -c extract-strings -v --po -f $file -o $d --ignore-regexp $ignored
   }
 }
 

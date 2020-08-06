@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-05 17:48+0200\n"
+"POT-Creation-Date: 2020-08-06 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,261 +17,159 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# filename: common/consts.go, offset: 43, line: 4, column: 20
-msgid "vim"
-msgstr "vim"
+# filename: cmd/kcp/consts.go, offset: 460, line: 12, column: 19
+msgid "Display all packages of KCP"
+msgstr "Display all packages of KCP"
 
-# filename: common/consts.go, offset: 65, line: 6, column: 16
-msgid "[Y/n]"
-msgstr "[Y/n]"
+# filename: cmd/kcp/consts.go, offset: 1435, line: 27, column: 19
+msgid "Display informations about a package"
+msgstr "Display informations about a package"
 
-# filename: common/consts.go, offset: 88, line: 7, column: 16
-msgid "[y/N]"
-msgstr "[y/N]"
+# filename: cmd/kcp/consts.go, offset: 508, line: 13, column: 19
+msgid "Refresh the local database"
+msgstr "Refresh the local database"
 
-# filename: common/consts.go, offset: 104, line: 9, column: 8
-msgid "yes"
-msgstr "yes"
+# filename: cmd/kcp/consts.go, offset: 990, line: 21, column: 19
+msgid "On refreshing database action, force complete update"
+msgstr "On refreshing database action, force complete update"
 
-# filename: common/consts.go, offset: 117, line: 10, column: 8
-msgid "no"
-msgstr "no"
+# filename: cmd/kcp/consts.go, offset: 234, line: 8, column: 19
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "Tool in command-line for KaOS Community Packages"
 
-# filename: database/consts.go, offset: 342, line: 13, column: 22
-msgid "Depends on"
-msgstr "Depends on"
+# filename: cmd/kcp/consts.go, offset: 555, line: 14, column: 19
+msgid "Search packages in KCP and display them"
+msgstr "Search packages in KCP and display them"
 
-# filename: database/consts.go, offset: 376, line: 14, column: 22
-msgid "Depends on (make)"
-msgstr "Depends on (make)"
+# filename: cmd/kcp/consts.go, offset: 859, line: 19, column: 19
+msgid "On install action, install as a dependence"
+msgstr "On install action, install as a dependence"
 
-# filename: database/consts.go, offset: 598, line: 20, column: 22
-msgid "Yes"
-msgstr "Yes"
+# filename: cmd/kcp/consts.go, offset: 922, line: 20, column: 19
+msgid "On list action, display only installed packages"
+msgstr "On list action, display only installed packages"
 
-# filename: database/consts.go, offset: 758, line: 27, column: 15
-msgid "%d entries updated!"
-msgstr "%d entries updated!"
+# filename: cmd/kcp/consts.go, offset: 1867, line: 38, column: 29
+msgid "Interrupt by user…"
+msgstr "Interrupt by user…"
 
-# filename: database/consts.go, offset: 215, line: 9, column: 22
-msgid "Architecture"
-msgstr "Architecture"
+# filename: cmd/kcp/consts.go, offset: 303, line: 9, column: 19
+msgid "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
+msgstr "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
 
-# filename: database/consts.go, offset: 251, line: 10, column: 22
-msgid "URL"
-msgstr "URL"
+# filename: cmd/kcp/consts.go, offset: 615, line: 15, column: 19
+msgid "Download needed files to build a package"
+msgstr "Download needed files to build a package"
 
-# filename: database/consts.go, offset: 688, line: 25, column: 15
-msgid "%d entries added!"
-msgstr "%d entries added!"
+# filename: cmd/kcp/consts.go, offset: 1550, line: 33, column: 29
+msgid "Don't launch this program as root!"
+msgstr "Don't launch this program as root!"
 
-# filename: database/consts.go, offset: 47, line: 4, column: 22
-msgid "[installed]"
-msgstr "[installed]"
+# filename: cmd/kcp/consts.go, offset: 2004, line: 42, column: 19
+msgid "Do you want to edit %s?"
+msgstr "Do you want to edit %s?"
 
-# filename: database/consts.go, offset: 121, line: 6, column: 22
-msgid "Name"
-msgstr "Name"
+# filename: cmd/kcp/consts.go, offset: 65, line: 5, column: 23
+msgid ""
+"Provides a tool to make the use of KaOS Community Packages.\n"
+"\n"
+"With this tool, you can search, get and install a package from KaOS "
+"Community Packages."
+msgstr ""
+"Provides a tool to make the use of KaOS Community Packages.\n"
+"\n"
+"With this tool, you can search, get and install a package from KaOS "
+"Community Packages."
 
-# filename: database/consts.go, offset: 149, line: 7, column: 22
-msgid "Version"
-msgstr "Version"
+# filename: cmd/kcp/consts.go, offset: 676, line: 16, column: 19
+msgid "Install a package from KCP"
+msgstr "Install a package from KCP"
 
-# filename: database/consts.go, offset: 278, line: 11, column: 22
-msgid "Licenses"
-msgstr "Licenses"
+# filename: cmd/kcp/consts.go, offset: 723, line: 17, column: 19
+msgid "On display action, don't print KCP version"
+msgstr "On display action, don't print KCP version"
 
-# filename: database/consts.go, offset: 310, line: 12, column: 22
-msgid "Provides"
-msgstr "Provides"
+# filename: cmd/kcp/consts.go, offset: 1210, line: 24, column: 19
+msgid "On display action, display only packages with at least one star"
+msgstr "On display action, display only packages with at least one star"
 
-# filename: database/consts.go, offset: 417, line: 15, column: 22
-msgid "Optional Deps"
-msgstr "Optional Deps"
+# filename: cmd/kcp/consts.go, offset: 1492, line: 28, column: 19
+msgid "<app>"
+msgstr "<app>"
 
-# filename: database/consts.go, offset: 492, line: 17, column: 22
-msgid "Replaces"
-msgstr "Replaces"
+# filename: cmd/kcp/consts.go, offset: 786, line: 18, column: 19
+msgid "On display action, sort packages by stars descending"
+msgstr "On display action, sort packages by stars descending"
 
-# filename: database/consts.go, offset: 524, line: 18, column: 22
-msgid "Install Script"
-msgstr "Install Script"
+# filename: cmd/kcp/consts.go, offset: 1365, line: 26, column: 19
+msgid "On display action, display only outdated packages"
+msgstr "On display action, display only outdated packages"
 
-# filename: database/consts.go, offset: 82, line: 5, column: 22
-msgid "[installed: %s]"
-msgstr "[installed: %s]"
+# filename: cmd/kcp/consts.go, offset: 1741, line: 36, column: 29
+msgid "Another instance of kcp is running!"
+msgstr "Another instance of kcp is running!"
 
-# filename: database/consts.go, offset: 648, line: 23, column: 18
-msgid "Dir %s already exists!"
-msgstr "Dir %s already exists!"
+# filename: cmd/kcp/consts.go, offset: 1807, line: 37, column: 29
+msgid "Failed to create locker file!"
+msgstr "Failed to create locker file!"
 
-# filename: database/consts.go, offset: 625, line: 21, column: 22
-msgid "No"
-msgstr "No"
+# filename: cmd/kcp/consts.go, offset: 426, line: 11, column: 19
+# filename: cmd/pckcp/consts.go, offset: 434, line: 11, column: 22
+msgid "Print version"
+msgstr "Print version"
 
-# filename: database/consts.go, offset: 454, line: 16, column: 22
-msgid "Conflicts With"
-msgstr "Conflicts With"
+# filename: cmd/kcp/consts.go, offset: 1063, line: 22, column: 19
+msgid "On display action, force refreshing local database"
+msgstr "On display action, force refreshing local database"
 
-# filename: database/consts.go, offset: 562, line: 19, column: 22
-msgid "Validated By"
-msgstr "Validated By"
+# filename: cmd/kcp/consts.go, offset: 1134, line: 23, column: 19
+msgid "On display action, display only the name of the package"
+msgstr "On display action, display only the name of the package"
 
-# filename: database/consts.go, offset: 722, line: 26, column: 15
-msgid "%d entries deleted!"
-msgstr "%d entries deleted!"
+# filename: cmd/kcp/consts.go, offset: 1615, line: 34, column: 29
+msgid "No package found"
+msgstr "No package found"
 
-# filename: database/consts.go, offset: 180, line: 8, column: 22
-msgid "Description"
-msgstr "Description"
+# filename: cmd/kcp/consts.go, offset: 1954, line: 41, column: 19
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Do you want to edit PKGBUILD?"
 
-# filename: flag/consts.go, offset: 374, line: 13, column: 27
-msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr "Flag '%s' doesn't allow multiple arguments!"
+# filename: cmd/kcp/consts.go, offset: 390, line: 10, column: 19
+# filename: cmd/pckcp/consts.go, offset: 395, line: 10, column: 22
+msgid "Print this help"
+msgstr "Print this help"
 
-# filename: flag/consts.go, offset: 577, line: 17, column: 27
-msgid "Arg '%s' not in %v!"
-msgstr "Arg '%s' not in %v!"
+# filename: cmd/kcp/consts.go, offset: 1294, line: 25, column: 19
+msgid "On display action, display only installed packages"
+msgstr "On display action, display only installed packages"
 
-# filename: flag/consts.go, offset: 625, line: 18, column: 27
-msgid "Flag '%s' is already set!"
-msgstr "Flag '%s' is already set!"
+# filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
+msgid "No package found. Check the database is updated."
+msgstr "No package found. Check the database is updated."
 
-# filename: flag/consts.go, offset: 840, line: 26, column: 18
-msgid "long"
-msgstr "long"
-
-# filename: flag/consts.go, offset: 244, line: 11, column: 27
-msgid "Flag '%s' cannot be used with '%s'"
-msgstr "Flag '%s' cannot be used with '%s'"
-
-# filename: flag/consts.go, offset: 307, line: 12, column: 27
-msgid "Flag '%s' needs one of these flags: %v"
-msgstr "Flag '%s' needs one of these flags: %v"
-
-# filename: flag/consts.go, offset: 864, line: 27, column: 18
-msgid "must begin with '%s'"
-msgstr "must begin with '%s'"
-
-# filename: flag/consts.go, offset: 904, line: 28, column: 18
-msgid "too short"
-msgstr "too short"
-
-# filename: flag/consts.go, offset: 933, line: 29, column: 18
-msgid "too long"
-msgstr "too long"
-
-# filename: flag/consts.go, offset: 954, line: 31, column: 10
-msgid "Usage:"
-msgstr "Usage:"
-
-# filename: flag/consts.go, offset: 182, line: 10, column: 27
-msgid "Invalid value '%v': Must be a %s!"
-msgstr "Invalid value '%v': Must be a %s!"
-
-# filename: flag/consts.go, offset: 790, line: 23, column: 15
-msgid "bool"
-msgstr "bool"
-
-# filename: flag/consts.go, offset: 490, line: 15, column: 27
-msgid "Arg needed!"
-msgstr "Arg needed!"
-
-# filename: flag/consts.go, offset: 530, line: 16, column: 27
-msgid "Unexpected arg: %s"
-msgstr "Unexpected arg: %s"
-
-# filename: flag/consts.go, offset: 679, line: 19, column: 27
-msgid "Unknown property: %d"
-msgstr "Unknown property: %d"
-
-# filename: flag/consts.go, offset: 728, line: 20, column: 27
-msgid "Unsupported flag '%s'"
-msgstr "Unsupported flag '%s'"
-
-# filename: flag/consts.go, offset: 767, line: 22, column: 15
-msgid "string"
-msgstr "string"
-
-# filename: flag/consts.go, offset: 128, line: 9, column: 27
-msgid "Invalid %s flag '%s': %s!"
-msgstr "Invalid %s flag '%s': %s!"
-
-# filename: flag/consts.go, offset: 446, line: 14, column: 27
-msgid "%s not allowed!"
-msgstr "%s not allowed!"
-
-# filename: flag/consts.go, offset: 815, line: 25, column: 18
-msgid "short"
-msgstr "short"
-
-# filename: cmd/pckcp/consts.go, offset: 754, line: 23, column: 20
-msgid "File %s does not exist."
-msgstr "File %s does not exist."
+# filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
+msgid "Package %s cloned in %s."
+msgstr "Package %s cloned in %s."
 
 # filename: cmd/pckcp/consts.go, offset: 799, line: 24, column: 20
 msgid "Variable '%s' is missing."
 msgstr "Variable '%s' is missing."
 
-# filename: cmd/pckcp/consts.go, offset: 1242, line: 31, column: 25
-msgid "Variable '%s' is empty."
-msgstr "Variable '%s' is empty."
+# filename: cmd/pckcp/consts.go, offset: 1622, line: 35, column: 25
+msgid "Variable '%s' contains bad packages."
+msgstr "Variable '%s' contains bad packages."
 
-# filename: cmd/pckcp/consts.go, offset: 1422, line: 33, column: 25
-msgid ""
-"arch is different from 'x86_64'. Since KaOS only supports this architecture, "
-"no other arch would be added here."
-msgstr ""
-"arch is different from 'x86_64'. Since KaOS only supports this architecture, "
-"no other arch would be added here."
+# filename: cmd/pckcp/consts.go, offset: 2137, line: 44, column: 20
+msgid "Declarations have the good type."
+msgstr "Declarations have the good type."
 
-# filename: cmd/pckcp/consts.go, offset: 2422, line: 51, column: 24
-msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr "Set variable '%s' with (leave blank to ignore):"
+# filename: cmd/pckcp/consts.go, offset: 2684, line: 56, column: 24
+msgid "Type the new name (leave blank to remove install variable):"
+msgstr "Type the new name (leave blank to remove install variable):"
 
-# filename: cmd/pckcp/consts.go, offset: 277, line: 8, column: 22
-msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr "Tool in command-line to manage common PKGBUILD errors"
-
-# filename: cmd/pckcp/consts.go, offset: 434, line: 11, column: 22
-msgid "Print version"
-msgstr "Print version"
-
-# filename: cmd/pckcp/consts.go, offset: 702, line: 20, column: 16
-msgid "Warning"
-msgstr "Warning"
-
-# filename: cmd/pckcp/consts.go, offset: 2586, line: 54, column: 24
-msgid "Reset arch to x86_64?"
-msgstr "Reset arch to x86_64?"
-
-# filename: cmd/pckcp/consts.go, offset: 2879, line: 60, column: 23
-msgid "You should add it manually."
-msgstr "You should add it manually."
-
-# filename: cmd/pckcp/consts.go, offset: 395, line: 10, column: 22
-msgid "Print this help"
-msgstr "Print this help"
-
-# filename: cmd/pckcp/consts.go, offset: 570, line: 14, column: 22
-msgid "Removes the useless comments and blanks of the prototype"
-msgstr "Removes the useless comments and blanks of the prototype"
-
-# filename: cmd/pckcp/consts.go, offset: 846, line: 25, column: 20
-msgid "Function '%s' is missing."
-msgstr "Function '%s' is missing."
-
-# filename: cmd/pckcp/consts.go, offset: 2334, line: 49, column: 24
-msgid "Remove duplicates?"
-msgstr "Remove duplicates?"
-
-# filename: cmd/pckcp/consts.go, offset: 2633, line: 55, column: 24
-msgid "Modify name of '%s' file?"
-msgstr "Modify name of '%s' file?"
-
-# filename: cmd/pckcp/consts.go, offset: 2966, line: 62, column: 23
-msgid "a variable"
-msgstr "a variable"
+# filename: cmd/pckcp/consts.go, offset: 2931, line: 61, column: 23
+msgid "a function"
+msgstr "a function"
 
 # filename: cmd/pckcp/consts.go, offset: 65, line: 5, column: 23
 msgid ""
@@ -287,101 +185,9 @@ msgstr ""
 "If flag -e is used, the common errors can be checked and a (potentially) "
 "valid PKGBUILD.new is created."
 
-# filename: cmd/pckcp/consts.go, offset: 727, line: 21, column: 16
-msgid "Info"
-msgstr "Info"
-
-# filename: cmd/pckcp/consts.go, offset: 1113, line: 29, column: 25
-msgid "Some duplicates found:"
-msgstr "Some duplicates found:"
-
-# filename: cmd/pckcp/consts.go, offset: 1292, line: 32, column: 25
-msgid ""
-"pkgrel is different from 1. It should be the case only if build instructions "
-"are edited but not pkgver."
-msgstr ""
-"pkgrel is different from 1. It should be the case only if build instructions "
-"are edited but not pkgver."
-
-# filename: cmd/pckcp/consts.go, offset: 1560, line: 34, column: 25
-msgid "install: file '%s' doesn’t exist."
-msgstr "install: file '%s' doesn’t exist."
-
-# filename: cmd/pckcp/consts.go, offset: 2495, line: 52, column: 24
-msgid "Remove variable '%s'?"
-msgstr "Remove variable '%s'?"
-
-# filename: cmd/pckcp/consts.go, offset: 2542, line: 53, column: 24
-msgid "Reset pkgrel to 1?"
-msgstr "Reset pkgrel to 1?"
-
-# filename: cmd/pckcp/consts.go, offset: 3043, line: 64, column: 23
-msgid "an array variable"
-msgstr "an array variable"
-
-# filename: cmd/pckcp/consts.go, offset: 679, line: 19, column: 16
-msgid "Error"
-msgstr "Error"
-
-# filename: cmd/pckcp/consts.go, offset: 3085, line: 65, column: 23
-msgid ""
-"Note that hooks provide similar functionnalities and are more powerful. For "
-"more informations: %s"
-msgstr ""
-"Note that hooks provide similar functionnalities and are more powerful. For "
-"more informations: %s"
-
-# filename: cmd/pckcp/consts.go, offset: 1941, line: 40, column: 20
-msgid "Header is clean."
-msgstr "Header is clean."
-
-# filename: cmd/pckcp/consts.go, offset: 2378, line: 50, column: 24
-msgid "Add variable '%s'?"
-msgstr "Add variable '%s'?"
-
-# filename: cmd/pckcp/consts.go, offset: 2684, line: 56, column: 24
-msgid "Type the new name (leave blank to remove install variable):"
-msgstr "Type the new name (leave blank to remove install variable):"
-
-# filename: cmd/pckcp/consts.go, offset: 2807, line: 58, column: 24
-msgid "Type the new value (leave blank to remove it):"
-msgstr "Type the new value (leave blank to remove it):"
-
-# filename: cmd/pckcp/consts.go, offset: 1622, line: 35, column: 25
-msgid "Variable '%s' contains bad packages."
-msgstr "Variable '%s' contains bad packages."
-
-# filename: cmd/pckcp/consts.go, offset: 1685, line: 36, column: 25
-msgid "'%s' is the name of the package. It is useless."
-msgstr "'%s' is the name of the package. It is useless."
-
-# filename: cmd/pckcp/consts.go, offset: 1759, line: 37, column: 25
-msgid "'%s' isn't in repo neither in kcp."
-msgstr "'%s' isn't in repo neither in kcp."
-
-# filename: cmd/pckcp/consts.go, offset: 2082, line: 43, column: 20
-msgid "There aren’t missing functions."
-msgstr "There aren’t missing functions."
-
-# filename: cmd/pckcp/consts.go, offset: 2191, line: 45, column: 20
-msgid "There aren’t empty variables."
-msgstr "There aren’t empty variables."
-
-# filename: cmd/pckcp/consts.go, offset: 952, line: 28, column: 25
-msgid ""
-"Header was found. Do not use names of maintainers or contributors in "
-"PKGBUILD, anyone can contribute, keep the header clean from this."
-msgstr ""
-"Header was found. Do not use names of maintainers or contributors in "
-"PKGBUILD, anyone can contribute, keep the header clean from this."
-
-# filename: cmd/pckcp/consts.go, offset: 899, line: 27, column: 25
-msgid "Modifications saved in %s!"
-msgstr "Modifications saved in %s!"
-
-# filename: cmd/pckcp/consts.go, offset: 1162, line: 30, column: 25
-msgid "Bad type declaration: '%s' is %s but it should be %s."
-msgstr "Bad type declaration: '%s' is %s but it should be %s."
+# filename: cmd/pckcp/consts.go, offset: 1242, line: 31, column: 25
+msgid "Variable '%s' is empty."
+msgstr "Variable '%s' is empty."
 
 # filename: cmd/pckcp/consts.go, offset: 1979, line: 41, column: 20
 msgid "There aren’t duplicates."
@@ -391,29 +197,53 @@ msgstr "There aren’t duplicates."
 msgid "There aren’t missing variables."
 msgstr "There aren’t missing variables."
 
-# filename: cmd/pckcp/consts.go, offset: 2244, line: 46, column: 20
-msgid "Variable '%s' is clean."
-msgstr "Variable '%s' is clean."
+# filename: cmd/pckcp/consts.go, offset: 2966, line: 62, column: 23
+msgid "a variable"
+msgstr "a variable"
+
+# filename: cmd/pckcp/consts.go, offset: 952, line: 28, column: 25
+msgid ""
+"Header was found. Do not use names of maintainers or contributors in "
+"PKGBUILD, anyone can contribute, keep the header clean from this."
+msgstr ""
+"Header was found. Do not use names of maintainers or contributors in "
+"PKGBUILD, anyone can contribute, keep the header clean from this."
+
+# filename: cmd/pckcp/consts.go, offset: 679, line: 19, column: 16
+msgid "Error"
+msgstr "Error"
+
+# filename: cmd/pckcp/consts.go, offset: 1685, line: 36, column: 25
+msgid "'%s' is the name of the package. It is useless."
+msgstr "'%s' is the name of the package. It is useless."
+
+# filename: cmd/pckcp/consts.go, offset: 1759, line: 37, column: 25
+msgid "'%s' isn't in repo neither in kcp."
+msgstr "'%s' isn't in repo neither in kcp."
+
+# filename: cmd/pckcp/consts.go, offset: 2378, line: 50, column: 24
+msgid "Add variable '%s'?"
+msgstr "Add variable '%s'?"
 
 # filename: cmd/pckcp/consts.go, offset: 2769, line: 57, column: 24
 msgid "Modify '%s'?"
 msgstr "Modify '%s'?"
 
-# filename: cmd/pckcp/consts.go, offset: 2931, line: 61, column: 23
-msgid "a function"
-msgstr "a function"
+# filename: cmd/pckcp/consts.go, offset: 2879, line: 60, column: 23
+msgid "You should add it manually."
+msgstr "You should add it manually."
 
 # filename: cmd/pckcp/consts.go, offset: 471, line: 12, column: 22
 msgid "Interactive edition"
 msgstr "Interactive edition"
 
-# filename: cmd/pckcp/consts.go, offset: 3001, line: 63, column: 23
-msgid "a string variable"
-msgstr "a string variable"
+# filename: cmd/pckcp/consts.go, offset: 570, line: 14, column: 22
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Removes the useless comments and blanks of the prototype"
 
-# filename: cmd/pckcp/consts.go, offset: 514, line: 13, column: 22
-msgid "Generate a prototype of PKGBUILD"
-msgstr "Generate a prototype of PKGBUILD"
+# filename: cmd/pckcp/consts.go, offset: 1113, line: 29, column: 25
+msgid "Some duplicates found:"
+msgstr "Some duplicates found:"
 
 # filename: cmd/pckcp/consts.go, offset: 1820, line: 38, column: 25
 msgid ""
@@ -423,25 +253,313 @@ msgstr ""
 "Variables 'depends' and 'makedepends' are empty. You should manually check "
 "if it is not a missing."
 
-# filename: cmd/pckcp/consts.go, offset: 2137, line: 44, column: 20
-msgid "Declarations have the good type."
-msgstr "Declarations have the good type."
+# filename: cmd/pckcp/consts.go, offset: 2082, line: 43, column: 20
+msgid "There aren’t missing functions."
+msgstr "There aren’t missing functions."
+
+# filename: cmd/pckcp/consts.go, offset: 2191, line: 45, column: 20
+msgid "There aren’t empty variables."
+msgstr "There aren’t empty variables."
 
 # filename: cmd/pckcp/consts.go, offset: 2294, line: 48, column: 24
 msgid "Remove header?"
 msgstr "Remove header?"
 
+# filename: cmd/pckcp/consts.go, offset: 2495, line: 52, column: 24
+msgid "Remove variable '%s'?"
+msgstr "Remove variable '%s'?"
+
+# filename: cmd/pckcp/consts.go, offset: 846, line: 25, column: 20
+msgid "Function '%s' is missing."
+msgstr "Function '%s' is missing."
+
+# filename: cmd/pckcp/consts.go, offset: 1560, line: 34, column: 25
+msgid "install: file '%s' doesn’t exist."
+msgstr "install: file '%s' doesn’t exist."
+
+# filename: cmd/pckcp/consts.go, offset: 2334, line: 49, column: 24
+msgid "Remove duplicates?"
+msgstr "Remove duplicates?"
+
+# filename: cmd/pckcp/consts.go, offset: 514, line: 13, column: 22
+msgid "Generate a prototype of PKGBUILD"
+msgstr "Generate a prototype of PKGBUILD"
+
+# filename: cmd/pckcp/consts.go, offset: 1941, line: 40, column: 20
+msgid "Header is clean."
+msgstr "Header is clean."
+
+# filename: cmd/pckcp/consts.go, offset: 1292, line: 32, column: 25
+msgid ""
+"pkgrel is different from 1. It should be the case only if build instructions "
+"are edited but not pkgver."
+msgstr ""
+"pkgrel is different from 1. It should be the case only if build instructions "
+"are edited but not pkgver."
+
+# filename: cmd/pckcp/consts.go, offset: 2542, line: 53, column: 24
+msgid "Reset pkgrel to 1?"
+msgstr "Reset pkgrel to 1?"
+
+# filename: cmd/pckcp/consts.go, offset: 2633, line: 55, column: 24
+msgid "Modify name of '%s' file?"
+msgstr "Modify name of '%s' file?"
+
+# filename: cmd/pckcp/consts.go, offset: 3043, line: 64, column: 23
+msgid "an array variable"
+msgstr "an array variable"
+
+# filename: cmd/pckcp/consts.go, offset: 3085, line: 65, column: 23
+msgid ""
+"Note that hooks provide similar functionnalities and are more powerful. For "
+"more informations: %s"
+msgstr ""
+"Note that hooks provide similar functionnalities and are more powerful. For "
+"more informations: %s"
+
+# filename: cmd/pckcp/consts.go, offset: 754, line: 23, column: 20
+msgid "File %s does not exist."
+msgstr "File %s does not exist."
+
 # filename: cmd/pckcp/consts.go, offset: 354, line: 9, column: 22
 msgid "[-h|-e|-v|-g[-c]]"
 msgstr "[-h|-e|-v|-g[-c]]"
 
-# filename: runes/consts.go, offset: 113, line: 10, column: 26
-msgid "Invalid token"
-msgstr "Invalid token"
+# filename: cmd/pckcp/consts.go, offset: 702, line: 20, column: 16
+msgid "Warning"
+msgstr "Warning"
 
-# filename: runes/consts.go, offset: 154, line: 11, column: 26
-msgid "Unended token"
-msgstr "Unended token"
+# filename: cmd/pckcp/consts.go, offset: 727, line: 21, column: 16
+msgid "Info"
+msgstr "Info"
+
+# filename: cmd/pckcp/consts.go, offset: 899, line: 27, column: 25
+msgid "Modifications saved in %s!"
+msgstr "Modifications saved in %s!"
+
+# filename: cmd/pckcp/consts.go, offset: 1162, line: 30, column: 25
+msgid "Bad type declaration: '%s' is %s but it should be %s."
+msgstr "Bad type declaration: '%s' is %s but it should be %s."
+
+# filename: cmd/pckcp/consts.go, offset: 1422, line: 33, column: 25
+msgid ""
+"arch is different from 'x86_64'. Since KaOS only supports this architecture, "
+"no other arch would be added here."
+msgstr ""
+"arch is different from 'x86_64'. Since KaOS only supports this architecture, "
+"no other arch would be added here."
+
+# filename: cmd/pckcp/consts.go, offset: 277, line: 8, column: 22
+msgid "Tool in command-line to manage common PKGBUILD errors"
+msgstr "Tool in command-line to manage common PKGBUILD errors"
+
+# filename: cmd/pckcp/consts.go, offset: 2422, line: 51, column: 24
+msgid "Set variable '%s' with (leave blank to ignore):"
+msgstr "Set variable '%s' with (leave blank to ignore):"
+
+# filename: cmd/pckcp/consts.go, offset: 2586, line: 54, column: 24
+msgid "Reset arch to x86_64?"
+msgstr "Reset arch to x86_64?"
+
+# filename: cmd/pckcp/consts.go, offset: 2807, line: 58, column: 24
+msgid "Type the new value (leave blank to remove it):"
+msgstr "Type the new value (leave blank to remove it):"
+
+# filename: cmd/pckcp/consts.go, offset: 3001, line: 63, column: 23
+msgid "a string variable"
+msgstr "a string variable"
+
+# filename: cmd/pckcp/consts.go, offset: 2244, line: 46, column: 20
+msgid "Variable '%s' is clean."
+msgstr "Variable '%s' is clean."
+
+# filename: common/consts.go, offset: 88, line: 7, column: 16
+msgid "[y/N]"
+msgstr "[y/N]"
+
+# filename: common/consts.go, offset: 104, line: 9, column: 8
+msgid "yes"
+msgstr "yes"
+
+# filename: common/consts.go, offset: 117, line: 10, column: 8
+msgid "no"
+msgstr "no"
+
+# filename: common/consts.go, offset: 43, line: 4, column: 20
+msgid "vim"
+msgstr "vim"
+
+# filename: common/consts.go, offset: 65, line: 6, column: 16
+msgid "[Y/n]"
+msgstr "[Y/n]"
+
+# filename: database/consts.go, offset: 180, line: 8, column: 22
+msgid "Description"
+msgstr "Description"
+
+# filename: database/consts.go, offset: 342, line: 13, column: 22
+msgid "Depends on"
+msgstr "Depends on"
+
+# filename: database/consts.go, offset: 492, line: 17, column: 22
+msgid "Replaces"
+msgstr "Replaces"
+
+# filename: database/consts.go, offset: 758, line: 27, column: 15
+msgid "%d entries updated!"
+msgstr "%d entries updated!"
+
+# filename: database/consts.go, offset: 121, line: 6, column: 22
+msgid "Name"
+msgstr "Name"
+
+# filename: database/consts.go, offset: 562, line: 19, column: 22
+msgid "Validated By"
+msgstr "Validated By"
+
+# filename: database/consts.go, offset: 598, line: 20, column: 22
+msgid "Yes"
+msgstr "Yes"
+
+# filename: database/consts.go, offset: 648, line: 23, column: 18
+msgid "Dir %s already exists!"
+msgstr "Dir %s already exists!"
+
+# filename: database/consts.go, offset: 688, line: 25, column: 15
+msgid "%d entries added!"
+msgstr "%d entries added!"
+
+# filename: database/consts.go, offset: 722, line: 26, column: 15
+msgid "%d entries deleted!"
+msgstr "%d entries deleted!"
+
+# filename: database/consts.go, offset: 47, line: 4, column: 22
+msgid "[installed]"
+msgstr "[installed]"
+
+# filename: database/consts.go, offset: 149, line: 7, column: 22
+msgid "Version"
+msgstr "Version"
+
+# filename: database/consts.go, offset: 278, line: 11, column: 22
+msgid "Licenses"
+msgstr "Licenses"
+
+# filename: database/consts.go, offset: 417, line: 15, column: 22
+msgid "Optional Deps"
+msgstr "Optional Deps"
+
+# filename: database/consts.go, offset: 454, line: 16, column: 22
+msgid "Conflicts With"
+msgstr "Conflicts With"
+
+# filename: database/consts.go, offset: 524, line: 18, column: 22
+msgid "Install Script"
+msgstr "Install Script"
+
+# filename: database/consts.go, offset: 625, line: 21, column: 22
+msgid "No"
+msgstr "No"
+
+# filename: database/consts.go, offset: 82, line: 5, column: 22
+msgid "[installed: %s]"
+msgstr "[installed: %s]"
+
+# filename: database/consts.go, offset: 215, line: 9, column: 22
+msgid "Architecture"
+msgstr "Architecture"
+
+# filename: database/consts.go, offset: 251, line: 10, column: 22
+msgid "URL"
+msgstr "URL"
+
+# filename: database/consts.go, offset: 310, line: 12, column: 22
+msgid "Provides"
+msgstr "Provides"
+
+# filename: database/consts.go, offset: 376, line: 14, column: 22
+msgid "Depends on (make)"
+msgstr "Depends on (make)"
+
+# filename: flag/consts.go, offset: 182, line: 10, column: 27
+msgid "Invalid value '%v': Must be a %s!"
+msgstr "Invalid value '%v': Must be a %s!"
+
+# filename: flag/consts.go, offset: 244, line: 11, column: 27
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr "Flag '%s' cannot be used with '%s'"
+
+# filename: flag/consts.go, offset: 530, line: 16, column: 27
+msgid "Unexpected arg: %s"
+msgstr "Unexpected arg: %s"
+
+# filename: flag/consts.go, offset: 767, line: 22, column: 15
+msgid "string"
+msgstr "string"
+
+# filename: flag/consts.go, offset: 904, line: 28, column: 18
+msgid "too short"
+msgstr "too short"
+
+# filename: flag/consts.go, offset: 933, line: 29, column: 18
+msgid "too long"
+msgstr "too long"
+
+# filename: flag/consts.go, offset: 954, line: 31, column: 10
+msgid "Usage:"
+msgstr "Usage:"
+
+# filename: flag/consts.go, offset: 128, line: 9, column: 27
+msgid "Invalid %s flag '%s': %s!"
+msgstr "Invalid %s flag '%s': %s!"
+
+# filename: flag/consts.go, offset: 490, line: 15, column: 27
+msgid "Arg needed!"
+msgstr "Arg needed!"
+
+# filename: flag/consts.go, offset: 815, line: 25, column: 18
+msgid "short"
+msgstr "short"
+
+# filename: flag/consts.go, offset: 840, line: 26, column: 18
+msgid "long"
+msgstr "long"
+
+# filename: flag/consts.go, offset: 307, line: 12, column: 27
+msgid "Flag '%s' needs one of these flags: %v"
+msgstr "Flag '%s' needs one of these flags: %v"
+
+# filename: flag/consts.go, offset: 625, line: 18, column: 27
+msgid "Flag '%s' is already set!"
+msgstr "Flag '%s' is already set!"
+
+# filename: flag/consts.go, offset: 679, line: 19, column: 27
+msgid "Unknown property: %d"
+msgstr "Unknown property: %d"
+
+# filename: flag/consts.go, offset: 864, line: 27, column: 18
+msgid "must begin with '%s'"
+msgstr "must begin with '%s'"
+
+# filename: flag/consts.go, offset: 374, line: 13, column: 27
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr "Flag '%s' doesn't allow multiple arguments!"
+
+# filename: flag/consts.go, offset: 577, line: 17, column: 27
+msgid "Arg '%s' not in %v!"
+msgstr "Arg '%s' not in %v!"
+
+# filename: flag/consts.go, offset: 728, line: 20, column: 27
+msgid "Unsupported flag '%s'"
+msgstr "Unsupported flag '%s'"
+
+# filename: flag/consts.go, offset: 790, line: 23, column: 15
+msgid "bool"
+msgstr "bool"
+
+# filename: flag/consts.go, offset: 446, line: 14, column: 27
+msgid "%s not allowed!"
+msgstr "%s not allowed!"
 
 # filename: pkgbuild/scanner/consts.go, offset: 36, line: 4, column: 12
 msgid ""
@@ -450,3 +568,11 @@ msgid ""
 msgstr ""
 "Error at %s: %s\n"
 "%s"
+
+# filename: runes/consts.go, offset: 113, line: 10, column: 26
+msgid "Invalid token"
+msgstr "Invalid token"
+
+# filename: runes/consts.go, offset: 154, line: 11, column: 26
+msgid "Unended token"
+msgstr "Unended token"
