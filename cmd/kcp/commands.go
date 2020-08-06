@@ -222,14 +222,14 @@ func install(debug bool, app string, asdep bool) {
 	}()
 	defer remove()
 	if err != nil {
-		//remove()
+		remove()
 		PrintError(err)
 		os.Exit(1)
 	}
 	os.Chdir(installDir)
 	if QuestionYN(Tr(msgEdit), true) {
 		if err = EditFile("PKGBUILD"); err != nil {
-			//remove()
+			remove()
 			PrintError(err)
 			os.Exit(1)
 		}
@@ -238,7 +238,7 @@ func install(debug bool, app string, asdep bool) {
 	for _, i := range m {
 		if QuestionYN(Tr(msgEditInstall, i), false) {
 			if err := EditFile(i); err != nil {
-				//remove()
+				remove()
 				PrintError(err)
 				os.Exit(1)
 			}
@@ -249,7 +249,7 @@ func install(debug bool, app string, asdep bool) {
 		args = append(args, "--asdeps")
 	}
 	if err := LaunchCommand("makepkg", args...); err != nil {
-		//remove()
+		remove()
 		PrintError(err)
 		os.Exit(1)
 	}

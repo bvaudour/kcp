@@ -2,6 +2,7 @@ package conf
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -97,7 +98,7 @@ func (c *Configuration) Read(r io.Reader) {
 			section = line[1 : l-1]
 			continue
 		}
-		if idx := strings.Index(line, "="); idx > 0 && idx < l-1 {
+		if idx := strings.Index(line, "="); idx > 0 {
 			key, value := strings.TrimSpace(line[:idx]), strings.TrimSpace(line[idx+1:])
 			k := section + "." + key
 			c.m[k] = value
@@ -118,18 +119,26 @@ func (c *Configuration) Write(w io.Writer) error {
 		l := lines[i]
 		idx := strings.Index(l, "=")
 		v := strings.TrimSpace(v)
-		if len(v) == 0 {
-			lines[i] = l[:idx]
-		} else {
-			lines[i] = fmt.Sprintf("%s= %s", lines[:idx], v)
-		}
+		lines[i] = fmt.Sprintf("%s= %s", l[:idx], v)
 	}
-	for _, l := range c.t {
+	for _, l := range lines {
 		if _, err := fmt.Fprintln(w, l); err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func (c *Configuration) Debug() string {
+	out := make(map[string]map[string]interface{})
+	for k, v := range c.m {
+		out[k] = map[string]interface{}{
+			"Value":     v,
+			"Interface": c.Position(k),
+		}
+	}
+	b, _ := json.MarshalIndent(out, "", "  ")
+	return string(b)
 }
 
 //Fusion sets all keys both defined in c & c2 with
