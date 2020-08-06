@@ -71,6 +71,9 @@ func check(edit, debug bool) {
 	checkArch(p, edit)
 	checkDepends(p, edit)
 	checkInstalls(p, edit)
+	if edit && QuestionYN(Tr(questionFormat), true) {
+		p.Format()
+	}
 
 	if debug {
 		fmt.Println()
@@ -80,7 +83,7 @@ func check(edit, debug bool) {
 	if !edit {
 		return
 	}
-	destname := fmt.Sprintf("PGKBUILD%s", Config.Get("pckcp.suffixNewPKGBUILD"))
+	destname := fmt.Sprintf("PKGBUILD%s", Config.Get("pckcp.suffixNewPKGBUILD"))
 	dest, err := os.Create(destname)
 	if err != nil {
 		PrintError(err)
@@ -91,5 +94,5 @@ func check(edit, debug bool) {
 		PrintError(err)
 		os.Exit(1)
 	}
-	PrintWarning(Tr(warnSaved, dest))
+	PrintWarning(Tr(warnSaved, destname))
 }

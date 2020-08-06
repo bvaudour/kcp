@@ -605,6 +605,7 @@ func setValues(a *atom.AtomVar, values ...string) (p position.Position, ok bool)
 	}
 	p = p.Next('(')
 	var childs atom.Slice
+	ok = true
 	for i, v := range values {
 		raw := v
 		if v = strings.TrimSpace(v); len(v) == 0 {

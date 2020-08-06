@@ -56,6 +56,7 @@ const (
 	questionInstall2    = "Type the new name (leave blank to remove install variable):"
 	questionDepend      = "Modify '%s'?"
 	questionTypeDepend  = "Type the new value (leave blank to remove it):"
+	questionFormat      = "Format the PKGBUILD?"
 
 	commentAddManually = "You should add it manually."
 	commentFunction    = "a function"

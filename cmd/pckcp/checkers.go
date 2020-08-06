@@ -91,7 +91,7 @@ func checkHeader(p *pkgbuild.PKGBUILD, edit bool) {
 	bh, eh := -1, -1
 	for i := 0; i < l; i++ {
 		info, isBlank, _ := p.GetIndex(i)
-		if info == nil {
+		if info != nil {
 			break
 		}
 		if i == 0 && isBlank {
