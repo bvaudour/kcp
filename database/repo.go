@@ -58,9 +58,13 @@ func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions, debug ...bo
 		nextPage = resp.NextPage
 		packages = make(Packages, len(repos))
 		for i, repo := range repos {
+			var description string
+			if repo.Description != nil {
+				description = *repo.Description
+			}
 			packages[i] = &Package{
 				Name:        *repo.Name,
-				Description: *repo.Description,
+				Description: description,
 				CreatedAt:   repo.CreatedAt.Time,
 				UpdatedAt:   repo.UpdatedAt.Time,
 				PushedAt:    repo.PushedAt.Time,
