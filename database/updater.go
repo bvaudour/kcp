@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/bvaudour/kcp/common"
-	"github.com/google/go-github/v32/github"
+	"github.com/google/go-github/v33/github"
 )
 
 //Updater provides utilities
