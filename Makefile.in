@@ -63,7 +63,7 @@ build: gobuild $(MOFILES)
 install: build
 	for b in $(BINARIES); do \
 		install -Dm755 $(WD)/$${b} $(DESTDIR)/usr/bin/$${b}; \
-		install -Dm644 resources/man/$${b} $(DESTDIR)/usr/share/man1/$${b}.1; \
+		install -Dm644 resources/man/$${b}.1 $(DESTDIR)/usr/share/man1/$${b}.1; \
 	done
 	for l in $(LANGS); do \
 		install -Dm644 $(WD)/$${l}.mo $(DESTDIR)$(LOCALEDIR)/$${l}/LC_MESSAGES/$(DOMAIN).mo; \
