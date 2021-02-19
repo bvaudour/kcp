@@ -1,6 +1,6 @@
 module github.com/bvaudour/kcp
 
-go 1.13
+go 1.16
 
 require (
 	github.com/google/go-github/v33 v33.0.0

@@ -1,12 +1,17 @@
 package common
 
 import (
+	"bytes"
+	_ "embed"
 	"os"
 	"path"
 
 	"github.com/bvaudour/kcp/conf"
 	"github.com/leonelquinteros/gotext"
 )
+
+//go:embed kcp.conf
+var embedConf []byte
 
 //Initialized at build time
 var (
@@ -62,11 +67,13 @@ func init() {
 	setIfZero(&DefaultEditor, fbDefaultEditor)
 	setIfZero(&UserBaseDir, path.Join(os.Getenv("HOME"), ".config"))
 
+	// Load the default config
+	Config = conf.Parse(bytes.NewReader(embedConf))
+
 	// Load the system config
 	fp := path.Join(ConfigBaseDir, ConfigFile)
-	var err error
-	if Config, err = conf.Load(fp); err != nil {
-		panic(err)
+	if cs, err := conf.Load(fp); err == nil {
+		Config.Fusion(cs)
 	}
 
 	// Load the user config
