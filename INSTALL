@@ -2,11 +2,11 @@ Installing kcp is a pretty straighforward task.
 
 1. DEPENDS
 	Ensure the needed depends are installed on your system:
-	- Go ≥ 1.12 (for building the apps)
+	- Go ≥ 1.16 (for building the apps)
 	- gettext (for translation files generation)
 	- git (to make the compiled app work)
 
-2. Prepare
+2. PREPARE
 	Launch configure script
 	To get help about options, type: ./configure --help
 
@@ -19,7 +19,7 @@ Installing kcp is a pretty straighforward task.
 	  make DESTDIR=<yourdestdir> install
 	As result:
 		- the binary file will be installed on <yourdestdir>/usr/bin
-		- the man file will be installed on <yourdestdir>/usr/share/man/man1
+		- the man files will be installed on <yourdestdir>/usr/share/man/man1
 		- the completion files will be installed
 		- the translation files will be installed on the path provided by the --locale-dir flag (/usr/share/locale by default)
 
