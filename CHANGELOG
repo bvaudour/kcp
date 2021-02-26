@@ -1,0 +1,32 @@
+kcp 1.0.0 (released 2021-02-??):
+--------------------------------
+
+* Common:
+	- Complete refactoring of the code
+	- Update requirement Go ≥ 1.16
+	- Use standard go.mod
+	- Add an option to configure kcp/pckcp (system to /etc/kcp/kcp.conf
+	  which can be overloaded by user config in $HOME/.config/kcp/kcp.conf)
+	- Add the hability to change the language of the CLI (trough an option)
+
+* kcp:
+	- Move the database to $HOME/.config/kcp
+	- Notice: the old database is incompatible with the new database
+	- Add the hability to change the temporary dir (default to /tmp) and the locker file (through options)
+	- Add the hability to use a personalized organization (default to KaOS-Community-Packages)
+	- Add the hability to customize repos to ignore
+	- Add the hability to change the clone method (ssh or https, default to https)
+	- Add the hability to use a custom OAuth provider
+	- Rewrite the manpage
+
+* pckp:
+	- Rewrite the logic of the PKGBUILD parser
+	- Add install vs. hook checker
+	- Add the hability to change the exceptions per user
+	- Add the hability to change the suffix of the new cleaned PKGBUILD
+	- Add the hability to use a custom PKGBUILD template
+	- Add a manpage
+
+kcp 0.91.0:
+-----------
+...
