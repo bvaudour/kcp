@@ -1,12 +1,12 @@
 package database
 
 import (
+	"fmt"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/bvaudour/kcp/common"
-	"github.com/google/go-github/v33/github"
 )
 
 //Updater provides utilities
@@ -80,43 +80,33 @@ func (u *Updater) updatePackage(p *Package, ps *PackageSet, debug ...bool) {
 //Update updates the local database
 //and returns the counter of modifications.
 func (u *Updater) Update(debug ...bool) (c Counter, err error) {
-	ps1 := u.db.ToSet()
-	ignore := s2m(u.db.IgnoreRepos)
-	opt := &github.RepositoryListByOrgOptions{
-		ListOptions: github.ListOptions{
-			Page:    1,
-			PerPage: 100,
-		},
-	}
-	ps2 := NewPackageSet()
 	var pl Packages
-	var nextPage int
+	if pl, err = u.repo.GetPublicRepos(debug...); err != nil {
+		return
+	}
+	ps1 := u.db.ToSet()
+	ps2 := NewPackageSet()
+	ignore := s2m(u.db.IgnoreRepos)
 	var wg sync.WaitGroup
-	for {
-		if pl, nextPage, err = u.repo.GetPage(opt, debug...); err != nil {
-			break
-		}
-		for p := range pl.Iterator() {
-			go (func(p *Package) {
-				wg.Add(1)
-				defer wg.Done()
-				if ignore[p.Name] {
-					return
-				}
-				ps2.Add(p)
-				u.updatePackage(p, ps1, debug...)
-			})(p)
-		}
-		if nextPage == 0 {
-			break
-		}
-		opt.Page = nextPage
+	wg.Add(len(pl))
+	limitRoutines := make(chan struct{}, 20)
+	for _, p := range pl {
+		go (func(p *Package) {
+			limitRoutines <- struct{}{}
+			defer (func() { <-limitRoutines })()
+			defer wg.Done()
+			if ignore[p.Name] {
+				return
+			}
+			p.PkgbuildUrl = fmt.Sprintf(baseRawURL, u.repo.organization, p.Name, p.Branch)
+			ps2.Add(p)
+			u.updatePackage(p, ps1, debug...)
+		})(p)
 	}
 	wg.Wait()
-	if err == nil {
-		c.Diff(ps1, ps2)
-		u.db.LastUpdate = time.Now()
-		u.db.Packages = ps2.ToList()
-	}
+	close(limitRoutines)
+	c.Diff(ps1, ps2)
+	u.db.LastUpdate = time.Now()
+	u.db.Packages = ps2.ToList()
 	return
 }

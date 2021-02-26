@@ -3,7 +3,7 @@ package database
 import (
 	"errors"
 	"fmt"
-	"net/http"
+	"io"
 	"os"
 	"path"
 	"sort"
@@ -20,29 +20,30 @@ import (
 
 //Package stores informations about a package.
 type Package struct {
-	Name             string
-	Description      string
-	CreatedAt        time.Time
-	UpdatedAt        time.Time
-	PushedAt         time.Time
-	RepoUrl          string
-	CloneUrl         string
-	SshUrl           string
-	PkgbuildUrl      string
-	Stars            int
-	LocalVersion     string
-	RepoVersion      string
-	Arch             []string
-	Url              string
-	Provides         []string
-	Depends          []string
-	OptDepends       []string
-	MakeDepends      []string
-	Conflicts        []string
-	Replaces         []string
-	Licenses         []string
-	ValidatedBy      string
-	HasInstallScript bool
+	Name             string    `json:"name"`
+	Description      string    `json:"description"`
+	CreatedAt        time.Time `json:"created_at"`
+	UpdatedAt        time.Time `json:"updated_at"`
+	PushedAt         time.Time `json:"pushed_at"`
+	RepoUrl          string    `json:"html_url"`
+	CloneUrl         string    `json:"git_url"`
+	SshUrl           string    `json:"ssh_url"`
+	PkgbuildUrl      string    `json:"pkgbuild_url"`
+	Stars            int       `json:"stargazers_count"`
+	Branch           string    `json:"default_branch"`
+	LocalVersion     string    `json:"local_version"`
+	RepoVersion      string    `json:"remote_version"`
+	Arch             []string  `json:"architectures"`
+	Url              string    `json:"upstream_url"`
+	Provides         []string  `json:"provides"`
+	Depends          []string  `json:"depends"`
+	OptDepends       []string  `json:"opt_depends"`
+	MakeDepends      []string  `json:"make_depends"`
+	Conflicts        []string  `json:"conflicts"`
+	Replaces         []string  `json:"replaces"`
+	Licenses         []string  `json:"licenses"`
+	ValidatedBy      string    `json:"validated_by"`
+	HasInstallScript bool      `json:"has_install_script"`
 }
 
 func (p *Package) toMap() map[string]interface{} {
@@ -129,25 +130,14 @@ func (p *Package) GetLocaleVersion() string {
 func (p *Package) GetPKGBUID(debug ...bool) (pkg *pkgbuild.PKGBUILD, err error) {
 	url := p.PkgbuildUrl
 	printDebug := len(debug) > 0 && debug[0]
-	var req *http.Request
-	if req, err = http.NewRequest("GET", url, nil); err != nil {
+	var buf io.Reader
+	if buf, err = execRequest(url, ctx{}); err != nil {
 		if printDebug {
 			fmt.Fprintf(os.Stderr, "%s %s\n", color.Red.Format("[Error: %s]", err), url)
 		}
 		return
 	}
-	var resp *http.Response
-	if resp, err = new(http.Client).Do(req); err != nil {
-		if printDebug {
-			fmt.Fprintf(os.Stderr, "%s %s\n", color.Red.Format("[Error: %s]", err), url)
-		}
-		return
-	}
-	defer resp.Body.Close()
-	if printDebug {
-		fmt.Fprintf(os.Stderr, "%s %s\n", color.Green.Format("[Success]"), url)
-	}
-	return pkgbuild.DecodeVars(resp.Body)
+	return pkgbuild.DecodeVars(buf)
 }
 
 func (p *Package) udpateFromPKGBUILD(pkg *pkgbuild.PKGBUILD) {

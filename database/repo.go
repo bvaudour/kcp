@@ -1,25 +1,60 @@
 package database
 
 import (
-	"context"
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"sync"
 
 	"github.com/bvaudour/kcp/color"
-	"github.com/google/go-github/v33/github"
 )
 
 const (
-	rawURL = "https://raw.githubusercontent.com/KaOS-Community-Packages/%s/master/PKGBUILD"
+	baseUrl             = "https://api.github.com/orgs"
+	baseRawURL          = "https://raw.githubusercontent.com/%s/%s/%s/PKGBUILD"
+	baseOrganizationURL = baseUrl + "/%s"
+	baseReposURL        = baseOrganizationURL + "/repos?page=%d&per_page=%d"
+	acceptHeader        = "application/vnd.github.v3+json"
+	defaultLimit        = 100
 )
+
+type ctx struct {
+	username string
+	password string
+	accept   string
+}
+
+func execRequest(url string, opt ctx, args ...interface{}) (io.Reader, error) {
+	request, err := http.NewRequest("GET", fmt.Sprintf(url, args...), nil)
+	if err != nil {
+		return nil, err
+	}
+	if opt.username != "" && opt.password != "" {
+		request.SetBasicAuth(opt.username, opt.password)
+	}
+	if opt.accept != "" {
+		request.Header.Set("Accept", opt.accept)
+	}
+	response, err := new(http.Client).Do(request)
+	if err != nil {
+		return nil, err
+	}
+	defer response.Body.Close()
+	b, err := io.ReadAll(response.Body)
+	if err == nil {
+		return bytes.NewBuffer(b), nil
+	}
+	return bytes.NewBuffer([]byte{}), nil
+}
 
 //Repository is a connector to access to the repos infos
 //of a github organization.
 type Repository struct {
 	organization string
-	client       *github.Client
-	ctx          context.Context
+	ctx
 }
 
 //NewRepository creates a connector to an organization.
@@ -30,51 +65,49 @@ func NewRepository(organization string, opt ...string) *Repository {
 	if len(opt) >= 2 {
 		user, password = opt[0], opt[1]
 	}
-	var client *http.Client
-	if user != "" && password != "" {
-		auth := github.BasicAuthTransport{
-			Username: user,
-			Password: password,
-		}
-		client = auth.Client()
-	}
 	return &Repository{
 		organization: organization,
-		client:       github.NewClient(client),
-		ctx:          context.Background(),
+		ctx: ctx{
+			username: user,
+			password: password,
+			accept:   acceptHeader,
+		},
 	}
 }
 
-func (r *Repository) getRepos(opt *github.RepositoryListByOrgOptions) (repos []*github.Repository, resp *github.Response, err error) {
-	return r.client.Repositories.ListByOrg(r.ctx, r.organization, opt)
+func (r *Repository) countPublicRepos() (nb int, err error) {
+	var buf io.Reader
+	if buf, err = execRequest(baseOrganizationURL, r.ctx, r.organization); err == nil {
+		var result struct {
+			PublicRepos int `json:"public_repos"`
+		}
+		dec := json.NewDecoder(buf)
+		if err = dec.Decode(&result); err == nil {
+			nb = result.PublicRepos
+		}
+	}
+	return
 }
 
-//GetPage the returns the remote packages’ infos on
+func (r *Repository) countPages(limit int) (pages int, err error) {
+	if limit == 0 {
+		panic("Limit should be > 0")
+	}
+	var nbRepos int
+	if nbRepos, err = r.countPublicRepos(); err == nil && nbRepos > 0 {
+		pages = (nbRepos-1)/limit + 1
+	}
+	return
+}
+
+//GetPage returns the remote packages’ infos on
 //the repositories list page of the organization.
-func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions, debug ...bool) (packages Packages, nextPage int, err error) {
-	var repos []*github.Repository
-	var resp *github.Response
-	if repos, resp, err = r.getRepos(opt); err == nil {
-		nextPage = resp.NextPage
-		packages = make(Packages, len(repos))
-		for i, repo := range repos {
-			var description string
-			if repo.Description != nil {
-				description = *repo.Description
-			}
-			packages[i] = &Package{
-				Name:        *repo.Name,
-				Description: description,
-				CreatedAt:   repo.CreatedAt.Time,
-				UpdatedAt:   repo.UpdatedAt.Time,
-				PushedAt:    repo.PushedAt.Time,
-				RepoUrl:     *repo.HTMLURL,
-				CloneUrl:    *repo.CloneURL,
-				SshUrl:      *repo.SSHURL,
-				PkgbuildUrl: fmt.Sprintf(rawURL, *repo.Name),
-				Stars:       *repo.StargazersCount,
-			}
-		}
+func (r *Repository) GetPage(page, limit int, debug ...bool) (packages Packages, err error) {
+	var buf io.Reader
+	buf, err = execRequest(baseReposURL, r.ctx, r.organization, page, limit)
+	if err == nil {
+		dec := json.NewDecoder(buf)
+		err = dec.Decode(&packages)
 	}
 	if len(debug) > 0 && debug[0] {
 		var t string
@@ -85,12 +118,46 @@ func (r *Repository) GetPage(opt *github.RepositoryListByOrgOptions, debug ...bo
 		}
 		fmt.Fprintf(
 			os.Stderr,
-			"%s https://api.github.com/%s/repos?page=%d&per_page=%d\n",
+			"%s "+baseReposURL+"\n",
 			t,
 			r.organization,
-			opt.Page,
-			opt.PerPage,
+			page,
+			limit,
 		)
 	}
+	return
+}
+
+//GetPublicRepos returns all remote packages’ infos on
+//the repositories list of the organization.
+func (r *Repository) GetPublicRepos(debug ...bool) (packages Packages, err error) {
+	limit := defaultLimit
+	var nbPages int
+	if nbPages, err = r.countPages(limit); err != nil {
+		fmt.Fprintf(
+			os.Stderr,
+			"%s %s\n",
+			color.Red.Format("[Error: %s]", err),
+			"Failed to count the pages of the repository list",
+		)
+		return
+	}
+	var wg sync.WaitGroup
+	wg.Add(nbPages)
+	var mtx sync.Mutex
+	for page := 1; page <= nbPages; page++ {
+		go (func(page int) {
+			defer wg.Done()
+			pl, err2 := r.GetPage(page, limit, debug...)
+			if err2 != nil {
+				err = err2
+				return
+			}
+			mtx.Lock()
+			defer mtx.Unlock()
+			packages = append(packages, pl...)
+		})(page)
+	}
+	wg.Wait()
 	return
 }
