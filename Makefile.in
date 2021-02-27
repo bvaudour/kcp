@@ -27,7 +27,7 @@ LDFLAGS += $(call cflag,$(PASSWORD),Password)
 
 
 # Go build variables
-GOFLAGS  ?= -v -trimpath -mod=readonly -modcacherw
+GOFLAGS  := -v -trimpath -mod=readonly -modcacherw
 GOCMD    := go build $(GOFLAGS) -ldflags='-s -w $(LDFLAGS)'
 BINARIES := kcp \
             pckcp
