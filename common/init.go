@@ -90,7 +90,7 @@ func init() {
 	conf.Save(userfp, Config)
 
 	// Load locales
-	if l := Config.Get("language"); l != "" {
+	if l := Config.Get("main.language"); l != "" {
 		Language = l
 	}
 	gotext.Configure(LocaleBaseDir, Language, LocaleDomain)

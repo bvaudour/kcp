@@ -21,7 +21,7 @@ func main() {
 			fmt.Println("- Base path:", b)
 			fmt.Println("- Domain:", d)
 			fmt.Println("- Language used:", l)
-			fmt.Println("- Mo file:")
+			fmt.Println("- Mo file:", f)
 			fmt.Println(" - Mo file exists:", common.FileExists(f))
 		}
 		flags.PrintHelp()
