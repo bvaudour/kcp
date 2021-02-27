@@ -26,7 +26,7 @@ type Package struct {
 	UpdatedAt        time.Time `json:"updated_at"`
 	PushedAt         time.Time `json:"pushed_at"`
 	RepoUrl          string    `json:"html_url"`
-	CloneUrl         string    `json:"git_url"`
+	CloneUrl         string    `json:"clone_url"`
 	SshUrl           string    `json:"ssh_url"`
 	PkgbuildUrl      string    `json:"pkgbuild_url"`
 	Stars            int       `json:"stargazers_count"`

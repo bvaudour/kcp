@@ -1,4 +1,8 @@
-kcp 1.0.0 (released 2021-02-??):
+kcp 1.0.1 (dev):
+----------------
+- fix the clone url in kcp database
+
+kcp 1.0.0 (released 2021-02-27):
 --------------------------------
 
 * Common:
