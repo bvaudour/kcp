@@ -90,6 +90,9 @@ func init() {
 	conf.Save(userfp, Config)
 
 	// Load locales
+	if l := Config.Get("language"); l != "" {
+		Language = l
+	}
 	gotext.Configure(LocaleBaseDir, Language, LocaleDomain)
 
 	// Load custom github config
