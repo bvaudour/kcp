@@ -11,6 +11,7 @@ import (
 	"github.com/bvaudour/kcp/color"
 	. "github.com/bvaudour/kcp/common"
 	"github.com/bvaudour/kcp/database"
+	"github.com/leonelquinteros/gotext"
 )
 
 func getIgnore() []string {
@@ -255,4 +256,15 @@ func install(debug bool, app string, asdep bool) {
 	}
 	p.LocalVersion = p.GetLocaleVersion()
 	saveDb(db)
+}
+
+func debugLocales() {
+	b, d, l := gotext.GetLibrary(), gotext.GetDomain(), gotext.GetLanguage()
+	f := filepath.Join(d, l, "LC_MESSAGES", l+".mo")
+	fmt.Println("Debug locale configuration:")
+	fmt.Println("- Base path:", b)
+	fmt.Println("- Domain:", d)
+	fmt.Println("- Language used:", l)
+	fmt.Println("- Mo file:", f)
+	fmt.Println("- Mo file exists:", FileExists(f))
 }
