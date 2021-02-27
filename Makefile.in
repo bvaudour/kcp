@@ -27,7 +27,7 @@ LDFLAGS += $(call cflag,$(PASSWORD),Password)
 
 
 # Go build variables
-GOFLAGS  ?= -v -trimpath -mod=vendor -modcacherw
+GOFLAGS  ?= -v -trimpath -mod=readonly -modcacherw
 GOCMD    := go build $(GOFLAGS) -ldflags='-s -w $(LDFLAGS)'
 BINARIES := kcp \
             pckcp
@@ -44,8 +44,8 @@ MOFILES      := $(addprefix $(WD)/,$(addsuffix .mo,$(LANGS)))
 
 default: build
 
-#$(WD):
-#	mkdir $(WD)
+preparebuild:
+	mkdir -p $(WD)
 
 ${WD}/%.mo: ${LOCALESRCDIR}/%.po
 	msgfmt $< -o $@
@@ -58,7 +58,7 @@ gobuild:
 clean:
 	rm -rf $(WD)
 
-build: gobuild $(MOFILES)
+build: preparebuild gobuild $(MOFILES)
 
 install: build
 	for b in $(BINARIES); do \
