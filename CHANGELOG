@@ -1,4 +1,4 @@
-kcp 1.0.1 (dev):
+kcp 1.0.1 (released 2021-02-27):
 ----------------
 - fix the clone url in kcp database
 - minor changes in the Makefile.in
