@@ -260,7 +260,7 @@ func install(debug bool, app string, asdep bool) {
 
 func debugLocales() {
 	b, d, l := gotext.GetLibrary(), gotext.GetDomain(), gotext.GetLanguage()
-	f := filepath.Join(d, l, "LC_MESSAGES", l+".mo")
+	f := filepath.Join(b, l, "LC_MESSAGES", d+".mo")
 	fmt.Println("Debug locale configuration:")
 	fmt.Println("- Base path:", b)
 	fmt.Println("- Domain:", d)
