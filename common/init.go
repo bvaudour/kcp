@@ -59,7 +59,7 @@ func init() {
 	setIfZero(&Organization, fbOrganization)
 
 	// Init runtime
-	Language = os.Getenv("LANGUAGE")
+	Language = setIfZero(os.Getenv("LANGUAGE"), "en")
 	DefaultEditor = os.Getenv("EDITOR")
 	setIfZero(&UserBaseDir, os.Getenv("XDG_CONFIG_HOME"))
 
