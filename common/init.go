@@ -3,8 +3,10 @@ package common
 import (
 	"bytes"
 	_ "embed"
+	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/bvaudour/kcp/conf"
 	"github.com/leonelquinteros/gotext"
@@ -43,6 +45,53 @@ func setIfZero(v *string, d string) {
 	}
 }
 
+func initLanguage() {
+	if Language = Config.Get("main.language"); Language != "" && checkLanguage() {
+		return
+	}
+	if Language = os.Getenv("LANGUAGE"); Language != "" && checkLanguage() {
+		return
+	}
+	if Language = os.Getenv("LANG"); Language != "" && checkLanguage() {
+		return
+	}
+	Language = "en"
+}
+
+func languageFileExist() bool {
+	p := path.Join(LocaleBaseDir, Language, "LC_MESSAGES", LocaleDomain+".mo")
+	return FileExists(p)
+}
+
+func checkLanguage() bool {
+	// No modification
+	if languageFileExist() {
+		return true
+	}
+	// Trying to replace fr_FR.UTF-8 by fr_FR, for example
+	if i := strings.Index(Language, "."); i > 0 {
+		Language = Language[:i]
+		if languageFileExist() {
+			return true
+		}
+	}
+	// Trying base: fr_FR by fr, for example
+	if i := strings.Index(Language, "_"); i > 0 {
+		if languageFileExist() {
+			return true
+		}
+	}
+	// Trying complete base: fr by fr_FR
+	cl := Language
+	Language = fmt.Sprintf("%s_%s", Language, strings.ToUpper(Language))
+	if languageFileExist() {
+		return true
+	}
+	Language = cl
+	//@TODO: Trying to search in similar locale (ie. if there is one fr_*)
+	return false
+}
+
 func init() {
 	// Init buildInfo
 	setIfZero(&Version, fbVersion)
@@ -59,7 +108,6 @@ func init() {
 	setIfZero(&Organization, fbOrganization)
 
 	// Init runtime
-	Language = setIfZero(os.Getenv("LANGUAGE"), "en")
 	DefaultEditor = os.Getenv("EDITOR")
 	setIfZero(&UserBaseDir, os.Getenv("XDG_CONFIG_HOME"))
 
@@ -90,9 +138,7 @@ func init() {
 	conf.Save(userfp, Config)
 
 	// Load locales
-	if l := Config.Get("main.language"); l != "" {
-		Language = l
-	}
+	initLanguage()
 	gotext.Configure(LocaleBaseDir, Language, LocaleDomain)
 
 	// Load custom github config

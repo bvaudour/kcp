@@ -1,5 +1,6 @@
 kcp 1.0.3 (dev):
-- If $LANGUAGE is not set, default to 'en'
+- Trying to guess the locale if malformed, fallback to en
+- Correct panic error on PKGBUILD parsing
 
 kcp 1.0.2 (released 2021-03-04):
 - trying to fix the localisation
