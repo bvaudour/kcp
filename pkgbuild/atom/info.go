@@ -262,8 +262,6 @@ func (l *InfoList) RecomputeValues() {
 			if len(info.values) > 0 {
 				l.values[info.GetName()] = info.values[0]
 			}
-		} else {
-			l.values = nil
 		}
 	}
 }
