@@ -206,9 +206,9 @@ func (p *Package) String() string {
 	if p.LocalVersion != "" {
 		fmt.Fprint(&w, " ")
 		if p.LocalVersion == p.RepoVersion {
-			fmt.Fprint(&w, color.Cyan.Colorize(cInstalled))
+			fmt.Fprint(&w, color.Cyan.Colorize(common.Tr(cInstalled)))
 		} else {
-			fmt.Fprint(&w, color.Cyan.Format(cInstalledVersion, p.LocalVersion))
+			fmt.Fprint(&w, color.Cyan.Format(common.Tr(cInstalledVersion), p.LocalVersion))
 		}
 	}
 	fmt.Fprintln(&w, color.Blue.Format(" (%d)", p.Stars))

@@ -1,4 +1,7 @@
-kcp 1.0.3 (dev):
+kcp 1.0.4 (released 2021-03-24):
+- Correct missing translations
+
+kcp 1.0.3 (released 2021-03-08):
 - Trying to guess the locale if malformed, fallback to en
 - Correct panic error on PKGBUILD parsing
 
