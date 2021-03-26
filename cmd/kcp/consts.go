@@ -2,7 +2,7 @@ package main
 
 //Flags informations
 const (
-	appLongDescription = `Provides a tool to make the use of KaOS Community Packages.
+	appLongDescription = `Provides a tool to make use of KaOS Community Packages.
 
 With this tool, you can search, get and install a package from KaOS Community Packages.`
 	appDescription = "Tool in command-line for KaOS Community Packages"
@@ -32,7 +32,7 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 const (
 	errNoRoot                = "Don't launch this program as root!"
 	errNoPackage             = "No package found"
-	errNoPackageOrNeedUpdate = "No package found. Check the database is updated."
+	errNoPackageOrNeedUpdate = "No package found. Check if the database is updated."
 	errOnlyOneInstance       = "Another instance of kcp is running!"
 	errFailedCreateLocker    = "Failed to create locker file!"
 	errInterrupt             = "Interrupt by user…"
