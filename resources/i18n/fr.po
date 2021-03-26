@@ -4,13 +4,13 @@
 # 
 # Translators:
 # benjamin.vaudour@gmx.fr, 2014
-# Cellix <cellix@yandex.com>, 2014-2017,2020
+# Cellix <cellix@yandex.com>, 2014-2017,2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-06 12:01+0200\n"
-"PO-Revision-Date: 2020-08-06 10:11+0000\n"
+"PO-Revision-Date: 2021-03-26 17:50+0000\n"
 "Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: French (http://www.transifex.com/kaos/kaos/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgid "On display action, display only installed packages"
 msgstr "Lors d’une action d’affichage, n’affiche que les paquets installés"
 
 # filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
-msgid "No package found. Check the database is updated."
+msgid "No package found. Check if the database is updated."
 msgstr "Aucun paquet trouvé. Veuillez vous assurer que la base de données est à jour."
 
 # filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19

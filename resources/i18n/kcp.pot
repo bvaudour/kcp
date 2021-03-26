@@ -144,8 +144,8 @@ msgid "On display action, display only installed packages"
 msgstr "On display action, display only installed packages"
 
 # filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
-msgid "No package found. Check the database is updated."
-msgstr "No package found. Check the database is updated."
+msgid "No package found. Check if the database is updated."
+msgstr "No package found. Check if the database is updated."
 
 # filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
 msgid "Package %s cloned in %s."

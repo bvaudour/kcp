@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Cellix <cellix@yandex.com>, 2021
 # Panwar108 <caspian7pena@gmail.com>, 2018
 # Panwar108 <caspian7pena@gmail.com>, 2018-2020
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-06 12:01+0200\n"
-"PO-Revision-Date: 2020-08-23 14:26+0000\n"
-"Last-Translator: Panwar108 <caspian7pena@gmail.com>\n"
+"PO-Revision-Date: 2021-03-26 17:53+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>\n"
 "Language-Team: Hindi (India) (http://www.transifex.com/kaos/kaos/language/hi_IN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -141,7 +142,7 @@ msgid "On display action, display only installed packages"
 msgstr "दिखाते समय, केवल इंस्टॉल पैकेज ही दिखाएँ"
 
 # filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
-msgid "No package found. Check the database is updated."
+msgid "No package found. Check if the database is updated."
 msgstr "कोई पैकेज नहीं मिला। सुनिश्चित करें कि डेटाबेस अपडेट है।"
 
 # filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
