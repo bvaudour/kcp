@@ -169,7 +169,7 @@ func (p *PKGBUILD) Contains(name string) bool {
 func (p *PKGBUILD) GetFullVersion() string {
 	s := fmt.Sprintf("%s-%s", p.GetValue(standard.PKGVER), p.GetValue(standard.PKGREL))
 	if p.HasValue(standard.EPOCH) {
-		s = fmt.Sprintf("%s:%s", s, p.GetValue(standard.EPOCH))
+		s = fmt.Sprintf("%s:%s", p.GetValue(standard.EPOCH), s)
 	}
 	return s
 }
