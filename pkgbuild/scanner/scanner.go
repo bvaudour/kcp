@@ -214,7 +214,7 @@ func (sc *scbase) Error() error {
 	default:
 		return sc.err
 	}
-	return fmt.Errorf(errorAt, sc.pos, sc.err, sc.buffer)
+	return fmt.Errorf(errorAt, sc.pos, sc.err, sc.buffer.String())
 }
 
 func (sc *scbase) Atom() atom.Atom {

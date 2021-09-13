@@ -116,6 +116,8 @@ func (d *Delimiter) Parse(r rune) (vname, out []rune, ok bool) {
 		switch {
 		case IsAlphaNum(r):
 			d.variableName = append(d.variableName, r)
+		case IsComment(r) && d.longVariable:
+			d.variableName = append(d.variableName, r)
 		case r == '{' && len(d.variableName) == 0:
 			d.longVariable = true
 		case len(d.variableName) == 0:

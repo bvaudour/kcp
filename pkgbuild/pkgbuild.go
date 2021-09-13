@@ -1,6 +1,7 @@
 package pkgbuild
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"strings"
@@ -307,6 +308,29 @@ func ReadVersion(r io.Reader) (s string) {
 		s = p.GetFullVersion()
 	}
 	return
+}
+
+//ReadVersionFast reads the given reader without parsing detail full file
+func ReadVersionFast(r io.Reader) (s string) {
+	sc := bufio.NewScanner(r)
+	m := map[string]string{
+		"pkgver": "",
+		"pkgrel": "",
+		"epoch":  "",
+	}
+	for sc.Scan() {
+		line := sc.Text()
+		for k := range m {
+			if strings.HasPrefix(line, k+"=") {
+				m[k] = strings.TrimSpace(strings.TrimPrefix(line, k+"="))
+				break
+			}
+		}
+	}
+	if m["epoch"] == "" {
+		return fmt.Sprintf("%s-%s", m["pkgver"], m["pkgrel"])
+	}
+	return fmt.Sprintf("%s:%s-%s", m["epoch"], m["pkgver"], m["pkgrel"])
 }
 
 //Format applies transformations to the PKGBUILD.
