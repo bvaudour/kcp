@@ -1,8 +1,8 @@
-kcp 1.0.6 (releasd 2021-09-13):
+kcp 1.0.7 (releasd 2021-09-13):
 - Correct error parsing
 - Better format for errors
 
-kcp 1.0.5 (2021-09-08):
+kcp 1.0.6 (2021-09-08):
 - Add danish translation
 - Correct version number with epoch
 
