@@ -1,9 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[kaos.kcppot]
+[o:kaos:p:kaos:r:kcppot]
 file_filter = resources/i18n/<lang>.po
 source_file = resources/i18n/kcp.pot
 source_lang = en
-type = PO
+type        = PO
 
