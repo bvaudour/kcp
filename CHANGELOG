@@ -1,5 +1,6 @@
 kcp 1.0.8 (dev)
 - Update gotext dependencies
+- Add italian translation
 
 kcp 1.0.7 (releasd 2021-09-13):
 - Correct error parsing
