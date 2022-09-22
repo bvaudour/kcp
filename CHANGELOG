@@ -1,3 +1,6 @@
+kcp 1.1.0 (not released):
+- Add broken informations (needed for use of kcp to refresh the future KCP-center database)
+
 kcp 1.0.9 (released 2022-07-07):
 - Add Sinhala translation
 

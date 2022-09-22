@@ -10,9 +10,10 @@ import (
 //Database is the decoded structure
 //of a json database of packages.
 type Database struct {
-	LastUpdate  time.Time `json:"last_update"`
-	IgnoreRepos []string  `json:"ignore_repos"`
-	Packages    `json:"packages"`
+	LastUpdate    time.Time `json:"last_update"`
+	IgnoreRepos   []string  `json:"ignore_repos"`
+	BrokenDepends []string  `json:"broken_depends"`
+	Packages      `json:"packages"`
 }
 
 //New returns a new empty database initialized

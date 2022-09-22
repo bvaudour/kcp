@@ -106,6 +106,7 @@ func (u *Updater) Update(debug ...bool) (c Counter, err error) {
 	wg.Wait()
 	close(limitRoutines)
 	c.Diff(ps1, ps2)
+	u.db.BrokenDepends = ps2.searchBroken()
 	u.db.LastUpdate = time.Now()
 	u.db.Packages = ps2.ToList()
 	return

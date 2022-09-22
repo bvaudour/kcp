@@ -44,6 +44,7 @@ type Package struct {
 	Licenses         []string  `json:"licenses"`
 	ValidatedBy      string    `json:"validated_by"`
 	HasInstallScript bool      `json:"has_install_script"`
+	Broken           []string  `json:"broken"`
 }
 
 func (p *Package) toMap() map[string]interface{} {
@@ -495,6 +496,45 @@ func (ps *PackageSet) Names() []string {
 		names = append(names, n)
 	}
 	return names
+}
+
+func (ps *PackageSet) searchBroken() []string {
+	available := make(map[string]bool)
+	for _, n := range ps.Names() {
+		available[n] = true
+	}
+
+	depends := make(map[string]bool)
+	for p := range ps.Iterator() {
+		for _, d := range p.Depends {
+			depends[d] = true
+		}
+		for _, d := range p.MakeDepends {
+			i := strings.Index(d, ":")
+			if i >= 0 {
+				d = d[:i]
+			}
+			depends[d] = true
+		}
+		for _, d := range p.OptDepends {
+			depends[d] = true
+		}
+	}
+
+	var broken []string
+	for d := range depends {
+		if available[d] {
+			continue
+		}
+		result, _ := common.GetOutputCommand("pacman", "-Si", d)
+		if len(result) > 0 {
+			available[d] = true
+		} else {
+			broken = append(broken, d)
+		}
+	}
+
+	return broken
 }
 
 func SortByName(p1, p2 *Package) int {
