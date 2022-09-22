@@ -1,0 +1,555 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# mkkDr2010, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: KaOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-06 12:01+0200\n"
+"PO-Revision-Date: 2014-12-15 19:40+0000\n"
+"Last-Translator: mkkDr2010, 2022\n"
+"Language-Team: Bulgarian (http://www.transifex.com/kaos/kaos/language/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# filename: cmd/kcp/consts.go, offset: 460, line: 12, column: 19
+msgid "Display all packages of KCP"
+msgstr "Показване на всички пакети на KCP"
+
+# filename: cmd/kcp/consts.go, offset: 1435, line: 27, column: 19
+msgid "Display informations about a package"
+msgstr "Показване на информация за пакет"
+
+# filename: cmd/kcp/consts.go, offset: 508, line: 13, column: 19
+msgid "Refresh the local database"
+msgstr "Обновяване на локалната база данни"
+
+# filename: cmd/kcp/consts.go, offset: 990, line: 21, column: 19
+msgid "On refreshing database action, force complete update"
+msgstr "При обновяване на базата данни да се извърши пълна актуализация"
+
+# filename: cmd/kcp/consts.go, offset: 234, line: 8, column: 19
+msgid "Tool in command-line for KaOS Community Packages"
+msgstr "Инструмент за командния ред за пакетите на KaOS Общността"
+
+# filename: cmd/kcp/consts.go, offset: 555, line: 14, column: 19
+msgid "Search packages in KCP and display them"
+msgstr "Търси пакети в KCP и ги показва. "
+
+# filename: cmd/kcp/consts.go, offset: 859, line: 19, column: 19
+msgid "On install action, install as a dependence"
+msgstr "При инсталиране, да се инсталира като зависимост"
+
+# filename: cmd/kcp/consts.go, offset: 922, line: 20, column: 19
+msgid "On list action, display only installed packages"
+msgstr "При показване на списъка, да се показват само инсталираните пакети"
+
+# filename: cmd/kcp/consts.go, offset: 1867, line: 38, column: 29
+msgid "Interrupt by user…"
+msgstr "Прекъсване от потребител…"
+
+# filename: cmd/kcp/consts.go, offset: 303, line: 9, column: 19
+msgid "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
+msgstr "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
+
+# filename: cmd/kcp/consts.go, offset: 615, line: 15, column: 19
+msgid "Download needed files to build a package"
+msgstr "Изтегляне на необходимите файлове за изграждането на пакет"
+
+# filename: cmd/kcp/consts.go, offset: 1550, line: 33, column: 29
+msgid "Don't launch this program as root!"
+msgstr "Не изпълнявайте тази програма като root!"
+
+# filename: cmd/kcp/consts.go, offset: 2004, line: 42, column: 19
+msgid "Do you want to edit %s?"
+msgstr "Искате ли да редактирате %s?"
+
+# filename: cmd/kcp/consts.go, offset: 65, line: 5, column: 23
+msgid ""
+"Provides a tool to make the use of KaOS Community Packages.\n"
+"\n"
+"With this tool, you can search, get and install a package from KaOS Community Packages."
+msgstr "Предоставя инструмент за изграждане на пакети на KaOS Общността.\n\nС този инструмент, можете да търсите, сваляте и инсталирате пакети на KaOS Общността."
+
+# filename: cmd/kcp/consts.go, offset: 676, line: 16, column: 19
+msgid "Install a package from KCP"
+msgstr "Инсталиране на пакет от KCP"
+
+# filename: cmd/kcp/consts.go, offset: 723, line: 17, column: 19
+msgid "On display action, don't print KCP version"
+msgstr "При "
+
+# filename: cmd/kcp/consts.go, offset: 1210, line: 24, column: 19
+msgid "On display action, display only packages with at least one star"
+msgstr "При показване на списъка да се показват само пакетите с поне една звезда"
+
+# filename: cmd/kcp/consts.go, offset: 1492, line: 28, column: 19
+msgid "<app>"
+msgstr "<приложение>"
+
+# filename: cmd/kcp/consts.go, offset: 786, line: 18, column: 19
+msgid "On display action, sort packages by stars descending"
+msgstr "При показване на списъка да се сортират пакетите според броя на звездите в низходящ ред"
+
+# filename: cmd/kcp/consts.go, offset: 1365, line: 26, column: 19
+msgid "On display action, display only outdated packages"
+msgstr "При показване на списъка да се показват само остарелите пакети"
+
+# filename: cmd/kcp/consts.go, offset: 1741, line: 36, column: 29
+msgid "Another instance of kcp is running!"
+msgstr "Има друг работещ процес на kcp!"
+
+# filename: cmd/kcp/consts.go, offset: 1807, line: 37, column: 29
+msgid "Failed to create locker file!"
+msgstr "Неуспех при създаване на заключващ файл!"
+
+# filename: cmd/kcp/consts.go, offset: 426, line: 11, column: 19
+# filename: cmd/pckcp/consts.go, offset: 434, line: 11, column: 22
+msgid "Print version"
+msgstr "Показване на версията"
+
+# filename: cmd/kcp/consts.go, offset: 1063, line: 22, column: 19
+msgid "On display action, force refreshing local database"
+msgstr "При показване на списъка да обновяване на локалната база данни"
+
+# filename: cmd/kcp/consts.go, offset: 1134, line: 23, column: 19
+msgid "On display action, display only the name of the package"
+msgstr "При показване на списъка да се показва само името на пакета"
+
+# filename: cmd/kcp/consts.go, offset: 1615, line: 34, column: 29
+msgid "No package found"
+msgstr "Не е намерен пакет"
+
+# filename: cmd/kcp/consts.go, offset: 1954, line: 41, column: 19
+msgid "Do you want to edit PKGBUILD?"
+msgstr "Искате ли да редактирате PKGBUILD?"
+
+# filename: cmd/kcp/consts.go, offset: 390, line: 10, column: 19
+# filename: cmd/pckcp/consts.go, offset: 395, line: 10, column: 22
+msgid "Print this help"
+msgstr "Показване на тази помощ"
+
+# filename: cmd/kcp/consts.go, offset: 1294, line: 25, column: 19
+msgid "On display action, display only installed packages"
+msgstr "При показване на списъка да се показват само инсталираните пакети"
+
+# filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
+msgid "No package found. Check if the database is updated."
+msgstr "Не е намерен пакет. Проверете дали базата от данни е актуализирана. "
+
+# filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
+msgid "Package %s cloned in %s."
+msgstr "Пакетът %s е клониран в %s."
+
+# filename: cmd/pckcp/consts.go, offset: 799, line: 24, column: 20
+msgid "Variable '%s' is missing."
+msgstr "Променливата '%s' липсва."
+
+# filename: cmd/pckcp/consts.go, offset: 1622, line: 35, column: 25
+msgid "Variable '%s' contains bad packages."
+msgstr "Променливата '%s' съдържа лоши пакети."
+
+# filename: cmd/pckcp/consts.go, offset: 2137, line: 44, column: 20
+msgid "Declarations have the good type."
+msgstr "Декларациите имат добър вид."
+
+# filename: cmd/pckcp/consts.go, offset: 2684, line: 56, column: 24
+msgid "Type the new name (leave blank to remove install variable):"
+msgstr "Въведете ново име (оставете празно, за да премахнете инсталационната променлива):"
+
+# filename: cmd/pckcp/consts.go, offset: 2931, line: 61, column: 23
+msgid "a function"
+msgstr "функция"
+
+# filename: cmd/pckcp/consts.go, offset: 65, line: 5, column: 23
+msgid ""
+"Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
+"\n"
+"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
+msgstr "Предоставя инструмент за проверка на валидността на  PKGBUILD съгласно стандартите на KCP.\n\nАко е използван флаг -e, ще се извърши проверка за често срещани грешки  (potentially) valid PKGBUILD.new is created."
+
+# filename: cmd/pckcp/consts.go, offset: 1242, line: 31, column: 25
+msgid "Variable '%s' is empty."
+msgstr "Променливата '%s' е празна."
+
+# filename: cmd/pckcp/consts.go, offset: 1979, line: 41, column: 20
+msgid "There aren’t duplicates."
+msgstr "Няма дубликати"
+
+# filename: cmd/pckcp/consts.go, offset: 2027, line: 42, column: 20
+msgid "There aren’t missing variables."
+msgstr "Няма липсващи променливи."
+
+# filename: cmd/pckcp/consts.go, offset: 2966, line: 62, column: 23
+msgid "a variable"
+msgstr "променлива"
+
+# filename: cmd/pckcp/consts.go, offset: 952, line: 28, column: 25
+msgid ""
+"Header was found. Do not use names of maintainers or contributors in "
+"PKGBUILD, anyone can contribute, keep the header clean from this."
+msgstr "Намерена е заглавна част. Не използвайте имената на разработчиците и помощниците в PKGBUILD, всеки може да даде своя принос. Пазете заглавната част изчистена от това. "
+
+# filename: cmd/pckcp/consts.go, offset: 679, line: 19, column: 16
+msgid "Error"
+msgstr "Грешка"
+
+# filename: cmd/pckcp/consts.go, offset: 1685, line: 36, column: 25
+msgid "'%s' is the name of the package. It is useless."
+msgstr "'%s' е името на пакета. То е неизползваемо."
+
+# filename: cmd/pckcp/consts.go, offset: 1759, line: 37, column: 25
+msgid "'%s' isn't in repo neither in kcp."
+msgstr "'%s' не се намира нито в хранилището, нито в kcp."
+
+# filename: cmd/pckcp/consts.go, offset: 2378, line: 50, column: 24
+msgid "Add variable '%s'?"
+msgstr "Да се добави ли променливата '%s'?"
+
+# filename: cmd/pckcp/consts.go, offset: 2769, line: 57, column: 24
+msgid "Modify '%s'?"
+msgstr "Да се промени ли '%s'?"
+
+# filename: cmd/pckcp/consts.go, offset: 2879, line: 60, column: 23
+msgid "You should add it manually."
+msgstr "Трябва да го добавите ръчно."
+
+# filename: cmd/pckcp/consts.go, offset: 471, line: 12, column: 22
+msgid "Interactive edition"
+msgstr "Интерактивно издание"
+
+# filename: cmd/pckcp/consts.go, offset: 570, line: 14, column: 22
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Премахва ненужните коментари и празни полета от прототипа"
+
+# filename: cmd/pckcp/consts.go, offset: 1113, line: 29, column: 25
+msgid "Some duplicates found:"
+msgstr "Намерени са някои дубликати:"
+
+# filename: cmd/pckcp/consts.go, offset: 1820, line: 38, column: 25
+msgid ""
+"Variables 'depends' and 'makedepends' are empty. You should manually check "
+"if it is not a missing."
+msgstr "Променливите 'depends' и 'makedepends' са празни. Трябва ръчно да проверите, дали не липсват."
+
+# filename: cmd/pckcp/consts.go, offset: 2082, line: 43, column: 20
+msgid "There aren’t missing functions."
+msgstr "Няма липсващи функции."
+
+# filename: cmd/pckcp/consts.go, offset: 2191, line: 45, column: 20
+msgid "There aren’t empty variables."
+msgstr "Няма празни променливи. "
+
+# filename: cmd/pckcp/consts.go, offset: 2294, line: 48, column: 24
+msgid "Remove header?"
+msgstr "Да се премахне ли заглавната част?"
+
+# filename: cmd/pckcp/consts.go, offset: 2495, line: 52, column: 24
+msgid "Remove variable '%s'?"
+msgstr "Да се премахне ли променливата '%s'?"
+
+# filename: cmd/pckcp/consts.go, offset: 846, line: 25, column: 20
+msgid "Function '%s' is missing."
+msgstr "Функцията '%s' липсва."
+
+# filename: cmd/pckcp/consts.go, offset: 1560, line: 34, column: 25
+msgid "install: file '%s' doesn’t exist."
+msgstr "install: файлът '%s' не съществува."
+
+# filename: cmd/pckcp/consts.go, offset: 2334, line: 49, column: 24
+msgid "Remove duplicates?"
+msgstr "Да се премахнат ли дубликатите?"
+
+# filename: cmd/pckcp/consts.go, offset: 514, line: 13, column: 22
+msgid "Generate a prototype of PKGBUILD"
+msgstr "Генериране на прототип на PKGBUILD"
+
+# filename: cmd/pckcp/consts.go, offset: 1941, line: 40, column: 20
+msgid "Header is clean."
+msgstr "Заглавната част е изчистена."
+
+# filename: cmd/pckcp/consts.go, offset: 1292, line: 32, column: 25
+msgid ""
+"pkgrel is different from 1. It should be the case only if build instructions"
+" are edited but not pkgver."
+msgstr "pkgrel е различно от 1. Това може да така в случай, че само инструкциите за изграждане са променени, но не и pkgver."
+
+# filename: cmd/pckcp/consts.go, offset: 2542, line: 53, column: 24
+msgid "Reset pkgrel to 1?"
+msgstr "Да се възстанови ли  pkgrel до 1?"
+
+# filename: cmd/pckcp/consts.go, offset: 2633, line: 55, column: 24
+msgid "Modify name of '%s' file?"
+msgstr "Да се промени ли името на файла '%s'?"
+
+# filename: cmd/pckcp/consts.go, offset: 3043, line: 64, column: 23
+msgid "an array variable"
+msgstr "променлива на масив"
+
+# filename: cmd/pckcp/consts.go, offset: 3085, line: 65, column: 23
+msgid ""
+"Note that hooks provide similar functionnalities and are more powerful. For "
+"more informations: %s"
+msgstr "Отбележете, че  hooks предоставят същата функционалност и са по-мощни. За повече информация: %s"
+
+# filename: cmd/pckcp/consts.go, offset: 754, line: 23, column: 20
+msgid "File %s does not exist."
+msgstr "Файлът %s не съществува."
+
+# filename: cmd/pckcp/consts.go, offset: 354, line: 9, column: 22
+msgid "[-h|-e|-v|-g[-c]]"
+msgstr "[-h|-e|-v|-g[-c]]"
+
+# filename: cmd/pckcp/consts.go, offset: 702, line: 20, column: 16
+msgid "Warning"
+msgstr "Предупреждение"
+
+# filename: cmd/pckcp/consts.go, offset: 727, line: 21, column: 16
+msgid "Info"
+msgstr "Данни"
+
+# filename: cmd/pckcp/consts.go, offset: 899, line: 27, column: 25
+msgid "Modifications saved in %s!"
+msgstr "Промените са запазени в %s!"
+
+# filename: cmd/pckcp/consts.go, offset: 1162, line: 30, column: 25
+msgid "Bad type declaration: '%s' is %s but it should be %s."
+msgstr "Лош вид на декларацията: '%s' е %s но трябва да бъде %s."
+
+# filename: cmd/pckcp/consts.go, offset: 1422, line: 33, column: 25
+msgid ""
+"arch is different from 'x86_64'. Since KaOS only supports this architecture,"
+" no other arch would be added here."
+msgstr "архитектурата е различна от  'x86_64'. Тъй като KaOS поддържа само тази архитектура,тук няма да бъдат добавени други архитектури."
+
+# filename: cmd/pckcp/consts.go, offset: 277, line: 8, column: 22
+msgid "Tool in command-line to manage common PKGBUILD errors"
+msgstr "Инструмент за командния ред за управление на често срещани грешки на PKGBUILD"
+
+# filename: cmd/pckcp/consts.go, offset: 2422, line: 51, column: 24
+msgid "Set variable '%s' with (leave blank to ignore):"
+msgstr "Задаване на променливата '%s' (оставете празно за пропускане):"
+
+# filename: cmd/pckcp/consts.go, offset: 2586, line: 54, column: 24
+msgid "Reset arch to x86_64?"
+msgstr "Да се възстанови ли обратно до архитектура x86_64?"
+
+# filename: cmd/pckcp/consts.go, offset: 2807, line: 58, column: 24
+msgid "Type the new value (leave blank to remove it):"
+msgstr "Въведете нова стойност (оставете празно, за да я премахнете):"
+
+# filename: cmd/pckcp/consts.go, offset: 3001, line: 63, column: 23
+msgid "a string variable"
+msgstr "низова променлива"
+
+# filename: cmd/pckcp/consts.go, offset: 2244, line: 46, column: 20
+msgid "Variable '%s' is clean."
+msgstr "Променливата '%s' е изчистена."
+
+# filename: common/consts.go, offset: 88, line: 7, column: 16
+msgid "[y/N]"
+msgstr "[y/N]"
+
+# filename: common/consts.go, offset: 104, line: 9, column: 8
+msgid "yes"
+msgstr "да"
+
+# filename: common/consts.go, offset: 117, line: 10, column: 8
+msgid "no"
+msgstr "не"
+
+# filename: common/consts.go, offset: 43, line: 4, column: 20
+msgid "vim"
+msgstr "vim"
+
+# filename: common/consts.go, offset: 65, line: 6, column: 16
+msgid "[Y/n]"
+msgstr "[Y/n]"
+
+# filename: database/consts.go, offset: 180, line: 8, column: 22
+msgid "Description"
+msgstr "Описание"
+
+# filename: database/consts.go, offset: 342, line: 13, column: 22
+msgid "Depends on"
+msgstr "Зависи от"
+
+# filename: database/consts.go, offset: 492, line: 17, column: 22
+msgid "Replaces"
+msgstr "Замества"
+
+# filename: database/consts.go, offset: 758, line: 27, column: 15
+msgid "%d entries updated!"
+msgstr "%d записа са актуализирани!"
+
+# filename: database/consts.go, offset: 121, line: 6, column: 22
+msgid "Name"
+msgstr "Име"
+
+# filename: database/consts.go, offset: 562, line: 19, column: 22
+msgid "Validated By"
+msgstr "Проверен от"
+
+# filename: database/consts.go, offset: 598, line: 20, column: 22
+msgid "Yes"
+msgstr "Да"
+
+# filename: database/consts.go, offset: 648, line: 23, column: 18
+msgid "Dir %s already exists!"
+msgstr "Директорията %s вече съществува!"
+
+# filename: database/consts.go, offset: 688, line: 25, column: 15
+msgid "%d entries added!"
+msgstr "%d записа са добавени!"
+
+# filename: database/consts.go, offset: 722, line: 26, column: 15
+msgid "%d entries deleted!"
+msgstr "%d записа са изтрити!"
+
+# filename: database/consts.go, offset: 47, line: 4, column: 22
+msgid "[installed]"
+msgstr "[инсталиран]"
+
+# filename: database/consts.go, offset: 149, line: 7, column: 22
+msgid "Version"
+msgstr "Версия"
+
+# filename: database/consts.go, offset: 278, line: 11, column: 22
+msgid "Licenses"
+msgstr "Лицензи"
+
+# filename: database/consts.go, offset: 417, line: 15, column: 22
+msgid "Optional Deps"
+msgstr "Незадължителни допълнителни зависимости"
+
+# filename: database/consts.go, offset: 454, line: 16, column: 22
+msgid "Conflicts With"
+msgstr "В конфликт с"
+
+# filename: database/consts.go, offset: 524, line: 18, column: 22
+msgid "Install Script"
+msgstr "Инсталиращ скрипт"
+
+# filename: database/consts.go, offset: 625, line: 21, column: 22
+msgid "No"
+msgstr "Не"
+
+# filename: database/consts.go, offset: 82, line: 5, column: 22
+msgid "[installed: %s]"
+msgstr "[инсталиран: %s]"
+
+# filename: database/consts.go, offset: 215, line: 9, column: 22
+msgid "Architecture"
+msgstr "Архитектура"
+
+# filename: database/consts.go, offset: 251, line: 10, column: 22
+msgid "URL"
+msgstr "Адрес"
+
+# filename: database/consts.go, offset: 310, line: 12, column: 22
+msgid "Provides"
+msgstr "Предоставя"
+
+# filename: database/consts.go, offset: 376, line: 14, column: 22
+msgid "Depends on (make)"
+msgstr "Зависи от (make)"
+
+# filename: flag/consts.go, offset: 182, line: 10, column: 27
+msgid "Invalid value '%v': Must be a %s!"
+msgstr "Невалидна стойност '%v': Трябва да бъде %s!"
+
+# filename: flag/consts.go, offset: 244, line: 11, column: 27
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr "Флагът '%s' не може да е използва с '%s'"
+
+# filename: flag/consts.go, offset: 530, line: 16, column: 27
+msgid "Unexpected arg: %s"
+msgstr "Неочакван аргумент: %s"
+
+# filename: flag/consts.go, offset: 767, line: 22, column: 15
+msgid "string"
+msgstr "низ"
+
+# filename: flag/consts.go, offset: 904, line: 28, column: 18
+msgid "too short"
+msgstr "твърде кратко"
+
+# filename: flag/consts.go, offset: 933, line: 29, column: 18
+msgid "too long"
+msgstr "твърде дълго"
+
+# filename: flag/consts.go, offset: 954, line: 31, column: 10
+msgid "Usage:"
+msgstr "Употреба:"
+
+# filename: flag/consts.go, offset: 128, line: 9, column: 27
+msgid "Invalid %s flag '%s': %s!"
+msgstr "Невалиден %s флаг '%s': %s!"
+
+# filename: flag/consts.go, offset: 490, line: 15, column: 27
+msgid "Arg needed!"
+msgstr "Необходими са аргументи!"
+
+# filename: flag/consts.go, offset: 815, line: 25, column: 18
+msgid "short"
+msgstr "кратко"
+
+# filename: flag/consts.go, offset: 840, line: 26, column: 18
+msgid "long"
+msgstr "дълго"
+
+# filename: flag/consts.go, offset: 307, line: 12, column: 27
+msgid "Flag '%s' needs one of these flags: %v"
+msgstr "Флагът '%s' се нуждае от един от тези флагове: %v"
+
+# filename: flag/consts.go, offset: 625, line: 18, column: 27
+msgid "Flag '%s' is already set!"
+msgstr "Флагът '%s' вече е зададен!"
+
+# filename: flag/consts.go, offset: 679, line: 19, column: 27
+msgid "Unknown property: %d"
+msgstr "Неизвестно свойство: %d"
+
+# filename: flag/consts.go, offset: 864, line: 27, column: 18
+msgid "must begin with '%s'"
+msgstr "трябва да започва с '%s'"
+
+# filename: flag/consts.go, offset: 374, line: 13, column: 27
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr "Флагът '%s' не разрешава множество аргументи!"
+
+# filename: flag/consts.go, offset: 577, line: 17, column: 27
+msgid "Arg '%s' not in %v!"
+msgstr "Аргумент '%s' не е в %v!"
+
+# filename: flag/consts.go, offset: 728, line: 20, column: 27
+msgid "Unsupported flag '%s'"
+msgstr "Неподдържан флаг '%s'"
+
+# filename: flag/consts.go, offset: 790, line: 23, column: 15
+msgid "bool"
+msgstr "bool"
+
+# filename: flag/consts.go, offset: 446, line: 14, column: 27
+msgid "%s not allowed!"
+msgstr " %s не е позволен!"
+
+# filename: pkgbuild/scanner/consts.go, offset: 36, line: 4, column: 12
+msgid ""
+"Error at %s: %s\n"
+"%s"
+msgstr "Грешка при %s: %s\n%s"
+
+# filename: runes/consts.go, offset: 113, line: 10, column: 26
+msgid "Invalid token"
+msgstr "Невалиден токен"
+
+# filename: runes/consts.go, offset: 154, line: 11, column: 26
+msgid "Unended token"
+msgstr "Незавършен токен"
