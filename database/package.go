@@ -44,7 +44,6 @@ type Package struct {
 	Licenses         []string  `json:"licenses"`
 	ValidatedBy      string    `json:"validated_by"`
 	HasInstallScript bool      `json:"has_install_script"`
-	Broken           []string  `json:"broken"`
 }
 
 func (p *Package) toMap() map[string]interface{} {

@@ -1,4 +1,4 @@
-kcp 1.1.0 (not released):
+kcp 1.1.0 (released 2022-09-26):
 - Add broken informations (needed for use of kcp to refresh the future KCP-center database)
 - Add Bulgarian translation
 
