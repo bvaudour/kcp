@@ -10,7 +10,7 @@ import (
 
 	"github.com/bvaudour/kcp/color"
 	. "github.com/bvaudour/kcp/common"
-	"github.com/bvaudour/kcp/database"
+	database "github.com/bvaudour/kcp/database2"
 	"github.com/leonelquinteros/gotext"
 )
 
