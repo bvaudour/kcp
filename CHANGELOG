@@ -1,3 +1,6 @@
+kcp 1.2.0 (released 2223-03-01):
+- Optimization of the db update’s process
+
 kcp 1.1.0 (released 2022-09-26):
 - Add broken informations (needed for use of kcp to refresh the future KCP-center database)
 - Add Bulgarian translation
