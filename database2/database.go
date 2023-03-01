@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/bvaudour/kcp/color"
@@ -94,14 +95,24 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 		return
 	}
 
+	if debug {
+		fmt.Fprintln(
+			os.Stderr,
+			color.Magenta.Format("%d pages, %d repos", nbPages, nbRepos),
+		)
+	}
+
 	var newPackages Packages
 	ignored := sliceToSet(db.IgnoreRepos)
 	lastUpdate, newUpdate := db.LastUpdate, time.Now().Add(time.Hour*-24)
 
 	packages := make(chan Package, (nbPages-1)*limit+1)
 	buffer := make(chan Package, nbRepos)
+	var wgPackages, wgPages, wgBuffer sync.WaitGroup
 
+	wgBuffer.Add(1)
 	go (func() {
+		defer wgBuffer.Done()
 		for {
 			p, ok := <-buffer
 			if !ok {
@@ -111,8 +122,10 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 		}
 	})()
 
+	wgPackages.Add(routines)
 	for i := 0; i < routines; i++ {
 		go (func() {
+			defer wgPackages.Done()
 			for {
 				p, ok := <-packages
 				if !ok {
@@ -134,8 +147,10 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 		})()
 	}
 
+	wgPages.Add(nbPages)
 	for i := 1; i <= nbPages; i++ {
 		go (func(i int) {
+			defer wgPages.Done()
 			page, e := repo.GetPage(i, limit, debug)
 			if e != nil {
 				err = e
@@ -147,13 +162,23 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 		})(i)
 	}
 
+	wgPages.Wait()
+
 	close(packages)
+	wgPackages.Wait()
+
 	close(buffer)
+	wgBuffer.Wait()
 
 	if err != nil {
+		fmt.Fprintf(
+			os.Stderr,
+			"%s %s\n",
+			color.Red.Format("[Error: %s]", err),
+			"Failed to retrieve the remote packages list",
+		)
 		return
 	}
-
 	psOld := db.Packages.ToSet()
 
 	for i, p := range newPackages {

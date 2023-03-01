@@ -8,6 +8,7 @@ import (
 	"path"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 	"unicode/utf8"
 
@@ -317,47 +318,58 @@ func (pl Packages) SearchBroken() (broken []string) {
 		available[p.Name] = true
 	}
 
-	buffer := make(chan string, len(pl))
+	cleanDep := func(d string) string {
+		for _, s := range []string{">", "<", "=", ":"} {
+			if i := strings.Index(d, s); i > 0 {
+				d = d[:i]
+			}
+		}
+		return strings.TrimSpace(d)
+	}
+
 	checkBroken := func(d string) {
 		if available[d] {
 			return
 		}
-
 		result, _ := common.GetOutputCommand("pacman", "-Si", d)
-		if len(result) > 0 {
-			buffer <- d
+		if len(result) == 0 {
+			broken = append(broken, d)
 		}
 	}
 
-	go (func() {
-		for {
-			b, ok := <-buffer
-			if !ok {
-				return
-			}
-			broken = append(broken, b)
-		}
-	})()
+	routines := defaultRoutines
+	done := make(map[string]bool)
+	buffer := make(chan string, len(pl))
+	var wg sync.WaitGroup
+	wg.Add(routines)
 
-	for _, p := range pl {
-		for _, d := range p.Depends {
-			go checkBroken(d)
-		}
-		for _, d := range p.MakeDepends {
-			go (func(d string) {
-				i := strings.Index(d, ":")
-				if i >= 0 {
-					d = d[:i]
+	for i := 0; i < routines; i++ {
+		go (func() {
+			defer wg.Done()
+			for {
+				d, ok := <-buffer
+				if !ok {
+					return
 				}
 				checkBroken(d)
-			})(d)
-		}
-		for _, d := range p.OptDepends {
-			go checkBroken(d)
+			}
+		})()
+	}
+
+	for _, p := range pl {
+		for _, depends := range [][]string{p.Depends, p.OptDepends, p.MakeDepends} {
+			for _, d := range depends {
+				d = cleanDep(d)
+				if !done[d] && len(d) > 0 {
+					done[d] = true
+					buffer <- d
+				}
+			}
 		}
 	}
 
 	close(buffer)
+	wg.Wait()
 
 	return
 }

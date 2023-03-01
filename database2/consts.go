@@ -33,5 +33,5 @@ const (
 	acceptHeader        = "application/vnd.github.v3+json"
 
 	defaultLimit    = 100
-	defaultRoutines = 50
+	defaultRoutines = 150
 )
