@@ -26,7 +26,7 @@ func useSsh() bool {
 	return Config.Get("kcp.cloneMethod") == "ssh"
 }
 
-func getDb() (db *database.Database, err error) {
+func getDb() (db database.Database, err error) {
 	fpath, ignore := getDbPath(), getIgnore()
 	return database.Load(fpath, ignore...)
 }
@@ -35,7 +35,7 @@ func updateDb(db *database.Database, debug bool) (counters database.Counter, err
 	return db.Update(Organization, debug, User, Password)
 }
 
-func loadDb(debug, forceUpdate bool) *database.Database {
+func loadDb(debug, forceUpdate bool) database.Database {
 	db, err := getDb()
 	if debug {
 		fmt.Fprintln(os.Stderr, "Trying to open db")
@@ -44,12 +44,12 @@ func loadDb(debug, forceUpdate bool) *database.Database {
 		if debug {
 			fmt.Fprintln(os.Stderr, "Trying to update db")
 		}
-		updateDb(db, debug)
+		updateDb(&db, debug)
 	}
 	return db
 }
 
-func saveDb(db *database.Database) error {
+func saveDb(db database.Database) error {
 	return database.Save(getDbPath(), db)
 }
 
@@ -88,7 +88,7 @@ func getFiltersSearch(search string) []database.FilterFunc {
 	var filters []database.FilterFunc
 	if len(search) > 0 {
 		search = strings.ToLower(search)
-		filters = append(filters, func(p *database.Package) bool {
+		filters = append(filters, func(p database.Package) bool {
 			name := strings.ToLower(p.Name)
 			if strings.Contains(name, search) {
 				return true
@@ -117,7 +117,7 @@ func update(debug bool) {
 	if debug {
 		fmt.Fprintln(os.Stderr, "Trying to update db")
 	}
-	counters, err := updateDb(db, debug)
+	counters, err := updateDb(&db, debug)
 	if err != nil {
 		PrintError(err)
 		os.Exit(1)
