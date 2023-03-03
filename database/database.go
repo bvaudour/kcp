@@ -108,6 +108,7 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 
 	packages := make(chan Package, (nbPages-1)*limit+1)
 	buffer := make(chan Package, nbRepos)
+	quit := make(chan bool)
 	var wgPackages, wgPages, wgBuffer sync.WaitGroup
 
 	wgBuffer.Add(1)
@@ -116,6 +117,7 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 		for {
 			p, ok := <-buffer
 			if !ok {
+				quit <- true
 				return
 			}
 			newPackages.Push(p)
@@ -169,6 +171,7 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 
 	close(buffer)
 	wgBuffer.Wait()
+	<-quit
 
 	if err != nil {
 		fmt.Fprintf(

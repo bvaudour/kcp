@@ -340,6 +340,7 @@ func (pl Packages) SearchBroken() (broken []string) {
 	routines := defaultRoutines
 	done := make(map[string]bool)
 	buffer := make(chan string, len(pl))
+	quit := make(chan bool)
 	var wg sync.WaitGroup
 	wg.Add(routines)
 
@@ -349,6 +350,7 @@ func (pl Packages) SearchBroken() (broken []string) {
 			for {
 				d, ok := <-buffer
 				if !ok {
+					quit <- true
 					return
 				}
 				checkBroken(d)
@@ -370,6 +372,7 @@ func (pl Packages) SearchBroken() (broken []string) {
 
 	close(buffer)
 	wg.Wait()
+	<-quit
 
 	return
 }
