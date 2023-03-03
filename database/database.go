@@ -170,8 +170,8 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 	wgPackages.Wait()
 
 	close(buffer)
-	wgBuffer.Wait()
 	<-quit
+	wgBuffer.Wait()
 
 	if err != nil {
 		fmt.Fprintf(
