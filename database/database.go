@@ -104,7 +104,7 @@ func (db *Database) UpdateRemote(organization string, debug bool, opt ...string)
 
 	var newPackages Packages
 	ignored := sliceToSet(db.IgnoreRepos)
-	lastUpdate, newUpdate := db.LastUpdate, time.Now().Add(time.Hour*-24)
+	lastUpdate, newUpdate := db.LastUpdate, time.Now()
 
 	packages := make(chan Package, (nbPages-1)*limit+1)
 	buffer := make(chan Package, nbRepos)

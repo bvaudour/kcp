@@ -54,10 +54,8 @@ func saveDb(db database.Database) error {
 }
 
 func filter(debug, forceUpdate, onlyName bool, f []database.FilterFunc, s []database.SorterFunc) {
-	db := loadDb(debug, forceUpdate)
-	if forceUpdate {
-		saveDb(db)
-	}
+	db := loadDb(debug, true)
+	saveDb(db)
 	l := db.Filter(f...).Sort(s...)
 	if len(l) == 0 {
 		PrintWarning(Tr(errNoPackage))
