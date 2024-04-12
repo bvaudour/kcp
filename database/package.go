@@ -317,6 +317,9 @@ func (pl Packages) SearchBroken() (broken []string) {
 	for _, p := range pl {
 		available[p.Name] = true
 	}
+	for e := range common.Exceptions {
+		available[e] = true
+	}
 
 	cleanDep := func(d string) string {
 		for _, s := range []string{">", "<", "=", ":"} {

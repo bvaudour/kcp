@@ -1,6 +1,7 @@
 package common
 
 import (
+	"bufio"
 	"bytes"
 	_ "embed"
 	"fmt"
@@ -15,7 +16,7 @@ import (
 //go:embed kcp.conf
 var embedConf []byte
 
-//Initialized at build time
+// Initialized at build time
 var (
 	Version   string
 	BuildTime string
@@ -31,12 +32,13 @@ var (
 	Password     string
 )
 
-//Initialized at execution time
+// Initialized at execution time
 var (
 	Language      string
 	DefaultEditor string
 	UserBaseDir   string
 	Config        *conf.Configuration
+	Exceptions    = make(map[string]bool)
 )
 
 func setIfZero(v *string, d string) {
@@ -148,5 +150,24 @@ func init() {
 	}
 	if user != "" && passwd != "" {
 		User, Password = user, passwd
+	}
+
+	// Load exceptions
+	exceptionsFile := Config.Get("pckcp.exceptionsFile")
+	if exceptionsFile != "" {
+		p := path.Join(userDir, exceptionsFile)
+		if f, err := os.ReadFile(p); err == nil {
+			sc := bufio.NewScanner(bytes.NewReader(f))
+			for sc.Scan() {
+				Exceptions[sc.Text()] = true
+			}
+		}
+		p = path.Join(ConfigBaseDir, exceptionsFile)
+		if f, err := os.ReadFile(p); err == nil {
+			sc := bufio.NewScanner(bytes.NewReader(f))
+			for sc.Scan() {
+				Exceptions[sc.Text()] = true
+			}
+		}
 	}
 }

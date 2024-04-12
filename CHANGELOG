@@ -1,3 +1,5 @@
+kcp 1.2.4 (released 2024-04-12):
+- Adjust exceptions files + use it at kcp updates
 kcp 1.2.3 (released 2024-04-08):
 - Always update event if --force-update is not typed
 kcp 1.2.2 (released 2023-03-03):

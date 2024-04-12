@@ -1,6 +1,9 @@
 java-runtime
 java-environment
+libgl
+libjpeg
 libreoffice-en-US
 libreoffice-langpack
 phonon-backend
 phonon-backend-qt5
+sh
