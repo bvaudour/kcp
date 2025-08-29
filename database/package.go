@@ -12,10 +12,12 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/bvaudour/kcp/color"
-	"github.com/bvaudour/kcp/common"
-	"github.com/bvaudour/kcp/pkgbuild"
-	"github.com/bvaudour/kcp/pkgbuild/standard"
+	"codeberg.org/bvaudour/kcp/common"
+	"codeberg.org/bvaudour/kcp/pkgbuild"
+	"codeberg.org/bvaudour/kcp/pkgbuild/standard"
+	"git.kaosx.ovh/benjamin/collection"
+	"git.kaosx.ovh/benjamin/collection/concurrent"
+	"git.kaosx.ovh/benjamin/format"
 )
 
 // Package stores informations about a package.
@@ -56,19 +58,23 @@ func (p Package) GetLocaleVersion() string {
 
 // GetPKGBUILD reads and parses the remote PKGBUILD
 // from the github organization URL.
-func (p Package) GetPKGBUID(debug ...bool) (pkg *pkgbuild.PKGBUILD, err error) {
-	url := p.PkgbuildUrl
-	printDebug := len(debug) > 0 && debug[0]
-	var buf io.Reader
+func (p Package) GetPKGBUID(debug ...bool) (file *pkgbuild.PKGBUILD, err error) {
+	url, printDebug := p.PkgbuildUrl, len(debug) > 0 && debug[0]
 
-	if buf, err = execRequest(url, ctx{}); err != nil {
+	var body io.Reader
+	if body, _, err = common.Request(url); err != nil {
 		if printDebug {
-			fmt.Fprintf(os.Stderr, "%s %s\n", color.Red.Format("[Error: %s]", err), url)
+			fmt.Fprintf(
+				os.Stderr,
+				"%s %s\n",
+				format.FormatOf("l_red").Sprintf("[Error: %s]", err),
+				url,
+			)
 		}
 		return
 	}
 
-	return pkgbuild.DecodeVars(buf)
+	return pkgbuild.DecodeVars(body)
 }
 
 func (p *Package) updateFromPKGBUILD(file *pkgbuild.PKGBUILD) {
@@ -96,12 +102,16 @@ func (p *Package) updateFromPKGBUILD(file *pkgbuild.PKGBUILD) {
 			p.Conflicts = v
 		case standard.REPLACES:
 			p.Replaces = v
+		case standard.CKSUMS:
+			p.ValidatedBy = "CRC32"
 		case standard.MD5SUMS:
 			p.ValidatedBy = "MD5"
 		case standard.SHA1SUMS:
 			p.ValidatedBy = "SHA-1"
 		case standard.SHA256SUMS:
 			p.ValidatedBy = "SHA-256"
+		case standard.B2SUMS:
+			p.ValidatedBy = "BLAKE2"
 		case standard.LICENSE:
 			p.Licenses = v
 		case standard.INSTALL:
@@ -130,23 +140,23 @@ func (p Package) String() string {
 	var w strings.Builder
 	fmt.Fprint(
 		&w,
-		color.Magenta.Colorize("kcp/"),
-		color.NoColor.Colorize(p.Name),
+		format.Apply("kcp/", "l_majenta"),
+		format.Apply(p.Name, "bold"),
 		" ",
-		color.Green.Colorize(p.RepoVersion),
+		format.Apply(p.RepoVersion, "l_green"),
 	)
 
 	if p.LocalVersion != "" {
 		fmt.Fprint(&w, " ")
 		if p.LocalVersion == p.RepoVersion {
-			fmt.Fprint(&w, color.Cyan.Colorize(common.Tr(labelInstalled)))
+			format.FormatOf("l_cyan").Fprint(&w, common.Tr(labelInstalled))
 		} else {
-			fmt.Fprint(&w, color.Cyan.Format(common.Tr(labelInstalledVersion), p.LocalVersion))
+			format.FormatOf("l_cyan").Fprintf(&w, common.Tr(labelInstalledVersion), p.LocalVersion)
 		}
 	}
 
-	fmt.Fprintln(&w, color.Blue.Format(" (%d)", p.Stars))
-	fmt.Fprint(&w, "\t", p.Description)
+	format.FormatOf("l_blue").Fprintf(&w, " (%d)", p.Stars)
+	fmt.Fprint(&w, "\n\t", p.Description)
 
 	return w.String()
 }
@@ -188,7 +198,7 @@ func (p Package) Detail() string {
 		if v == "" {
 			v = "--"
 		}
-		sep := strings.Repeat(" ", s-utf8.RuneCountInString(l))
+		sep := strings.Repeat(" ", utf8.RuneCountInString(l))
 		result[i] = fmt.Sprintf("%s%s : %s", l, sep, v)
 	}
 
@@ -213,7 +223,9 @@ func (p Package) Clone(dir string, ssh bool) (fullDir string, err error) {
 		url = p.SshUrl
 	}
 
-	err = common.LaunchCommand("git", "clone", url)
+	if err = common.LaunchCommand("git", "clone", url); err != nil {
+		os.RemoveAll(fullDir)
+	}
 
 	return
 }
@@ -245,224 +257,6 @@ func NewSorter(sorters ...SorterFunc) SorterFunc {
 	}
 }
 
-// Packages is a list of packages.
-type Packages []Package
-
-// ToSet returns a set of the list.
-func (pl Packages) ToSet() PackageSet {
-	ps := make(PackageSet)
-
-	for _, p := range pl {
-		ps[p.Name] = p
-	}
-
-	return ps
-}
-
-// Push append the given entries to the list.
-func (pl *Packages) Push(packages ...Package) {
-	*pl = append(*pl, packages...)
-}
-
-// Remove removes the given entries from the list.
-func (pl *Packages) Remove(packages ...Package) {
-	ps := Packages(packages).ToSet()
-	np := pl.Filter(func(p Package) bool { return !ps.Contains(p.Name) })
-	*pl = np
-}
-
-// Filter returns a list which contains all packages
-// matching the filters.
-func (pl Packages) Filter(filters ...FilterFunc) (result Packages) {
-	f := NewFilter(filters...)
-
-	for _, p := range pl {
-		if f(p) {
-			result.Push(p)
-		}
-	}
-
-	return result
-}
-
-// Sort sorts the list using the given criterias
-// and returns it.
-func (pl Packages) Sort(sorters ...SorterFunc) Packages {
-	s := NewSorter(sorters...)
-	less := func(i, j int) bool {
-		return s(pl[i], pl[j]) <= 0
-	}
-
-	sort.Slice(pl, less)
-
-	return pl
-}
-
-// Get returns the package with the given name.
-// If no package found, ok is false.
-func (pl Packages) Get(name string) (result Package, ok bool) {
-	for _, p := range pl {
-		if ok = p.Name == name; ok {
-			return p, ok
-		}
-	}
-
-	return
-}
-
-// SearchBroken returns packages which have at least
-// one depend missing on the offical repo or on KCP.
-func (pl Packages) SearchBroken() (broken []string) {
-	available := make(map[string]bool)
-	for _, p := range pl {
-		available[p.Name] = true
-	}
-	for e := range common.Exceptions {
-		available[e] = true
-	}
-
-	cleanDep := func(d string) string {
-		for _, s := range []string{">", "<", "=", ":"} {
-			if i := strings.Index(d, s); i > 0 {
-				d = d[:i]
-			}
-		}
-		return strings.TrimSpace(d)
-	}
-
-	checkBroken := func(d string) {
-		if available[d] {
-			return
-		}
-		result, _ := common.GetOutputCommand("pacman", "-Si", d)
-		if len(result) == 0 {
-			broken = append(broken, d)
-		}
-	}
-
-	routines := defaultRoutines
-	done := make(map[string]bool)
-	buffer := make(chan string, len(pl))
-	var wg sync.WaitGroup
-	wg.Add(routines)
-
-	for i := 0; i < routines; i++ {
-		go (func() {
-			defer wg.Done()
-			for {
-				d, ok := <-buffer
-				if !ok {
-					return
-				}
-				checkBroken(d)
-			}
-		})()
-	}
-
-	for _, p := range pl {
-		for _, depends := range [][]string{p.Depends, p.OptDepends, p.MakeDepends} {
-			for _, d := range depends {
-				d = cleanDep(d)
-				if !done[d] && len(d) > 0 {
-					done[d] = true
-					buffer <- d
-				}
-			}
-		}
-	}
-
-	close(buffer)
-	wg.Wait()
-
-	return
-}
-
-// Names returns the list of the packages’ names.
-func (pl Packages) Names() []string {
-	names := make([]string, len(pl))
-
-	for i, p := range pl {
-		names[i] = p.Name
-	}
-
-	return names
-}
-
-// String returns the string representation of the list.
-func (pl Packages) String() string {
-	out := make([]string, len(pl))
-
-	for i, p := range pl {
-		out[i] = p.String()
-	}
-
-	return strings.Join(out, "\n")
-}
-
-// PackageSet is list of packages mapped by name
-type PackageSet map[string]Package
-
-// Contains checks if the set contains a package with the given name.
-func (ps PackageSet) Contains(name string) (ok bool) {
-	_, ok = ps[name]
-
-	return
-}
-
-// Push adds all given packages to the set.
-func (ps PackageSet) Push(packages ...Package) {
-	for _, p := range packages {
-		ps[p.Name] = p
-	}
-}
-
-// Remove removes all packages with the given names.
-func (ps PackageSet) Remove(names ...string) {
-	for _, n := range names {
-		delete(ps, n)
-	}
-}
-
-// ToList converts the set to a list of packages.
-func (ps PackageSet) ToList() (pl Packages) {
-	for _, p := range ps {
-		pl.Push(p)
-	}
-
-	return
-}
-
-// Filter returns a list which contains all packages
-// matching the filters.
-func (ps PackageSet) Filter(filters ...FilterFunc) (pl Packages) {
-	f := NewFilter(filters...)
-
-	for _, p := range ps {
-		if f(p) {
-			pl.Push(p)
-		}
-	}
-
-	return
-}
-
-// Sort sorts the packages using the given criterias
-// and returns them.
-func (ps PackageSet) Sort(sorters ...SorterFunc) Packages {
-	return ps.ToList().Sort(sorters...)
-}
-
-// Names returns the list of the packages’ names.
-func (ps PackageSet) Names() []string {
-	var names []string
-
-	for n := range ps {
-		names = append(names, n)
-	}
-
-	return names
-}
-
 func SortByName(p1, p2 Package) int {
 	return strings.Compare(p1.Name, p2.Name)
 }
@@ -488,4 +282,147 @@ func FilterOutdated(p Package) bool {
 
 func FilterStarred(p Package) bool {
 	return p.Stars > 0
+}
+
+// Packages is a list of packages.
+type Packages []Package
+
+// Push append the given entries to the list.
+func (pl *Packages) Push(packages ...Package) {
+	*pl = append(*pl, packages...)
+}
+
+// Remove removes the given entries from the list.
+func (pl *Packages) Remove(packages ...Package) {
+	packageNames := collection.NewSet[string]()
+	for _, p := range packages {
+		packageNames.Add(p.Name)
+	}
+
+	*pl = pl.Filter(func(p Package) bool { return !packageNames.Contains(p.Name) })
+}
+
+// Filter returns a list which contains all packages
+// matching the filters.
+func (pl Packages) Filter(filters ...FilterFunc) (result Packages) {
+	f := NewFilter(filters...)
+
+	for _, p := range pl {
+		if f(p) {
+			result.Push(p)
+		}
+	}
+
+	return result
+}
+
+// Sort sorts the list using the given criterias
+// and returns it.
+func (pl Packages) Sort(sorters ...SorterFunc) Packages {
+	s := NewSorter(sorters...)
+	less := func(i, j int) bool {
+		return s(pl[i], pl[j]) <= 0
+	}
+	sort.Slice(pl, less)
+
+	return pl
+}
+
+// Get returns the package with the given name.
+// If no package found, ok is false.
+func (pl Packages) Get(name string) (result Package, ok bool) {
+	for _, p := range pl {
+		if ok = p.Name == name; ok {
+			return p, ok
+		}
+	}
+
+	return
+}
+
+// Contains checks if the set contains a package with the given name.
+func (pl Packages) Contains(name string) (ok bool) {
+	_, ok = pl.Get(name)
+
+	return
+}
+
+// SearchBroken returns packages which have at least
+// one depend missing on the offical repo or on KCP.
+func (pl Packages) SearchBroken() []string {
+	done := concurrent.NewSet(common.Exceptions...)
+	for _, p := range pl {
+		done.Add(p.Name)
+	}
+
+	broken := concurrent.NewSlice[string]()
+	cleanDep := func(d string) string {
+		for _, s := range []string{">", "<", "=", ":"} {
+			if i := strings.Index(d, s); i > 0 {
+				d = d[:i]
+			}
+		}
+		return strings.TrimSpace(d)
+	}
+	checkBroken := func(d string) {
+		d = cleanDep(d)
+		if len(d) == 0 || done.Contains(d) {
+			return
+		}
+		done.Add(d)
+		result, _ := common.GetOutputCommand("pacman", "-Si", d)
+		if len(result) == 0 {
+			broken.Append(d)
+		}
+	}
+
+	buffer := make(chan string, max(100, len(pl)))
+	var wg sync.WaitGroup
+
+	for i := 0; i < defaultRoutines; i++ {
+		wg.Go(func() {
+			for {
+				if d, ok := <-buffer; ok {
+					checkBroken(d)
+				} else {
+					return
+				}
+			}
+		})
+	}
+
+	for _, p := range pl {
+		for _, depends := range [][]string{p.Depends, p.OptDepends, p.MakeDepends} {
+			for _, d := range depends {
+				buffer <- d
+			}
+		}
+	}
+
+	close(buffer)
+	wg.Wait()
+
+	return broken.CloseData()
+}
+
+// Names returns the list of the packages’ names.
+func (pl Packages) Names() []string {
+	names := make([]string, len(pl))
+
+	for i, p := range pl {
+		names[i] = p.Name
+	}
+
+	return names
+}
+
+// String returns the string representation of the list.
+func (pl Packages) String() string {
+	out := make([]string, len(pl))
+
+	for i, p := range pl {
+		out[i] = p.String()
+	}
+
+	return strings.Join(out, "\n")
 }

@@ -1,14 +1,16 @@
 package database
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"io"
+	"log"
 	"os"
+	"slices"
 	"sync"
 	"time"
 
-	"github.com/bvaudour/kcp/color"
+	"git.kaosx.ovh/benjamin/collection/concurrent"
 )
 
 // Database is the decoded structure
@@ -31,7 +33,6 @@ func New(ignored ...string) Database {
 // Decode decodes the given file to the database
 func (db *Database) Decode(r io.Reader) error {
 	dec := json.NewDecoder(r)
-
 	return dec.Decode(db)
 }
 
@@ -39,37 +40,33 @@ func (db *Database) Decode(r io.Reader) error {
 // and write it to the given file.
 func (db Database) Encode(w io.Writer) error {
 	enc := json.NewEncoder(w)
-
 	return enc.Encode(db)
 }
 
 // Load decodes the file in the given path and
 // returns the decoded database.
 func Load(fpath string, ignored ...string) (db Database, err error) {
-	var f *os.File
-	db = New(ignored...)
-
-	if f, err = os.Open(fpath); err != nil {
+	var file *os.File
+	if file, err = os.Open(fpath); err != nil {
 		return
 	}
-	defer f.Close()
+	defer file.Close()
 
-	err = db.Decode(f)
-	db.IgnoreRepos = ignored
+	db = New(ignored...)
+	db.Decode(file)
 
 	return
 }
 
 // Save writes the database into the file on the given path.
-func Save(fpath string, db Database) (err error) {
-	var f *os.File
-
-	if f, err = os.Create(fpath); err != nil {
-		return
+func Save(fpath string, db Database) error {
+	file, err := os.Create(fpath)
+	if err != nil {
+		return err
 	}
-	defer f.Close()
+	defer file.Close()
 
-	return db.Encode(f)
+	return db.Encode(file)
 }
 
 // UpdateBroken updates the broken depends.
@@ -77,140 +74,163 @@ func (db *Database) UpdateBroken() {
 	db.BrokenDepends = db.Packages.SearchBroken()
 }
 
-// UpdateRemote updates the database from a github organization.
-// If optional user and password are given, requests are done
-// with authentification in order to have a better rate limit.
-func (db *Database) UpdateRemote(organization string, debug bool, opt ...string) (counter Counter, err error) {
-	limit, routines := defaultLimit, defaultRoutines
-	repo := NewRepository(organization, opt...)
+// UpdateRemote updates the database from the remote server.
+// It returns a counter of the changes.
+func (db *Database) UpdateRemote(connector Connector, debug bool) (counter Counter, err error) {
+	// Étape 7: Mettre à jour db.LastUpdate avec la date/heure du début du traitement.
+	startTime := time.Now()
+	defer func() {
+		if err == nil {
+			db.LastUpdate = startTime
+		}
+	}()
 
-	var nbPages, nbRepos int
-	if nbPages, nbRepos, err = repo.CountPages(limit); err != nil {
-		fmt.Fprintf(
-			os.Stderr,
-			"%s %s\n",
-			color.Red.Format("[Error: %s]", err),
-			"Failed to count the pages of the repository list",
-		)
-		return
+	// Étape 1: Évaluer le nombre d'appels nécessaires.
+	count, err := connector.CountPublcRepos()
+	if err != nil {
+		return counter, err
+	}
+	pages := count / defaultLimit
+	if count%defaultLimit > 0 {
+		pages++
 	}
 
-	if debug {
-		fmt.Fprintln(
-			os.Stderr,
-			color.Magenta.Format("%d pages, %d repos", nbPages, nbRepos),
-		)
-	}
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
-	var newPackages Packages
-	ignored := sliceToSet(db.IgnoreRepos)
-	lastUpdate, newUpdate := db.LastUpdate, time.Now()
+	var wg sync.WaitGroup
+	stack := concurrent.NewSlice[Package]()
+	errChan := make(chan error, pages)
 
-	packages := make(chan Package, (nbPages-1)*limit+1)
-	buffer := make(chan Package, nbRepos)
-	quit := make(chan bool)
-	var wgPackages, wgPages, wgBuffer sync.WaitGroup
+	// Canal pour limiter le nombre de goroutines simultanées
+	sem := make(chan struct{}, defaultRoutines)
 
-	wgBuffer.Add(1)
-	go (func() {
-		defer wgBuffer.Done()
-		for {
-			p, ok := <-buffer
-			if !ok {
-				quit <- true
+	// Étape 2 & 3: Exécuter connector.GetPage en parallèle et traiter les réponses.
+	for i := 1; i <= pages; i++ {
+		wg.Add(1)
+		sem <- struct{}{}
+		go func(page int) {
+			defer wg.Done()
+			defer func() { <-sem }()
+
+			// Vérifier si une autre goroutine a déjà échoué
+			select {
+			case <-ctx.Done():
 				return
+			default:
+			}
+
+			pagePackages, pageErr := connector.GetPage(page, defaultLimit)
+			if pageErr != nil {
+				errChan <- pageErr
+				cancel() // Annuler toutes les autres goroutines
+				return
+			}
+
+			var pageWg sync.WaitGroup
+			// Étape 4: Traiter chaque paquet.
+			for _, p := range pagePackages {
+				// Vérifier à nouveau avant de lancer une nouvelle sous-goroutine
+				select {
+				case <-ctx.Done():
+					return
+				default:
+				}
+
+				pageWg.Add(1)
+				sem <- struct{}{}
+				go func(pkg Package) {
+					defer pageWg.Done()
+					defer func() { <-sem }()
+
+					// 4.1. Ignorer le paquet si nécessaire.
+					if slices.Contains(db.IgnoreRepos, pkg.Name) {
+						return
+					}
+
+					pkg.noChange = true
+					// 4.2. Vérifier si le paquet a été mis à jour.
+					if pkg.UpdatedAt.After(db.LastUpdate) {
+						if file, err := pkg.GetPKGBUID(debug); err == nil {
+							pkg.updateFromPKGBUILD(file)
+							pkg.noChange = false
+						} else if debug {
+							log.Printf("Failed to get PKGBUILD for %s: %v", pkg.Name, err)
+						}
+					}
+
+					// 4.3. Récupérer la version locale et ajouter à la liste.
+					pkg.LocalVersion = pkg.GetLocaleVersion()
+					stack.Append(pkg)
+				}(p)
+			}
+			pageWg.Wait()
+		}(i)
+	}
+
+	// Attendre la fin de toutes les goroutines ou une erreur
+	waitChan := make(chan struct{})
+	go func() {
+		wg.Wait()
+		close(waitChan)
+	}()
+
+	select {
+	case <-waitChan:
+		// Toutes les goroutines ont terminé sans erreur
+	case err = <-errChan:
+		// Une erreur est survenue, on l'a récupérée et on retourne
+		return counter, err
+	}
+
+	// Étape 5: Parcourir la liste des paquets à traiter.
+	remotePackages := Packages(stack.CloseData())
+	newPackages := make(Packages, 0, len(remotePackages))
+	for _, p := range remotePackages {
+		localPkg, exists := db.Packages.Get(p.Name)
+
+		if !exists {
+			// 5.1. Le paquet n'existe pas dans la base de données.
+			counter.Added++
+			if p.noChange {
+				if file, err := p.GetPKGBUID(debug); err == nil {
+					p.updateFromPKGBUILD(file)
+				} else if debug {
+					log.Printf("Failed to get PKGBUILD for new package %s: %v", p.Name, err)
+				}
+			}
+			newPackages.Push(p)
+		} else {
+			if p.noChange {
+				// 5.2. Le paquet existe et noChange vaut true.
+				p.updateFromPackage(localPkg)
+				if p.LocalVersion != localPkg.LocalVersion {
+					counter.Updated++
+				}
+			} else {
+				// 5.3. Le paquet existe et noChange vaut false (mis à jour).
+				counter.Updated++
 			}
 			newPackages.Push(p)
 		}
-	})()
-
-	wgPackages.Add(routines)
-	for i := 0; i < routines; i++ {
-		go (func() {
-			defer wgPackages.Done()
-			for {
-				p, ok := <-packages
-				if !ok {
-					return
-				}
-				if ignored[p.Name] {
-					continue
-				}
-
-				p.PkgbuildUrl = fmt.Sprintf(baseRawURL, repo.organization, p.Name, p.Branch)
-				p.LocalVersion = p.GetLocaleVersion()
-				if p.noChange = p.UpdatedAt.Before(lastUpdate); !p.noChange {
-					if file, e := p.GetPKGBUID(debug); e == nil {
-						p.updateFromPKGBUILD(file)
-					}
-				}
-				buffer <- p
-			}
-		})()
 	}
 
-	wgPages.Add(nbPages)
-	for i := 1; i <= nbPages; i++ {
-		go (func(i int) {
-			defer wgPages.Done()
-			page, e := repo.GetPage(i, limit, debug)
-			if e != nil {
-				err = e
-				return
-			}
-			for _, p := range page {
-				packages <- p
-			}
-		})(i)
-	}
-
-	wgPages.Wait()
-
-	close(packages)
-	wgPackages.Wait()
-
-	close(buffer)
-	<-quit
-	wgBuffer.Wait()
-
-	if err != nil {
-		fmt.Fprintf(
-			os.Stderr,
-			"%s %s\n",
-			color.Red.Format("[Error: %s]", err),
-			"Failed to retrieve the remote packages list",
-		)
-		return
-	}
-	psOld := db.Packages.ToSet()
-
-	for i, p := range newPackages {
-		p0, ok := psOld[p.Name]
-		if !ok {
-			counter.Added++
-		} else if !p.noChange {
-			counter.Updated++
-		} else {
-			newPackages[i].updateFromPackage(p0)
-		}
-	}
-
-	psNew := newPackages.ToSet()
-
-	for n := range psOld {
-		if _, ok := psNew[n]; !ok {
+	// Étape 6: Parcourir les paquets locaux pour trouver les paquets supprimés.
+	for _, localPkg := range db.Packages {
+		if !remotePackages.Contains(localPkg.Name) {
 			counter.Deleted++
 		}
 	}
 
-	db.Packages, db.LastUpdate = newPackages, newUpdate
+	// Étape 7: Mettre à jour la base de données.
+	db.Packages = newPackages
 
-	return
+	return counter, nil
 }
 
 // Update checks if updates are available in the database.
-func (db *Database) Update(organization string, debug bool, opt ...string) (counter Counter, err error) {
-	if counter, err = db.UpdateRemote(organization, debug, opt...); err == nil {
+func (db *Database) Update(connector Connector, debug bool) (counter Counter, err error) {
+	if counter, err = db.UpdateRemote(connector, debug); err == nil {
 		db.UpdateBroken()
 	}
 

@@ -26,12 +26,6 @@ const (
 	msgDeleted = "%d entries deleted!"
 	msgUpdated = "%d entries updated!"
 
-	baseUrl             = "https://api.github.com/orgs"
-	baseRawURL          = "https://raw.githubusercontent.com/%s/%s/%s/PKGBUILD"
-	baseOrganizationURL = baseUrl + "/%s"
-	baseReposURL        = baseOrganizationURL + "/repos?page=%d&per_page=%d"
-	acceptHeader        = "application/vnd.github.v3+json"
-
 	defaultLimit    = 100
 	defaultRoutines = 150
 )

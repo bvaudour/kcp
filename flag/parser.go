@@ -9,7 +9,7 @@ import (
 	"unicode/utf8"
 )
 
-//Parser is a structure containing definitions to parse arguments of a CLI.
+// Parser is a structure containing definitions to parse arguments of a CLI.
 type Parser struct {
 	p        Properties
 	flags    []*Flag
@@ -21,75 +21,75 @@ type Parser struct {
 	post     []string
 }
 
-//Set modifies the given property with the given value.
-func (p *Parser) Set(k PropertyType, v interface{}) error {
+// Set modifies the given property with the given value.
+func (p *Parser) Set(k PropertyType, v any) error {
 	return p.p.Set(k, v)
 }
 
-//GetString returns the string representation of the needed property
+// GetString returns the string representation of the needed property
 func (p *Parser) GetString(k PropertyType) string {
 	return p.p.ValueString(k)
 }
 
-//GetBool returns the boolean representation of the needed property.
+// GetBool returns the boolean representation of the needed property.
 func (p *Parser) GetBool(k PropertyType) bool {
 	return p.p.ValueBool(k)
 }
 
-//Name returns the name of the application.
+// Name returns the name of the application.
 func (p *Parser) Name() string {
 	return p.GetString(Name)
 }
 
-//Description returns the description of the application.
+// Description returns the description of the application.
 func (p *Parser) Description() string {
 	return p.GetString(Description)
 }
 
-//LongDescription returns the long description of the application.
+// LongDescription returns the long description of the application.
 func (p *Parser) LongDescription() string {
 	return p.GetString(LongDescription)
 }
 
-//Synopsis returns the synopsis of the application.
+// Synopsis returns the synopsis of the application.
 func (p *Parser) Synopsis() string {
 	return p.GetString(Synopsis)
 }
 
-//Author returns the author's name of the application.
+// Author returns the author's name of the application.
 func (p *Parser) Author() string {
 	return p.GetString(Author)
 }
 
-//Version returns the version of the application.
+// Version returns the version of the application.
 func (p *Parser) Version() string {
 	return p.GetString(Version)
 }
 
-//AllowPreArgs returns true if the parser accepts anonymous args before flags.
+// AllowPreArgs returns true if the parser accepts anonymous args before flags.
 func (p *Parser) AllowPreArgs() bool {
 	return p.GetBool(AllowPreArs)
 }
 
-//AllowPostArgs returns true if the parser accepts anonymous args after flags.
+// AllowPostArgs returns true if the parser accepts anonymous args after flags.
 func (p *Parser) AllowPostArgs() bool {
 	return p.GetBool(AllowPostArgs)
 }
 
-//GetFlag returns the flag where the given name is defined.
+// GetFlag returns the flag where the given name is defined.
 func (p *Parser) GetFlag(name string) *Flag {
 	f, _ := p.args[name]
 	return f
 }
 
-//ContainsFlag returns true if a flag with the given name is defined.
+// ContainsFlag returns true if a flag with the given name is defined.
 func (p *Parser) ContainsFlag(name string) bool {
 	_, ok := p.args[name]
 	return ok
 }
 
-//Add appends a flags to the parser.
-//If a flag with same name(s) is (are) defined, return a non nil error.
+// Add appends a flags to the parser.
+// If a flag with same name(s) is (are) defined, return a non nil error.
 func (p *Parser) Add(f *Flag) error {
 	long, short := f.Long(), f.Short()
 	if p.ContainsFlag(long) {
@@ -109,8 +109,8 @@ func (p *Parser) Add(f *Flag) error {
 	return nil
 }
 
-//AddAll appends given flags to the parser.
-//If a flag cannot be added, return an error.
+// AddAll appends given flags to the parser.
+// If a flag cannot be added, return an error.
 func (p *Parser) AddAll(flags ...*Flag) (err []error) {
 	for _, f := range flags {
 		if e := p.Add(f); e != nil {
@@ -120,7 +120,7 @@ func (p *Parser) AddAll(flags ...*Flag) (err []error) {
 	return
 }
 
-//NewParser returns an new parser initialized with the description and the version of the application.
+// NewParser returns an new parser initialized with the description and the version of the application.
 func NewParser(description, version string) *Parser {
 	p := &Parser{
 		p:        ParserProps(),
@@ -134,7 +134,7 @@ func NewParser(description, version string) *Parser {
 	return p
 }
 
-//Bool appends a new boolean flag and returns a pointer to its value.
+// Bool appends a new boolean flag and returns a pointer to its value.
 func (p *Parser) Bool(s, l, desc string) (*bool, error) {
 	f, v, e := NewBoolFlag(s, l, desc)
 	if e == nil {
@@ -143,7 +143,7 @@ func (p *Parser) Bool(s, l, desc string) (*bool, error) {
 	return v, e
 }
 
-//String appends a new string flag and returns a pointer to its value.
+// String appends a new string flag and returns a pointer to its value.
 func (p *Parser) String(s, l, desc, vn, df string) (*string, error) {
 	f, v, e := NewStringFlag(s, l, desc, vn, df)
 	if e == nil {
@@ -152,7 +152,7 @@ func (p *Parser) String(s, l, desc, vn, df string) (*string, error) {
 	return v, e
 }
 
-//Choice appends a new choice flag and returns a pointer to its value.
+// Choice appends a new choice flag and returns a pointer to its value.
 func (p *Parser) Choice(s, l, desc, df string, choices []string) (*string, error) {
 	f, v, e := NewChoiceFlag(s, l, desc, df, choices)
 	if e == nil {
@@ -161,7 +161,7 @@ func (p *Parser) Choice(s, l, desc, df string, choices []string) (*string, error
 	return v, e
 }
 
-//Array appends a new multiple string flag and returns a pointer to its value.
+// Array appends a new multiple string flag and returns a pointer to its value.
 func (p *Parser) Array(s, l, desc, vn string) (*[]string, error) {
 	f, v, e := NewArrayFlag(s, l, desc, vn)
 	if e == nil {
@@ -170,7 +170,7 @@ func (p *Parser) Array(s, l, desc, vn string) (*[]string, error) {
 	return v, e
 }
 
-//Int appends a new multiple int flag and returns a pointer to its value.
+// Int appends a new multiple int flag and returns a pointer to its value.
 func (p *Parser) Int(s, l, desc, vn string, df int) (*int, error) {
 	f, v, e := NewIntFlag(s, l, desc, vn, df)
 	if e == nil {
@@ -179,8 +179,8 @@ func (p *Parser) Int(s, l, desc, vn string, df int) (*int, error) {
 	return v, e
 }
 
-//Group groups all flags with given names and returns the number of flags in the group.
-//Only one flag of a group can be used at same time.
+// Group groups all flags with given names and returns the number of flags in the group.
+// Only one flag of a group can be used at same time.
 func (p *Parser) Group(names ...string) int {
 	g := new(Group)
 	var flags []*Flag
@@ -195,7 +195,7 @@ func (p *Parser) Group(names ...string) int {
 	return len(flags)
 }
 
-//Require defines all flags required by the flag with name name0 and returns the number of required flags.
+// Require defines all flags required by the flag with name name0 and returns the number of required flags.
 func (p *Parser) Require(name0 string, names ...string) int {
 	f0 := p.GetFlag(name0)
 	if f0 == nil {
@@ -241,7 +241,7 @@ func format(args []string) []string {
 	return out
 }
 
-//Parse parses the givens arguments according to the definition of the parser.
+// Parse parses the givens arguments according to the definition of the parser.
 func (p *Parser) Parse(args []string) error {
 	if len(args) == 0 {
 		return NewError(errNotEnoughArg)
@@ -358,17 +358,17 @@ func (p *Parser) Parse(args []string) error {
 	return nil
 }
 
-//GetPreArgs returns anonymous args before flags.
+// GetPreArgs returns anonymous args before flags.
 func (p *Parser) GetPreArgs() []string {
 	return p.pre
 }
 
-//GetPostArgs returns anonymous args after flags.
+// GetPostArgs returns anonymous args after flags.
 func (p *Parser) GetPostArgs() []string {
 	return p.post
 }
 
-//Manpage creation
+// Manpage creation
 func (f *Flag) man() string {
 	b := new(strings.Builder)
 	short, long := f.Short(), f.Long()
@@ -414,7 +414,7 @@ func (p *Parser) description() string {
 	return b.String()
 }
 
-//PrinMan prints the Manpage to the standard output according to the parser's definition.
+// PrinMan prints the Manpage to the standard output according to the parser's definition.
 func (p *Parser) PrintMan() {
 	app, version, summ, author := p.Name(), p.Version(), p.Description(), p.Author()
 	fmt.Printf(`.TH "%s" 1 "%s" "%s" ""`, app, time.Now().Format("January 2, 2006"), version)
@@ -439,10 +439,10 @@ func (p *Parser) PrintMan() {
 	}
 }
 
-//PrintVersion displays the version of the application.
+// PrintVersion displays the version of the application.
 func (p *Parser) PrintVersion() { fmt.Println(p.Name(), p.Version()) }
 
-//PrintHelp displays the help of the application.
+// PrintHelp displays the help of the application.
 func (p *Parser) PrintHelp() {
 	// Usage
 	a, s := p.Name(), p.Synopsis()

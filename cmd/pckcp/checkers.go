@@ -6,22 +6,24 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bvaudour/kcp/color"
-	. "github.com/bvaudour/kcp/common"
-	"github.com/bvaudour/kcp/pkgbuild"
-	"github.com/bvaudour/kcp/pkgbuild/atom"
-	"github.com/bvaudour/kcp/pkgbuild/standard"
+	"codeberg.org/bvaudour/kcp/common"
+	"codeberg.org/bvaudour/kcp/pkgbuild"
+	pformat "codeberg.org/bvaudour/kcp/pkgbuild/format"
+	"codeberg.org/bvaudour/kcp/pkgbuild/info"
+	"codeberg.org/bvaudour/kcp/pkgbuild/standard"
+	"git.kaosx.ovh/benjamin/collection"
+	fformat "git.kaosx.ovh/benjamin/format"
+	"mvdan.cc/sh/v3/syntax"
 )
 
 const (
-	urlHook = "https://jlk.fjfi.cvut.cz/arch/manpages/man/alpm-hooks.5"
+	urlHook = "https://archlinux.org/pacman/alpm-hooks.5.html"
 )
 
 var (
-	colorType = map[string]color.Color{
-		typeError:   color.Red,
-		typeWarning: color.Yellow,
-		typeInfo:    color.Green,
+	colorType = map[string]fformat.Format{
+		typeError:   fformat.FormatOf("l_red"),
+		typeWarning: fformat.FormatOf("l_yellow"), typeInfo: fformat.FormatOf("l_green"),
 	}
 )
 
@@ -36,18 +38,18 @@ func message(t string, l1, l2 int, msg string) {
 	}
 	fmt.Printf(
 		"%s:\n  %s\n",
-		colorType[t].Format("%s %s", t, position),
+		colorType[t].Sprintf("%s %s", t, position),
 		msg,
 	)
 }
 
-func loadExceptions() (exceptions map[string]bool) {
-	exceptions = make(map[string]bool)
-	fp := Config.Get("pckcp.exceptionsFile")
+func loadExceptions() (exceptions collection.Set[string]) {
+	exceptions = collection.NewSet[string]()
+	fp := common.Config.Get("pckcp.exceptionsFile")
 	if fp == "" {
 		return
 	}
-	fp = JoinIfRelative(ConfigBaseDir, fp)
+	fp = common.JoinIfRelative(common.ConfigBaseDir, fp)
 	f, err := os.Open(fp)
 	if err != nil {
 		return
@@ -56,7 +58,7 @@ func loadExceptions() (exceptions map[string]bool) {
 	sc := bufio.NewScanner(f)
 	for sc.Scan() {
 		for _, e := range strings.Fields(sc.Text()) {
-			exceptions[e] = true
+			exceptions.Add(e)
 		}
 	}
 	return
@@ -73,11 +75,11 @@ func formatPackage(v string) string {
 }
 
 func isPackageInRepo(v string) bool {
-	result, _ := GetOutputCommand("pacman", "-Si", v)
+	result, _ := common.GetOutputCommand("pacman", "-Si", v)
 	if len(result) > 0 {
 		return true
 	}
-	result, _ = GetOutputCommand("kcp", "-Ns", v)
+	result, _ = common.GetOutputCommand("kcp", "-Ns", v)
 	for _, e := range strings.Fields(string(result)) {
 		if e == v {
 			return true
@@ -86,327 +88,292 @@ func isPackageInRepo(v string) bool {
 	return false
 }
 
-func checkHeader(p *pkgbuild.PKGBUILD, edit bool) {
-	l := p.Len()
-	bh, eh := -1, -1
-	for i := 0; i < l; i++ {
-		info, isBlank, _ := p.GetIndex(i)
-		if info != nil {
-			break
-		}
-		if i == 0 && isBlank {
-			continue
-		}
-		eh = i
-		if bh < 0 {
-			bh = i
-		}
-	}
-	if bh < 0 {
-		message(typeInfo, 0, 0, Tr(infoHeader))
+func checkHeader(p *pkgbuild.PKGBUILD, edit bool) (formatOptions []pformat.FormatOption) {
+	if !p.HasHeader() {
+		message(typeInfo, 0, 0, common.Tr(infoHeader))
 		return
 	}
-
-	message(typeWarning, bh+1, eh+1, Tr(warnHeader))
-	if edit && QuestionYN(Tr(questionHeader), true) {
-		for i := bh; i <= eh; i++ {
-			p.RemoveIndex(bh)
-		}
+	begin, _ := p.NodeInfoList[0].Position()
+	end, _ := p.NodeInfoList[0].InnerPosition()
+	message(typeWarning, int(begin.Line()), int(end.Line()-1), common.Tr(warnHeader))
+	if edit && common.QuestionYN(common.Tr(questionHeader), true) {
+		formatOptions = append(formatOptions, pformat.OptionRemoveHeader)
 	}
+	return
 }
 
-func checkDuplicates(p *pkgbuild.PKGBUILD, edit bool) {
-	names := make(map[string]int)
-	var infoNames [][]*atom.Info
-	infos := p.GetInfos()
-	for _, info := range infos {
-		name := info.Name()
-		if i, exists := names[name]; exists {
-			infoNames[i] = append(infoNames[i], info)
-		} else {
-			names[name] = len(infoNames)
-			infoNames = append(infoNames, []*atom.Info{info})
-		}
-	}
-
-	var duplicates [][]*atom.Info
-	for _, l := range infoNames {
-		if len(l) > 1 {
-			duplicates = append(duplicates, l)
-		}
-	}
-
+func checkDuplicates(p *pkgbuild.PKGBUILD, edit bool) (formatOptions []pformat.FormatOption) {
+	duplicates := p.GetDuplicates()
 	if len(duplicates) == 0 {
-		message(typeInfo, 0, 0, Tr(infoDuplicate))
+		message(typeInfo, 0, 0, common.Tr(infoDuplicate))
 		return
 	}
 
-	message(typeWarning, 0, 0, Tr(warnDuplicate))
-	for _, d := range duplicates {
-		name := d[0].Name()
-		lines := make([]string, len(d))
-		for i, info := range d {
-			b, e := info.GetPositions()
+	message(typeWarning, 0, 0, common.Tr(warnDuplicate))
+	for name, nodes := range duplicates {
+		lines := make([]string, len(nodes))
+		for i, node := range nodes {
+			begin, end := node.InnerPosition()
 			t := "V"
-			if info.IsFunc() {
+			if node.Type == info.Function {
 				t = "F"
 			}
-			if b.Line == e.Line {
-				lines[i] = fmt.Sprintf("L.%d (%s)", b.Line, t)
+			if begin.Line() == end.Line() {
+				lines[i] = fmt.Sprintf("L.%d (%s)", begin.Line(), t)
 			} else {
-				lines[i] = fmt.Sprintf("L.%d-%d (%s)", b.Line, e.Line, t)
+				lines[i] = fmt.Sprintf("L.%d-%d (%s)", begin.Line(), end.Line(), t)
 			}
-		}
-		fmt.Printf("  - '%s': %s\n", name, strings.Join(lines, ", "))
-	}
-	if edit && QuestionYN(Tr(questionDuplicate), true) {
-		for _, d := range duplicates {
-			for _, i := range d[1:] {
-				p.RemoveInfo(i)
-			}
+			fmt.Printf("  - '%s': %s\n", name, strings.Join(lines, ", "))
 		}
 	}
+
+	if edit && common.QuestionYN(common.Tr(questionDuplicate), true) {
+		formatOptions = append(formatOptions, pformat.OptionRemoveDuplicates)
+	}
+
+	return
 }
 
-func checkMissingVars(p *pkgbuild.PKGBUILD, edit bool) {
-	var missings []string
-	for _, v := range standard.GetVariables() {
-		if !standard.IsRequiredVariable(v) {
-			continue
-		}
-		if !p.ContainsVariable(v) {
-			missings = append(missings, v)
-		}
+func checkMissingVars(p *pkgbuild.PKGBUILD, edit bool) (newNodes info.NodeInfoList) {
+	missings, missingChecksum := p.GetMissingVariables()
+	if missingChecksum && p.HasVariable(standard.SOURCE) {
+		message(typeWarning, 0, 0, common.Tr(errMissingChecksum))
+		fmt.Printf("  %s\n", commentAddManually)
+	} else {
+		message(typeInfo, 0, 0, common.Tr(infoMissingChecksum))
 	}
 	if len(missings) == 0 {
-		message(typeInfo, 0, 0, Tr(infoMissingVar))
+		message(typeInfo, 0, 0, common.Tr(infoMissingVar))
 		return
 	}
+
 	for _, v := range missings {
-		message(typeError, 0, 0, Tr(errMissingVar, v))
-		if !(edit && QuestionYN(Tr(questionMissingVar, v), true)) {
+		message(typeError, 0, 0, common.Tr(errMissingVar, v))
+		if !(edit && common.QuestionYN(common.Tr(questionMissingVar, v), true)) {
 			continue
 		}
-		r := strings.TrimSpace(Question(Tr(questionAddValue, v)))
+		r := strings.TrimSpace(common.Question(common.Tr(questionAddValue, v)))
 		if len(r) == 0 {
 			continue
 		}
-		isArray := standard.IsArrayVariable(v)
-		var values []string
-		if isArray {
-			values = strings.Split(r, " ")
-		} else {
-			values = append(values, r)
+		parsed, err := syntax.NewParser().Parse(strings.NewReader(r), "")
+		if err != nil {
+			continue
 		}
-		p.AddVariable(v, isArray, values...)
+		expr, ok := parsed.Stmts[0].Cmd.(*syntax.CallExpr)
+		if !ok || len(expr.Args) == 0 {
+			continue
+		}
+		var line string
+		if standard.IsArrayVariable(v) || len(expr.Args) > 1 {
+			line = fmt.Sprintf("%s=(%s)", v, r)
+		} else {
+			line = fmt.Sprintf("%s=%s", v, r)
+		}
+		parsed, err = syntax.NewParser().Parse(strings.NewReader(line), "")
+		if err != nil || len(parsed.Stmts) == 0 {
+			continue
+		}
+		node, err := info.New(0, parsed.Stmts[0], p.Env())
+		if err != nil {
+			continue
+		}
+		newNodes = append(newNodes, node)
 	}
+
+	return
 }
 
 func checkMissingFuncs(p *pkgbuild.PKGBUILD, edit bool) {
-	var missings []string
-	for _, f := range standard.GetFunctions() {
-		if !standard.IsRequiredFunction(f) {
-			continue
-		}
-		if !p.ContainsFunction(f) {
-			missings = append(missings, f)
-		}
-	}
+	missings := p.GetMissingFunctions()
 	if len(missings) == 0 {
-		message(typeInfo, 0, 0, Tr(infoMissingFunc))
+		message(typeInfo, 0, 0, common.Tr(infoMissingFunc))
 		return
 	}
+
 	for _, f := range missings {
-		message(typeError, 0, 0, Tr(errMissingFunc, f))
+		message(typeError, 0, 0, common.Tr(errMissingFunc, f))
 		fmt.Printf("  %s\n", commentAddManually)
 	}
+	return
 }
 
-func checkInfoTypes(p *pkgbuild.PKGBUILD, edit bool) {
-	infos := p.GetInfos()
+func checkInfoTypes(p *pkgbuild.PKGBUILD, edit bool) (formatOptions []pformat.FormatOption) {
 	clean := true
-	for _, info := range infos {
-		name := info.Name()
-		p0, p1 := info.GetPositions()
-		var actualType, neededType string
-		var isBad bool
+	mtype := map[info.NodeType]string{
+		info.Function:  commentFunction,
+		info.ArrayVar:  commentArrayVar,
+		info.SingleVar: commentStringVar,
+	}
+	for _, node := range p.NodeInfoList {
+		name := node.Name
+		begin, end := node.Position()
+		actualType, neededType := node.Type, node.Type
 		if standard.IsStandardFunction(name) {
-			if isBad = !info.IsFunc(); isBad {
-				actualType, neededType = commentVariable, commentFunction
-			}
+			neededType = info.Function
+		} else if standard.IsArrayVariable(name) {
+			neededType = info.ArrayVar
 		} else if standard.IsStandardVariable(name) {
-			if isBad = !info.IsVar(); isBad {
-				actualType, neededType = commentFunction, commentVariable
-			} else {
-				actualType, neededType = commentStringVar, commentStringVar
-				if info.IsArrayVar() {
-					actualType = commentArrayVar
-				}
-				if standard.IsArrayVariable(name) {
-					neededType = commentArrayVar
-				}
-				isBad = actualType != neededType
-			}
+			neededType = info.SingleVar
 		}
-		if isBad {
-			clean = false
-			message(typeWarning, p0.Line, p1.Line, Tr(warnBadType, name, Tr(actualType), Tr(neededType)))
+		if actualType == neededType {
+			continue
 		}
+		clean = false
+		message(
+			typeWarning,
+			int(begin.Line()),
+			int(end.Line()),
+			common.Tr(warnBadType, name, common.Tr(mtype[actualType]), common.Tr(mtype[neededType])),
+		)
 	}
+
 	if clean {
-		message(typeInfo, 0, 0, Tr(infoBadType))
+		message(typeInfo, 0, 0, common.Tr(infoBadType))
 	}
+
+	return
 }
 
-func checkEmpty(p *pkgbuild.PKGBUILD, edit bool) {
-	infos := p.GetInfos(atom.VarArray, atom.VarString)
+func checkEmpty(p *pkgbuild.PKGBUILD, edit bool) (remove []int) {
 	clean := true
-	for _, info := range infos {
-		values := info.ArrayValue()
-		if len(values) == 0 || (len(values) == 1 && values[0] == "") {
+	for _, node := range p.NodeInfoList {
+		if node.Type == info.Function {
+			continue
+		}
+		if node.Value == "" && len(node.Values) == 0 {
 			clean = false
-			name := info.Name()
-			p0, p1 := info.GetPositions()
-			message(typeWarning, p0.Line, p1.Line, Tr(warnEmpty, name))
-			if edit && QuestionYN(Tr(questionRemoveEmpty, name), true) {
-				p.RemoveIndex(info.Index())
+			begin, end := node.InnerPosition()
+			message(typeWarning, int(begin.Line()), int(end.Line()), common.Tr(warnEmpty, node.Name))
+			if edit && common.QuestionYN(common.Tr(questionRemoveEmpty, node.Name), true) {
+				remove = append(remove, node.Id)
 			}
 		}
 	}
+
 	if clean {
-		message(typeInfo, 0, 0, Tr(infoEmpty))
+		message(typeInfo, 0, 0, common.Tr(infoEmpty))
 	}
+
+	return
 }
 
 func checkPkgrel(p *pkgbuild.PKGBUILD, edit bool) {
-	info, ok := p.GetInfo(standard.PKGREL, atom.VarString)
-	if !ok {
+	n, i := p.FindLast(standard.PKGREL, info.SingleVar)
+	if i < 0 {
 		return
 	}
-	p0, p1 := info.GetPositions()
-	ok, t, m := true, typeInfo, Tr(infoVarClean, standard.PKGREL)
-	if info.StringValue() != "1" {
-		ok, t, m = false, typeWarning, Tr(warnPkgrel)
+	b, e := n.InnerPosition()
+	v := n.Value
+	if v == "1" {
+		message(typeInfo, int(b.Line()), int(e.Line()), common.Tr(infoVarClean, standard.PKGREL))
+		return
 	}
-	message(t, p0.Line, p1.Line, m)
-	if !ok && edit && QuestionYN(Tr(questionPkgrel), false) {
-		p.SetValue(info, "1")
+	message(typeWarning, int(b.Line()), int(e.Line()), common.Tr(warnPkgrel))
+	if edit && common.QuestionYN(common.Tr(questionPkgrel), false) {
+		p.UpdateValue(n.Id, "1")
 	}
 }
 
 func checkArch(p *pkgbuild.PKGBUILD, edit bool) {
-	info, ok := p.GetInfo(standard.ARCH, atom.VarString, atom.VarArray)
-	if !ok {
+	n, i := p.FindLast(standard.ARCH, info.ArrayVar)
+	if i < 0 {
 		return
 	}
-	p0, p1 := info.GetPositions()
-	ok, t, m := true, typeInfo, Tr(infoVarClean, standard.ARCH)
-	values := info.ArrayValue()
-	if len(values) != 1 || values[0] != "x86_64" {
-		ok, t, m = false, typeWarning, Tr(warnArch)
+	b, e := n.InnerPosition()
+	v := n.Values
+	if len(v) == 1 && v[0] == "x86_64" {
+		message(typeInfo, int(b.Line()), int(e.Line()), common.Tr(infoVarClean, standard.ARCH))
+		return
 	}
-	message(t, p0.Line, p1.Line, m)
-	if !ok && edit && QuestionYN(Tr(questionArch), true) {
-		if !info.IsArrayVar() {
-			p.SetArrayVar(info)
-		}
-		p.SetValue(info, "x86_64")
+	message(typeWarning, int(b.Line()), int(e.Line()), common.Tr(warnArch))
+	if edit && common.QuestionYN(common.Tr(questionArch), true) {
+		p.UpdateValue(n.Id, "'x86_64'")
 	}
 }
 
-func checkDep(p *pkgbuild.PKGBUILD, edit bool, info *atom.Info, pkgname string, exceptions map[string]bool) {
+func checkDepend(node *info.NodeInfo, pkgname string, exceptions collection.Set[string]) {
 	errors := make(map[string]int)
-	values := info.ArrayValue()
+	values := make([]string, len(node.Values))
+	copy(values, node.Values)
+
 	for i, v := range values {
 		v = formatPackage(v)
 		values[i] = v
 		if v == pkgname {
 			errors[v] = 1
-		} else if !exceptions[v] && !isPackageInRepo(v) {
+		} else if !exceptions.Contains(v) && !isPackageInRepo(v) {
 			errors[v] = 2
 		}
 	}
-	name := info.Name()
-	p0, p1 := info.GetPositions()
+	name := node.Name
+	begin, end := node.InnerPosition()
 	if len(errors) == 0 {
-		message(typeInfo, p0.Line, p1.Line, Tr(infoVarClean, name))
+		message(typeInfo, int(begin.Line()), int(end.Line()), common.Tr(infoVarClean, name))
 		return
 	}
-	message(typeWarning, p0.Line, p1.Line, Tr(warnDepends, name))
-	var newValues []string
+
+	message(typeWarning, int(begin.Line()), int(end.Line()), common.Tr(warnDepends, name))
 	for _, v := range values {
-		switch errors[v] {
-		case 1:
-			fmt.Printf("  %s\n", Tr(warnPackageIsName, v))
-			if edit && QuestionYN("  "+Tr(questionDepend, v), true) {
-				v = Question("  " + Tr(questionTypeDepend))
+		if t, ok := errors[v]; ok {
+			m := warnPackageNotInRepo
+			if t == 1 {
+				m = warnPackageIsName
 			}
-		case 2:
-			fmt.Printf("  %s\n", Tr(warnPackageNotInRepo, v))
-			if edit && QuestionYN("  "+Tr(questionDepend, v), true) {
-				v = Question("  " + Tr(questionTypeDepend))
-			}
+			fmt.Printf("  %s\n", common.Tr(m, v))
 		}
-		if v != "" {
-			newValues = append(newValues, v)
-		}
-	}
-	if edit {
-		p.SetValue(info, newValues...)
 	}
 }
 
 func checkDepends(p *pkgbuild.PKGBUILD, edit bool) {
 	var hasDepend bool
 	pkgname := p.GetValue(standard.PKGNAME)
-	names := map[string]bool{
-		standard.CONFLICTS:    true,
-		standard.PROVIDES:     true,
-		standard.REPLACES:     true,
-		standard.DEPENDS:      true,
-		standard.MAKEDEPENDS:  true,
-		standard.OPTDEPENDS:   true,
-		standard.CHECKDEPENDS: true,
-	}
-	nameDepends := map[string]bool{
-		standard.DEPENDS:     true,
-		standard.MAKEDEPENDS: true,
-	}
+	names := collection.NewSet(
+		standard.CONFLICTS,
+		standard.PROVIDES,
+		standard.REPLACES,
+		standard.DEPENDS,
+		standard.MAKEDEPENDS,
+		standard.OPTDEPENDS,
+		standard.CHECKDEPENDS,
+	)
+	nameDepends := collection.NewSet(
+		standard.DEPENDS,
+		standard.MAKEDEPENDS,
+	)
 	exceptions := loadExceptions()
-	infos := p.GetInfos(atom.VarArray)
-	for _, info := range infos {
-		name := info.Name()
-		if !names[name] || len(info.ArrayValue()) == 0 {
+
+	for _, node := range p.NodeInfoList {
+		name := node.Name
+		if node.Type != info.ArrayVar || !names.Contains(name) {
 			continue
 		}
-		hasDepend = hasDepend || nameDepends[name]
-		checkDep(p, edit, info, pkgname, exceptions)
+		hasDepend = hasDepend || nameDepends.Contains(name)
+		checkDepend(node, pkgname, exceptions)
 	}
 	if !hasDepend {
-		message(typeWarning, 0, 0, Tr(warnMissingDepends))
+		message(typeWarning, 0, 0, common.Tr(warnMissingDepends))
 	}
 }
 
-func checkInstalls(p *pkgbuild.PKGBUILD, edit bool) {
-	info, ok := p.GetInfo(standard.INSTALL, atom.VarString)
-	if !ok {
+func checkInstall(p *pkgbuild.PKGBUILD, edit bool) {
+	node, index := p.FindLast(standard.INSTALL, info.SingleVar)
+	if index < 0 {
 		return
 	}
-	p0, p1 := info.GetPositions()
-	file := info.StringValue()
-	if FileExists(file) {
-		message(typeInfo, p0.Line, p1.Line, Tr(infoVarClean, standard.INSTALL))
-		fmt.Printf("  %s\n", Tr(commentInstall, urlHook))
+	begin, end := node.InnerPosition()
+	if common.FileExists(node.Value) {
+		message(typeInfo, int(begin.Line()), int(end.Line()), common.Tr(infoVarClean, standard.INSTALL))
+		fmt.Printf("  %s\n", common.Tr(commentInstall, urlHook))
 		return
 	}
-	message(typeWarning, p0.Line, p1.Line, Tr(warnInstall, file))
-	if !(edit && QuestionYN(Tr(questionInstall, file), true)) {
-		return
-	}
-	newFile := Question(Tr(questionInstall2))
-	if newFile == "" {
-		p.RemoveInfo(info)
-	} else {
-		p.SetValue(info, newFile)
+	message(typeWarning, int(begin.Line()), int(end.Line()), common.Tr(warnInstall, node.Value))
+	if edit && common.QuestionYN(common.Tr(questionInstall, node.Value), true) {
+		newFile := common.Question(common.Tr(questionInstall2))
+		if newFile == "" {
+			p.Remove(node.Id)
+		} else {
+			p.UpdateValue(node.Id, newFile)
+		}
 	}
 }

@@ -4,17 +4,16 @@ func main() {
 	initFlags()
 	parseFlags()
 
-	if *fHelp {
+	switch {
+	case *fHelp:
 		flags.PrintHelp()
-		return
-	}
-	if *fVersion {
+	case *fVersion:
 		flags.PrintVersion()
-		return
+	case *fGenerate:
+		generate(*fClean, *fDebug, *fOutput)
+	case *fFormat:
+		format(*fDebug, *fOutput)
+	default:
+		check(*fEdit, *fDebug, *fOutput)
 	}
-	if *fGenerate {
-		generate(*fClean, *fDebug)
-		return
-	}
-	check(*fEdit, *fDebug)
 }

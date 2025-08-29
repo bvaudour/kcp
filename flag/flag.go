@@ -6,14 +6,14 @@ import (
 	"strings"
 )
 
-//Flag is a descriptor of a parsing element.
+// Flag is a descriptor of a parsing element.
 type Flag struct {
 	p    Properties
 	f    func(string) error
 	used string
 }
 
-//Internal checkers
+// Internal checkers
 func contains(a []string, s string) bool {
 	for _, e := range a {
 		if e == s {
@@ -22,19 +22,19 @@ func contains(a []string, s string) bool {
 	}
 	return false
 }
-func stringOf(v interface{}) (string, error) {
+func stringOf(v any) (string, error) {
 	if s, ok := v.(string); ok {
 		return s, nil
 	}
 	return "", NewError(errInvalidValue, v, typeString)
 }
-func boolOf(v interface{}) (bool, error) {
+func boolOf(v any) (bool, error) {
 	if b, ok := v.(bool); ok {
 		return b, nil
 	}
 	return false, NewError(errInvalidValue, v, typeBool)
 }
-func isShortFlag(v interface{}) error {
+func isShortFlag(v any) error {
 	n, e := stringOf(v)
 	if e != nil {
 		return e
@@ -51,7 +51,7 @@ func isShortFlag(v interface{}) error {
 	}
 	return nil
 }
-func isLongFlag(v interface{}) error {
+func isLongFlag(v any) error {
 	n, e := stringOf(v)
 	if e != nil {
 		return e
@@ -68,8 +68,8 @@ func isLongFlag(v interface{}) error {
 	}
 }
 
-//Set modifies the given property with the given value.
-func (f *Flag) Set(k PropertyType, v interface{}) error {
+// Set modifies the given property with the given value.
+func (f *Flag) Set(k PropertyType, v any) error {
 	switch k {
 	case Short:
 		if e := isShortFlag(v); e != nil {
@@ -83,57 +83,57 @@ func (f *Flag) Set(k PropertyType, v interface{}) error {
 	return f.p.Set(k, v)
 }
 
-//Get returns the value of the needed property.
-func (f *Flag) Get(k PropertyType) interface{} {
+// Get returns the value of the needed property.
+func (f *Flag) Get(k PropertyType) any {
 	return f.p.Value(k)
 }
 
-//GetString returns the string representation of the needed property.
+// GetString returns the string representation of the needed property.
 func (f *Flag) GetString(k PropertyType) string {
 	return f.p.ValueString(k)
 }
 
-//GetBool returns the boolean representation of the needed property.
+// GetBool returns the boolean representation of the needed property.
 func (f *Flag) GetBool(k PropertyType) bool {
 	return f.p.ValueBool(k)
 }
 
-//Short returns the value of the short flag.
+// Short returns the value of the short flag.
 func (f *Flag) Short() string {
 	return f.GetString(Short)
 }
 
-//Long returns the value of the long flag.
+// Long returns the value of the long flag.
 func (f *Flag) Long() string {
 	return f.GetString(Long)
 }
 
-//Description returns the description of the flag.
+// Description returns the description of the flag.
 func (f *Flag) Description() string {
 	return f.GetString(Description)
 }
 
-//ValueName returns the value' name of the flag.
+// ValueName returns the value' name of the flag.
 func (f *Flag) ValueName() string {
 	return f.GetString(ValueName)
 }
 
-//DefaultValue returns the default value of the flag.
+// DefaultValue returns the default value of the flag.
 func (f *Flag) DefaultValue() string {
 	return f.GetString(DefaultValue)
 }
 
-//AllowMultipleValues returns true if the flag accepts one or more values.
+// AllowMultipleValues returns true if the flag accepts one or more values.
 func (f *Flag) AllowMultipleValues() bool {
 	return f.GetBool(MultipleValues)
 }
 
-//Hidden returns true if the flag shouldn't appear in the help.
+// Hidden returns true if the flag shouldn't appear in the help.
 func (f *Flag) Hidden() bool {
 	return f.GetBool(Hidden)
 }
 
-//Parse functions
+// Parse functions
 func parseBool(v *bool) func(string) error {
 	return func(s string) error {
 		if s != "" {
@@ -181,7 +181,7 @@ func parseInt(v *int) func(string) error {
 	}
 }
 
-//Flag initialization
+// Flag initialization
 func initFlag(s, l, desc string, cb func(string) error) (f *Flag, e error) {
 	f = new(Flag)
 	f.p = FlagProps()
@@ -196,14 +196,14 @@ func initFlag(s, l, desc string, cb func(string) error) (f *Flag, e error) {
 	return
 }
 
-//NewBoolFlag returns a new flag which doesn't accept args and a pointer to its value.
+// NewBoolFlag returns a new flag which doesn't accept args and a pointer to its value.
 func NewBoolFlag(s, l, desc string) (f *Flag, v *bool, e error) {
 	v = new(bool)
 	f, e = initFlag(s, l, desc, parseBool(v))
 	return
 }
 
-//NewStringFlag returns a new flag which accepts a string arg and a pointer to its value.
+// NewStringFlag returns a new flag which accepts a string arg and a pointer to its value.
 func NewStringFlag(s, l, desc, vn, df string) (f *Flag, v *string, e error) {
 	v = new(string)
 	f, e = initFlag(s, l, desc, parseString(v))
@@ -218,7 +218,7 @@ func NewStringFlag(s, l, desc, vn, df string) (f *Flag, v *string, e error) {
 	return
 }
 
-//NewChoiceFlag returns a new flag which accepts arg among a list of choices, and a pointer to its value.
+// NewChoiceFlag returns a new flag which accepts arg among a list of choices, and a pointer to its value.
 func NewChoiceFlag(s, l, desc, df string, choices []string) (f *Flag, v *string, e error) {
 	if df != "" && !contains(choices, df) {
 		e = NewError(errUnexpectedChoiceArg, df, choices)
@@ -234,7 +234,7 @@ func NewChoiceFlag(s, l, desc, df string, choices []string) (f *Flag, v *string,
 	return
 }
 
-//NewArrayFlag returns a new flag which accepts multiple string args, and a pointer to its value.
+// NewArrayFlag returns a new flag which accepts multiple string args, and a pointer to its value.
 func NewArrayFlag(s, l, desc, vn string) (f *Flag, v *[]string, e error) {
 	*v = make([]string, 0, 1)
 	f, e = initFlag(s, l, desc, parseArray(v))
@@ -248,7 +248,7 @@ func NewArrayFlag(s, l, desc, vn string) (f *Flag, v *[]string, e error) {
 	return
 }
 
-//NewIntFlag returns a new flag which accepts an int arg and a pointer to its value.
+// NewIntFlag returns a new flag which accepts an int arg and a pointer to its value.
 func NewIntFlag(s, l, desc, vn string, df int) (f *Flag, v *int, e error) {
 	v = new(int)
 	*v = df

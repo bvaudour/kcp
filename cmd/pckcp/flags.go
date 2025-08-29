@@ -3,36 +3,39 @@ package main
 import (
 	"os"
 
-	. "github.com/bvaudour/kcp/common"
-	"github.com/bvaudour/kcp/flag"
+	"codeberg.org/bvaudour/kcp/common"
+	"codeberg.org/bvaudour/kcp/flag"
 )
 
 var (
-	flags                                             *flag.Parser
-	fHelp, fVersion, fEdit, fDebug, fGenerate, fClean *bool
+	flags                                                      *flag.Parser
+	fHelp, fVersion, fEdit, fDebug, fGenerate, fClean, fFormat *bool
+	fOutput                                                    *string
 )
 
 func initFlags() {
-	flags = flag.NewParser(Tr(appDescription), Version)
-	flags.Set(flag.Synopsis, Tr(synopsis))
-	flags.Set(flag.LongDescription, Tr(appLongDescription))
+	flags = flag.NewParser(common.Tr(appDescription), common.Version)
+	flags.Set(flag.Synopsis, common.Tr(synopsis))
+	flags.Set(flag.LongDescription, common.Tr(appLongDescription))
 
-	fHelp, _ = flags.Bool("-h", "--help", Tr(help))
-	fVersion, _ = flags.Bool("-v", "--version", Tr(version))
-	fEdit, _ = flags.Bool("-e", "--edit", Tr(interactiveEdit))
-	fGenerate, _ = flags.Bool("-g", "--generate", Tr(generatePrototype))
+	fHelp, _ = flags.Bool("-h", "--help", common.Tr(help))
+	fVersion, _ = flags.Bool("-v", "--version", common.Tr(version))
+	fEdit, _ = flags.Bool("-e", "--edit", common.Tr(interactiveEdit))
+	fGenerate, _ = flags.Bool("-g", "--generate", common.Tr(generatePrototype))
+	fFormat, _ = flags.Bool("-f", "--format", common.Tr(formatFile))
+	fOutput, _ = flags.String("-o", "--output", common.Tr(formatedOutput), common.Tr(dFileName), "")
 
-	fClean, _ = flags.Bool("-c", "--clean", Tr(cleanUseless))
+	fClean, _ = flags.Bool("-c", "--clean", common.Tr(cleanUseless))
 	flags.Require("-c", "-g")
 
 	fDebug, _ = flags.Bool("-d", "--debug", "")
 	flags.GetFlag("--debug").Set(flag.Hidden, true)
-	flags.Group("-h", "-e", "-v", "-g")
+	flags.Group("-h", "-e", "-v", "-g", "-f")
 }
 
 func parseFlags() {
 	if err := flags.Parse(os.Args); err != nil {
-		PrintError(err)
+		common.PrintError(err)
 		flags.PrintHelp()
 		os.Exit(1)
 	}

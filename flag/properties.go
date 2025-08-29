@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-//Property is a type of property.
+// Property is a type of property.
 type PropertyType int
 
 const (
@@ -66,7 +66,7 @@ var (
 	}
 )
 
-//Property represents an internal property of a flag or a flags’ parser.
+// Property represents an internal property of a flag or a flags’ parser.
 type Property struct {
 	t     PropertyType
 	vbool bool
@@ -77,43 +77,43 @@ func newProperty(t PropertyType) *Property {
 	return &Property{t: t}
 }
 
-//Type returns the property’s type.
+// Type returns the property’s type.
 func (p *Property) Type() PropertyType {
 	return p.t
 }
 
-//IsBool returns true if the property’s value accept only booleans.
+// IsBool returns true if the property’s value accept only booleans.
 func (p *Property) IsBool() bool {
 	return kType[p.t]
 }
 
-//IsString returns true if the property’s value accept only strings.
+// IsString returns true if the property’s value accept only strings.
 func (p *Property) IsString() bool {
 	return !p.IsBool()
 }
 
-//ValueBool returns the boolean value of the property.
-//It returns false if the property is not boolean.
+// ValueBool returns the boolean value of the property.
+// It returns false if the property is not boolean.
 func (p *Property) ValueBool() bool {
 	return p.vbool
 }
 
-//ValueString returns the string value of the property.
-//It returns an empty string if the property is not a string.
+// ValueString returns the string value of the property.
+// It returns an empty string if the property is not a string.
 func (p *Property) ValueString() string {
 	return p.vstr
 }
 
-//Value returns the value of the property which is either
-//boolean or string depending of the type of the property.
-func (p *Property) Value() interface{} {
+// Value returns the value of the property which is either
+// boolean or string depending of the type of the property.
+func (p *Property) Value() any {
 	if p.IsBool() {
 		return p.ValueBool()
 	}
 	return p.ValueString()
 }
 
-//String returns the string representation of the value’s property.
+// String returns the string representation of the value’s property.
 func (p *Property) String() string {
 	if p.IsString() {
 		return p.ValueString()
@@ -121,9 +121,9 @@ func (p *Property) String() string {
 	return fmt.Sprint(p.ValueBool())
 }
 
-//Set sets the property to the given value.
-//It returns an error if the given value has not the good type.
-func (p *Property) Set(v interface{}) (err error) {
+// Set sets the property to the given value.
+// It returns an error if the given value has not the good type.
+func (p *Property) Set(v any) (err error) {
 	if p.IsBool() {
 		p.vbool, err = boolOf(v)
 	} else {
@@ -132,7 +132,7 @@ func (p *Property) Set(v interface{}) (err error) {
 	return
 }
 
-//Properties is a set of properties
+// Properties is a set of properties
 type Properties map[PropertyType]*Property
 
 func newProperties(keys []PropertyType) Properties {
@@ -143,40 +143,40 @@ func newProperties(keys []PropertyType) Properties {
 	return p
 }
 
-//ParserProps returns all properties supported by
-//a flags’ parser.
+// ParserProps returns all properties supported by
+// a flags’ parser.
 func ParserProps() Properties {
 	return newProperties(kParser)
 }
 
-//FlagProps returns all propertis supported by
-//a flag.
+// FlagProps returns all propertis supported by
+// a flag.
 func FlagProps() Properties {
 	return newProperties(kFlag)
 }
 
-//Set set the given property to the given value.
-//It returns an error if the type of value isn’t supported
-//by the property’s type.
-func (l Properties) Set(k PropertyType, v interface{}) error {
+// Set set the given property to the given value.
+// It returns an error if the type of value isn’t supported
+// by the property’s type.
+func (l Properties) Set(k PropertyType, v any) error {
 	if p, ok := l[k]; ok {
 		return p.Set(v)
 	}
 	return NewError(errUnknownProperty, k)
 }
 
-//Value returns a string or a boolan of the given property
-//depending of the property’s type.
-//It returns nil if the property doesn’t exist.
-func (l Properties) Value(k PropertyType) interface{} {
+// Value returns a string or a boolan of the given property
+// depending of the property’s type.
+// It returns nil if the property doesn’t exist.
+func (l Properties) Value(k PropertyType) any {
 	if p, ok := l[k]; ok {
 		return p.Value()
 	}
 	return nil
 }
 
-//ValueBool returns the boolan value of the given property.
-//It returns false if the property doesn’t exist or is not a boolean.
+// ValueBool returns the boolan value of the given property.
+// It returns false if the property doesn’t exist or is not a boolean.
 func (l Properties) ValueBool(k PropertyType) bool {
 	if p, ok := l[k]; ok {
 		return p.ValueBool()
@@ -184,8 +184,8 @@ func (l Properties) ValueBool(k PropertyType) bool {
 	return false
 }
 
-//ValueString returns the string value of the given property.
-//It returns an empty string if the property doesn’t exist or is not a string.
+// ValueString returns the string value of the given property.
+// It returns an empty string if the property doesn’t exist or is not a string.
 func (l Properties) ValueString(k PropertyType) string {
 	if p, ok := l[k]; ok {
 		return p.ValueString()
@@ -193,7 +193,7 @@ func (l Properties) ValueString(k PropertyType) string {
 	return ""
 }
 
-//String returns the string representation af the properties’ set.
+// String returns the string representation af the properties’ set.
 func (l Properties) String() string {
 	m := make(map[PropertyType]string)
 	for k, p := range l {

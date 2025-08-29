@@ -8,31 +8,31 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/bvaudour/kcp/color"
-	. "github.com/bvaudour/kcp/common"
-	"github.com/bvaudour/kcp/database"
+	"codeberg.org/bvaudour/kcp/common"
+	"codeberg.org/bvaudour/kcp/database"
+	"git.kaosx.ovh/benjamin/format"
 	"github.com/leonelquinteros/gotext"
 )
 
 func getIgnore() []string {
-	return strings.Fields(Config.Get("kcp.ignore"))
+	return strings.Fields(common.Config.Get("kcp.ignore"))
 }
 
 func getDbPath() string {
-	return JoinIfRelative(UserBaseDir, Config.Get("kcp.dbFile"))
+	return common.JoinIfRelative(common.UserBaseDir, common.Config.Get("kcp.dbFile"))
 }
 
 func useSsh() bool {
-	return Config.Get("kcp.cloneMethod") == "ssh"
+	return common.Config.Get("kcp.cloneMethod") == "ssh"
 }
 
-func getDb() (db database.Database, err error) {
+func getDb() (database.Database, error) {
 	fpath, ignore := getDbPath(), getIgnore()
 	return database.Load(fpath, ignore...)
 }
 
-func updateDb(db *database.Database, debug bool) (counters database.Counter, err error) {
-	return db.Update(Organization, debug, User, Password)
+func updateDb(db *database.Database, debug bool) (database.Counter, error) {
+	return db.Update(database.NewConnector(), debug)
 }
 
 func loadDb(debug, forceUpdate bool) database.Database {
@@ -54,11 +54,11 @@ func saveDb(db database.Database) error {
 }
 
 func filter(debug, forceUpdate, onlyName bool, f []database.FilterFunc, s []database.SorterFunc) {
-	db := loadDb(debug, true)
+	db := loadDb(debug, forceUpdate)
 	saveDb(db)
 	l := db.Filter(f...).Sort(s...)
 	if len(l) == 0 {
-		PrintWarning(Tr(errNoPackage))
+		common.PrintWarning(common.Tr(errNoPackage))
 		return
 	}
 	if onlyName {
@@ -111,21 +111,24 @@ func update(debug bool) {
 	if debug {
 		fmt.Fprintln(os.Stderr, "Open db")
 	}
-	db, _ := getDb()
+	db, err := getDb()
+	if err != nil {
+		db = database.New(getIgnore()...)
+	}
 	if debug {
 		fmt.Fprintln(os.Stderr, "Trying to update db")
 	}
 	counters, err := updateDb(&db, debug)
 	if err != nil {
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
 	if err = saveDb(db); err != nil {
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
 	fmt.Println()
-	fmt.Println(color.Yellow.Colorize(counters))
+	format.FormatOf("yellow").Println(counters)
 }
 
 func list(
@@ -162,7 +165,7 @@ func info(debug bool, app string) {
 	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
-		PrintWarning(Tr(errNoPackage))
+		common.PrintWarning(common.Tr(errNoPackage))
 		os.Exit(1)
 	}
 	fmt.Println(p.Detail())
@@ -172,38 +175,38 @@ func get(debug bool, app string) {
 	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
-		PrintWarning(Tr(errNoPackageOrNeedUpdate))
+		common.PrintWarning(common.Tr(errNoPackageOrNeedUpdate))
 		os.Exit(1)
 	}
 	wd, _ := os.Getwd()
 	fullDir, err := p.Clone(wd, useSsh())
 	if err != nil {
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
-	fmt.Println(Tr(msgCloned, app, fullDir))
+	fmt.Println(common.Tr(msgCloned, app, fullDir))
 }
 
 func install(debug bool, app string, asdep bool) {
 	db := loadDb(debug, false)
 	p, ok := db.Get(app)
 	if !ok {
-		PrintWarning(Tr(errNoPackageOrNeedUpdate))
+		common.PrintWarning(common.Tr(errNoPackageOrNeedUpdate))
 		os.Exit(1)
 	}
-	wd := Config.Get("kcp.tmpDir")
+	wd := common.Config.Get("kcp.tmpDir")
 	if err := os.MkdirAll(wd, 0755); err != nil {
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
-	locker := JoinIfRelative(wd, Config.Get("kcp.lockerFile"))
+	locker := common.JoinIfRelative(wd, common.Config.Get("kcp.lockerFile"))
 	if _, err := os.Open(locker); err == nil {
-		PrintError(Tr(errOnlyOneInstance))
+		common.PrintError(common.Tr(errOnlyOneInstance))
 		os.Exit(1)
 	}
 	_, err := os.Create(locker)
 	if err != nil {
-		PrintError(Tr(errFailedCreateLocker))
+		common.PrintError(common.Tr(errFailedCreateLocker))
 		os.Exit(1)
 	}
 	installDir, err := p.Clone(wd, useSsh())
@@ -216,29 +219,29 @@ func install(debug bool, app string, asdep bool) {
 	go func() {
 		<-c
 		remove()
-		PrintError(Tr(errInterrupt))
+		common.PrintError(common.Tr(errInterrupt))
 		os.Exit(1)
 	}()
 	defer remove()
 	if err != nil {
 		remove()
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
 	os.Chdir(installDir)
-	if QuestionYN(Tr(msgEdit), true) {
-		if err = EditFile("PKGBUILD"); err != nil {
+	if common.QuestionYN(common.Tr(msgEdit), true) {
+		if err = common.EditFile("PKGBUILD"); err != nil {
 			remove()
-			PrintError(err)
+			common.PrintError(err)
 			os.Exit(1)
 		}
 	}
 	m, _ := filepath.Glob("*.install")
 	for _, i := range m {
-		if QuestionYN(Tr(msgEditInstall, i), false) {
-			if err := EditFile(i); err != nil {
+		if common.QuestionYN(common.Tr(msgEditInstall, i), false) {
+			if err := common.EditFile(i); err != nil {
 				remove()
-				PrintError(err)
+				common.PrintError(err)
 				os.Exit(1)
 			}
 		}
@@ -247,9 +250,9 @@ func install(debug bool, app string, asdep bool) {
 	if asdep {
 		args = append(args, "--asdeps")
 	}
-	if err := LaunchCommand("makepkg", args...); err != nil {
+	if err := common.LaunchCommand("makepkg", args...); err != nil {
 		remove()
-		PrintError(err)
+		common.PrintError(err)
 		os.Exit(1)
 	}
 	p.LocalVersion = p.GetLocaleVersion()
@@ -264,5 +267,5 @@ func debugLocales() {
 	fmt.Println("- Domain:", d)
 	fmt.Println("- Language used:", l)
 	fmt.Println("- Mo file:", f)
-	fmt.Println("- Mo file exists:", FileExists(f))
+	fmt.Println("- Mo file exists:", common.FileExists(f))
 }

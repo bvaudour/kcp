@@ -1,6 +1,6 @@
 package main
 
-//Flags informations
+// Flags informations
 const (
 	appLongDescription = `Provides a tool to make use of KaOS Community Packages.
 
@@ -28,7 +28,7 @@ With this tool, you can search, get and install a package from KaOS Community Pa
 	dValueName     = "<app>"
 )
 
-//Messages
+// Messages
 const (
 	errNoRoot                = "Don't launch this program as root!"
 	errNoPackage             = "No package found"

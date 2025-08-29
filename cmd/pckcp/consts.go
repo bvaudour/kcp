@@ -1,28 +1,32 @@
 package main
 
-//Flags informations
+// Flags informations
 const (
 	appLongDescription = `Provides a tool to check the validity of a PKGBUILD according to the KCP standards.
 
-If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created.`
+If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created (if -o is not used).`
 	appDescription    = "Tool in command-line to manage common PKGBUILD errors"
 	synopsis          = "[-h|-e|-v|-g[-c]]"
 	help              = "Print this help"
 	version           = "Print version"
 	interactiveEdit   = "Interactive edition"
-	generatePrototype = "Generate a prototype of PKGBUILD"
+	generatePrototype = "Generates a prototype of PKGBUILD"
 	cleanUseless      = "Removes the useless comments and blanks of the prototype"
+	formatFile        = "Formats the PKGBUILD file. If output option (-o) is not specified, standard output is used."
+	formatedOutput    = "File’s name of the transformed PKGBUILD"
+	dFileName         = "<file>"
 )
 
-//Messages’ templates
+// Messages’ templates
 const (
 	typeError   = "Error"
 	typeWarning = "Warning"
 	typeInfo    = "Info"
 
-	errFileNotExist = "File %s does not exist."
-	errMissingVar   = "Variable '%s' is missing."
-	errMissingFunc  = "Function '%s' is missing."
+	errFileNotExist    = "File %s does not exist."
+	errMissingChecksum = "Checksum is missing."
+	errMissingVar      = "Variable '%s' is missing."
+	errMissingFunc     = "Function '%s' is missing."
 
 	warnSaved            = "Modifications saved in %s!"
 	warnHeader           = "Header was found. Do not use names of maintainers or contributors in PKGBUILD, anyone can contribute, keep the header clean from this."
@@ -37,13 +41,14 @@ const (
 	warnPackageNotInRepo = "'%s' isn't in repo neither in kcp."
 	warnMissingDepends   = "Variables 'depends' and 'makedepends' are empty. You should manually check if it is not a missing."
 
-	infoHeader      = "Header is clean."
-	infoDuplicate   = "There aren’t duplicates."
-	infoMissingVar  = "There aren’t missing variables."
-	infoMissingFunc = "There aren’t missing functions."
-	infoBadType     = "Declarations have the good type."
-	infoEmpty       = "There aren’t empty variables."
-	infoVarClean    = "Variable '%s' is clean."
+	infoHeader          = "Header is clean."
+	infoDuplicate       = "There aren’t duplicates."
+	infoMissingChecksum = "Checksum is OK."
+	infoMissingVar      = "There aren’t missing variables."
+	infoMissingFunc     = "There aren’t missing functions."
+	infoBadType         = "Declarations have the good type."
+	infoEmpty           = "There aren’t empty variables."
+	infoVarClean        = "Variable '%s' is clean."
 
 	questionHeader      = "Remove header?"
 	questionDuplicate   = "Remove duplicates?"
