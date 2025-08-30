@@ -126,6 +126,25 @@ func (p *PKGBUILD) Encode(w io.Writer, formater ...format.Formater) error {
 	} else if p.file != nil {
 		p.file.Stmts = p.Stmts()
 	}
+	if p.file == nil {
+		return nil
+	}
+	var begin syntax.Pos
+	if len(p.NodeInfoList) > 0 {
+		begin, _ = p.NodeInfoList[0].Position()
+	} else if len(p.file.Last) > 0 {
+		begin = p.file.Last[0].Pos()
+	}
+	if begin.IsValid() && begin.Line() > 1 {
+		bytes := make([]byte, uint(begin.Line())-1)
+		for i := range bytes {
+			bytes[i] = '\n'
+		}
+		if _, err := w.Write(bytes); err != nil {
+			return err
+		}
+	}
+
 	return syntax.NewPrinter().Print(w, p.file)
 }
 

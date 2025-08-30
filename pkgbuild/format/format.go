@@ -129,6 +129,7 @@ func NewFormater(options ...FormatOption) Formater {
 		RemoveInnerComments: option.Contains(OptionRemoveInnerComments),
 		FormatWords:         option.Contains(OptionFormatWords),
 		IndentFunctions:     option.Contains(OptionIndentFunctions),
+		IndentVariables:     option.Contains(OptionIndentArrayVariables),
 		Reorder:             option.Contains(OptionReorder),
 		FormatBlank:         option.Contains(OptionFormatBlank),
 		KeepFirstBlank:      option.Contains(OptionKeepFirstBlank),
