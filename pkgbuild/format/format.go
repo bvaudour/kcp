@@ -136,7 +136,7 @@ func NewFormater(options ...FormatOption) Formater {
 	}
 
 	if option.Contains(OptionIndentFunctionsWithSpaces) {
-		f.IndentSpaces = 2
+		f.IndentSpaces = 4
 	}
 
 	return f
