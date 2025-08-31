@@ -1,6 +1,7 @@
 package format
 
 import (
+	"fmt"
 	"slices"
 
 	"codeberg.org/bvaudour/kcp/pkgbuild/info"
@@ -69,6 +70,44 @@ type nodeReorder struct {
 	depends []string
 }
 
+func newNr(node *info.NodeInfo, lastPos syntax.Pos) (nr nodeReorder, nextPos syntax.Pos) {
+	begin, end := node.Position()
+	if lastPos.IsValid() {
+		l := int(begin.Line()) - int(lastPos.Line()) - 1
+		if l > 0 {
+			nr.lines = uint(l)
+		}
+	}
+	if node.Type == info.ArrayVar || node.Type == info.SingleVar {
+		assign := node.Stmt.Cmd.(*syntax.CallExpr).Assigns[0]
+		nr.depends = getDepends(assign)
+	}
+
+	nextPos = end
+	return
+}
+
+func (nr nodeReorder) String() {
+	fmt.Sprintf(`{lines: %d, depends: %v}`, nr.lines, nr.depends)
+}
+
+func prepareReorder(nodes info.NodeInfoList) (variables, functions info.NodeInfoList, depends map[int]nodeReorder) {
+	depends = make(map[int]nodeReorder)
+	var nr nodeReorder
+	var lastPos syntax.Pos
+	for _, node := range nodes {
+		nr, lastPos = newNr(node, lastPos)
+		depends[node.Id] = nr
+		if node.Type == info.Function {
+			functions = append(functions, node)
+		} else {
+			variables = append(variables, node)
+		}
+	}
+
+	return
+}
+
 func fOrder(nodes info.NodeInfoList) info.NodeInfoList {
 	var fs, fu info.NodeInfoList
 	ms := make(map[string]info.NodeInfoList)
@@ -94,7 +133,7 @@ func vOrder0(nodes info.NodeInfoList) info.NodeInfoList {
 	var vs, vu info.NodeInfoList
 	ms := make(map[string]info.NodeInfoList)
 	for _, node := range nodes {
-		if standard.IsStandardFunction(node.Name) {
+		if standard.IsStandardVariable(node.Name) {
 			ms[node.Name] = append(ms[node.Name], node)
 		} else {
 			vu = append(vu, node)
@@ -112,7 +151,7 @@ func vOrder0(nodes info.NodeInfoList) info.NodeInfoList {
 }
 
 func vOrder1(nodes info.NodeInfoList, depends map[int]nodeReorder) info.NodeInfoList {
-	done := make(map[string]bool)
+	done := collection.NewSet[string]()
 	var result info.NodeInfoList
 	for len(nodes) > 0 {
 		node := nodes[0]
@@ -120,33 +159,32 @@ func vOrder1(nodes info.NodeInfoList, depends map[int]nodeReorder) info.NodeInfo
 		r := depends[node.Id]
 		var missing []string
 		for _, d := range r.depends {
-			if !done[d] {
+			if !done.Contains(d) {
 				missing = append(missing, d)
 			}
 		}
 		if len(nodes) == 0 || len(missing) == 0 {
 			result = append(result, node)
-			done[node.Name] = true
+			done.Add(node.Name)
+			continue
 		}
 		var before, after info.NodeInfoList
-		d := make(map[string]bool)
-		for k := range done {
-			d[k] = true
-		}
+		d := collection.NewSet(done.ToSlice()...)
 		for _, next := range nodes {
-			if d[next.Name] || !slices.Contains(missing, next.Name) {
+			if d.Contains(next.Name) || !slices.Contains(missing, next.Name) {
 				after = append(after, next)
 			} else {
 				before = append(before, next)
 			}
-			d[next.Name] = true
+			d.Add(next.Name)
 		}
 		if len(before) == 0 {
 			result = append(result, node)
-			done[node.Name] = true
+			done.Add(node.Name)
 		} else {
-			nodes = append(before, node)
-			nodes = append(nodes, after...)
+			before = append(before, node)
+			before = append(before, after...)
+			nodes = before
 		}
 	}
 
@@ -163,59 +201,30 @@ func Reorder(nodes info.NodeInfoList) (result info.NodeInfoList) {
 		return nodes
 	}
 
-	rv, rf := make(map[int]nodeReorder), make(map[int]nodeReorder)
-	var variables, functions info.NodeInfoList
-	begin, _ := nodes[0].Position()
-	r := nodeReorder{lines: begin.Line()}
-	if nodes[0].Type != info.Function {
-		r.depends = getDepends(nodes[0].Stmt.Cmd.(*syntax.CallExpr).Assigns[0])
-		rv[nodes[0].Id] = r
-		variables = append(variables, nodes[0])
-	} else {
-		rf[nodes[0].Id] = r
-		functions = append(functions, nodes[0])
-	}
+	variables, functions, depends := prepareReorder(nodes)
 
-	for i, node := range nodes[1:] {
-		_, end := nodes[i].Position()
-		_, begin := node.Position()
-		r := nodeReorder{lines: begin.Line() - end.Line()}
-		if node.Type != info.Function {
-			r.depends = getDepends(node.Stmt.Cmd.(*syntax.CallExpr).Assigns[0])
-			rv[node.Id] = r
-			variables = append(variables, node)
+	functions = fOrder(functions)
+	variables = vOrder(variables, depends)
+	result = append(result, variables...)
+	result = append(result, functions...)
+
+	var lastPos syntax.Pos
+	initialPos, _ := nodes[0].Position()
+	for _, node := range result {
+		nr := depends[node.Id]
+		var newPos syntax.Pos
+		begin, _ := node.Position()
+		if !lastPos.IsValid() {
+			newPos = initialPos
 		} else {
-			rf[node.Id] = r
-			functions = append(functions, node)
-		}
-	}
-
-	variables, functions = vOrder(variables, rv), fOrder(functions)
-	for i, v := range variables {
-		begin, _ := v.Position()
-		newPos := syntax.NewPos(0, 1, begin.Col())
-		if i > 0 {
-			_, end := variables[i-1].Position()
-			newPos = syntax.NewPos(end.Offset()+1, end.Line()+1, begin.Col())
+			newPos = syntax.NewPos(lastPos.Offset()+nr.lines+1, lastPos.Line()+nr.lines+1, begin.Col())
 		}
 		diff := position.Diff(begin, newPos)
-		diff.Update(v.Stmt)
-	}
-	for i, f := range functions {
-		begin, _ := f.Position()
-		newPos := syntax.NewPos(0, 1, begin.Col())
-		if i > 0 {
-			_, end := functions[i-1].Position()
-			newPos = syntax.NewPos(end.Offset()+1, end.Line()+1, begin.Col())
-		} else if l := len(variables); l > 0 {
-			_, end := variables[l-1].Position()
-			newPos = syntax.NewPos(end.Offset()+1, end.Line()+1, begin.Col())
-		}
-		diff := position.Diff(begin, newPos)
-		diff.Update(f.Stmt)
+		diff.Update(node.Stmt)
+		_, lastPos = node.Position()
 	}
 
-	return append(variables, functions...)
+	return
 }
 
 func FormatBlankLines(keepFirstBlank bool) TransformListFunc {

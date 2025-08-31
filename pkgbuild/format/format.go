@@ -94,11 +94,13 @@ func (f formater) Format(nodes info.NodeInfoList, lastComments []syntax.Comment)
 	}
 
 	newNodes = TransformList(nodes, transforms...)
+
 	if f.Reorder {
-		newNodes = Reorder(nodes)
+		newNodes = Reorder(newNodes)
 	}
+
 	if f.FormatBlank {
-		newNodes = FormatBlankLines(f.KeepFirstBlank)(nodes)
+		newNodes = FormatBlankLines(f.KeepFirstBlank)(newNodes)
 	}
 
 	if !f.RemoveOuterComments && len(lastComments) > 0 {

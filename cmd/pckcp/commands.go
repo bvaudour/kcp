@@ -139,6 +139,10 @@ func format(debug bool, output string) {
 		os.Exit(1)
 	}
 
+	if debug {
+		p.Debug(os.Stderr)
+	}
+
 	p.Format(pformat.NewFormater(
 		pformat.OptionRemoveInnerComments,
 		pformat.OptionRemoveOuterComments,
