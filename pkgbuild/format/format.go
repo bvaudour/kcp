@@ -14,16 +14,10 @@ const (
 	OptionRemoveHeader
 	OptionRemoveDuplicates
 	OptionFormatWords
-	OptionIndentFunctionsWithSpaces
-	OptionIndentFunctionsWithTabs
-	OptionIndentArrayVariables
+	OptionFormatArrayVariables
 	OptionReorder
 	OptionFormatBlank
 	OptionKeepFirstBlank
-
-	OptionIndentFunctions  = OptionIndentFunctionsWithSpaces | OptionIndentFunctionsWithTabs
-	OptionIndentWithSpaces = OptionIndentArrayVariables | OptionIndentFunctionsWithSpaces
-	OptionIndentWithTabs   = OptionIndentArrayVariables | OptionIndentFunctionsWithTabs
 )
 
 func (option FormatOption) Merge(options ...FormatOption) FormatOption {
@@ -43,17 +37,15 @@ type Formater interface {
 }
 
 type formater struct {
-	RemoveHeader        bool
-	RemoveDuplicates    bool
-	RemoveOuterComments bool
-	RemoveInnerComments bool
-	FormatWords         bool
-	IndentFunctions     bool
-	IndentVariables     bool
-	IndentSpaces        uint
-	Reorder             bool
-	FormatBlank         bool
-	KeepFirstBlank      bool
+	RemoveHeader         bool
+	RemoveDuplicates     bool
+	RemoveOuterComments  bool
+	RemoveInnerComments  bool
+	FormatWords          bool
+	FormatArrayVariables bool
+	Reorder              bool
+	FormatBlank          bool
+	KeepFirstBlank       bool
 }
 
 func (f formater) Format(nodes info.NodeInfoList, lastComments []syntax.Comment) (newNodes info.NodeInfoList, newComments []syntax.Comment) {
@@ -86,10 +78,7 @@ func (f formater) Format(nodes info.NodeInfoList, lastComments []syntax.Comment)
 	if f.FormatWords {
 		transforms = append(transforms, FormatWords)
 	}
-	if f.IndentFunctions {
-		transforms = append(transforms, IndentFunctions(f.IndentSpaces))
-	}
-	if f.IndentVariables {
+	if f.FormatArrayVariables {
 		transforms = append(transforms, IndentVariables)
 	}
 
@@ -125,20 +114,15 @@ func NewFormater(options ...FormatOption) Formater {
 	option = option.Merge(options...)
 
 	f := formater{
-		RemoveHeader:        option.Contains(OptionRemoveHeader),
-		RemoveDuplicates:    option.Contains(OptionRemoveDuplicates),
-		RemoveOuterComments: option.Contains(OptionRemoveOuterComments),
-		RemoveInnerComments: option.Contains(OptionRemoveInnerComments),
-		FormatWords:         option.Contains(OptionFormatWords),
-		IndentFunctions:     option.Contains(OptionIndentFunctions),
-		IndentVariables:     option.Contains(OptionIndentArrayVariables),
-		Reorder:             option.Contains(OptionReorder),
-		FormatBlank:         option.Contains(OptionFormatBlank),
-		KeepFirstBlank:      option.Contains(OptionKeepFirstBlank),
-	}
-
-	if option.Contains(OptionIndentFunctionsWithSpaces) {
-		f.IndentSpaces = 4
+		RemoveHeader:         option.Contains(OptionRemoveHeader),
+		RemoveDuplicates:     option.Contains(OptionRemoveDuplicates),
+		RemoveOuterComments:  option.Contains(OptionRemoveOuterComments),
+		RemoveInnerComments:  option.Contains(OptionRemoveInnerComments),
+		FormatWords:          option.Contains(OptionFormatWords),
+		FormatArrayVariables: option.Contains(OptionFormatArrayVariables),
+		Reorder:              option.Contains(OptionReorder),
+		FormatBlank:          option.Contains(OptionFormatBlank),
+		KeepFirstBlank:       option.Contains(OptionKeepFirstBlank),
 	}
 
 	return f

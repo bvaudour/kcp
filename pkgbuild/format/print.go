@@ -9,6 +9,10 @@ import (
 	"mvdan.cc/sh/v3/syntax"
 )
 
+var (
+	DefaultIndentation = uint(4)
+)
+
 func Print(w io.Writer, nodes info.NodeInfoList, comments []syntax.Comment) error {
 	var lastPos syntax.Pos
 	for _, node := range nodes {
@@ -19,7 +23,7 @@ func Print(w io.Writer, nodes info.NodeInfoList, comments []syntax.Comment) erro
 				return err
 			}
 		}
-		indentSize := uint(4)
+		indentSize := DefaultIndentation
 		if node.Type == info.ArrayVar {
 			arrayExpr := node.Stmt.Cmd.(*syntax.CallExpr).Assigns[0].Array
 			indentSize = arrayExpr.Lparen.Col()

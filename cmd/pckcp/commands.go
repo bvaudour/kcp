@@ -31,7 +31,12 @@ func generate(clean, debug bool, output string) {
 		os.Exit(1)
 	}
 	if clean {
-		p.Format(pformat.NewFormater(pformat.OptionRemoveInnerComments, pformat.OptionRemoveOuterComments, pformat.OptionIndentWithSpaces))
+		p.Format(pformat.NewFormater(
+			pformat.OptionRemoveInnerComments,
+			pformat.OptionRemoveOuterComments,
+			pformat.OptionFormatWords,
+			pformat.OptionFormatArrayVariables,
+		))
 	}
 	if debug {
 		p.Debug(os.Stderr)
@@ -88,9 +93,9 @@ func check(edit, debug bool, output string) {
 				pformat.OptionRemoveOuterComments,
 				pformat.OptionRemoveInnerComments,
 				pformat.OptionFormatWords,
+				pformat.OptionFormatArrayVariables,
 				pformat.OptionFormatBlank,
 				pformat.OptionKeepFirstBlank,
-				pformat.OptionIndentWithSpaces,
 				pformat.OptionReorder,
 			)
 		}
@@ -148,7 +153,7 @@ func format(debug bool, output string) {
 		pformat.OptionRemoveOuterComments,
 		pformat.OptionRemoveDuplicates,
 		pformat.OptionFormatWords,
-		pformat.OptionIndentWithSpaces,
+		pformat.OptionFormatArrayVariables,
 		pformat.OptionReorder,
 		pformat.OptionFormatBlank,
 		pformat.OptionKeepFirstBlank,
