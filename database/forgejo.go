@@ -78,12 +78,12 @@ func (fc *ForgejoConnector) CountPublcRepos() (int, error) {
 
 	totalCountStr := responseHeader.Get("X-Total-Count")
 	if totalCountStr == "" {
-		return 0, fmt.Errorf("X-Total-Count header not found in response")
+		return 0, fmt.Errorf(errCountHeaderNotFound)
 	}
 
 	totalCount, err := strconv.Atoi(totalCountStr)
 	if err != nil {
-		return 0, fmt.Errorf("could not parse X-Total-Count header: %w", err)
+		return 0, fmt.Errorf(errCountHeader, err)
 	}
 
 	return totalCount, nil

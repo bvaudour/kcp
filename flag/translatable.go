@@ -1,9 +1,5 @@
 package flag
 
-import (
-	"codeberg.org/bvaudour/kcp/common"
-)
-
 // Templates for errors' messages.
 const (
 	errInvalidFlag         = "Invalid %s flag '%s': %s!"
@@ -30,13 +26,3 @@ const (
 
 	usage = "Usage:"
 )
-
-type Error string
-
-func (e Error) Error() string {
-	return string(e)
-}
-
-func NewError(err string, args ...any) error {
-	return Error(common.Tr(err, args...))
-}

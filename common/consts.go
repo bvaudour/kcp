@@ -1,11 +1,15 @@
+//go:build !dev
+// +build !dev
+
 package common
 
 const (
 	fbDefaultEditor = "vim"
-
-	cDefaultYes = "[Y/n]"
-	cDefaultNo  = "[y/N]"
-
-	Yes = "yes"
-	No  = "no"
+	fbVersion       = ""
+	fbLocaleBaseDir = "/usr/share/locale"
+	fbLocaleDomain  = "kcp"
+	fbConfigBaseDir = "/etc/kcp"
+	fbConfigUserDir = ""
+	fbConfigFile    = "kcp.conf"
+	fbOrganization  = "KaOS-Community-Packages"
 )

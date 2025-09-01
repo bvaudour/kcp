@@ -35,7 +35,7 @@ fn extract_all {||
 }
 
 fn extract_trans {||
-  put **/consts.go | each {|file|
+  put **/translatable.go | each {|file|
     var d = $workdir/$transdir/(dirname $file)
     i18n4go -c extract-strings -v --po -f $file -o $d --ignore-regexp $ignored
   }

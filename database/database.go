@@ -155,7 +155,7 @@ func (db *Database) UpdateRemote(connector Connector, debug bool) (counter Count
 							pkg.updateFromPKGBUILD(file)
 							pkg.noChange = false
 						} else if debug {
-							log.Printf("Failed to get PKGBUILD for %s: %v", pkg.Name, err)
+							log.Printf(errFailedGetPKGBUILD, pkg.Name, err)
 						}
 					}
 
@@ -196,7 +196,7 @@ func (db *Database) UpdateRemote(connector Connector, debug bool) (counter Count
 				if file, err := p.GetPKGBUID(debug); err == nil {
 					p.updateFromPKGBUILD(file)
 				} else if debug {
-					log.Printf("Failed to get PKGBUILD for new package %s: %v", p.Name, err)
+					log.Printf(errFailedGetPKGBUILDForNewPackage, p.Name, err)
 				}
 			}
 			newPackages.Push(p)

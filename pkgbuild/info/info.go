@@ -85,7 +85,7 @@ func newInfo(idx int, stmt *syntax.Stmt, t NodeType, environ expand.WriteEnviron
 		}
 		node.Name, node.Values = n.Name.Value, values
 	default:
-		err = fmt.Errorf("Invalid syntax at %s", position.RangeString(stmt.Pos(), stmt.End()))
+		err = fmt.Errorf(errInvalidSyntax, position.RangeString(stmt.Pos(), stmt.End()))
 		return
 	}
 	node.Id, node.Type, node.Stmt = idx, t, stmt

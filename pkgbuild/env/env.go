@@ -57,7 +57,7 @@ func GetDeepName(env expand.Environ, name string) string {
 // If the variable already exists and is read-only, an error is returned.
 func (env environment) Set(name string, vr expand.Variable) error {
 	if existing, ok := env[name]; ok && existing.ReadOnly {
-		return fmt.Errorf("cannot modify read-only variable %q", name)
+		return fmt.Errorf(errReadonlyVariable, name)
 	}
 	env[name] = vr
 	return nil
@@ -223,7 +223,7 @@ func setIndex(env expand.WriteEnviron, name string, idx int, variable expand.Var
 	} else if idx < 0 {
 		i := idx + l
 		if i < 0 {
-			return fmt.Errorf("%d: bad array index", idx)
+			return fmt.Errorf(errBadIndex, idx)
 		}
 		idx = i
 	}
@@ -240,7 +240,7 @@ func setIndex(env expand.WriteEnviron, name string, idx int, variable expand.Var
 // Assoc set the variable name “variable” at index “index”. If add, variable is added to the index variable.
 func Assoc(env expand.WriteEnviron, name, index string, variable expand.Variable, add ...bool) (err error) {
 	if variable.Kind == expand.Associative || variable.Kind == expand.Indexed {
-		return errors.New("Cannot set array in indexed variable")
+		return errors.New(errConvertArrayToIndexed)
 	}
 
 	cur := GetDeep(env, name)
@@ -321,7 +321,7 @@ func ParseAssignation(env expand.WriteEnviron, assign *syntax.Assign) (err error
 	} else {
 		switch assign.Index.(type) {
 		case *syntax.BinaryArithm, *syntax.UnaryArithm, *syntax.ParenArithm:
-			err = fmt.Errorf("%s: invalid syntax", position.RangeString(assign.Index.Pos(), assign.Index.End()))
+			err = fmt.Errorf(errInvalidSyntax, position.RangeString(assign.Index.Pos(), assign.Index.End()))
 		default:
 			w := assign.Index.(*syntax.Word)
 			index := w.Lit()
