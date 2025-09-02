@@ -13,6 +13,7 @@ var (
 	DefaultIndentation = uint(4)
 )
 
+// Print writes nodes and comment of a PKGBUILD to a writer interface.
 func Print(w io.Writer, nodes info.NodeInfoList, comments []syntax.Comment) error {
 	var lastPos syntax.Pos
 	for _, node := range nodes {

@@ -21,6 +21,7 @@ const (
 	Function
 )
 
+// TypeOf returns the type of a statement node.
 func TypeOf(stmt *syntax.Stmt) NodeType {
 	switch stmt.Cmd.(type) {
 	case *syntax.CallExpr:
@@ -425,6 +426,7 @@ func scomments[T syntax.Node](nodes []T) (out []syntax.Comment) {
 	return
 }
 
+// HeaderComments returns comments before the node.
 func (info *NodeInfo) HeaderComments() (out []syntax.Comment) {
 	allComments := comments(info.Stmt)
 	begin, _ := info.InnerPosition()
@@ -437,6 +439,7 @@ func (info *NodeInfo) HeaderComments() (out []syntax.Comment) {
 	return
 }
 
+// InlineComments returns comments inside the node.
 func (info *NodeInfo) InlineComments() (out []syntax.Comment) {
 	allComments := comments(info.Stmt)
 	begin, end := info.InnerPosition()
@@ -449,6 +452,7 @@ func (info *NodeInfo) InlineComments() (out []syntax.Comment) {
 	return
 }
 
+// FooterComments returns comments after the node.
 func (info *NodeInfo) FooterComments() (out []syntax.Comment) {
 	allComments := comments(info.Stmt)
 	_, end := info.InnerPosition()
@@ -459,32 +463,6 @@ func (info *NodeInfo) FooterComments() (out []syntax.Comment) {
 	}
 
 	return
-}
-
-func (info *NodeInfo) Clone(removeComments ...bool) *NodeInfo {
-	cloned := NodeInfo{
-		Id:     info.Id,
-		Type:   info.Type,
-		Name:   info.Name,
-		Value:  info.Value,
-		Values: make([]string, len(info.Values)),
-		Stmt:   info.Stmt,
-	}
-
-	copy(cloned.Values, info.Values)
-
-	printer, parser := syntax.NewPrinter(), syntax.NewParser(syntax.KeepComments(len(removeComments) == 0 || !removeComments[0]))
-	begin, _ := info.Position()
-	var sb strings.Builder
-	sb.WriteString(strings.Repeat("\n", int(begin.Line())-1))
-
-	if err := printer.Print(&sb, info.Stmt); err == nil {
-		if f, err := parser.Parse(strings.NewReader(sb.String()), ""); err == nil && len(f.Stmts) > 0 {
-			cloned.Stmt = f.Stmts[0]
-		}
-	}
-
-	return &cloned
 }
 
 // NodeInfoList represents a list of nodes’ infos.
@@ -558,6 +536,7 @@ func (infos NodeInfoList) GetInfos(name string) (out []NodeInfo) {
 	return
 }
 
+// Stmts returns the statements associated to the node infos.
 func (infos NodeInfoList) Stmts() (stmts []*syntax.Stmt) {
 	stmts = make([]*syntax.Stmt, len(infos))
 	for i, node := range infos {
@@ -567,6 +546,7 @@ func (infos NodeInfoList) Stmts() (stmts []*syntax.Stmt) {
 	return
 }
 
+// GetDuplicates returns duplicates nodes mapped by name.
 func (infos NodeInfoList) GetDuplicates() (duplicates map[string]NodeInfoList) {
 	names := make(map[string]NodeInfoList)
 	for _, info := range infos {

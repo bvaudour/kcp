@@ -89,7 +89,7 @@ func minimizeQuotingSequence(quotings []quoting) []joinQuoting {
 		precomputedJoins[i] = make([]quoting, n)
 	}
 
-	for i := 0; i < n; i++ {
+	for i := range n {
 		precomputedJoins[i][i] = quotings[i]
 		for j := i + 1; j < n; j++ {
 			precomputedJoins[i][j] = precomputedJoins[i][j-1].join(quotings[j])
@@ -275,6 +275,10 @@ func formatWordRecursive(node *info.NodeInfo, preferQuote bool) *info.NodeInfo {
 	return node
 }
 
+// FormatWords format all strings of variable assignations and body
+// of functions :
+// - Use of long format for variable references (${var} instead of $var),
+// - Prefers single quoting if possible.
 func FormatWords(node *info.NodeInfo) *info.NodeInfo {
 	preferQuote := node.Type == info.Function ||
 		!standard.IsStandardVariable(node.Name) ||

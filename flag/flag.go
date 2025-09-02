@@ -2,6 +2,7 @@ package flag
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -15,12 +16,7 @@ type Flag struct {
 
 // Internal checkers
 func contains(a []string, s string) bool {
-	for _, e := range a {
-		if e == s {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(a, s)
 }
 func stringOf(v any) (string, error) {
 	if s, ok := v.(string); ok {
@@ -236,6 +232,7 @@ func NewChoiceFlag(s, l, desc, df string, choices []string) (f *Flag, v *string,
 
 // NewArrayFlag returns a new flag which accepts multiple string args, and a pointer to its value.
 func NewArrayFlag(s, l, desc, vn string) (f *Flag, v *[]string, e error) {
+	v = new([]string)
 	*v = make([]string, 0, 1)
 	f, e = initFlag(s, l, desc, parseArray(v))
 	if e != nil {

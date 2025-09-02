@@ -5,10 +5,13 @@ import (
 	"codeberg.org/bvaudour/kcp/pkgbuild/position"
 )
 
+// TransformFunc represents a function to modify a node.
 type TransformFunc func(*info.NodeInfo) *info.NodeInfo
 
+// TransformListFunc represents a function to modify a list of nodes.
 type TransformListFunc func(info.NodeInfoList) info.NodeInfoList
 
+// MultiTransform fusions many node's transform functions in one.
 func MultiTransform(tranforms ...TransformFunc) TransformFunc {
 	return func(node *info.NodeInfo) *info.NodeInfo {
 		for _, transform := range tranforms {
@@ -18,6 +21,9 @@ func MultiTransform(tranforms ...TransformFunc) TransformFunc {
 	}
 }
 
+// TransformAndRecomputePositions applies a transform function of a node,
+// and moves its position based on diff.
+// Its returns the transformed node and the new diff position after transformation.
 func TransformAndRecomputePositions(
 	node *info.NodeInfo,
 	transform TransformFunc,
@@ -34,6 +40,7 @@ func TransformAndRecomputePositions(
 	return transformedNode, nextDiff
 }
 
+// TransformList transforms all nodes of a list and recomputes positions.
 func TransformList(nodes info.NodeInfoList, tranforms ...TransformFunc) info.NodeInfoList {
 	var diff *position.PosDiff
 	transform := MultiTransform(tranforms...)

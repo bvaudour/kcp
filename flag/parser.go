@@ -404,7 +404,7 @@ func (p *Parser) synopsis() string {
 }
 func (p *Parser) description() string {
 	b := new(strings.Builder)
-	for _, l := range strings.Split(p.LongDescription(), "\n") {
+	for l := range strings.SplitSeq(p.LongDescription(), "\n") {
 		if l == "" {
 			fmt.Fprintln(b, ".PP")
 		} else {

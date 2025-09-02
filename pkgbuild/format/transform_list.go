@@ -87,8 +87,8 @@ func newNr(node *info.NodeInfo, lastPos syntax.Pos) (nr nodeReorder, nextPos syn
 	return
 }
 
-func (nr nodeReorder) String() {
-	fmt.Sprintf(`{lines: %d, depends: %v}`, nr.lines, nr.depends)
+func (nr nodeReorder) String() string {
+	return fmt.Sprintf(`{lines: %d, depends: %v}`, nr.lines, nr.depends)
 }
 
 func prepareReorder(nodes info.NodeInfoList) (variables, functions info.NodeInfoList, depends map[int]nodeReorder) {
@@ -196,6 +196,7 @@ func vOrder(nodes info.NodeInfoList, depends map[int]nodeReorder) info.NodeInfoL
 	return vOrder1(nodes, depends)
 }
 
+// Reorder reorders variable assignations and function declarations in a PKGBUILD.
 func Reorder(nodes info.NodeInfoList) (result info.NodeInfoList) {
 	if len(nodes) < 2 {
 		return nodes
@@ -227,6 +228,8 @@ func Reorder(nodes info.NodeInfoList) (result info.NodeInfoList) {
 	return
 }
 
+// FormatBlankLines removes useless blank lines and add one blank line before
+// each function declaration.
 func FormatBlankLines(keepFirstBlank bool) TransformListFunc {
 	return func(nodes info.NodeInfoList) info.NodeInfoList {
 		if len(nodes) == 0 {
@@ -257,6 +260,7 @@ func FormatBlankLines(keepFirstBlank bool) TransformListFunc {
 	}
 }
 
+// RemoveHeader removes the first comment of the first node if needed.
 func RemoveHeader(nodes info.NodeInfoList) info.NodeInfoList {
 	if len(nodes) == 0 {
 		return nodes
@@ -280,6 +284,8 @@ func RemoveHeader(nodes info.NodeInfoList) info.NodeInfoList {
 	return nodes
 }
 
+// RemoveDuplicates remove duplicates variables and functions.
+// It keeps the last element.
 func RemoveDuplicates(nodes info.NodeInfoList) info.NodeInfoList {
 	duplicates := nodes.GetDuplicates()
 	ids := collection.NewSet[int]()

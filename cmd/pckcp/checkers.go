@@ -57,7 +57,7 @@ func loadExceptions() (exceptions collection.Set[string]) {
 	defer f.Close()
 	sc := bufio.NewScanner(f)
 	for sc.Scan() {
-		for _, e := range strings.Fields(sc.Text()) {
+		for e := range strings.FieldsSeq(sc.Text()) {
 			exceptions.Add(e)
 		}
 	}
@@ -80,7 +80,7 @@ func isPackageInRepo(v string) bool {
 		return true
 	}
 	result, _ = common.GetOutputCommand("kcp", "-Ns", v)
-	for _, e := range strings.Fields(string(result)) {
+	for e := range strings.FieldsSeq(string(result)) {
 		if e == v {
 			return true
 		}
@@ -195,7 +195,6 @@ func checkMissingFuncs(p *pkgbuild.PKGBUILD, edit bool) {
 		message(typeError, 0, 0, common.Tr(errMissingFunc, f))
 		fmt.Printf("  %s\n", commentAddManually)
 	}
-	return
 }
 
 func checkInfoTypes(p *pkgbuild.PKGBUILD, edit bool) (formatOptions []pformat.FormatOption) {

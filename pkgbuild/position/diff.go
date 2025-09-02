@@ -18,6 +18,7 @@ func isNil(e any) bool {
 	return false
 }
 
+// IncLine add lines to the the given position (1 line by default).
 func IncLine(pos syntax.Pos, lines ...uint) syntax.Pos {
 	line := uint(1)
 	if len(lines) > 0 && lines[0] > 0 {
@@ -27,6 +28,7 @@ func IncLine(pos syntax.Pos, lines ...uint) syntax.Pos {
 	return syntax.NewPos(pos.Offset()+line, pos.Line()+line, 1)
 }
 
+// PosDiff represents a difference between 2 positions.
 type PosDiff struct {
 	From   syntax.Pos
 	Ignore syntax.Node
@@ -35,6 +37,7 @@ type PosDiff struct {
 	Offset int
 }
 
+// Diff returns the difference between 2 positions.
 func Diff(oldPos, newPos syntax.Pos) *PosDiff {
 	return &PosDiff{
 		From:   oldPos,
@@ -44,15 +47,18 @@ func Diff(oldPos, newPos syntax.Pos) *PosDiff {
 	}
 }
 
+// IsNil returns true if difference is null.
 func (diff *PosDiff) IsNil() bool {
 	return diff == nil || (diff.Line == 0 && diff.Col == 0 && diff.Offset == 0)
 }
 
+// Clone copies the positions' diff.
 func (diff PosDiff) Clone() PosDiff {
 	cloned := diff
 	return cloned
 }
 
+// AddTo applies a diff to the given position and returns the new position.
 func (diff *PosDiff) AddTo(pos syntax.Pos) syntax.Pos {
 	if !pos.IsValid() || diff.IsNil() {
 		return pos
@@ -64,9 +70,9 @@ func (diff *PosDiff) AddTo(pos syntax.Pos) syntax.Pos {
 	return syntax.NewPos(newOffset, newLine, newCol)
 }
 
-// mv is a private helper method to apply a diff to a position `pos`
-// only if it is after `fromPos`. It correctly handles the column adjustment:
-// if `pos` is on a different line than `fromPos`, the column diff is reset to zero.
+// Mv is an helper method to apply a diff to a position `pos`
+// only if it is after `From`. It correctly handles the column adjustment:
+// if `pos` is on a different line than `From`, the column diff is reset to zero.
 func (diff *PosDiff) Mv(pos syntax.Pos) syntax.Pos {
 	if diff.IsNil() || !pos.IsValid() {
 		return pos
@@ -86,6 +92,7 @@ func (diff *PosDiff) Mv(pos syntax.Pos) syntax.Pos {
 	return d.AddTo(pos)
 }
 
+// MvAll applies a diff to multiple positions.
 func (diff *PosDiff) MvAll(positions ...*syntax.Pos) *PosDiff {
 	for _, p := range positions {
 		*p = diff.Mv(*p)
@@ -385,14 +392,18 @@ func updAll[T syntax.Node](diff *PosDiff, nodes []T) *PosDiff {
 	return diff
 }
 
+// Update applies the diff to all positions defined in the given
+// nodes and their subnodes.
 func (diff *PosDiff) Update(nodes ...syntax.Node) {
 	diff.updAll(nodes...)
 }
 
+// UpdateComments applies the diff to all comments positions.
 func (diff *PosDiff) UpdateComments(comments ...[]syntax.Comment) {
 	diff.updComments(comments...)
 }
 
+// Update applies the diff update to a typed silce of nodes.
 func Update[T syntax.Node](diff *PosDiff, nodes []T) {
 	updAll(diff, nodes)
 }

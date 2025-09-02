@@ -12,7 +12,7 @@ import (
 	"mvdan.cc/sh/v3/syntax"
 )
 
-// Environment implements the expand.Environ and expand.WriteEnviron interfaces
+// environment implements the expand.Environ and expand.WriteEnviron interfaces
 // to store and manage shell variables.
 type environment map[string]expand.Variable
 
@@ -43,6 +43,7 @@ func GetDeep(env expand.Environ, name string) expand.Variable {
 	return out
 }
 
+// GetDeepName returns the ultimate reference name.
 func GetDeepName(env expand.Environ, name string) string {
 	v := env.Get(name)
 	for v.Kind == expand.NameRef {

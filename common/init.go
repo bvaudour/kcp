@@ -64,8 +64,6 @@ func getAvailableLocales() {
 			availableLocales = append(availableLocales, locale)
 		}
 	}
-
-	return
 }
 
 func checkLanguage() bool {

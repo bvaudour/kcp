@@ -1,12 +1,15 @@
 package pkgbuild
 
 import (
+	"slices"
+
 	"codeberg.org/bvaudour/kcp/common"
 	"codeberg.org/bvaudour/kcp/pkgbuild/info"
 	"codeberg.org/bvaudour/kcp/pkgbuild/standard"
 	"git.kaosx.ovh/benjamin/collection"
 )
 
+// HasHeader returns true if the PKGBUILD has leading comments.
 func (p *PKGBUILD) HasHeader() bool {
 	if len(p.NodeInfoList) > 0 {
 		n := p.NodeInfoList[0]
@@ -17,6 +20,8 @@ func (p *PKGBUILD) HasHeader() bool {
 	return false
 }
 
+// GetMissingVariables returns the missing standard variables names of the PKGBUILD
+// and if it has checksums.
 func (p *PKGBUILD) GetMissingVariables() (missing []string, missingChecksum bool) {
 	variables := collection.NewSet(p.GetVariables()...)
 	for _, required := range standard.GetRequiredVariables() {
@@ -25,17 +30,15 @@ func (p *PKGBUILD) GetMissingVariables() (missing []string, missingChecksum bool
 		}
 	}
 
-	missingChecksum = true
-	for _, chck := range standard.GetChecksumsVariables() {
-		if variables.Contains(chck) {
-			missingChecksum = false
-			break
-		}
-	}
+	missingChecksum = !slices.ContainsFunc(
+		standard.GetChecksumsVariables(),
+		func(chck string) bool { return variables.Contains(chck) },
+	)
 
 	return
 }
 
+// GetMissingFunctions returns the missing standard functions of the PKGBUILD.
 func (p *PKGBUILD) GetMissingFunctions() (missing []string) {
 	functions := collection.NewSet(p.GetFunctions()...)
 	for _, required := range standard.GetRequiredFunctions() {
@@ -47,6 +50,7 @@ func (p *PKGBUILD) GetMissingFunctions() (missing []string) {
 	return
 }
 
+// GetBadStandard returns the nodes which are not on the good type (function declaration, single variable or array variable).
 func (p *PKGBUILD) GetBadStandard() (badInfos info.NodeInfoList, shouldBe []info.NodeType) {
 	for _, n := range p.NodeInfoList {
 		var t info.NodeType
@@ -67,6 +71,7 @@ func (p *PKGBUILD) GetBadStandard() (badInfos info.NodeInfoList, shouldBe []info
 	return
 }
 
+// GetEmpty returns the variables which have no value.
 func (p *PKGBUILD) GetEmpty() (infos info.NodeInfoList) {
 	for _, n := range p.NodeInfoList {
 		if (n.Type == info.ArrayVar && len(n.Values) == 0) || (n.Type == info.SingleVar && len(n.Value) == 0) {
@@ -77,16 +82,19 @@ func (p *PKGBUILD) GetEmpty() (infos info.NodeInfoList) {
 	return
 }
 
+// IsPkgrelClean returns true if pkgrel = 1.
 func (p *PKGBUILD) IsPkgrelClean() bool {
 	return p.GetValue(standard.PKGREL) == "1"
 }
 
+// IsArchClean returns true if arch contains only x86_64.
 func (p *PKGBUILD) IsArchClean() bool {
 	arch := p.GetArrayValue(standard.ARCH)
 
 	return len(arch) == 1 && arch[0] == "x86_64"
 }
 
+// HadDepends returns true if depends, makedepends or checkdepends is defined.
 func (p *PKGBUILD) HasDepends() bool {
 	for _, k := range []string{standard.DEPENDS, standard.MAKEDEPENDS, standard.CHECKDEPENDS} {
 		v := p.GetArrayValue(k)
@@ -98,6 +106,7 @@ func (p *PKGBUILD) HasDepends() bool {
 	return false
 }
 
+// IsInstallValid return true if install refers to existent files.
 func (p *PKGBUILD) IsInstallValid() bool {
 	return !p.HasValue(standard.INSTALL) || common.FileExists(p.GetValue(standard.INSTALL))
 }

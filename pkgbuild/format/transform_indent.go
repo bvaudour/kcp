@@ -8,6 +8,7 @@ import (
 	"mvdan.cc/sh/v3/syntax"
 )
 
+// @TODO: unused for now: indentation are made at Print stage.
 func IndentFunctions(spaces uint) TransformFunc {
 	return func(node *info.NodeInfo) *info.NodeInfo {
 		if node.Type != info.Function {
@@ -64,6 +65,7 @@ func getNextArrayElem(element *syntax.ArrayElem, currentPos syntax.Pos) (syntax.
 	return nil, false
 }
 
+// IndentVariables aligns correctly array variable assignations.
 func IndentVariables(node *info.NodeInfo) *info.NodeInfo {
 	if node.Type == info.Function {
 		return node

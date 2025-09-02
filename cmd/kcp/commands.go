@@ -215,7 +215,7 @@ func install(debug bool, app string, asdep bool) {
 		os.RemoveAll(installDir)
 	}
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, os.Kill, syscall.SIGQUIT, syscall.SIGABRT, syscall.SIGHUP)
+	signal.Notify(c, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGABRT, syscall.SIGHUP)
 	go func() {
 		<-c
 		remove()

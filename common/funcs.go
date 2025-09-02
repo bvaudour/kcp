@@ -61,7 +61,7 @@ func QuestionYN(msg string, defaultResponse bool) bool {
 	if !defaultResponse {
 		defstr = Tr(cDefaultNo)
 	}
-	format.FormatOf("l_yellow").Printf("%s %s ", msg, Tr(defstr))
+	format.FormatOf("l_yellow").Printf("%s %s ", msg, defstr)
 	if _, e := fmt.Scanf("%v", &resp); e != nil || len(resp) == 0 {
 		return defaultResponse
 	}

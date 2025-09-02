@@ -7,11 +7,13 @@ import (
 	"net/url"
 )
 
+// BasicAuth is a structure representing a basic authentication configuration.
 type BasicAuth struct {
 	Username string
 	Password string
 }
 
+// Context represents a full config to make an HTTP request.
 type Context struct {
 	*BasicAuth
 	Method string
@@ -20,6 +22,10 @@ type Context struct {
 	Body   io.Reader
 }
 
+// GetAuthParameters returns the  default authentication parameters
+// to make HTTP requests.
+// If both token and basic authentication methods
+// are defined, token is preferred.
 func GetAuthParameters() []string {
 	if Token != "" {
 		return []string{Token}
@@ -29,6 +35,8 @@ func GetAuthParameters() []string {
 	return nil
 }
 
+// Request do an HTTP request on the requested URL, using the optional context configuration.
+// It returns the body/header response, or an error if request failed.
 func Request(requestUrl string, context ...Context) (responseBody io.Reader, responseHeader http.Header, err error) {
 	var ctx Context
 	if len(context) > 0 {
@@ -40,7 +48,7 @@ func Request(requestUrl string, context ...Context) (responseBody io.Reader, res
 		method = ctx.Method
 	}
 
-	if ctx.Query != nil && len(ctx.Query) > 0 {
+	if len(ctx.Query) > 0 {
 		if p, e := url.Parse(requestUrl); e == nil {
 			query := p.Query()
 			for k, vv := range ctx.Query {

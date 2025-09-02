@@ -6,6 +6,7 @@ import (
 	"mvdan.cc/sh/v3/syntax"
 )
 
+// FormatOption represents an option configuration to give to a formater.
 type FormatOption uint
 
 const (
@@ -20,6 +21,7 @@ const (
 	OptionKeepFirstBlank
 )
 
+// Merge fusions many options to one option.
 func (option FormatOption) Merge(options ...FormatOption) FormatOption {
 	for _, o := range options {
 		option |= o
@@ -28,10 +30,12 @@ func (option FormatOption) Merge(options ...FormatOption) FormatOption {
 	return option
 }
 
+// Contains returns true if arg is included to the option.
 func (option FormatOption) Contains(arg FormatOption) bool {
 	return option&arg != 0
 }
 
+// Formater is an API to format nodes and comments from a PKGBUILD file.
 type Formater interface {
 	Format(info.NodeInfoList, []syntax.Comment) (info.NodeInfoList, []syntax.Comment)
 }
@@ -109,6 +113,7 @@ func (f formater) Format(nodes info.NodeInfoList, lastComments []syntax.Comment)
 	return
 }
 
+// NewFormater returns a Formater instance set with given options.
 func NewFormater(options ...FormatOption) Formater {
 	var option FormatOption
 	option = option.Merge(options...)

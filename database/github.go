@@ -25,7 +25,7 @@ type githubOrg struct {
 
 // NewGithubConnector creates a new GithubConnector.
 // The auth parameter is optional and can be a token (1 value)
-// or a username and password (2 values).
+// or a username and password (2 values) for basic authentication.
 func NewGithubConnector(org string, auth ...string) *GithubConnector {
 	gc := &GithubConnector{
 		organization: org,

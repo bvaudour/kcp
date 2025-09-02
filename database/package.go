@@ -230,8 +230,16 @@ func (p Package) Clone(dir string, ssh bool) (fullDir string, err error) {
 	return
 }
 
+// FilterFunc represents a function to filter a list of packages.
+// Only packages which pass the function will be kept.
 type FilterFunc func(Package) bool
-type SorterFunc func(Package, Package) int
+
+// SorterFunc represents a comparison function between 2 packages
+// in order to sort a list of packages.
+// -1 means p1 < p2.
+// 0 means p1 = p2.
+// 1 means p2 > p2.
+type SorterFunc func(p1, p2 Package) int
 
 // NewFilter aggregates multiple filter funcs in one filter func.
 func NewFilter(filters ...FilterFunc) FilterFunc {
@@ -257,10 +265,12 @@ func NewSorter(sorters ...SorterFunc) SorterFunc {
 	}
 }
 
+// SortByName sorts packages according to their name.
 func SortByName(p1, p2 Package) int {
 	return strings.Compare(p1.Name, p2.Name)
 }
 
+// SortByStar sorts packages according to their popularity's rate.
 func SortByStar(p1, p2 Package) int {
 	c := p2.Stars - p1.Stars
 
@@ -272,14 +282,17 @@ func SortByStar(p1, p2 Package) int {
 	return c
 }
 
+// FilterInstalled keeps only installed packages.
 func FilterInstalled(p Package) bool {
 	return p.LocalVersion != ""
 }
 
+// FilterOutdated keeps only packages which need to be updated.
 func FilterOutdated(p Package) bool {
 	return FilterInstalled(p) && p.LocalVersion != p.RepoVersion
 }
 
+// FilterStarred filter packages which have a star or more.
 func FilterStarred(p Package) bool {
 	return p.Stars > 0
 }
@@ -379,7 +392,7 @@ func (pl Packages) SearchBroken() []string {
 	buffer := make(chan string, max(100, len(pl)))
 	var wg sync.WaitGroup
 
-	for i := 0; i < defaultRoutines; i++ {
+	for range defaultRoutines {
 		wg.Go(func() {
 			for {
 				if d, ok := <-buffer; ok {

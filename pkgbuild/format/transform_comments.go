@@ -6,6 +6,7 @@ import (
 	"mvdan.cc/sh/v3/syntax"
 )
 
+// RemoveOuterComments removes comments defined out of a node.
 func RemoveOuterComments(node *info.NodeInfo) *info.NodeInfo {
 	toPos, _ := node.Position()
 	fromPos, _ := node.InnerPosition()
@@ -24,6 +25,8 @@ func commentsDiff(comments []syntax.Comment) (diff *position.PosDiff) {
 	return
 }
 
+// RemovesInnerComments removes comments defined inside a call expression.
+// Actually, only array variable assignations are supported (not function declarations).
 func RemoveInnerComments(node *info.NodeInfo) *info.NodeInfo {
 	if node.Type != info.ArrayVar {
 		return node
