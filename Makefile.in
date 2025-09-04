@@ -5,9 +5,11 @@ CONFIGDIR    := %configdir%
 CONFIGFILE   := %configfile%
 LOCALEDIR    := %localedir%
 DOMAIN       := %domain%
+HOST         := %host%
 ORGANIZATION := %organization%
 USER         := %user%
 PASSWORD     := %password%
+TOKEN        := %token% 
 
 DESTDIR ?=
 WD       = build
@@ -21,9 +23,11 @@ LDFLAGS += $(call cflag,$(CONFIGDIR),ConfigBaseDir)
 LDFLAGS += $(call cflag,$(CONFIGFILE),ConfigFile)
 LDFLAGS += $(call cflag,$(LOCALEDIR),LocaleBaseDir)
 LDFLAGS += $(call cflag,$(DOMAIN),LocaleDomain)
+LDFLAGE += $(call cflag,$(HOST),GitDomain)
 LDFLAGS += $(call cflag,$(ORGANIZATION),Organization)
 LDFLAGS += $(call cflag,$(USER),User)
 LDFLAGS += $(call cflag,$(PASSWORD),Password)
+LDFLAGS += $(call cflag,$(TOKEN),Token)
 
 
 # Go build variables

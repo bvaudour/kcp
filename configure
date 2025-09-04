@@ -8,6 +8,8 @@ DOMAIN=kcp
 ORGANIZATION=KaOS-Community-Packages
 USER=
 PASSWORD=
+HOST=github.com
+TOKEN=
 
 _help() {
 	echo "Usage: $0 [options]"
@@ -18,9 +20,11 @@ _help() {
 	echo -e "\t--config-file\tName of the configuration file [kcp.conf]"
 	echo -e "\t--locale-dir\tFinal locale directory [/usr/share/locale]"
 	echo -e "\t--locale-domain\tDomain name of the locales [kcp]"
-	echo -e "\t--organization\tGithub organization [KaOS-Community-Packages]"
-	echo -e "\t--user\tUser to use for the github API requests"
-	echo -e "\t--password\tPassword to use for the github API requests"
+	echo -e "\t--organization\tGit server organization [KaOS-Community-Packages]"
+	echo -e "\t--host\tName of git server domain [github.com]"
+	echo -e "\t--user\tUser to use for the git server API requests"
+	echo -e "\t--password\tPassword to use for the git server API requests"
+	echo -e "\t--token\tToken to use for the git server API requests"
 }
 
 _parseArgs() {
@@ -36,9 +40,11 @@ _parseArgs() {
 		--config-file) CONFIGFILE=$arg;;
 		--locale-dir) LOCALEDIR=$arg;;
 		--locale-domain) DOMAIN=$arg;;
+		--host) HOST=$arg;;
 		--organization) ORGANIZATION=$arg;;
 		--user) USER=$arg;;
 		--password) PASSWORD=$arg;;
+		--token) TOKEN=$arg;;
 		*) echo "Invalid flag: '${flag}'. Type $0 -h for help."; exit 1;;
 		esac
 	done
@@ -61,9 +67,11 @@ _makeMakefile() {
 	sed -i "s|%configfile%|${CONFIGFILE}|" Makefile
 	sed -i "s|%localedir%|${LOCALEDIR}|" Makefile
 	sed -i "s|%domain%|${DOMAIN}|" Makefile
+	sed -i "s|%host%|${HOST}|" Makefile
 	sed -i "s|%organization%|${ORGANIZATION}|" Makefile
 	sed -i "s|%user%|${USER}|" Makefile
 	sed -i "s|%password%|${PASSWORD}|" Makefile
+	sed -i "s|%token%|${token}|" Makefile
 }
 
 _parseArgs $@
