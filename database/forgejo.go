@@ -71,7 +71,7 @@ func (fc *ForgejoConnector) CountPublcRepos() (int, error) {
 	query := url.Values{}
 	query.Set("limit", "1")
 
-	_, responseHeader, err := fc.doRequest(http.MethodHead, query)
+	_, responseHeader, err := fc.doRequest(http.MethodGet, query)
 	if err != nil {
 		return 0, err
 	}

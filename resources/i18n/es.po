@@ -1,6 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Cellix <cellix@yandex.com>, 2015,2017,2020
@@ -12,547 +9,470 @@ msgstr ""
 "Project-Id-Version: KaOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-06 12:01+0200\n"
-"PO-Revision-Date: 2021-03-26 17:53+0000\n"
-"Last-Translator: Cellix <cellix@yandex.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/kaos/kaos/language/es/)\n"
+"PO-Revision-Date: 2014-12-15 19:40+0000\n"
+"Last-Translator: Cellix <cellix@yandex.com>, 2015,2017,2020-2021\n"
+"Language-Team: Spanish (http://app.transifex.com/kaos/kaos/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-# filename: cmd/kcp/consts.go, offset: 460, line: 12, column: 19
-msgid "Display all packages of KCP"
-msgstr "Muestra todos los paquetes existentes en KCP"
-
-# filename: cmd/kcp/consts.go, offset: 1435, line: 27, column: 19
-msgid "Display informations about a package"
-msgstr "Muestra información sobre un paquete"
-
-# filename: cmd/kcp/consts.go, offset: 508, line: 13, column: 19
-msgid "Refresh the local database"
-msgstr "Renovar la base de datos local"
-
-# filename: cmd/kcp/consts.go, offset: 990, line: 21, column: 19
-msgid "On refreshing database action, force complete update"
-msgstr "En una acción de renovación de la base de datos, fuerza la actualización completa"
-
-# filename: cmd/kcp/consts.go, offset: 234, line: 8, column: 19
-msgid "Tool in command-line for KaOS Community Packages"
-msgstr "Herramienta en linea de comandos para KaOS Community Packages"
-
-# filename: cmd/kcp/consts.go, offset: 555, line: 14, column: 19
-msgid "Search packages in KCP and display them"
-msgstr "Busca y muestra paquetes que están en KCP"
-
-# filename: cmd/kcp/consts.go, offset: 859, line: 19, column: 19
-msgid "On install action, install as a dependence"
-msgstr "En una acción de instalación, instala el paquete como una dependencia"
-
-# filename: cmd/kcp/consts.go, offset: 922, line: 20, column: 19
-msgid "On list action, display only installed packages"
-msgstr "En una acción de listado, muestra sólo los paquetes instalados."
-
-# filename: cmd/kcp/consts.go, offset: 1867, line: 38, column: 29
-msgid "Interrupt by user…"
-msgstr "Interrumpido por el usuario"
-
-# filename: cmd/kcp/consts.go, offset: 303, line: 9, column: 19
-msgid "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
-msgstr "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
-
-# filename: cmd/kcp/consts.go, offset: 615, line: 15, column: 19
-msgid "Download needed files to build a package"
-msgstr "Descargar los archivos necesarios para compilar un paquete"
-
-# filename: cmd/kcp/consts.go, offset: 1550, line: 33, column: 29
-msgid "Don't launch this program as root!"
-msgstr "¡No ejecute este programa como root!"
-
-# filename: cmd/kcp/consts.go, offset: 2004, line: 42, column: 19
-msgid "Do you want to edit %s?"
-msgstr "¿Quiere editar %s?"
-
-# filename: cmd/kcp/consts.go, offset: 65, line: 5, column: 23
-msgid ""
-"Provides a tool to make the use of KaOS Community Packages.\n"
-"\n"
-"With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr "Brinda una herramienta para hacer uso de KaOS Community Packages.\n\nCon esta herramienta, puede buscar, obtener e instalar un paquete desde KaOS Community Packages."
-
-# filename: cmd/kcp/consts.go, offset: 676, line: 16, column: 19
-msgid "Install a package from KCP"
-msgstr "Instala un paquete desde KCP"
-
-# filename: cmd/kcp/consts.go, offset: 723, line: 17, column: 19
-msgid "On display action, don't print KCP version"
-msgstr "En una acción de visualización, no muestra la versión de KCP"
-
-# filename: cmd/kcp/consts.go, offset: 1210, line: 24, column: 19
-msgid "On display action, display only packages with at least one star"
-msgstr "En una acción de visualización, muestra sólo los paquetes con al menos un voto."
-
-# filename: cmd/kcp/consts.go, offset: 1492, line: 28, column: 19
-msgid "<app>"
-msgstr "<applicación>"
-
-# filename: cmd/kcp/consts.go, offset: 786, line: 18, column: 19
-msgid "On display action, sort packages by stars descending"
-msgstr "En una acción de visualización, ordena los paquetes por orden descendiente de votación"
-
-# filename: cmd/kcp/consts.go, offset: 1365, line: 26, column: 19
-msgid "On display action, display only outdated packages"
-msgstr "En una acción de visualización, muestra sólo los paquetes desactualizados"
-
-# filename: cmd/kcp/consts.go, offset: 1741, line: 36, column: 29
-msgid "Another instance of kcp is running!"
-msgstr "¡Se está ejecutando otra instancia de kcp!"
-
-# filename: cmd/kcp/consts.go, offset: 1807, line: 37, column: 29
-msgid "Failed to create locker file!"
-msgstr "Se falló al crear el archivo de bloqueo"
-
-# filename: cmd/kcp/consts.go, offset: 426, line: 11, column: 19
-# filename: cmd/pckcp/consts.go, offset: 434, line: 11, column: 22
-msgid "Print version"
-msgstr "Muestra la versión"
-
-# filename: cmd/kcp/consts.go, offset: 1063, line: 22, column: 19
-msgid "On display action, force refreshing local database"
-msgstr "En una acción de visualización, fuerza la renovación de la base de datos local"
-
-# filename: cmd/kcp/consts.go, offset: 1134, line: 23, column: 19
-msgid "On display action, display only the name of the package"
-msgstr "En una acción de visualización, muestra sólo el nombre del paquete"
-
-# filename: cmd/kcp/consts.go, offset: 1615, line: 34, column: 29
-msgid "No package found"
-msgstr "No se encontró el paquete"
-
-# filename: cmd/kcp/consts.go, offset: 1954, line: 41, column: 19
-msgid "Do you want to edit PKGBUILD?"
-msgstr "¿Quiere editar el PKGBUILD?"
-
-# filename: cmd/kcp/consts.go, offset: 390, line: 10, column: 19
-# filename: cmd/pckcp/consts.go, offset: 395, line: 10, column: 22
-msgid "Print this help"
-msgstr "Muestra esta ayuda"
-
-# filename: cmd/kcp/consts.go, offset: 1294, line: 25, column: 19
-msgid "On display action, display only installed packages"
-msgstr "En una acción de visualización, muestra sólo los paquetes instalados"
-
-# filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
-msgid "No package found. Check if the database is updated."
-msgstr "Paquete no encontrado. Compruebe que la base de datos esté actualizada"
-
-# filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
-msgid "Package %s cloned in %s."
-msgstr "Paquete %s clonado en %s"
-
-# filename: cmd/pckcp/consts.go, offset: 799, line: 24, column: 20
-msgid "Variable '%s' is missing."
-msgstr "La variable '%s' no está"
-
-# filename: cmd/pckcp/consts.go, offset: 1622, line: 35, column: 25
-msgid "Variable '%s' contains bad packages."
-msgstr "La variable '%s' contiene paquetes incorrectos"
-
-# filename: cmd/pckcp/consts.go, offset: 2137, line: 44, column: 20
-msgid "Declarations have the good type."
-msgstr "Las declaraciones tienen el tipo correcto."
-
-# filename: cmd/pckcp/consts.go, offset: 2684, line: 56, column: 24
-msgid "Type the new name (leave blank to remove install variable):"
-msgstr "Escriba el nuevo nombre (deje en blanco para eliminar la variable install"
-
-# filename: cmd/pckcp/consts.go, offset: 2931, line: 61, column: 23
-msgid "a function"
-msgstr "una función"
-
-# filename: cmd/pckcp/consts.go, offset: 65, line: 5, column: 23
+# filename: cmd/pckcp/translatable.go, offset: 66, line: 5, column: 23
 msgid ""
 "Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
 "\n"
-"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
-msgstr "Provee una herramienta para comprobar la validez de un PKGBUILD de acuerdo a los estándares de KCP.\n\nSi se usa el modifcador -e, los errores comunes pueden ser comprobados y se crea un PKGBUILD.new (potencialmente) válido."
+"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created (if -o is not used)."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 1242, line: 31, column: 25
-msgid "Variable '%s' is empty."
-msgstr "La variable '%s' está vacía"
+# filename: cmd/pckcp/translatable.go, offset: 787, line: 16, column: 22
+msgid "File’s name of the transformed PKGBUILD"
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 1979, line: 41, column: 20
-msgid "There aren’t duplicates."
-msgstr "No hay duplicados."
+# filename: cmd/pckcp/translatable.go, offset: 935, line: 23, column: 16
+msgid "Warning"
+msgstr "Peligro"
 
-# filename: cmd/pckcp/consts.go, offset: 2027, line: 42, column: 20
-msgid "There aren’t missing variables."
-msgstr "No hay variables perdidas."
+# filename: cmd/pckcp/translatable.go, offset: 960, line: 24, column: 16
+msgid "Info"
+msgstr "Información"
 
-# filename: cmd/pckcp/consts.go, offset: 2966, line: 62, column: 23
-msgid "a variable"
-msgstr "una variable"
+# filename: cmd/pckcp/translatable.go, offset: 1038, line: 27, column: 23
+msgid "Checksum is missing."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 952, line: 28, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 1239, line: 32, column: 25
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
 msgstr "Se encontró un encabezado. No use nombre de mantenedores o colaboradores en PKGBUILD, cualquiera puede colaborar, deje el encabezado libre de esto."
 
-# filename: cmd/pckcp/consts.go, offset: 679, line: 19, column: 16
-msgid "Error"
-msgstr "Error"
+# filename: cmd/pckcp/translatable.go, offset: 1449, line: 34, column: 25
+msgid "Bad type declaration: '%s' is %s but it should be %s."
+msgstr "Declaración de tipo incorrecto: '%s' es %s pero debería ser %s."
 
-# filename: cmd/pckcp/consts.go, offset: 1685, line: 36, column: 25
-msgid "'%s' is the name of the package. It is useless."
-msgstr "'%s' es el nombre del paquete. Es inútil"
-
-# filename: cmd/pckcp/consts.go, offset: 1759, line: 37, column: 25
-msgid "'%s' isn't in repo neither in kcp."
-msgstr "'%s' no está ni en los repos ni en kcp."
-
-# filename: cmd/pckcp/consts.go, offset: 2378, line: 50, column: 24
-msgid "Add variable '%s'?"
-msgstr "¿Añadir la variable '%s'?"
-
-# filename: cmd/pckcp/consts.go, offset: 2769, line: 57, column: 24
-msgid "Modify '%s'?"
-msgstr "¿Modificar '%s'?"
-
-# filename: cmd/pckcp/consts.go, offset: 2879, line: 60, column: 23
-msgid "You should add it manually."
-msgstr "Debería añadirlo manualmente"
-
-# filename: cmd/pckcp/consts.go, offset: 471, line: 12, column: 22
-msgid "Interactive edition"
-msgstr "Edición interactiva"
-
-# filename: cmd/pckcp/consts.go, offset: 570, line: 14, column: 22
-msgid "Removes the useless comments and blanks of the prototype"
-msgstr "Elimina los comentarios inútiles y los espacios en blanco del prototipo"
-
-# filename: cmd/pckcp/consts.go, offset: 1113, line: 29, column: 25
-msgid "Some duplicates found:"
-msgstr "Se encontraron algunos duplicados:"
-
-# filename: cmd/pckcp/consts.go, offset: 1820, line: 38, column: 25
-msgid ""
-"Variables 'depends' and 'makedepends' are empty. You should manually check "
-"if it is not a missing."
-msgstr "Las variables 'depends' y 'makedepends' están vacías. Debería comprobar manualmente si no están desaparecidas."
-
-# filename: cmd/pckcp/consts.go, offset: 2082, line: 43, column: 20
-msgid "There aren’t missing functions."
-msgstr "No hay funciones desaparecidas"
-
-# filename: cmd/pckcp/consts.go, offset: 2191, line: 45, column: 20
-msgid "There aren’t empty variables."
-msgstr "No hay variables vacías"
-
-# filename: cmd/pckcp/consts.go, offset: 2294, line: 48, column: 24
-msgid "Remove header?"
-msgstr "¿Eliminar cabecera?"
-
-# filename: cmd/pckcp/consts.go, offset: 2495, line: 52, column: 24
-msgid "Remove variable '%s'?"
-msgstr "¿Eliminar variable '%s'?"
-
-# filename: cmd/pckcp/consts.go, offset: 846, line: 25, column: 20
-msgid "Function '%s' is missing."
-msgstr "No se encuentra la función '%s'."
-
-# filename: cmd/pckcp/consts.go, offset: 1560, line: 34, column: 25
-msgid "install: file '%s' doesn’t exist."
-msgstr "install: archivo '%s' no existe"
-
-# filename: cmd/pckcp/consts.go, offset: 2334, line: 49, column: 24
-msgid "Remove duplicates?"
-msgstr "¿Eliminar duplicados?"
-
-# filename: cmd/pckcp/consts.go, offset: 514, line: 13, column: 22
-msgid "Generate a prototype of PKGBUILD"
-msgstr "Generar un prototipo de PKGBUILD"
-
-# filename: cmd/pckcp/consts.go, offset: 1941, line: 40, column: 20
+# filename: cmd/pckcp/translatable.go, offset: 2232, line: 44, column: 24
 msgid "Header is clean."
 msgstr "La cabecera está limpia."
 
-# filename: cmd/pckcp/consts.go, offset: 1292, line: 32, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 375, line: 9, column: 22
+msgid "[-h|-e|-v|-g[-c]]"
+msgstr "[-h|-e|-v|-g[-c]]"
+
+# filename: cmd/pckcp/translatable.go, offset: 912, line: 22, column: 16
+msgid "Error"
+msgstr "Error"
+
+# filename: cmd/pckcp/translatable.go, offset: 1133, line: 29, column: 23
+msgid "Function '%s' is missing."
+msgstr "No se encuentra la función '%s'."
+
+# filename: cmd/pckcp/translatable.go, offset: 1186, line: 31, column: 25
+msgid "Modifications saved in %s!"
+msgstr "¡Modificaciones guardads en %s!"
+
+# filename: cmd/pckcp/translatable.go, offset: 1400, line: 33, column: 25
+msgid "Some duplicates found:"
+msgstr "Se encontraron algunos duplicados:"
+
+# filename: cmd/pckcp/translatable.go, offset: 2543, line: 50, column: 24
+msgid "There aren’t empty variables."
+msgstr "No hay variables vacías"
+
+# filename: cmd/pckcp/translatable.go, offset: 2600, line: 51, column: 24
+msgid "Variable '%s' is clean."
+msgstr "Variable '%s' está limpia."
+
+# filename: cmd/pckcp/translatable.go, offset: 2690, line: 54, column: 24
+msgid "Remove duplicates?"
+msgstr "¿Eliminar duplicados?"
+
+# filename: cmd/pckcp/translatable.go, offset: 298, line: 8, column: 22
+msgid "Tool in command-line to manage common PKGBUILD errors"
+msgstr "Herramienta en linea de comandos para administrar errores comunes de PKGBUILD"
+
+# filename: cmd/pckcp/translatable.go, offset: 852, line: 17, column: 22
+msgid "<file>"
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 1579, line: 36, column: 25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
 msgstr "pkgrel es distinto de 1. Este debería ser el caso solamente si se editaron las instruccionesde compilación, pero no el pkgver."
 
-# filename: cmd/pckcp/consts.go, offset: 2542, line: 53, column: 24
-msgid "Reset pkgrel to 1?"
-msgstr "¿Restablecer pkgrel a 1?"
+# filename: cmd/pckcp/translatable.go, offset: 2778, line: 56, column: 24
+msgid "Set variable '%s' with (leave blank to ignore):"
+msgstr "Ajustar la variable '%s' con (deje en blanco para ignorar):"
 
-# filename: cmd/pckcp/consts.go, offset: 2633, line: 55, column: 24
-msgid "Modify name of '%s' file?"
-msgstr "¿Modificar el nombre del archivo '%s'"
+# filename: cmd/pckcp/translatable.go, offset: 3235, line: 64, column: 24
+msgid "Format the PKGBUILD?"
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 3043, line: 64, column: 23
-msgid "an array variable"
-msgstr "una variable de array"
-
-# filename: cmd/pckcp/consts.go, offset: 3085, line: 65, column: 23
+# filename: cmd/pckcp/translatable.go, offset: 672, line: 15, column: 22
 msgid ""
-"Note that hooks provide similar functionnalities and are more powerful. For "
-"more informations: %s"
-msgstr "Note que los hooks proveen funcionalidades similares y son más poderosos.Para más instrucciones: %s"
+"Formats the PKGBUILD file. If output option (-o) is not specified, standard "
+"output is used."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 754, line: 23, column: 20
-msgid "File %s does not exist."
-msgstr "El archivo %s no existe."
+# filename: cmd/pckcp/translatable.go, offset: 1847, line: 38, column: 25
+msgid "install: file '%s' doesn’t exist."
+msgstr "install: archivo '%s' no existe"
 
-# filename: cmd/pckcp/consts.go, offset: 354, line: 9, column: 22
-msgid "[-h|-e|-v|-g[-c]]"
-msgstr "[-h|-e|-v|-g[-c]]"
+# filename: cmd/pckcp/translatable.go, offset: 1972, line: 40, column: 25
+msgid "'%s' is the name of the package. It is useless."
+msgstr "'%s' es el nombre del paquete. Es inútil"
 
-# filename: cmd/pckcp/consts.go, offset: 702, line: 20, column: 16
-msgid "Warning"
-msgstr "Peligro"
+# filename: cmd/pckcp/translatable.go, offset: 2046, line: 41, column: 25
+msgid "'%s' isn't in repo neither in kcp."
+msgstr "'%s' no está ni en los repos ni en kcp."
 
-# filename: cmd/pckcp/consts.go, offset: 727, line: 21, column: 16
-msgid "Info"
-msgstr "Información"
+# filename: cmd/pckcp/translatable.go, offset: 3040, line: 61, column: 24
+msgid "Type the new name (leave blank to remove install variable):"
+msgstr "Escriba el nuevo nombre (deje en blanco para eliminar la variable install"
 
-# filename: cmd/pckcp/consts.go, offset: 899, line: 27, column: 25
-msgid "Modifications saved in %s!"
-msgstr "¡Modificaciones guardads en %s!"
+# filename: cmd/pckcp/translatable.go, offset: 3403, line: 69, column: 23
+msgid "a string variable"
+msgstr "una variable de string"
 
-# filename: cmd/pckcp/consts.go, offset: 1162, line: 30, column: 25
-msgid "Bad type declaration: '%s' is %s but it should be %s."
-msgstr "Declaración de tipo incorrecto: '%s' es %s pero debería ser %s."
-
-# filename: cmd/pckcp/consts.go, offset: 1422, line: 33, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 1709, line: 37, column: 25
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
 msgstr "la arquitectura es distinta a 'x86_64'. Dado que KaOS sólamente soporta esta arquitectura,no se añadiría ninguna otra arquitectura aquí."
 
-# filename: cmd/pckcp/consts.go, offset: 277, line: 8, column: 22
-msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr "Herramienta en linea de comandos para administrar errores comunes de PKGBUILD"
+# filename: cmd/pckcp/translatable.go, offset: 1909, line: 39, column: 25
+msgid "Variable '%s' contains bad packages."
+msgstr "La variable '%s' contiene paquetes incorrectos"
 
-# filename: cmd/pckcp/consts.go, offset: 2422, line: 51, column: 24
-msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr "Ajustar la variable '%s' con (deje en blanco para ignorar):"
+# filename: cmd/pckcp/translatable.go, offset: 416, line: 10, column: 22
+msgid "Print this help"
+msgstr "Muestra esta ayuda"
 
-# filename: cmd/pckcp/consts.go, offset: 2586, line: 54, column: 24
+# filename: cmd/pckcp/translatable.go, offset: 990, line: 26, column: 23
+msgid "File %s does not exist."
+msgstr "El archivo %s no existe."
+
+# filename: cmd/pckcp/translatable.go, offset: 2274, line: 45, column: 24
+msgid "There aren’t duplicates."
+msgstr "No hay duplicados."
+
+# filename: cmd/pckcp/translatable.go, offset: 2650, line: 53, column: 24
+msgid "Remove header?"
+msgstr "¿Eliminar cabecera?"
+
+# filename: cmd/pckcp/translatable.go, offset: 3125, line: 62, column: 24
+msgid "Modify '%s'?"
+msgstr "¿Modificar '%s'?"
+
+# filename: cmd/pckcp/translatable.go, offset: 3281, line: 66, column: 23
+msgid "You should add it manually."
+msgstr "Debería añadirlo manualmente"
+
+# filename: cmd/pckcp/translatable.go, offset: 1083, line: 28, column: 23
+msgid "Variable '%s' is missing."
+msgstr "La variable '%s' no está"
+
+# filename: cmd/pckcp/translatable.go, offset: 1529, line: 35, column: 25
+msgid "Variable '%s' is empty."
+msgstr "La variable '%s' está vacía"
+
+# filename: cmd/pckcp/translatable.go, offset: 2326, line: 46, column: 24
+msgid "Checksum is OK."
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 2426, line: 48, column: 24
+msgid "There aren’t missing functions."
+msgstr "No hay funciones desaparecidas"
+
+# filename: cmd/pckcp/translatable.go, offset: 2851, line: 57, column: 24
+msgid "Remove variable '%s'?"
+msgstr "¿Eliminar variable '%s'?"
+
+# filename: cmd/pckcp/translatable.go, offset: 2898, line: 58, column: 24
+msgid "Reset pkgrel to 1?"
+msgstr "¿Restablecer pkgrel a 1?"
+
+# filename: cmd/pckcp/translatable.go, offset: 2942, line: 59, column: 24
 msgid "Reset arch to x86_64?"
 msgstr "Restablecer la arquitectura a x86_64"
 
-# filename: cmd/pckcp/consts.go, offset: 2807, line: 58, column: 24
+# filename: cmd/pckcp/translatable.go, offset: 3163, line: 63, column: 24
 msgid "Type the new value (leave blank to remove it):"
 msgstr "Escriba el nuevo valor (deje en blanco para eliminarla):"
 
-# filename: cmd/pckcp/consts.go, offset: 3001, line: 63, column: 23
-msgid "a string variable"
-msgstr "una variable de string"
+# filename: cmd/pckcp/translatable.go, offset: 592, line: 14, column: 22
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "Elimina los comentarios inútiles y los espacios en blanco del prototipo"
 
-# filename: cmd/pckcp/consts.go, offset: 2244, line: 46, column: 20
-msgid "Variable '%s' is clean."
-msgstr "Variable '%s' está limpia."
+# filename: cmd/pckcp/translatable.go, offset: 2485, line: 49, column: 24
+msgid "Declarations have the good type."
+msgstr "Las declaraciones tienen el tipo correcto."
 
-# filename: common/consts.go, offset: 88, line: 7, column: 16
-msgid "[y/N]"
-msgstr "[s/N]"
+# filename: cmd/pckcp/translatable.go, offset: 2734, line: 55, column: 24
+msgid "Add variable '%s'?"
+msgstr "¿Añadir la variable '%s'?"
 
-# filename: common/consts.go, offset: 104, line: 9, column: 8
-msgid "yes"
-msgstr "si"
+# filename: cmd/pckcp/translatable.go, offset: 2989, line: 60, column: 24
+msgid "Modify name of '%s' file?"
+msgstr "¿Modificar el nombre del archivo '%s'"
 
-# filename: common/consts.go, offset: 117, line: 10, column: 8
-msgid "no"
-msgstr "no"
+# filename: cmd/pckcp/translatable.go, offset: 3445, line: 70, column: 23
+msgid "an array variable"
+msgstr "una variable de array"
 
-# filename: common/consts.go, offset: 43, line: 4, column: 20
-msgid "vim"
-msgstr "vim"
+# filename: cmd/pckcp/translatable.go, offset: 3487, line: 71, column: 23
+msgid ""
+"Note that hooks provide similar functionnalities and are more powerful. For "
+"more informations: %s"
+msgstr "Note que los hooks proveen funcionalidades similares y son más poderosos.Para más instrucciones: %s"
 
-# filename: common/consts.go, offset: 65, line: 6, column: 16
+# filename: cmd/pckcp/translatable.go, offset: 455, line: 11, column: 22
+msgid "Print version"
+msgstr "Muestra la versión"
+
+# filename: cmd/pckcp/translatable.go, offset: 492, line: 12, column: 22
+msgid "Interactive edition"
+msgstr "Edición interactiva"
+
+# filename: cmd/pckcp/translatable.go, offset: 535, line: 13, column: 22
+msgid "Generates a prototype of PKGBUILD"
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 2107, line: 42, column: 25
+msgid ""
+"Variables 'depends' and 'makedepends' are empty. You should manually check "
+"if it is not a missing."
+msgstr "Las variables 'depends' y 'makedepends' están vacías. Debería comprobar manualmente si no están desaparecidas."
+
+# filename: cmd/pckcp/translatable.go, offset: 2367, line: 47, column: 24
+msgid "There aren’t missing variables."
+msgstr "No hay variables perdidas."
+
+# filename: cmd/pckcp/translatable.go, offset: 3333, line: 67, column: 23
+msgid "a function"
+msgstr "una función"
+
+# filename: cmd/pckcp/translatable.go, offset: 3368, line: 68, column: 23
+msgid "a variable"
+msgstr "una variable"
+
+# filename: common/translatable.go, offset: 39, line: 4, column: 16
 msgid "[Y/n]"
 msgstr "[S/n]"
 
-# filename: database/consts.go, offset: 180, line: 8, column: 22
-msgid "Description"
-msgstr "Descripción"
+# filename: common/translatable.go, offset: 62, line: 5, column: 16
+msgid "[y/N]"
+msgstr "[s/N]"
 
-# filename: database/consts.go, offset: 342, line: 13, column: 22
-msgid "Depends on"
-msgstr "Depende de"
+# filename: common/translatable.go, offset: 78, line: 7, column: 8
+msgid "yes"
+msgstr "si"
 
-# filename: database/consts.go, offset: 492, line: 17, column: 22
-msgid "Replaces"
-msgstr "Reemplaza"
+# filename: common/translatable.go, offset: 91, line: 8, column: 8
+msgid "no"
+msgstr "no"
 
-# filename: database/consts.go, offset: 758, line: 27, column: 15
-msgid "%d entries updated!"
-msgstr "%d entradas actualizadas!"
-
-# filename: database/consts.go, offset: 121, line: 6, column: 22
-msgid "Name"
-msgstr "Nombre"
-
-# filename: database/consts.go, offset: 562, line: 19, column: 22
-msgid "Validated By"
-msgstr "Validado por"
-
-# filename: database/consts.go, offset: 598, line: 20, column: 22
-msgid "Yes"
-msgstr "Si"
-
-# filename: database/consts.go, offset: 648, line: 23, column: 18
-msgid "Dir %s already exists!"
-msgstr "¡El directorio %s ya existe!"
-
-# filename: database/consts.go, offset: 688, line: 25, column: 15
-msgid "%d entries added!"
-msgstr "¡Se añadieron %d entradas!"
-
-# filename: database/consts.go, offset: 722, line: 26, column: 15
-msgid "%d entries deleted!"
-msgstr "¡Se borraron %d entradas!"
-
-# filename: database/consts.go, offset: 47, line: 4, column: 22
-msgid "[installed]"
-msgstr "[instalado]"
-
-# filename: database/consts.go, offset: 149, line: 7, column: 22
-msgid "Version"
-msgstr "Versión"
-
-# filename: database/consts.go, offset: 278, line: 11, column: 22
-msgid "Licenses"
-msgstr "Licencias"
-
-# filename: database/consts.go, offset: 417, line: 15, column: 22
-msgid "Optional Deps"
-msgstr "Dependencias Opcionales"
-
-# filename: database/consts.go, offset: 454, line: 16, column: 22
-msgid "Conflicts With"
-msgstr "Conflicto con"
-
-# filename: database/consts.go, offset: 524, line: 18, column: 22
-msgid "Install Script"
-msgstr "Script de Instalación"
-
-# filename: database/consts.go, offset: 625, line: 21, column: 22
-msgid "No"
-msgstr "No"
-
-# filename: database/consts.go, offset: 82, line: 5, column: 22
+# filename: database/translatable.go, offset: 90, line: 5, column: 26
 msgid "[installed: %s]"
 msgstr "[instalado: %s]"
 
-# filename: database/consts.go, offset: 215, line: 9, column: 22
-msgid "Architecture"
-msgstr "Arquitectura"
-
-# filename: database/consts.go, offset: 251, line: 10, column: 22
-msgid "URL"
-msgstr "URL"
-
-# filename: database/consts.go, offset: 310, line: 12, column: 22
-msgid "Provides"
-msgstr "Provee"
-
-# filename: database/consts.go, offset: 376, line: 14, column: 22
+# filename: database/translatable.go, offset: 420, line: 14, column: 26
 msgid "Depends on (make)"
 msgstr "Depende de (make)"
 
-# filename: flag/consts.go, offset: 182, line: 10, column: 27
-msgid "Invalid value '%v': Must be a %s!"
-msgstr "Valor inválido '%v': Debe ser un %s!"
+# filename: database/translatable.go, offset: 887, line: 25, column: 38
+msgid "Failed to get PKGBUILD for %s: %v"
+msgstr ""
 
-# filename: flag/consts.go, offset: 244, line: 11, column: 27
-msgid "Flag '%s' cannot be used with '%s'"
-msgstr "Modificador '%s' no puede ser usado con '%s'"
+# filename: database/translatable.go, offset: 1040, line: 27, column: 38
+msgid "X-Total-Count not found in response"
+msgstr ""
 
-# filename: flag/consts.go, offset: 530, line: 16, column: 27
-msgid "Unexpected arg: %s"
-msgstr "Arg Inesperado: %s"
+# filename: database/translatable.go, offset: 1127, line: 30, column: 15
+msgid "%d entries deleted!"
+msgstr "¡Se borraron %d entradas!"
 
-# filename: flag/consts.go, offset: 767, line: 22, column: 15
-msgid "string"
-msgstr "string"
+# filename: database/translatable.go, offset: 1163, line: 31, column: 15
+msgid "%d entries updated!"
+msgstr "%d entradas actualizadas!"
 
-# filename: flag/consts.go, offset: 904, line: 28, column: 18
-msgid "too short"
-msgstr "demasiado corto"
+# filename: database/translatable.go, offset: 165, line: 7, column: 26
+msgid "Version"
+msgstr "Versión"
 
-# filename: flag/consts.go, offset: 933, line: 29, column: 18
-msgid "too long"
-msgstr "demasiado largo"
+# filename: database/translatable.go, offset: 239, line: 9, column: 26
+msgid "Architecture"
+msgstr "Arquitectura"
 
-# filename: flag/consts.go, offset: 954, line: 31, column: 10
-msgid "Usage:"
-msgstr "Uso:"
+# filename: database/translatable.go, offset: 279, line: 10, column: 26
+msgid "URL"
+msgstr "URL"
 
-# filename: flag/consts.go, offset: 128, line: 9, column: 27
-msgid "Invalid %s flag '%s': %s!"
-msgstr "Modificador '%s' inválido %s: %s!"
+# filename: database/translatable.go, offset: 548, line: 17, column: 26
+msgid "Replaces"
+msgstr "Reemplaza"
 
-# filename: flag/consts.go, offset: 490, line: 15, column: 27
-msgid "Arg needed!"
-msgstr "Arg necesario!"
+# filename: database/translatable.go, offset: 666, line: 20, column: 26
+msgid "Yes"
+msgstr "Si"
 
-# filename: flag/consts.go, offset: 815, line: 25, column: 18
-msgid "short"
-msgstr "corto"
+# filename: database/translatable.go, offset: 697, line: 21, column: 26
+msgid "No"
+msgstr "No"
 
-# filename: flag/consts.go, offset: 840, line: 26, column: 18
-msgid "long"
-msgstr "largo"
+# filename: database/translatable.go, offset: 960, line: 26, column: 38
+msgid "Could not parse X-Total-Count header: %v"
+msgstr ""
 
-# filename: flag/consts.go, offset: 307, line: 12, column: 27
+# filename: database/translatable.go, offset: 1093, line: 29, column: 15
+msgid "%d entries added!"
+msgstr "¡Se añadieron %d entradas!"
+
+# filename: database/translatable.go, offset: 200, line: 8, column: 26
+msgid "Description"
+msgstr "Descripción"
+
+# filename: database/translatable.go, offset: 382, line: 13, column: 26
+msgid "Depends on"
+msgstr "Depende de"
+
+# filename: database/translatable.go, offset: 506, line: 16, column: 26
+msgid "Conflicts With"
+msgstr "Conflicto con"
+
+# filename: database/translatable.go, offset: 133, line: 6, column: 26
+msgid "Name"
+msgstr "Nombre"
+
+# filename: database/translatable.go, offset: 310, line: 11, column: 26
+msgid "Licenses"
+msgstr "Licencias"
+
+# filename: database/translatable.go, offset: 346, line: 12, column: 26
+msgid "Provides"
+msgstr "Provee"
+
+# filename: database/translatable.go, offset: 465, line: 15, column: 26
+msgid "Optional Deps"
+msgstr "Dependencias Opcionales"
+
+# filename: database/translatable.go, offset: 584, line: 18, column: 26
+msgid "Install Script"
+msgstr "Script de Instalación"
+
+# filename: database/translatable.go, offset: 626, line: 19, column: 26
+msgid "Validated By"
+msgstr "Validado por"
+
+# filename: database/translatable.go, offset: 740, line: 23, column: 38
+msgid "Dir %s already exists!"
+msgstr "¡El directorio %s ya existe!"
+
+# filename: database/translatable.go, offset: 802, line: 24, column: 38
+msgid "Failed to get PKGBUILD for new package %s: %v"
+msgstr ""
+
+# filename: database/translatable.go, offset: 51, line: 4, column: 26
+msgid "[installed]"
+msgstr "[instalado]"
+
+# filename: flag/translatable.go, offset: 262, line: 8, column: 27
 msgid "Flag '%s' needs one of these flags: %v"
 msgstr "Modificador '%s' necesita uno de estos modificadores: %v"
 
-# filename: flag/consts.go, offset: 625, line: 18, column: 27
-msgid "Flag '%s' is already set!"
-msgstr "Modificador '%s' ya fue establecido!"
+# filename: flag/translatable.go, offset: 485, line: 12, column: 27
+msgid "Unexpected arg: %s"
+msgstr "Arg Inesperado: %s"
 
-# filename: flag/consts.go, offset: 679, line: 19, column: 27
-msgid "Unknown property: %d"
-msgstr "Propiedad desconocida: %d"
-
-# filename: flag/consts.go, offset: 864, line: 27, column: 18
-msgid "must begin with '%s'"
-msgstr "debe comenzar con '%s'"
-
-# filename: flag/consts.go, offset: 374, line: 13, column: 27
-msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr "El modificador '%s' no permite argumentos múltiples!"
-
-# filename: flag/consts.go, offset: 577, line: 17, column: 27
+# filename: flag/translatable.go, offset: 532, line: 13, column: 27
 msgid "Arg '%s' not in %v!"
 msgstr "Arg '%s' no está en %v!"
 
-# filename: flag/consts.go, offset: 728, line: 20, column: 27
+# filename: flag/translatable.go, offset: 634, line: 15, column: 27
+msgid "Unknown property: %d"
+msgstr "Propiedad desconocida: %d"
+
+# filename: flag/translatable.go, offset: 683, line: 16, column: 27
 msgid "Unsupported flag '%s'"
 msgstr "Modificador no soportado '%s'"
 
-# filename: flag/consts.go, offset: 790, line: 23, column: 15
+# filename: flag/translatable.go, offset: 745, line: 19, column: 15
 msgid "bool"
 msgstr "bool"
 
-# filename: flag/consts.go, offset: 446, line: 14, column: 27
+# filename: flag/translatable.go, offset: 770, line: 21, column: 18
+msgid "short"
+msgstr "corto"
+
+# filename: flag/translatable.go, offset: 859, line: 24, column: 18
+msgid "too short"
+msgstr "demasiado corto"
+
+# filename: flag/translatable.go, offset: 401, line: 10, column: 27
 msgid "%s not allowed!"
 msgstr "%s no permitido!"
 
-# filename: pkgbuild/scanner/consts.go, offset: 36, line: 4, column: 12
-msgid ""
-"Error at %s: %s\n"
-"%s"
-msgstr "Error en %s: %s\n%s"
+# filename: flag/translatable.go, offset: 580, line: 14, column: 27
+msgid "Flag '%s' is already set!"
+msgstr "Modificador '%s' ya fue establecido!"
 
-# filename: runes/consts.go, offset: 113, line: 10, column: 26
-msgid "Invalid token"
-msgstr "Token inválido"
+# filename: flag/translatable.go, offset: 722, line: 18, column: 15
+msgid "string"
+msgstr "string"
 
-# filename: runes/consts.go, offset: 154, line: 11, column: 26
-msgid "Unended token"
-msgstr "Token sin completar"
+# filename: flag/translatable.go, offset: 795, line: 22, column: 18
+msgid "long"
+msgstr "largo"
+
+# filename: flag/translatable.go, offset: 137, line: 6, column: 27
+msgid "Invalid value '%v': Must be a %s!"
+msgstr "Valor inválido '%v': Debe ser un %s!"
+
+# filename: flag/translatable.go, offset: 819, line: 23, column: 18
+msgid "must begin with '%s'"
+msgstr "debe comenzar con '%s'"
+
+# filename: flag/translatable.go, offset: 83, line: 5, column: 27
+msgid "Invalid %s flag '%s': %s!"
+msgstr "Modificador '%s' inválido %s: %s!"
+
+# filename: flag/translatable.go, offset: 199, line: 7, column: 27
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr "Modificador '%s' no puede ser usado con '%s'"
+
+# filename: flag/translatable.go, offset: 329, line: 9, column: 27
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr "El modificador '%s' no permite argumentos múltiples!"
+
+# filename: flag/translatable.go, offset: 445, line: 11, column: 27
+msgid "Arg needed!"
+msgstr "Arg necesario!"
+
+# filename: flag/translatable.go, offset: 888, line: 25, column: 18
+msgid "too long"
+msgstr "demasiado largo"
+
+# filename: flag/translatable.go, offset: 909, line: 27, column: 10
+msgid "Usage:"
+msgstr "Uso:"
+
+# filename: pkgbuild/env/translatable.go, offset: 49, line: 4, column: 29
+msgid "Cannot modify read-only variable %q"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 115, line: 5, column: 29
+msgid "%d: bad array index"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 165, line: 6, column: 29
+msgid "Cannot set array in indexed variable"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 232, line: 7, column: 29
+msgid "%s: Invalid syntax"
+msgstr ""
+
+# filename: pkgbuild/info/translatable.go, offset: 42, line: 4, column: 21
+msgid "Invalid syntax at %s"
+msgstr ""

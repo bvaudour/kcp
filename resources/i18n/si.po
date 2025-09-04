@@ -1,9 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# හෙළබස, 2021
+# HelaBasa Group <transifex-helabasa-group@yalu.lk>, 2021
 # හෙළබස, 2021
 msgid ""
 msgstr ""
@@ -12,545 +9,468 @@ msgstr ""
 "POT-Creation-Date: 2020-08-06 12:01+0200\n"
 "PO-Revision-Date: 2014-12-15 19:40+0000\n"
 "Last-Translator: හෙළබස, 2021\n"
-"Language-Team: Sinhala (http://www.transifex.com/kaos/kaos/language/si/)\n"
+"Language-Team: Sinhala (http://app.transifex.com/kaos/kaos/language/si/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: si\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-# filename: cmd/kcp/consts.go, offset: 460, line: 12, column: 19
-msgid "Display all packages of KCP"
-msgstr "KCP හි සියලුම පැකේජ පෙන්වන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1435, line: 27, column: 19
-msgid "Display informations about a package"
-msgstr "පැකේජයක් පිළිබඳ තොරතුරු පෙන්වන්න"
-
-# filename: cmd/kcp/consts.go, offset: 508, line: 13, column: 19
-msgid "Refresh the local database"
-msgstr "ස්ථානීය දත්තසමුදාය නැවුම් කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 990, line: 21, column: 19
-msgid "On refreshing database action, force complete update"
-msgstr "දත්ත සමුදා ක්‍රියාව නැවුම් කිරීමේදී, සම්පූර්ණ යාවත්කාලීන කිරීමට බල කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 234, line: 8, column: 19
-msgid "Tool in command-line for KaOS Community Packages"
-msgstr "KaOS ප්‍රජා පැකේජ සඳහා විධාන රේඛාවේ මෙවලම"
-
-# filename: cmd/kcp/consts.go, offset: 555, line: 14, column: 19
-msgid "Search packages in KCP and display them"
-msgstr "KCP හි පැකේජ සොයන්න සහ ඒවා පෙන්වන්න"
-
-# filename: cmd/kcp/consts.go, offset: 859, line: 19, column: 19
-msgid "On install action, install as a dependence"
-msgstr "ස්ථාපනය කිරීමේ ක්‍රියාව මත, පරායත්තයක් ලෙස ස්ථාපනය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 922, line: 20, column: 19
-msgid "On list action, display only installed packages"
-msgstr "ලැයිස්තු ක්‍රියාවේදී, ස්ථාපිත පැකේජ පමණක් ප්‍රදර්ශනය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1867, line: 38, column: 29
-msgid "Interrupt by user…"
-msgstr "පරිශීලක…විසින් බාධා කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 303, line: 9, column: 19
-msgid "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
-msgstr "(-h|-v|-u|(-l|-s <app>) [-fxNSIO]|-i <app> [-d]|-g <app>|-V <app>)"
-
-# filename: cmd/kcp/consts.go, offset: 615, line: 15, column: 19
-msgid "Download needed files to build a package"
-msgstr "පැකේජයක් තැනීමට අවශ්‍ය ගොනු බාගන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1550, line: 33, column: 29
-msgid "Don't launch this program as root!"
-msgstr "මෙම වැඩසටහන root ලෙස දියත් නොකරන්න!"
-
-# filename: cmd/kcp/consts.go, offset: 2004, line: 42, column: 19
-msgid "Do you want to edit %s?"
-msgstr "ඔබට %s සංස්කරණය කිරීමට අවශ්‍යද?"
-
-# filename: cmd/kcp/consts.go, offset: 65, line: 5, column: 23
-msgid ""
-"Provides a tool to make the use of KaOS Community Packages.\n"
-"\n"
-"With this tool, you can search, get and install a package from KaOS Community Packages."
-msgstr "KaOS ප්‍රජා පැකේජ භාවිතා කිරීමට මෙවලමක් සපයයි.\n\nමෙම මෙවලම සමඟ, ඔබට KaOS ප්‍රජා පැකේජ වලින් පැකේජයක් සෙවීමට, ලබා ගැනීමට සහ ස්ථාපනය කිරීමට හැකිය."
-
-# filename: cmd/kcp/consts.go, offset: 676, line: 16, column: 19
-msgid "Install a package from KCP"
-msgstr "කේසීපී වෙතින් ඇසුරුමක් ස්ථාපනය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 723, line: 17, column: 19
-msgid "On display action, don't print KCP version"
-msgstr "සංදර්ශක ක්‍රියාවේදී, KCP අනුවාදය මුද්‍රණය නොකරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1210, line: 24, column: 19
-msgid "On display action, display only packages with at least one star"
-msgstr "සංදර්ශක ක්‍රියාවේදී, අවම වශයෙන් එක් තරුවක් සහිත පැකේජ පමණක් සංදර්ශන කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1492, line: 28, column: 19
-msgid "<app>"
-msgstr "<app>"
-
-# filename: cmd/kcp/consts.go, offset: 786, line: 18, column: 19
-msgid "On display action, sort packages by stars descending"
-msgstr "සංදර්ශක ක්‍රියාවේදී, තරු අවරෝහණ අනුව පැකේජ වර්ග කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1365, line: 26, column: 19
-msgid "On display action, display only outdated packages"
-msgstr "සංදර්ශක ක්‍රියාවේදී, යල් පැන ගිය පැකේජ පමණක් සංදර්ශන කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1741, line: 36, column: 29
-msgid "Another instance of kcp is running!"
-msgstr "kcp හි තවත් අවස්ථාවක් ධාවනය වේ!"
-
-# filename: cmd/kcp/consts.go, offset: 1807, line: 37, column: 29
-msgid "Failed to create locker file!"
-msgstr "ලොකර් ගොනුව සෑදීමට අසමත් විය!"
-
-# filename: cmd/kcp/consts.go, offset: 426, line: 11, column: 19
-# filename: cmd/pckcp/consts.go, offset: 434, line: 11, column: 22
-msgid "Print version"
-msgstr "මුද්‍රණ අනුවාදය"
-
-# filename: cmd/kcp/consts.go, offset: 1063, line: 22, column: 19
-msgid "On display action, force refreshing local database"
-msgstr "සංදර්ශක ක්‍රියාවේදී, දේශීය දත්ත සමුදාය නැවුම් කිරීමට බල කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1134, line: 23, column: 19
-msgid "On display action, display only the name of the package"
-msgstr "සංදර්ශක ක්‍රියාවේදී, පැකේජයේ නම පමණක් ප්‍රදර්ශනය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1615, line: 34, column: 29
-msgid "No package found"
-msgstr "පැකේජයක් හමු නොවීය"
-
-# filename: cmd/kcp/consts.go, offset: 1954, line: 41, column: 19
-msgid "Do you want to edit PKGBUILD?"
-msgstr "ඔබට PKGBUILD සංස්කරණය කිරීමට අවශ්‍යද?"
-
-# filename: cmd/kcp/consts.go, offset: 390, line: 10, column: 19
-# filename: cmd/pckcp/consts.go, offset: 395, line: 10, column: 22
-msgid "Print this help"
-msgstr "මෙම උදව් මුද්‍රණය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1294, line: 25, column: 19
-msgid "On display action, display only installed packages"
-msgstr "සංදර්ශක ක්‍රියාවේදී, ස්ථාපිත පැකේජ පමණක් ප්‍රදර්ශනය කරන්න"
-
-# filename: cmd/kcp/consts.go, offset: 1662, line: 35, column: 29
-msgid "No package found. Check if the database is updated."
-msgstr "පැකේජයක් හමු නොවීය. දත්ත සමුදාය යාවත්කාලීන කර ඇත්දැයි පරීක්ෂා කරන්න."
-
-# filename: cmd/kcp/consts.go, offset: 1909, line: 40, column: 19
-msgid "Package %s cloned in %s."
-msgstr "%s පැකේජය %sක්ලෝන කර ඇත."
-
-# filename: cmd/pckcp/consts.go, offset: 799, line: 24, column: 20
-msgid "Variable '%s' is missing."
-msgstr "'%s' විචල්‍යය අස්ථානගත වී ඇත."
-
-# filename: cmd/pckcp/consts.go, offset: 1622, line: 35, column: 25
-msgid "Variable '%s' contains bad packages."
-msgstr "'%s' විචල්‍යයේ නරක පැකේජ අඩංගු වේ."
-
-# filename: cmd/pckcp/consts.go, offset: 2137, line: 44, column: 20
-msgid "Declarations have the good type."
-msgstr "ප්‍රකාශනවල හොඳ වර්ගයක් ඇත."
-
-# filename: cmd/pckcp/consts.go, offset: 2684, line: 56, column: 24
-msgid "Type the new name (leave blank to remove install variable):"
-msgstr "නව නම ටයිප් කරන්න (ස්ථාපන විචල්‍යය ඉවත් කිරීමට හිස්ව තබන්න):"
-
-# filename: cmd/pckcp/consts.go, offset: 2931, line: 61, column: 23
-msgid "a function"
-msgstr "කාර්යයක්"
-
-# filename: cmd/pckcp/consts.go, offset: 65, line: 5, column: 23
+# filename: cmd/pckcp/translatable.go, offset: 66, line: 5, column: 23
 msgid ""
 "Provides a tool to check the validity of a PKGBUILD according to the KCP standards.\n"
 "\n"
-"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created."
-msgstr "KCP ප්‍රමිතීන්ට අනුව PKGBUILD එකක වලංගුභාවය පරීක්ෂා කිරීමට මෙවලමක් සපයයි.\n\nflag -e භාවිතා කරන්නේ නම්, පොදු දෝෂ පරීක්ෂා කර (විය හැකි) වලංගු PKGBUILD.new එකක් සෑදිය හැක."
+"If flag -e is used, the common errors can be checked and a (potentially) valid PKGBUILD.new is created (if -o is not used)."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 1242, line: 31, column: 25
-msgid "Variable '%s' is empty."
-msgstr "'%s' විචල්‍යය හිස්ය."
+# filename: cmd/pckcp/translatable.go, offset: 787, line: 16, column: 22
+msgid "File’s name of the transformed PKGBUILD"
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 1979, line: 41, column: 20
-msgid "There aren’t duplicates."
-msgstr "අනුපිටපත් නැත."
+# filename: cmd/pckcp/translatable.go, offset: 935, line: 23, column: 16
+msgid "Warning"
+msgstr "අවවාදයයි"
 
-# filename: cmd/pckcp/consts.go, offset: 2027, line: 42, column: 20
-msgid "There aren’t missing variables."
-msgstr "නැතිවූ විචල්‍යයන් නොමැත."
+# filename: cmd/pckcp/translatable.go, offset: 960, line: 24, column: 16
+msgid "Info"
+msgstr "තොරතුරු"
 
-# filename: cmd/pckcp/consts.go, offset: 2966, line: 62, column: 23
-msgid "a variable"
-msgstr "විචල්‍යයක්"
+# filename: cmd/pckcp/translatable.go, offset: 1038, line: 27, column: 23
+msgid "Checksum is missing."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 952, line: 28, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 1239, line: 32, column: 25
 msgid ""
 "Header was found. Do not use names of maintainers or contributors in "
 "PKGBUILD, anyone can contribute, keep the header clean from this."
 msgstr "ශීර්ෂකය හමු විය. PKGBUILD හි නඩත්තු කරන්නන්ගේ හෝ දායකයින්ගේ නම් භාවිතා නොකරන්න, ඕනෑම කෙනෙකුට දායක විය හැක, මෙයින් ශීර්ෂකය පිරිසිදුව තබා ගන්න."
 
-# filename: cmd/pckcp/consts.go, offset: 679, line: 19, column: 16
-msgid "Error"
-msgstr "දෝෂයකි"
+# filename: cmd/pckcp/translatable.go, offset: 1449, line: 34, column: 25
+msgid "Bad type declaration: '%s' is %s but it should be %s."
+msgstr "නරක ආකාරයේ ප්‍රකාශය: '%s' %s වන නමුත් එය %sවිය යුතුය."
 
-# filename: cmd/pckcp/consts.go, offset: 1685, line: 36, column: 25
-msgid "'%s' is the name of the package. It is useless."
-msgstr "'%s' යනු පැකේජයේ නමයි. එය නිෂ්ඵල ය."
-
-# filename: cmd/pckcp/consts.go, offset: 1759, line: 37, column: 25
-msgid "'%s' isn't in repo neither in kcp."
-msgstr "'%s' repo වලවත් kcp වලවත් නෑ."
-
-# filename: cmd/pckcp/consts.go, offset: 2378, line: 50, column: 24
-msgid "Add variable '%s'?"
-msgstr "'%s' විචල්‍යය එක් කරන්නද?"
-
-# filename: cmd/pckcp/consts.go, offset: 2769, line: 57, column: 24
-msgid "Modify '%s'?"
-msgstr "'%s' වෙනස් කරන්නද?"
-
-# filename: cmd/pckcp/consts.go, offset: 2879, line: 60, column: 23
-msgid "You should add it manually."
-msgstr "ඔබ එය අතින් එකතු කළ යුතුය."
-
-# filename: cmd/pckcp/consts.go, offset: 471, line: 12, column: 22
-msgid "Interactive edition"
-msgstr "අන්තර් ක්රියාකාරී සංස්කරණය"
-
-# filename: cmd/pckcp/consts.go, offset: 570, line: 14, column: 22
-msgid "Removes the useless comments and blanks of the prototype"
-msgstr "මූලාකෘතියේ නිෂ්ඵල අදහස් සහ හිස් තැන් ඉවත් කරයි"
-
-# filename: cmd/pckcp/consts.go, offset: 1113, line: 29, column: 25
-msgid "Some duplicates found:"
-msgstr "සමහර අනුපිටපත් හමු විය:"
-
-# filename: cmd/pckcp/consts.go, offset: 1820, line: 38, column: 25
-msgid ""
-"Variables 'depends' and 'makedepends' are empty. You should manually check "
-"if it is not a missing."
-msgstr "විචල්‍යයන් 'යැපෙන' සහ 'සාදන ලද' හිස් ය. එය අතුරුදහන් වී නොමැති නම් ඔබ අතින් පරීක්ෂා කළ යුතුය."
-
-# filename: cmd/pckcp/consts.go, offset: 2082, line: 43, column: 20
-msgid "There aren’t missing functions."
-msgstr "නැතිවූ කාර්යයන් නොමැත."
-
-# filename: cmd/pckcp/consts.go, offset: 2191, line: 45, column: 20
-msgid "There aren’t empty variables."
-msgstr "හිස් විචල්‍ය නොමැත."
-
-# filename: cmd/pckcp/consts.go, offset: 2294, line: 48, column: 24
-msgid "Remove header?"
-msgstr "ශීර්ෂකය ඉවත් කරන්නද?"
-
-# filename: cmd/pckcp/consts.go, offset: 2495, line: 52, column: 24
-msgid "Remove variable '%s'?"
-msgstr "'%s' විචල්‍යය ඉවත් කරන්නද?"
-
-# filename: cmd/pckcp/consts.go, offset: 846, line: 25, column: 20
-msgid "Function '%s' is missing."
-msgstr "'%s' ශ්‍රිතය අස්ථානගත වී ඇත."
-
-# filename: cmd/pckcp/consts.go, offset: 1560, line: 34, column: 25
-msgid "install: file '%s' doesn’t exist."
-msgstr "ස්ථාපනය: ගොනුව '%s' නොපවතී."
-
-# filename: cmd/pckcp/consts.go, offset: 2334, line: 49, column: 24
-msgid "Remove duplicates?"
-msgstr "අනුපිටපත් ඉවත් කරන්නද?"
-
-# filename: cmd/pckcp/consts.go, offset: 514, line: 13, column: 22
-msgid "Generate a prototype of PKGBUILD"
-msgstr "PKGBUILD හි මූලාකෘතියක් ජනනය කරන්න"
-
-# filename: cmd/pckcp/consts.go, offset: 1941, line: 40, column: 20
+# filename: cmd/pckcp/translatable.go, offset: 2232, line: 44, column: 24
 msgid "Header is clean."
 msgstr "ශීර්ෂකය පිරිසිදුයි."
 
-# filename: cmd/pckcp/consts.go, offset: 1292, line: 32, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 375, line: 9, column: 22
+msgid "[-h|-e|-v|-g[-c]]"
+msgstr "[-h|-e|-v|-g[-c]]"
+
+# filename: cmd/pckcp/translatable.go, offset: 912, line: 22, column: 16
+msgid "Error"
+msgstr "දෝෂයකි"
+
+# filename: cmd/pckcp/translatable.go, offset: 1133, line: 29, column: 23
+msgid "Function '%s' is missing."
+msgstr "'%s' ශ්‍රිතය අස්ථානගත වී ඇත."
+
+# filename: cmd/pckcp/translatable.go, offset: 1186, line: 31, column: 25
+msgid "Modifications saved in %s!"
+msgstr "වෙනස් කිරීම් %sකින් සුරකින ලදි!"
+
+# filename: cmd/pckcp/translatable.go, offset: 1400, line: 33, column: 25
+msgid "Some duplicates found:"
+msgstr "සමහර අනුපිටපත් හමු විය:"
+
+# filename: cmd/pckcp/translatable.go, offset: 2543, line: 50, column: 24
+msgid "There aren’t empty variables."
+msgstr "හිස් විචල්‍ය නොමැත."
+
+# filename: cmd/pckcp/translatable.go, offset: 2600, line: 51, column: 24
+msgid "Variable '%s' is clean."
+msgstr "'%s' විචල්‍යය පිරිසිදුයි."
+
+# filename: cmd/pckcp/translatable.go, offset: 2690, line: 54, column: 24
+msgid "Remove duplicates?"
+msgstr "අනුපිටපත් ඉවත් කරන්නද?"
+
+# filename: cmd/pckcp/translatable.go, offset: 298, line: 8, column: 22
+msgid "Tool in command-line to manage common PKGBUILD errors"
+msgstr "පොදු PKGBUILD දෝෂ කළමනාකරණය කිරීමට විධාන රේඛාවේ මෙවලම"
+
+# filename: cmd/pckcp/translatable.go, offset: 852, line: 17, column: 22
+msgid "<file>"
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 1579, line: 36, column: 25
 msgid ""
 "pkgrel is different from 1. It should be the case only if build instructions"
 " are edited but not pkgver."
 msgstr "pkgrel 1 ට වඩා වෙනස් වේ. එය එසේ විය යුත්තේ ගොඩනැගීමේ උපදෙස් සංස්කරණය කර ඇත්නම් පමණක් මිස pkgver නොවේ."
 
-# filename: cmd/pckcp/consts.go, offset: 2542, line: 53, column: 24
-msgid "Reset pkgrel to 1?"
-msgstr "pkgrel 1 ට යළි පිහිටුවන්නද?"
+# filename: cmd/pckcp/translatable.go, offset: 2778, line: 56, column: 24
+msgid "Set variable '%s' with (leave blank to ignore):"
+msgstr "'%s' විචල්‍යය සකසන්න (නොසලකා හැරීමට හිස්ව තබන්න):"
 
-# filename: cmd/pckcp/consts.go, offset: 2633, line: 55, column: 24
-msgid "Modify name of '%s' file?"
-msgstr "'%s' ගොනුවේ නම වෙනස් කරන්නද?"
+# filename: cmd/pckcp/translatable.go, offset: 3235, line: 64, column: 24
+msgid "Format the PKGBUILD?"
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 3043, line: 64, column: 23
-msgid "an array variable"
-msgstr "array variable එකක්"
-
-# filename: cmd/pckcp/consts.go, offset: 3085, line: 65, column: 23
+# filename: cmd/pckcp/translatable.go, offset: 672, line: 15, column: 22
 msgid ""
-"Note that hooks provide similar functionnalities and are more powerful. For "
-"more informations: %s"
-msgstr "කොකු සමාන ක්‍රියාකාරීත්වයක් සපයන අතර වඩා බලවත් බව සලකන්න. වැඩි විස්තර සඳහා: %s"
+"Formats the PKGBUILD file. If output option (-o) is not specified, standard "
+"output is used."
+msgstr ""
 
-# filename: cmd/pckcp/consts.go, offset: 754, line: 23, column: 20
-msgid "File %s does not exist."
-msgstr "%s ගොනුව නොපවතී."
+# filename: cmd/pckcp/translatable.go, offset: 1847, line: 38, column: 25
+msgid "install: file '%s' doesn’t exist."
+msgstr "ස්ථාපනය: ගොනුව '%s' නොපවතී."
 
-# filename: cmd/pckcp/consts.go, offset: 354, line: 9, column: 22
-msgid "[-h|-e|-v|-g[-c]]"
-msgstr "[-h|-e|-v|-g[-c]]"
+# filename: cmd/pckcp/translatable.go, offset: 1972, line: 40, column: 25
+msgid "'%s' is the name of the package. It is useless."
+msgstr "'%s' යනු පැකේජයේ නමයි. එය නිෂ්ඵල ය."
 
-# filename: cmd/pckcp/consts.go, offset: 702, line: 20, column: 16
-msgid "Warning"
-msgstr "අවවාදයයි"
+# filename: cmd/pckcp/translatable.go, offset: 2046, line: 41, column: 25
+msgid "'%s' isn't in repo neither in kcp."
+msgstr "'%s' repo වලවත් kcp වලවත් නෑ."
 
-# filename: cmd/pckcp/consts.go, offset: 727, line: 21, column: 16
-msgid "Info"
-msgstr "තොරතුරු"
+# filename: cmd/pckcp/translatable.go, offset: 3040, line: 61, column: 24
+msgid "Type the new name (leave blank to remove install variable):"
+msgstr "නව නම ටයිප් කරන්න (ස්ථාපන විචල්‍යය ඉවත් කිරීමට හිස්ව තබන්න):"
 
-# filename: cmd/pckcp/consts.go, offset: 899, line: 27, column: 25
-msgid "Modifications saved in %s!"
-msgstr "වෙනස් කිරීම් %sකින් සුරකින ලදි!"
+# filename: cmd/pckcp/translatable.go, offset: 3403, line: 69, column: 23
+msgid "a string variable"
+msgstr "string variable එකක්"
 
-# filename: cmd/pckcp/consts.go, offset: 1162, line: 30, column: 25
-msgid "Bad type declaration: '%s' is %s but it should be %s."
-msgstr "නරක ආකාරයේ ප්‍රකාශය: '%s' %s වන නමුත් එය %sවිය යුතුය."
-
-# filename: cmd/pckcp/consts.go, offset: 1422, line: 33, column: 25
+# filename: cmd/pckcp/translatable.go, offset: 1709, line: 37, column: 25
 msgid ""
 "arch is different from 'x86_64'. Since KaOS only supports this architecture,"
 " no other arch would be added here."
 msgstr "arch එක 'x86_64' ට වඩා වෙනස්. KaOS මෙම ගෘහනිර්මාණ ශිල්පයට පමණක් සහය දක්වන බැවින්, වෙනත් කිසිදු ආරුක්කුවක් මෙහි එකතු නොවේ."
 
-# filename: cmd/pckcp/consts.go, offset: 277, line: 8, column: 22
-msgid "Tool in command-line to manage common PKGBUILD errors"
-msgstr "පොදු PKGBUILD දෝෂ කළමනාකරණය කිරීමට විධාන රේඛාවේ මෙවලම"
+# filename: cmd/pckcp/translatable.go, offset: 1909, line: 39, column: 25
+msgid "Variable '%s' contains bad packages."
+msgstr "'%s' විචල්‍යයේ නරක පැකේජ අඩංගු වේ."
 
-# filename: cmd/pckcp/consts.go, offset: 2422, line: 51, column: 24
-msgid "Set variable '%s' with (leave blank to ignore):"
-msgstr "'%s' විචල්‍යය සකසන්න (නොසලකා හැරීමට හිස්ව තබන්න):"
+# filename: cmd/pckcp/translatable.go, offset: 416, line: 10, column: 22
+msgid "Print this help"
+msgstr "මෙම උදව් මුද්‍රණය කරන්න"
 
-# filename: cmd/pckcp/consts.go, offset: 2586, line: 54, column: 24
+# filename: cmd/pckcp/translatable.go, offset: 990, line: 26, column: 23
+msgid "File %s does not exist."
+msgstr "%s ගොනුව නොපවතී."
+
+# filename: cmd/pckcp/translatable.go, offset: 2274, line: 45, column: 24
+msgid "There aren’t duplicates."
+msgstr "අනුපිටපත් නැත."
+
+# filename: cmd/pckcp/translatable.go, offset: 2650, line: 53, column: 24
+msgid "Remove header?"
+msgstr "ශීර්ෂකය ඉවත් කරන්නද?"
+
+# filename: cmd/pckcp/translatable.go, offset: 3125, line: 62, column: 24
+msgid "Modify '%s'?"
+msgstr "'%s' වෙනස් කරන්නද?"
+
+# filename: cmd/pckcp/translatable.go, offset: 3281, line: 66, column: 23
+msgid "You should add it manually."
+msgstr "ඔබ එය අතින් එකතු කළ යුතුය."
+
+# filename: cmd/pckcp/translatable.go, offset: 1083, line: 28, column: 23
+msgid "Variable '%s' is missing."
+msgstr "'%s' විචල්‍යය අස්ථානගත වී ඇත."
+
+# filename: cmd/pckcp/translatable.go, offset: 1529, line: 35, column: 25
+msgid "Variable '%s' is empty."
+msgstr "'%s' විචල්‍යය හිස්ය."
+
+# filename: cmd/pckcp/translatable.go, offset: 2326, line: 46, column: 24
+msgid "Checksum is OK."
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 2426, line: 48, column: 24
+msgid "There aren’t missing functions."
+msgstr "නැතිවූ කාර්යයන් නොමැත."
+
+# filename: cmd/pckcp/translatable.go, offset: 2851, line: 57, column: 24
+msgid "Remove variable '%s'?"
+msgstr "'%s' විචල්‍යය ඉවත් කරන්නද?"
+
+# filename: cmd/pckcp/translatable.go, offset: 2898, line: 58, column: 24
+msgid "Reset pkgrel to 1?"
+msgstr "pkgrel 1 ට යළි පිහිටුවන්නද?"
+
+# filename: cmd/pckcp/translatable.go, offset: 2942, line: 59, column: 24
 msgid "Reset arch to x86_64?"
 msgstr "ආරුක්කුව x86_64 වෙත යළි පිහිටුවන්නද?"
 
-# filename: cmd/pckcp/consts.go, offset: 2807, line: 58, column: 24
+# filename: cmd/pckcp/translatable.go, offset: 3163, line: 63, column: 24
 msgid "Type the new value (leave blank to remove it):"
 msgstr "නව අගය ටයිප් කරන්න (එය ඉවත් කිරීමට හිස්ව තබන්න):"
 
-# filename: cmd/pckcp/consts.go, offset: 3001, line: 63, column: 23
-msgid "a string variable"
-msgstr "string variable එකක්"
+# filename: cmd/pckcp/translatable.go, offset: 592, line: 14, column: 22
+msgid "Removes the useless comments and blanks of the prototype"
+msgstr "මූලාකෘතියේ නිෂ්ඵල අදහස් සහ හිස් තැන් ඉවත් කරයි"
 
-# filename: cmd/pckcp/consts.go, offset: 2244, line: 46, column: 20
-msgid "Variable '%s' is clean."
-msgstr "'%s' විචල්‍යය පිරිසිදුයි."
+# filename: cmd/pckcp/translatable.go, offset: 2485, line: 49, column: 24
+msgid "Declarations have the good type."
+msgstr "ප්‍රකාශනවල හොඳ වර්ගයක් ඇත."
 
-# filename: common/consts.go, offset: 88, line: 7, column: 16
-msgid "[y/N]"
-msgstr "[y/N]"
+# filename: cmd/pckcp/translatable.go, offset: 2734, line: 55, column: 24
+msgid "Add variable '%s'?"
+msgstr "'%s' විචල්‍යය එක් කරන්නද?"
 
-# filename: common/consts.go, offset: 104, line: 9, column: 8
-msgid "yes"
-msgstr "ඔව්"
+# filename: cmd/pckcp/translatable.go, offset: 2989, line: 60, column: 24
+msgid "Modify name of '%s' file?"
+msgstr "'%s' ගොනුවේ නම වෙනස් කරන්නද?"
 
-# filename: common/consts.go, offset: 117, line: 10, column: 8
-msgid "no"
-msgstr "නැහැ"
+# filename: cmd/pckcp/translatable.go, offset: 3445, line: 70, column: 23
+msgid "an array variable"
+msgstr "array variable එකක්"
 
-# filename: common/consts.go, offset: 43, line: 4, column: 20
-msgid "vim"
-msgstr "vim"
+# filename: cmd/pckcp/translatable.go, offset: 3487, line: 71, column: 23
+msgid ""
+"Note that hooks provide similar functionnalities and are more powerful. For "
+"more informations: %s"
+msgstr "කොකු සමාන ක්‍රියාකාරීත්වයක් සපයන අතර වඩා බලවත් බව සලකන්න. වැඩි විස්තර සඳහා: %s"
 
-# filename: common/consts.go, offset: 65, line: 6, column: 16
+# filename: cmd/pckcp/translatable.go, offset: 455, line: 11, column: 22
+msgid "Print version"
+msgstr "මුද්‍රණ අනුවාදය"
+
+# filename: cmd/pckcp/translatable.go, offset: 492, line: 12, column: 22
+msgid "Interactive edition"
+msgstr "අන්තර් ක්රියාකාරී සංස්කරණය"
+
+# filename: cmd/pckcp/translatable.go, offset: 535, line: 13, column: 22
+msgid "Generates a prototype of PKGBUILD"
+msgstr ""
+
+# filename: cmd/pckcp/translatable.go, offset: 2107, line: 42, column: 25
+msgid ""
+"Variables 'depends' and 'makedepends' are empty. You should manually check "
+"if it is not a missing."
+msgstr "විචල්‍යයන් 'යැපෙන' සහ 'සාදන ලද' හිස් ය. එය අතුරුදහන් වී නොමැති නම් ඔබ අතින් පරීක්ෂා කළ යුතුය."
+
+# filename: cmd/pckcp/translatable.go, offset: 2367, line: 47, column: 24
+msgid "There aren’t missing variables."
+msgstr "නැතිවූ විචල්‍යයන් නොමැත."
+
+# filename: cmd/pckcp/translatable.go, offset: 3333, line: 67, column: 23
+msgid "a function"
+msgstr "කාර්යයක්"
+
+# filename: cmd/pckcp/translatable.go, offset: 3368, line: 68, column: 23
+msgid "a variable"
+msgstr "විචල්‍යයක්"
+
+# filename: common/translatable.go, offset: 39, line: 4, column: 16
 msgid "[Y/n]"
 msgstr "[Y/n]"
 
-# filename: database/consts.go, offset: 180, line: 8, column: 22
-msgid "Description"
-msgstr "විස්තර"
+# filename: common/translatable.go, offset: 62, line: 5, column: 16
+msgid "[y/N]"
+msgstr "[y/N]"
 
-# filename: database/consts.go, offset: 342, line: 13, column: 22
-msgid "Depends on"
-msgstr "මත රඳා පවතී"
-
-# filename: database/consts.go, offset: 492, line: 17, column: 22
-msgid "Replaces"
-msgstr "ආදේශ කරයි"
-
-# filename: database/consts.go, offset: 758, line: 27, column: 15
-msgid "%d entries updated!"
-msgstr "ඇතුළත් කිරීම් %d ක් යාවත්කාලීන කර ඇත!"
-
-# filename: database/consts.go, offset: 121, line: 6, column: 22
-msgid "Name"
-msgstr "නම"
-
-# filename: database/consts.go, offset: 562, line: 19, column: 22
-msgid "Validated By"
-msgstr "විසින් වලංගු කරන ලදී"
-
-# filename: database/consts.go, offset: 598, line: 20, column: 22
-msgid "Yes"
+# filename: common/translatable.go, offset: 78, line: 7, column: 8
+msgid "yes"
 msgstr "ඔව්"
 
-# filename: database/consts.go, offset: 648, line: 23, column: 18
-msgid "Dir %s already exists!"
-msgstr "Dir %s දැනටමත් පවතී!"
+# filename: common/translatable.go, offset: 91, line: 8, column: 8
+msgid "no"
+msgstr "නැහැ"
 
-# filename: database/consts.go, offset: 688, line: 25, column: 15
-msgid "%d entries added!"
-msgstr "ඇතුළත් කිරීම් %d ක් එකතු කරන ලදී!"
-
-# filename: database/consts.go, offset: 722, line: 26, column: 15
-msgid "%d entries deleted!"
-msgstr "ඇතුළත් කිරීම් %d ක් මකා ඇත!"
-
-# filename: database/consts.go, offset: 47, line: 4, column: 22
-msgid "[installed]"
-msgstr "[ස්ථාපිතයි]"
-
-# filename: database/consts.go, offset: 149, line: 7, column: 22
-msgid "Version"
-msgstr "අනුවාදය"
-
-# filename: database/consts.go, offset: 278, line: 11, column: 22
-msgid "Licenses"
-msgstr "බලපත්‍ර"
-
-# filename: database/consts.go, offset: 417, line: 15, column: 22
-msgid "Optional Deps"
-msgstr "විකල්ප Deps"
-
-# filename: database/consts.go, offset: 454, line: 16, column: 22
-msgid "Conflicts With"
-msgstr "සමග ගැටුම්"
-
-# filename: database/consts.go, offset: 524, line: 18, column: 22
-msgid "Install Script"
-msgstr "ස්ක්‍රිප්ට් ස්ථාපනය කරන්න"
-
-# filename: database/consts.go, offset: 625, line: 21, column: 22
-msgid "No"
-msgstr "නැත"
-
-# filename: database/consts.go, offset: 82, line: 5, column: 22
+# filename: database/translatable.go, offset: 90, line: 5, column: 26
 msgid "[installed: %s]"
 msgstr "[ස්ථාපිත: %s]"
 
-# filename: database/consts.go, offset: 215, line: 9, column: 22
-msgid "Architecture"
-msgstr "නිර්මාණ ශිල්පය"
-
-# filename: database/consts.go, offset: 251, line: 10, column: 22
-msgid "URL"
-msgstr "ඒ.ස.නි."
-
-# filename: database/consts.go, offset: 310, line: 12, column: 22
-msgid "Provides"
-msgstr "සපයයි"
-
-# filename: database/consts.go, offset: 376, line: 14, column: 22
+# filename: database/translatable.go, offset: 420, line: 14, column: 26
 msgid "Depends on (make)"
 msgstr "(සාදන) මත රඳා පවතී"
 
-# filename: flag/consts.go, offset: 182, line: 10, column: 27
-msgid "Invalid value '%v': Must be a %s!"
-msgstr "වලංගු නොවන අගය '%v': %sවිය යුතුය !"
+# filename: database/translatable.go, offset: 887, line: 25, column: 38
+msgid "Failed to get PKGBUILD for %s: %v"
+msgstr ""
 
-# filename: flag/consts.go, offset: 244, line: 11, column: 27
-msgid "Flag '%s' cannot be used with '%s'"
-msgstr "'%s' ධජය '%s' සමඟ භාවිතා කළ නොහැක"
+# filename: database/translatable.go, offset: 1040, line: 27, column: 38
+msgid "X-Total-Count not found in response"
+msgstr ""
 
-# filename: flag/consts.go, offset: 530, line: 16, column: 27
-msgid "Unexpected arg: %s"
-msgstr "අනපේක්ෂිත arg: %s"
+# filename: database/translatable.go, offset: 1127, line: 30, column: 15
+msgid "%d entries deleted!"
+msgstr "ඇතුළත් කිරීම් %d ක් මකා ඇත!"
 
-# filename: flag/consts.go, offset: 767, line: 22, column: 15
-msgid "string"
-msgstr "නූල්"
+# filename: database/translatable.go, offset: 1163, line: 31, column: 15
+msgid "%d entries updated!"
+msgstr "ඇතුළත් කිරීම් %d ක් යාවත්කාලීන කර ඇත!"
 
-# filename: flag/consts.go, offset: 904, line: 28, column: 18
-msgid "too short"
-msgstr "බොහෝ කෙටි"
+# filename: database/translatable.go, offset: 165, line: 7, column: 26
+msgid "Version"
+msgstr "අනුවාදය"
 
-# filename: flag/consts.go, offset: 933, line: 29, column: 18
-msgid "too long"
-msgstr "දිග වැඩියි"
+# filename: database/translatable.go, offset: 239, line: 9, column: 26
+msgid "Architecture"
+msgstr "නිර්මාණ ශිල්පය"
 
-# filename: flag/consts.go, offset: 954, line: 31, column: 10
-msgid "Usage:"
-msgstr "භාවිතය:"
+# filename: database/translatable.go, offset: 279, line: 10, column: 26
+msgid "URL"
+msgstr "ඒ.ස.නි."
 
-# filename: flag/consts.go, offset: 128, line: 9, column: 27
-msgid "Invalid %s flag '%s': %s!"
-msgstr "වලංගු නොවන %s ධජය '%s': %s!"
+# filename: database/translatable.go, offset: 548, line: 17, column: 26
+msgid "Replaces"
+msgstr "ආදේශ කරයි"
 
-# filename: flag/consts.go, offset: 490, line: 15, column: 27
-msgid "Arg needed!"
-msgstr "Arg අවශ්යයි!"
+# filename: database/translatable.go, offset: 666, line: 20, column: 26
+msgid "Yes"
+msgstr "ඔව්"
 
-# filename: flag/consts.go, offset: 815, line: 25, column: 18
-msgid "short"
-msgstr "කෙටි"
+# filename: database/translatable.go, offset: 697, line: 21, column: 26
+msgid "No"
+msgstr "නැත"
 
-# filename: flag/consts.go, offset: 840, line: 26, column: 18
-msgid "long"
-msgstr "දිගු"
+# filename: database/translatable.go, offset: 960, line: 26, column: 38
+msgid "Could not parse X-Total-Count header: %v"
+msgstr ""
 
-# filename: flag/consts.go, offset: 307, line: 12, column: 27
+# filename: database/translatable.go, offset: 1093, line: 29, column: 15
+msgid "%d entries added!"
+msgstr "ඇතුළත් කිරීම් %d ක් එකතු කරන ලදී!"
+
+# filename: database/translatable.go, offset: 200, line: 8, column: 26
+msgid "Description"
+msgstr "විස්තර"
+
+# filename: database/translatable.go, offset: 382, line: 13, column: 26
+msgid "Depends on"
+msgstr "මත රඳා පවතී"
+
+# filename: database/translatable.go, offset: 506, line: 16, column: 26
+msgid "Conflicts With"
+msgstr "සමග ගැටුම්"
+
+# filename: database/translatable.go, offset: 133, line: 6, column: 26
+msgid "Name"
+msgstr "නම"
+
+# filename: database/translatable.go, offset: 310, line: 11, column: 26
+msgid "Licenses"
+msgstr "බලපත්‍ර"
+
+# filename: database/translatable.go, offset: 346, line: 12, column: 26
+msgid "Provides"
+msgstr "සපයයි"
+
+# filename: database/translatable.go, offset: 465, line: 15, column: 26
+msgid "Optional Deps"
+msgstr "විකල්ප Deps"
+
+# filename: database/translatable.go, offset: 584, line: 18, column: 26
+msgid "Install Script"
+msgstr "ස්ක්‍රිප්ට් ස්ථාපනය කරන්න"
+
+# filename: database/translatable.go, offset: 626, line: 19, column: 26
+msgid "Validated By"
+msgstr "විසින් වලංගු කරන ලදී"
+
+# filename: database/translatable.go, offset: 740, line: 23, column: 38
+msgid "Dir %s already exists!"
+msgstr "Dir %s දැනටමත් පවතී!"
+
+# filename: database/translatable.go, offset: 802, line: 24, column: 38
+msgid "Failed to get PKGBUILD for new package %s: %v"
+msgstr ""
+
+# filename: database/translatable.go, offset: 51, line: 4, column: 26
+msgid "[installed]"
+msgstr "[ස්ථාපිතයි]"
+
+# filename: flag/translatable.go, offset: 262, line: 8, column: 27
 msgid "Flag '%s' needs one of these flags: %v"
 msgstr "'%s' ධජයට මෙම කොඩි වලින් එකක් අවශ්‍ය වේ: %v"
 
-# filename: flag/consts.go, offset: 625, line: 18, column: 27
-msgid "Flag '%s' is already set!"
-msgstr "ධජය '%s' දැනටමත් සකසා ඇත!"
+# filename: flag/translatable.go, offset: 485, line: 12, column: 27
+msgid "Unexpected arg: %s"
+msgstr "අනපේක්ෂිත arg: %s"
 
-# filename: flag/consts.go, offset: 679, line: 19, column: 27
-msgid "Unknown property: %d"
-msgstr "නොදන්නා දේපල: %d"
-
-# filename: flag/consts.go, offset: 864, line: 27, column: 18
-msgid "must begin with '%s'"
-msgstr "'%s' වලින් ආරම්භ විය යුතුය"
-
-# filename: flag/consts.go, offset: 374, line: 13, column: 27
-msgid "Flag '%s' doesn't allow multiple arguments!"
-msgstr "ධජය '%s' බහු තර්කවලට ඉඩ නොදේ!"
-
-# filename: flag/consts.go, offset: 577, line: 17, column: 27
+# filename: flag/translatable.go, offset: 532, line: 13, column: 27
 msgid "Arg '%s' not in %v!"
 msgstr "Arg '%s' %vහි නොවේ!"
 
-# filename: flag/consts.go, offset: 728, line: 20, column: 27
+# filename: flag/translatable.go, offset: 634, line: 15, column: 27
+msgid "Unknown property: %d"
+msgstr "නොදන්නා දේපල: %d"
+
+# filename: flag/translatable.go, offset: 683, line: 16, column: 27
 msgid "Unsupported flag '%s'"
 msgstr "සහාය නොදක්වන ධජය '%s'"
 
-# filename: flag/consts.go, offset: 790, line: 23, column: 15
+# filename: flag/translatable.go, offset: 745, line: 19, column: 15
 msgid "bool"
 msgstr "bool"
 
-# filename: flag/consts.go, offset: 446, line: 14, column: 27
+# filename: flag/translatable.go, offset: 770, line: 21, column: 18
+msgid "short"
+msgstr "කෙටි"
+
+# filename: flag/translatable.go, offset: 859, line: 24, column: 18
+msgid "too short"
+msgstr "බොහෝ කෙටි"
+
+# filename: flag/translatable.go, offset: 401, line: 10, column: 27
 msgid "%s not allowed!"
 msgstr "%s අවසර නැත!"
 
-# filename: pkgbuild/scanner/consts.go, offset: 36, line: 4, column: 12
-msgid ""
-"Error at %s: %s\n"
-"%s"
-msgstr "%s: %s\n%sහි දෝෂයකි"
+# filename: flag/translatable.go, offset: 580, line: 14, column: 27
+msgid "Flag '%s' is already set!"
+msgstr "ධජය '%s' දැනටමත් සකසා ඇත!"
 
-# filename: runes/consts.go, offset: 113, line: 10, column: 26
-msgid "Invalid token"
-msgstr "වලංගු නොවන ටෝකනය"
+# filename: flag/translatable.go, offset: 722, line: 18, column: 15
+msgid "string"
+msgstr "නූල්"
 
-# filename: runes/consts.go, offset: 154, line: 11, column: 26
-msgid "Unended token"
-msgstr "නිමක් නැති ටෝකනය"
+# filename: flag/translatable.go, offset: 795, line: 22, column: 18
+msgid "long"
+msgstr "දිගු"
+
+# filename: flag/translatable.go, offset: 137, line: 6, column: 27
+msgid "Invalid value '%v': Must be a %s!"
+msgstr "වලංගු නොවන අගය '%v': %sවිය යුතුය !"
+
+# filename: flag/translatable.go, offset: 819, line: 23, column: 18
+msgid "must begin with '%s'"
+msgstr "'%s' වලින් ආරම්භ විය යුතුය"
+
+# filename: flag/translatable.go, offset: 83, line: 5, column: 27
+msgid "Invalid %s flag '%s': %s!"
+msgstr "වලංගු නොවන %s ධජය '%s': %s!"
+
+# filename: flag/translatable.go, offset: 199, line: 7, column: 27
+msgid "Flag '%s' cannot be used with '%s'"
+msgstr "'%s' ධජය '%s' සමඟ භාවිතා කළ නොහැක"
+
+# filename: flag/translatable.go, offset: 329, line: 9, column: 27
+msgid "Flag '%s' doesn't allow multiple arguments!"
+msgstr "ධජය '%s' බහු තර්කවලට ඉඩ නොදේ!"
+
+# filename: flag/translatable.go, offset: 445, line: 11, column: 27
+msgid "Arg needed!"
+msgstr "Arg අවශ්යයි!"
+
+# filename: flag/translatable.go, offset: 888, line: 25, column: 18
+msgid "too long"
+msgstr "දිග වැඩියි"
+
+# filename: flag/translatable.go, offset: 909, line: 27, column: 10
+msgid "Usage:"
+msgstr "භාවිතය:"
+
+# filename: pkgbuild/env/translatable.go, offset: 49, line: 4, column: 29
+msgid "Cannot modify read-only variable %q"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 115, line: 5, column: 29
+msgid "%d: bad array index"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 165, line: 6, column: 29
+msgid "Cannot set array in indexed variable"
+msgstr ""
+
+# filename: pkgbuild/env/translatable.go, offset: 232, line: 7, column: 29
+msgid "%s: Invalid syntax"
+msgstr ""
+
+# filename: pkgbuild/info/translatable.go, offset: 42, line: 4, column: 21
+msgid "Invalid syntax at %s"
+msgstr ""
